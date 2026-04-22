@@ -1,0 +1,117 @@
+# STOCK RANKINGS: STRONGEST BUY → STRONGEST SELL
+
+---
+
+## 1. NVDA - NVIDIA
+**Action:** STRONG BUY  
+**Score:** 10/10  
+**Price Target:** $285
+
+**Reasoning:** Dominating AI infrastructure with 73% revenue growth and 56% profit margins while trading at forward P/E of only 18—a massive discount to historical ratios. Strong upward momentum (+15% 1M, +104% 1Y) with analyst consensus $67 above current price shows continued institutional confidence. Net income nearly doubled YoY ($120B vs $73B) with powerful operating leverage as R&D spending becomes increasingly efficient.
+
+**Key Risk:** High beta (2.34) means severe volatility if AI spending cycle pauses; watch for customer inventory corrections from hyperscalers.
+
+---
+
+## 2. TSM - Taiwan Semiconductor
+**Action:** STRONG BUY  
+**Score:** 9.5/10  
+**Price Target:** $475
+
+**Reasoning:** Irreplaceable foundry partner printing money with 35% revenue growth and 47% profit margins—net income surged 47% YoY to $1.7T TWD. Trading at forward P/E of 20 despite being the critical enabler of AI chip revolution, with clear pricing power and operational excellence. Recent momentum strong (+13% 1M, +155% 1Y) as AI capacity constraints drive premium pricing.
+
+**Key Risk:** Geopolitical exposure to Taiwan-China tensions could trigger instant derating; any Arizona fab delays would concern investors.
+
+---
+
+## 3. AMZN - Amazon
+**Action:** STRONG BUY  
+**Score:** 9/10  
+**Price Target:** $295
+
+**Reasoning:** Firing on all cylinders with AWS driving massive margin expansion—profit margins at 11% (up significantly) while revenue grew 14% YoY. Net income exploded 31% to $78B with strong free cash flow generation, and Amazon's retail AI integration (Rufus showing 60% higher purchase rates) represents untapped monetization. Trading at forward P/E of 27 with strong momentum (+21% 1M).
+
+**Key Risk:** Rising R&D spend ($64B, up 41%) to compete in AI could compress margins if AWS growth decelerates.
+
+---
+
+## 4. GOOG - Alphabet
+**Action:** STRONG BUY  
+**Score:** 8.5/10  
+**Price Target:** $395
+
+**Reasoning:** Massive earnings beat with net income up 32% to $132B while maintaining 33% profit margins and demonstrating search resilience despite AI disruption fears. New AI chip announcements show serious commitment to infrastructure independence, reducing NVDA dependence. Trading at forward P/E of 25 with strong momentum (+12% 1M, +119% 1Y) while generating $24B in investment gains.
+
+**Key Risk:** DOJ antitrust actions remain ongoing threat; search disruption from AI competitors like ChatGPT could accelerate.
+
+---
+
+## 5. AMD - Advanced Micro Devices
+**Action:** BUY  
+**Score:** 8/10  
+**Price Target:** $325
+
+**Reasoning:** Explosive momentum (+48% 1M, +248% 1Y) as MI300 AI accelerators gain data center traction with 34% revenue growth and improving margins. Net income nearly tripled YoY to $4.3B, and at forward P/E of 27, valuation finally reasonable after recent surge. Rising R&D ($8.1B) positions for next-gen AI chip competitiveness against NVDA.
+
+**Key Risk:** Already near all-time highs creates limited near-term upside; execution risk in competing against entrenched NVDA ecosystem.
+
+---
+
+## 6. MSFT - Microsoft
+**Action:** BUY  
+**Score:** 7.5/10  
+**Price Target:** $520
+
+**Reasoning:** Azure and AI services driving solid 17% revenue growth with industry-leading 39% profit margins, while net income rose 16% to $102B. Anthropic integration signals aggressive AI push, but stock remains 22% below 52-week highs despite recovery. Forward P/E of 23 is reasonable given cloud durability and Office/Windows moats.
+
+**Key Risk:** Massive AI capex ($34B depreciation) without proportional revenue acceleration could disappoint; GitHub Copilot adoption slower than expected.
+
+---
+
+## 7. META - Meta Platforms
+**Action:** BUY  
+**Score:** 7/10  
+**Price Target:** $780
+
+**Reasoning:** Revenue acceleration to 24% growth with 30% profit margins while net income stayed flat at $60B signals peak margin pressure from Reality Labs spending. Ad platform showing resilience with strong engagement metrics, and trading at forward P/E of 19 makes it cheapest mega-cap tech on growth-adjusted basis. Momentum solid (+12% 1M).
+
+**Key Risk:** Reality Labs losses continue ballooning ($58B R&D, up 31%); Apple's privacy changes remain structural headwind to targeting precision.
+
+---
+
+## 8. AAPL - Apple
+**Action:** HOLD  
+**Score:** 6/10  
+**Price Target:** $285
+
+**Reasoning:** Steady performer with 16% revenue growth and premium 27% margins, but iPhone cycle maturity shows in decelerating growth while trading at elevated 29 forward P/E. CEO transition from Tim Cook to John Ternus creates short-term uncertainty, though succession appears well-planned. Strong balance sheet and buybacks provide floor.
+
+**Key Risk:** China revenue vulnerability and lack of AI hardware breakthrough; Services growth must accelerate to justify valuation premium.
+
+---
+
+## 9. TSLA - Tesla
+**Action:** HOLD  
+**Score:** 5/10  
+**Price Target:** $390
+
+**Reasoning:** Revenue declining -3% with profit margins collapsing to 4% (from healthier levels) while trading at absurd forward P/E of 142 shows pure sentiment/Musk premium. Automotive business struggling with price cuts and competition, though energy/FSD optionality provides narrative support. Recent momentum fading despite Elon's government role halo effect.
+
+**Key Risk:** Valuation indefensible on fundamentals; any autonomous driving delays or Cybertruck production issues trigger sharp selloff.
+
+---
+
+## 10. PLTR - Palantir
+**Action:** SELL  
+**Score:** 3/10  
+**Price Target:** $115
+
+**Reasoning:** Despite impressive 70% revenue growth and new DoD contracts, trading at forward P/E of 82 and current P/E of 241 represents speculative excess with minimal margin of safety. Recent pullback (-6% 1M) from $207 highs suggests momentum exhaustion, and at $363B market cap, expectations are stratospheric. Profit margins of 36% are solid but don't justify nosebleed valuation.
+
+**Key Risk:** Multiple compression would be savage—any revenue growth deceleration or government contract delays sends this to $100 quickly.
+
+---
+
+# 🏆 TOP PICK: NVIDIA (NVDA)
+
+NVIDIA is the singular AI infrastructure play with irreplaceable CUDA moat, accelerating growth at scale, and trades at absurdly cheap forward P/E of 18 despite 73% revenue growth. The combination of fundamental dominance (56% margins, doubling net income) and technical momentum with $67/share analyst upside represents asymmetric risk/reward. Every mega-cap tech company is a forced buyer with no viable alternative, creating unprecedented pricing power in a multi-year AI buildout cycle.

@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;AI Investing Dashboard&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #0a0a0f;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #e0e0e0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>header {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #1a1a2e, #16213e);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px 40px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid #2a2a4a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(90deg, #00d4ff, #7b2ff7);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-background-clip: text;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>-webkit-text-fill-color: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#refresh-btn {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #00d4ff, #7b2ff7);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#refresh-btn:hover { opacity: 0.85; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>#loading {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 100px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #888;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.spinner {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 48px; height: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 4px solid #2a2a4a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-top-color: #00d4ff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>animation: spin 0.8s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0 auto 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes spin { to { transform: rotate(360deg); } }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>main { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-pick {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #1a1a2e, #0f3460);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #00d4ff44;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 32px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-pick h2 { color: #00d4ff; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-pick h3 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-pick p<span class="Apple-converted-space">  </span>{ color: #aaa; line-height: 1.6; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.grid {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #12121e;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #2a2a4a;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: transform 0.2s, border-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card:hover { transform: translateY(-3px); border-color: #00d4ff44; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card-header {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.ticker { font-size: 22px; font-weight: 800; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.price { font-size: 20px; font-weight: 700; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.change { font-size: 13px; margin-top: 2px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.change.up <span class="Apple-converted-space">  </span>{ color: #00e676; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.change.down { color: #ff5252; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 5px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 11px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>letter-spacing: 1px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge.strong-buy<span class="Apple-converted-space">  </span>{ background: #00e67622; color: #00e676; border: 1px solid #00e67644; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge.buy <span class="Apple-converted-space">        </span>{ background: #69f0ae22; color: #69f0ae; border: 1px solid #69f0ae44; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge.hold<span class="Apple-converted-space">        </span>{ background: #ffd74022; color: #ffd740; border: 1px solid #ffd74044; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge.sell<span class="Apple-converted-space">        </span>{ background: #ff525222; color: #ff5252; border: 1px solid #ff525244; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.badge.strong-sell { background: #d50000aa; color: #ff8a80; border: 1px solid #d5000066; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.score-bar {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #1e1e2e;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 12px 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.score-fill {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(90deg, #7b2ff7, #00d4ff);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stats {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 12px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stat { background: #1a1a2e; border-radius: 8px; padding: 8px 12px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.stat-value { font-size: 14px; font-weight: 600; margin-top: 2px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.summary { font-size: 13px; color: #999; line-height: 1.6; margin: 12px 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.risk { font-size: 12px; color: #ff5252; background: #ff525210; border-radius: 6px; padding: 6px 10px; margin-top: 8px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.news-item { font-size: 12px; color: #777; margin-top: 4px; padding-left: 10px; border-left: 2px solid #2a2a4a; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>canvas { margin-top: 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;📈 AI Investing Dashboard&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button id="refresh-btn" onclick="loadData()"&gt;🔄 Refresh Analysis&lt;/button&gt;</p>
+<p class="p1">&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div id="loading"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="spinner"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Pulling data and running AI analysis — ~30 seconds...</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;main id="main" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="top-pick" id="top-pick"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="grid" id="grid"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">function badgeClass(action) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return action.toLowerCase().replace(/ /g, '-');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderCard(item) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const changeClass = item.change_1m_pct &gt;= 0 ? 'up' : 'down';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const changeSign<span class="Apple-converted-space">  </span>= item.change_1m_pct &gt;= 0 ? '+' : '';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const upside = item.analyst_target !== 'N/A' &amp;&amp; item.current_price</p>
+<p class="p1"><span class="Apple-converted-space">    </span>? (((item.analyst_target - item.current_price) / item.current_price) * 100).toFixed(1)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>: 'N/A';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const newsHtml = (item.news || []).slice(0, 2)</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.map(h =&gt; `&lt;div class="news-item"&gt;${h}&lt;/div&gt;`).join('');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const id = 'chart-' + item.ticker;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>return `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="card-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="ticker"&gt;${item.ticker}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="price"&gt;$${item.current_price}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="change ${changeClass}"&gt;${changeSign}${item.change_1m_pct}% this month&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="badge ${badgeClass(item.action)}"&gt;${item.action}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style="text-align:right; margin-top:8px; font-size:22px; font-weight:800"&gt;${item.score}&lt;span style="font-size:13px;color:#666"&gt;/10&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="score-bar"&gt;&lt;div class="score-fill" style="width:${item.score * 10}%"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="stats"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-label"&gt;Price Target&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-value"&gt;$${item.price_target}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-label"&gt;Analyst Upside&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-value"&gt;${upside !== 'N/A' ? upside + '%' : 'N/A'}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-label"&gt;P/E Ratio&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-value"&gt;${typeof item.pe_ratio === 'number' ? item.pe_ratio.toFixed(1) : item.pe_ratio}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-label"&gt;Beta&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="stat-value"&gt;${typeof item.beta === 'number' ? item.beta.toFixed(2) : item.beta}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;canvas id="${id}" height="80"&gt;&lt;/canvas&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="summary"&gt;${item.summary}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="risk"&gt;⚠️ ${item.key_risk}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>${newsHtml ? `&lt;div style="margin-top:12px"&gt;${newsHtml}&lt;/div&gt;` : ''}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function drawChart(item) {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const ctx = document.getElementById('chart-' + item.ticker);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (!ctx || !item.prices) return;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const up = item.change_1m_pct &gt;= 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>new Chart(ctx, {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>type: 'line',</p>
+<p class="p1"><span class="Apple-converted-space">    </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>labels: item.dates,</p>
+<p class="p1"><span class="Apple-converted-space">      </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">        </span>data: item.prices,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>borderColor: up ? '#00e676' : '#ff5252',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>backgroundColor: up ? '#00e67611' : '#ff525211',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>borderWidth: 2,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pointRadius: 0,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>fill: true,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tension: 0.4</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>plugins: { legend: { display: false } },</p>
+<p class="p1"><span class="Apple-converted-space">      </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>x: { display: false },</p>
+<p class="p1"><span class="Apple-converted-space">        </span>y: { display: false }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">async function loadData() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('loading').style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('main').style.display = 'none';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const res<span class="Apple-converted-space">  </span>= await fetch('/api/data');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const data = await res.json();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Top pick = highest score</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const top = data[0];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('top-pick').innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;🏆 Top Pick&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h3&gt;${top.ticker} — $${top.current_price} &lt;span class="badge ${badgeClass(top.action)}" style="font-size:14px"&gt;${top.action}&lt;/span&gt;&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;${top.summary}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('grid').innerHTML = data.map(renderCard).join('');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('loading').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('main').style.display = 'block';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>data.forEach(drawChart);</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">loadData();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

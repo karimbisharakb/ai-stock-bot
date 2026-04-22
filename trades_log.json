@@ -1,0 +1,79 @@
+{
+  "cash": 970.0,
+  "positions": [
+    {
+      "time": "14:40:23",
+      "question": "Will Spain win the 2026 FIFA World Cup?",
+      "direction": "NO",
+      "price": 0.8395,
+      "contracts": 11.91,
+      "size": 10,
+      "p_true": 0.09,
+      "p_market": 0.1605,
+      "reasoning": "Spain faces significant structural disadvantages: no European team has won a World Cup in the Americas since 1958, and tournament variance means even strong teams rarely exceed 15% true win probability. The market at 16.1% appears slightly elevated given historical base rates and the presence of multiple strong contenders including host-continent favorites.",
+      "status": "OPEN"
+    },
+    {
+      "time": "14:40:59",
+      "question": "Will the Oklahoma City Thunder win the 2026 NBA Fi",
+      "direction": "NO",
+      "price": 0.495,
+      "contracts": 20.2,
+      "size": 10,
+      "p_true": 0.08,
+      "p_market": 0.505,
+      "reasoning": "While OKC is elite now, winning a specific championship requires beating ~15 teams in a single tournament with high variance. Historical base rates show only 1/30 teams wins annually, and even top contenders rarely exceed 15-20% pre-season odds two years out.",
+      "status": "OPEN"
+    },
+    {
+      "time": "14:42:13",
+      "question": "MegaETH market cap (FDV) >$2B one day after launch",
+      "direction": "YES",
+      "price": 0.345,
+      "contracts": 28.99,
+      "size": 10,
+      "p_true": 0.52,
+      "p_market": 0.345,
+      "reasoning": "Strong VC backing and Vitalik association typically drive high FDV launches, and low circulating supply at launch makes $2B FDV achievable. However, L2 narrative saturation and potential market conditions create meaningful downside risk, making this closer to a coin flip with slight edge to YES.",
+      "status": "OPEN"
+    }
+  ],
+  "trades": [
+    {
+      "time": "14:40:23",
+      "question": "Will Spain win the 2026 FIFA World Cup?",
+      "direction": "NO",
+      "price": 0.8395,
+      "contracts": 11.91,
+      "size": 10,
+      "p_true": 0.09,
+      "p_market": 0.1605,
+      "reasoning": "Spain faces significant structural disadvantages: no European team has won a World Cup in the Americas since 1958, and tournament variance means even strong teams rarely exceed 15% true win probability. The market at 16.1% appears slightly elevated given historical base rates and the presence of multiple strong contenders including host-continent favorites.",
+      "status": "OPEN"
+    },
+    {
+      "time": "14:40:59",
+      "question": "Will the Oklahoma City Thunder win the 2026 NBA Fi",
+      "direction": "NO",
+      "price": 0.495,
+      "contracts": 20.2,
+      "size": 10,
+      "p_true": 0.08,
+      "p_market": 0.505,
+      "reasoning": "While OKC is elite now, winning a specific championship requires beating ~15 teams in a single tournament with high variance. Historical base rates show only 1/30 teams wins annually, and even top contenders rarely exceed 15-20% pre-season odds two years out.",
+      "status": "OPEN"
+    },
+    {
+      "time": "14:42:13",
+      "question": "MegaETH market cap (FDV) >$2B one day after launch",
+      "direction": "YES",
+      "price": 0.345,
+      "contracts": 28.99,
+      "size": 10,
+      "p_true": 0.52,
+      "p_market": 0.345,
+      "reasoning": "Strong VC backing and Vitalik association typically drive high FDV launches, and low circulating supply at launch makes $2B FDV achievable. However, L2 narrative saturation and potential market conditions create meaningful downside risk, making this closer to a coin flip with slight edge to YES.",
+      "status": "OPEN"
+    }
+  ]
+}
