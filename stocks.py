@@ -42,20 +42,28 @@ portfolio = load_portfolio()
 
 # ── Questrade Auth ─────────────────────────────────────────────────────────
 def get_questrade_token():
-    r = requests.post("https://login.questrade.com/oauth2/token",
-        params={"grant_type": "refresh_token",
-                "refresh_token": os.getenv("QUESTRADE_REFRESH_TOKEN")})
-    data = r.json()
-    # Update .env only if running locally
-    if os.path.exists(".env"):
-        env = open(".env").read()
-        env = "\n".join(
-            f"QUESTRADE_REFRESH_TOKEN={data['refresh_token']}"
-            if l.startswith("QUESTRADE_REFRESH_TOKEN") else l
-            for l in env.splitlines()
-        )
-        open(".env", "w").write(env)
-    return data["access_token"], data["api_server"]
+    token = os.getenv("QUESTRADE_REFRESH_TOKEN")
+    if not token:
+        return None, None
+    try:
+        r = requests.post("https://login.questrade.com/oauth2/token",
+            params={"grant_type": "refresh_token", "refresh_token": token})
+        if r.status_code != 200:
+            print(f"  ⚠️  Questrade auth failed: {r.status_code}")
+            return None, None
+        data = r.json()
+        if os.path.exists(".env"):
+            env = open(".env").read()
+            env = "\n".join(
+                f"QUESTRADE_REFRESH_TOKEN={data['refresh_token']}"
+                if l.startswith("QUESTRADE_REFRESH_TOKEN") else l
+                for l in env.splitlines()
+            )
+            open(".env", "w").write(env)
+        return data["access_token"], data["api_server"]
+    except Exception as e:
+        print(f"  ⚠️  Questrade error: {e}")
+        return None, None
 
 def get_symbol_id(ticker, access_token, api_server):
     headers = {"Authorization": f"Bearer {access_token}"}
@@ -437,7 +445,10 @@ def run(live=False):
     print("═"*62)
 
     access_token, api_server = get_questrade_token()
-    account_id = os.getenv("QUESTRADE_ACCOUNT_ID")
+account_id = os.getenv("QUESTRADE_ACCOUNT_ID")
+if not access_token:
+    print("⚠️  Running without Questrade — analysis only mode")
+    live = False
 
     # Scan all stocks
     stocks     = scan_stocks()
