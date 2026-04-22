@@ -46,10 +46,12 @@ def get_questrade_token():
     if not token:
         return None, None
     try:
-        r = requests.post("https://login.questrade.com/oauth2/token",
-            params={"grant_type": "refresh_token", "refresh_token": token})
-        if r.status_code != 200:
-            print(f"  ⚠️  Questrade auth failed: {r.status_code}")
+        r = requests.post(
+            "https://login.questrade.com/oauth2/token",
+            params={"grant_type": "refresh_token", "refresh_token": token},
+            timeout=10
+        )
+        if r.status_code != 200 or not r.text:
             return None, None
         data = r.json()
         if os.path.exists(".env"):
@@ -62,7 +64,7 @@ def get_questrade_token():
             open(".env", "w").write(env)
         return data["access_token"], data["api_server"]
     except Exception as e:
-        print(f"  ⚠️  Questrade error: {e}")
+        print(f"  ⚠️  Questrade unavailable: {e}")
         return None, None
 
 def get_symbol_id(ticker, access_token, api_server):
