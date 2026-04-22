@@ -1,0 +1,27 @@
+name: AI Stock Bot
+
+on:
+  schedule:
+    - cron: '0 13 * * 1-5'  # 9am EST Monday-Friday
+  workflow_dispatch:          # allows manual run
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic yfinance python-dotenv requests
+
+      - name: Run stock bot
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          QUESTRADE_REFRESH_TOKEN: ${{ secrets.QUESTRADE_REFRESH_TOKEN }}
+          QUESTRADE_ACCOUNT_ID: ${{ secrets.QUESTRADE_ACCOUNT_ID }}
+        run: python stocks.py
