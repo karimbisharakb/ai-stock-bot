@@ -2,18 +2,23 @@ name: AI Stock Bot
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'
+    # 8:30 AM EST (UTC-5) = 13:30 UTC — pre-market scan before open
+    - cron: '30 13 * * 1-5'
+    # 12:00 PM EST (UTC-5) = 17:00 UTC — midday position check
+    - cron: '0 17 * * 1-5'
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -21,17 +26,112 @@ jobs:
       - name: Install dependencies
         run: pip install anthropic yfinance python-dotenv requests
 
-      - name: Run stock bot
+      - name: Run AI stock bot
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY:       ${{ secrets.ANTHROPIC_API_KEY }}
           QUESTRADE_REFRESH_TOKEN: ${{ secrets.QUESTRADE_REFRESH_TOKEN }}
-          QUESTRADE_ACCOUNT_ID: ${{ secrets.QUESTRADE_ACCOUNT_ID }}
+          QUESTRADE_ACCOUNT_ID:    ${{ secrets.QUESTRADE_ACCOUNT_ID }}
         run: python stocks.py
 
-      - name: Save portfolio to GitHub
+      - name: Save portfolio to repo
         run: |
-          git config user.name "AI Stock Bot"
+          git config user.name  "AI Stock Bot"
           git config user.email "bot@github.com"
           git add stock_trades.json
-          git diff --staged --quiet || git commit -m "portfolio update $(date +'%Y-%m-%d %H:%M')"
+          git diff --staged --quiet || git commit -m "portfolio update $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
+
+      - name: Post run summary to latest commit
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO:         ${{ github.repository }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, subprocess, urllib.request, urllib.error
+
+          # Load the freshly updated portfolio
+          try:
+              with open("stock_trades.json") as f:
+                  d = json.load(f)
+          except Exception as e:
+              print(f"Could not read stock_trades.json: {e}")
+              exit(0)
+
+          cash      = d.get("cash", 0)
+          positions = d.get("positions", [])
+          regime    = d.get("regime", "UNKNOWN")
+          metrics   = d.get("metrics", {})
+          top_picks = d.get("top_picks", [])
+          history   = d.get("portfolio_history", [])
+          last_val  = history[-1]["value"] if history else cash
+          total_ret = ((last_val - 1000) / 1000 * 100)
+
+          regime_emoji = {"BULL": "🟢", "BEAR": "🔴", "SIDEWAYS": "🟡"}.get(regime, "⚪")
+
+          lines = [
+              "## 🤖 AI Stock Bot Run Summary",
+              "",
+              f"| Metric | Value |",
+              f"|--------|-------|",
+              f"| {regime_emoji} Market Regime | **{regime}** |",
+              f"| 💼 Portfolio Value | **${last_val:.2f}** ({total_ret:+.1f}% vs $1,000) |",
+              f"| 💰 Cash | **${cash:.2f}** |",
+              f"| 📈 Open Positions | **{len(positions)}** / 5 |",
+              f"| 🎯 Win Rate | **{metrics.get('win_rate', 'N/A')}%** (rolling 20: {metrics.get('rolling_win_rate', 'N/A')}%) |",
+              f"| 📊 Sharpe Ratio | **{metrics.get('sharpe', 'N/A')}** |",
+              f"| 📉 Max Drawdown | **{metrics.get('max_drawdown', 0):.1f}%** |",
+              "",
+          ]
+
+          if metrics.get("underperforming"):
+              lines += ["⚠️ **Warning:** Rolling win rate below 40% — review strategy.", ""]
+
+          if positions:
+              lines += ["### Open Positions", ""]
+              lines += ["| Ticker | Strategy | Shares | Buy Price | Target | Stop | P&L | Days |",
+                        "|--------|----------|--------|-----------|--------|------|-----|------|"]
+              for p in positions:
+                  pnl = p.get("last_pnl_pct", 0)
+                  pnl_str = f"{pnl:+.1f}%" if isinstance(pnl, (int, float)) else "N/A"
+                  lines.append(
+                      f"| **{p['ticker']}** | {p.get('strategy','?')} | {p['shares']} "
+                      f"| ${p['price']} | ${p.get('target','?')} | ${p.get('stop_loss','?')} "
+                      f"| {pnl_str} | {p.get('days_held', 0)}d |"
+                  )
+              lines.append("")
+
+          if top_picks:
+              lines += ["### Top Watchlist Picks (not yet bought)", ""]
+              for pick in top_picks:
+                  reason = pick.get("reasoning", "")[:100]
+                  lines.append(
+                      f"- **{pick['ticker']}** — score {pick.get('score','?')}/10 "
+                      f"[{pick.get('strategy','?')}] — {reason}"
+                  )
+              lines.append("")
+
+          body = "\n".join(lines)
+
+          # Get the current HEAD SHA
+          sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode().strip()
+          repo  = os.environ["REPO"]
+          token = os.environ["GITHUB_TOKEN"]
+
+          payload = json.dumps({"body": body}).encode()
+          req = urllib.request.Request(
+              f"https://api.github.com/repos/{repo}/commits/{sha}/comments",
+              data=payload,
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Content-Type": "application/json",
+                  "Accept": "application/vnd.github+json",
+              },
+              method="POST",
+          )
+          try:
+              urllib.request.urlopen(req)
+              print("✅ Run summary posted to commit.")
+          except urllib.error.HTTPError as e:
+              print(f"⚠️  Could not post comment: {e.read().decode()}")
+          PYEOF
