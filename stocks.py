@@ -444,27 +444,26 @@ def run(live=False):
     print(f"   {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print("═"*62)
 
+    # Questrade auth — skip if token unavailable
     access_token, api_server = get_questrade_token()
-account_id = os.getenv("QUESTRADE_ACCOUNT_ID")
-if not access_token:
-    print("⚠️  Running without Questrade — analysis only mode")
-    live = False
+    account_id = os.getenv("QUESTRADE_ACCOUNT_ID")
+    if not access_token:
+        print("⚠️  No Questrade connection — running analysis only")
+        live = False
 
-    # Scan all stocks
-    stocks     = scan_stocks()
-    stock_map  = {s["ticker"]: s for s in stocks}
+    stocks    = scan_stocks()
+    stock_map = {s["ticker"]: s for s in stocks}
 
-    # Monitor & sell existing positions
-    monitor_positions(stock_map, access_token, api_server, account_id, live)
+    if access_token:
+        monitor_positions(stock_map, access_token, api_server, account_id, live)
 
-    # Find new buys
     trades_made = 0
     for stock in stocks:
         print(f"\n{'─'*62}")
         print(f"📌 {stock['ticker']} — ${stock['price']}")
 
-        research   = research_stock(stock)
-        prediction = predict_stock(stock, research)
+        research     = research_stock(stock)
+        prediction   = predict_stock(stock, research)
         size, reason = risk_check(stock, prediction)
 
         if size is None:
@@ -479,4 +478,4 @@ if not access_token:
     summary()
 
 if __name__ == "__main__":
-    run(live=False)  # ← Change to True for real money
+    run(live=False)
