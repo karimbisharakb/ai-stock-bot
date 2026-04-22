@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,3 +27,11 @@ jobs:
           QUESTRADE_REFRESH_TOKEN: ${{ secrets.QUESTRADE_REFRESH_TOKEN }}
           QUESTRADE_ACCOUNT_ID: ${{ secrets.QUESTRADE_ACCOUNT_ID }}
         run: python stocks.py
+
+      - name: Save portfolio to GitHub
+        run: |
+          git config user.name "AI Stock Bot"
+          git config user.email "bot@github.com"
+          git add stock_trades.json
+          git diff --staged --quiet || git commit -m "portfolio update $(date +'%Y-%m-%d %H:%M')"
+          git push
