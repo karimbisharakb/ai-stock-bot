@@ -46,13 +46,15 @@ def get_questrade_token():
         params={"grant_type": "refresh_token",
                 "refresh_token": os.getenv("QUESTRADE_REFRESH_TOKEN")})
     data = r.json()
-    env = open(".env").read()
-    env = "\n".join(
-        f"QUESTRADE_REFRESH_TOKEN={data['refresh_token']}"
-        if l.startswith("QUESTRADE_REFRESH_TOKEN") else l
-        for l in env.splitlines()
-    )
-    open(".env", "w").write(env)
+    # Update .env only if running locally
+    if os.path.exists(".env"):
+        env = open(".env").read()
+        env = "\n".join(
+            f"QUESTRADE_REFRESH_TOKEN={data['refresh_token']}"
+            if l.startswith("QUESTRADE_REFRESH_TOKEN") else l
+            for l in env.splitlines()
+        )
+        open(".env", "w").write(env)
     return data["access_token"], data["api_server"]
 
 def get_symbol_id(ticker, access_token, api_server):
