@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 *.db
 bot/.env
+.DS_Store
+.claude/
