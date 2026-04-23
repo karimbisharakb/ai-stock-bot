@@ -4,6 +4,8 @@ Parses commands and replies via TwiML.
 """
 import os
 import re
+import logging
+import traceback
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 
@@ -11,9 +13,18 @@ import portfolio
 import alerts
 from database import get_connection
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
+)
+log = logging.getLogger(__name__)
+
 app = Flask(__name__)
 
 MY_NUMBER = os.getenv("MY_PHONE_NUMBER", "")
+if not MY_NUMBER:
+    log.warning("MY_PHONE_NUMBER env var is not set — all inbound messages will be processed")
 
 
 # ──────────────────────────────────────────────
@@ -24,16 +35,28 @@ MY_NUMBER = os.getenv("MY_PHONE_NUMBER", "")
 def webhook():
     from_number = request.form.get("From", "").strip()
     body        = request.form.get("Body", "").strip()
+    log.info("Webhook hit: from=%r body=%r", from_number, body[:120])
 
     resp = MessagingResponse()
 
-    # Only process messages from the owner
-    if _normalize(from_number) != _normalize(MY_NUMBER):
-        return str(resp)
+    # Only filter by number when MY_PHONE_NUMBER is configured
+    if MY_NUMBER:
+        norm_from = _normalize(from_number)
+        norm_mine = _normalize(MY_NUMBER)
+        if norm_from != norm_mine:
+            log.warning("Rejected: from=%r (normalized=%r) expected=%r", from_number, norm_from, norm_mine)
+            return str(resp)
 
-    reply = handle_command(body)
-    if reply:
-        resp.message(reply)
+    try:
+        reply = handle_command(body)
+        if reply:
+            resp.message(reply)
+            log.info("Reply queued (%d chars)", len(reply))
+        else:
+            log.warning("handle_command returned empty for body=%r", body)
+    except Exception:
+        log.error("Unhandled error handling command:\n%s", traceback.format_exc())
+        resp.message("❌ Internal error — check Railway logs.")
 
     return str(resp)
 
