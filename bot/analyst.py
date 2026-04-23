@@ -1,6 +1,6 @@
 """
 Stock analysis: real-time metrics from yfinance + qualitative analysis from Claude.
-No web_search tool — avoids API compatibility issues while still giving live numbers.
+Every step is logged so Railway logs expose the real failure point.
 """
 import os
 import logging
@@ -18,12 +18,27 @@ MODEL = "claude-sonnet-4-6"
 # ──────────────────────────────────────────────
 
 def _fetch_metrics(ticker: str) -> dict:
-    """Pull key fundamentals from yfinance. Returns dict with all fields."""
+    """Pull key fundamentals from yfinance. Always returns a complete dict; fields
+    default to 'N/A' if unavailable so Claude still runs regardless."""
+    log.info("analyst: fetching yfinance info for %s", ticker)
+    info: dict = {}
     try:
-        info = yf.Ticker(ticker).info
-    except Exception as e:
-        log.warning("yfinance info failed for %s: %s", ticker, e)
-        info = {}
+        t    = yf.Ticker(ticker)
+        info = t.info or {}
+        log.info(
+            "analyst: yfinance OK for %s — %d keys, price=%s, pe=%s, name=%s",
+            ticker,
+            len(info),
+            info.get("currentPrice") or info.get("regularMarketPrice"),
+            info.get("trailingPE"),
+            info.get("shortName") or info.get("longName"),
+        )
+    except Exception:
+        log.error(
+            "analyst: yfinance FAILED for %s — proceeding with N/A metrics\n%s",
+            ticker,
+            traceback.format_exc(),
+        )
 
     def _pct(val) -> str:
         if val is None:
@@ -33,7 +48,7 @@ def _fetch_metrics(ticker: str) -> dict:
         except Exception:
             return "N/A"
 
-    def _round(val, digits=1) -> str:
+    def _fmt(val, digits: int = 1) -> str:
         if val is None:
             return "N/A"
         try:
@@ -45,21 +60,22 @@ def _fetch_metrics(ticker: str) -> dict:
     rev = info.get("totalRevenue")
     fcf_margin = (fcf / rev) if (fcf and rev) else None
 
-    return {
-        "price":        _round(info.get("currentPrice") or info.get("regularMarketPrice"), 2),
-        "pe":           _round(info.get("trailingPE"), 1),
-        "fwd_pe":       _round(info.get("forwardPE"), 1),
+    metrics = {
+        "price":        _fmt(info.get("currentPrice") or info.get("regularMarketPrice"), 2),
+        "pe":           _fmt(info.get("trailingPE"), 1),
+        "fwd_pe":       _fmt(info.get("forwardPE"), 1),
         "rev_growth":   _pct(info.get("revenueGrowth")),
         "gross_margin": _pct(info.get("grossMargins")),
         "net_margin":   _pct(info.get("profitMargins")),
         "roe":          _pct(info.get("returnOnEquity")),
         "fcf_margin":   _pct(fcf_margin),
         "eps_growth":   _pct(info.get("earningsGrowth")),
-        "market_cap":   info.get("marketCap"),
-        "sector":       info.get("sector", ""),
-        "industry":     info.get("industry", ""),
+        "sector":       info.get("sector") or "Unknown",
+        "industry":     info.get("industry") or "Unknown",
         "name":         info.get("shortName") or info.get("longName") or ticker,
     }
+    log.info("analyst: metrics for %s — %s", ticker, metrics)
+    return metrics
 
 
 # ──────────────────────────────────────────────
@@ -70,23 +86,26 @@ def analyze_stock(ticker: str) -> str:
     """Return a WhatsApp-formatted analysis for ticker (under ~1400 chars)."""
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
+        log.error("analyst: ANTHROPIC_API_KEY not set")
         return "❌ ANTHROPIC_API_KEY not configured."
 
     ticker = ticker.upper().strip()
+    log.info("analyst: starting analysis for %s", ticker)
+
     m = _fetch_metrics(ticker)
 
     prompt = (
         f"You are a sharp financial analyst. Analyze {ticker} ({m['name']}) "
         f"in sector: {m['sector']} / {m['industry']}.\n\n"
-        f"Live metrics from yfinance:\n"
+        "Live metrics from yfinance (use N/A where shown — fill in from "
+        "your knowledge if the value is available):\n"
         f"  Price: ${m['price']}\n"
         f"  P/E: {m['pe']}  |  Fwd P/E: {m['fwd_pe']}\n"
         f"  Rev Growth (1Y): {m['rev_growth']}\n"
         f"  Gross Margin: {m['gross_margin']}  |  Net Margin: {m['net_margin']}\n"
         f"  ROE: {m['roe']}  |  FCF Margin: {m['fcf_margin']}\n"
         f"  EPS Growth: {m['eps_growth']}\n\n"
-        "Using the metrics above plus your knowledge of this company, "
-        "return ONLY the following formatted message — no preamble, no extra text:\n\n"
+        "Return ONLY the formatted message below — no preamble, no extra text:\n\n"
         f"📊 {ticker} ANALYSIS\n"
         "──────────────\n"
         "🏆 Overall: [0-100]/100\n"
@@ -105,6 +124,7 @@ def analyze_stock(ticker: str) -> str:
         "Total response MUST stay under 1400 characters."
     )
 
+    log.info("analyst: calling Claude model=%s prompt_len=%d", MODEL, len(prompt))
     try:
         client = anthropic.Anthropic(api_key=api_key)
         resp = client.messages.create(
@@ -112,12 +132,27 @@ def analyze_stock(ticker: str) -> str:
             max_tokens=1024,
             messages=[{"role": "user", "content": prompt}],
         )
+        log.info(
+            "analyst: Claude response received stop_reason=%s blocks=%d",
+            resp.stop_reason,
+            len(resp.content),
+        )
         text = next(
             (b.text.strip() for b in resp.content if hasattr(b, "text") and b.text.strip()),
             None,
         )
-        return text or "❌ Analysis returned empty — try again."
+        if text:
+            log.info("analyst: returning %d chars for %s", len(text), ticker)
+            return text
+        log.warning("analyst: Claude returned no text blocks for %s", ticker)
+        return "❌ Analysis returned empty — try again."
 
+    except anthropic.APIStatusError as e:
+        log.error(
+            "analyst: Anthropic API error status=%s message=%s\n%s",
+            e.status_code, e.message, traceback.format_exc(),
+        )
+        return f"❌ Analysis failed (API {e.status_code}) — try again."
     except Exception:
-        log.error("analyze_stock(%s) failed:\n%s", ticker, traceback.format_exc())
+        log.error("analyst: unexpected error for %s\n%s", ticker, traceback.format_exc())
         return "❌ Analysis failed — please try again."

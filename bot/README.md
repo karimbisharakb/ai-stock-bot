@@ -62,6 +62,24 @@ Copy the `https://xxxx.ngrok.io` URL, then go to:
 4. Railway auto-assigns a public URL — use it as your Twilio webhook:  
    `https://your-app.up.railway.app/webhook`
 
+### Persistent database (required — do this once)
+
+Without a persistent volume, `portfolio.db` is stored inside the container and
+**wiped on every redeploy**. Fix:
+
+1. In Railway dashboard → your service → **Volumes** tab → **Add Volume**
+2. Set **Mount Path** to `/data`
+3. Click **Deploy**
+
+Railway injects `RAILWAY_VOLUME_MOUNT_PATH=/data` automatically.
+`database.py` detects this and stores `portfolio.db` at `/data/portfolio.db`,
+which survives all future redeployments.
+
+You can confirm it's working by checking the Railway logs for:
+```
+[database] DB_PATH = /data/portfolio.db
+```
+
 ---
 
 ## SMS Commands

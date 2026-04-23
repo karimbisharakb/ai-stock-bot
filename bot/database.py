@@ -2,7 +2,15 @@ import sqlite3
 import os
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "portfolio.db")
+# Railway injects RAILWAY_VOLUME_MOUNT_PATH when a persistent volume is attached.
+# Fall back to DB_PATH env var, then to a local file beside this module.
+_volume = os.getenv("RAILWAY_VOLUME_MOUNT_PATH", "").strip()
+if _volume:
+    DB_PATH = os.path.join(_volume, "portfolio.db")
+else:
+    DB_PATH = os.getenv("DB_PATH", os.path.join(os.path.dirname(__file__), "portfolio.db"))
+
+print(f"[database] DB_PATH = {DB_PATH}")
 
 
 def get_connection():
