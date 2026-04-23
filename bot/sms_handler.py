@@ -47,16 +47,7 @@ def webhook():
     #         log.warning("Rejected: from=%r (normalized=%r) expected=%r", from_number, norm_from, norm_mine)
     #         return str(resp)
 
-    try:
-        reply = handle_command(body)
-        if reply:
-            resp.message(reply)
-            log.info("Reply queued (%d chars)", len(reply))
-        else:
-            log.warning("handle_command returned empty for body=%r", body)
-    except Exception:
-        log.error("Unhandled error handling command:\n%s", traceback.format_exc())
-        resp.message("❌ Internal error — check Railway logs.")
+    resp.message("Hello it works!")
 
     return str(resp)
 
