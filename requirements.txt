@@ -1,0 +1,11 @@
+anthropic
+flask
+requests
+yfinance
+pandas
+numpy
+vaderSentiment
+apscheduler
+twilio
+python-dotenv
+newsapi-python
