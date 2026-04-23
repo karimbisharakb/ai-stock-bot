@@ -9,6 +9,3 @@ pytz>=2024.1
 pandas>=2.3.3
 numpy>=2.0.2
 gunicorn>=22.0.0
-gunicorn
-gunicorn
-gunicorn

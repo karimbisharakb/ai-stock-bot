@@ -3,6 +3,11 @@ WSGI entry point for gunicorn.
 Runs setup (DB init, scheduler) at import time so gunicorn workers get it.
 """
 import os
+import sys
+
+# Ensure bot/ is on sys.path so bare imports work when invoked from root
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from dotenv import load_dotenv
 load_dotenv()
 
