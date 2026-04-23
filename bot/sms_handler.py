@@ -99,8 +99,8 @@ def handle_command(text: str) -> str:
         amount = float(m.group(1).replace(",", ""))
         return _cmd_room(amount)
 
-    # ANALYZE <ticker>
-    m = re.match(r"ANALYZE\s+([A-Z.]+(?:\.TO)?)", upper)
+    # ANALYZE / ANALYSE <ticker>
+    m = re.match(r"ANALY[ZS]E\s+([A-Z.]+(?:\.TO)?)", upper)
     if m:
         return _cmd_analyze(m.group(1))
 

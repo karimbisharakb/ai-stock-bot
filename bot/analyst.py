@@ -1,12 +1,13 @@
 """Stock analysis via Claude + web search."""
 import os
 import logging
+import traceback
 import anthropic
 
 log = logging.getLogger(__name__)
 
 MODEL = "claude-sonnet-4-6"
-_TOOLS = [{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}]
+_TOOLS = [{"type": "web_search_20250305", "name": "web_search"}]
 
 
 def analyze_stock(ticker: str) -> str:
@@ -41,6 +42,14 @@ def analyze_stock(ticker: str) -> str:
 
     messages = [{"role": "user", "content": prompt}]
 
+    try:
+        return _run_loop(client, messages)
+    except Exception:
+        log.error("analyze_stock(%s) failed:\n%s", ticker, traceback.format_exc())
+        return "❌ Analysis failed — please try again."
+
+
+def _run_loop(client: anthropic.Anthropic, messages: list) -> str:
     for _ in range(8):
         resp = client.messages.create(
             model=MODEL,
@@ -59,7 +68,11 @@ def analyze_stock(ticker: str) -> str:
         if resp.stop_reason == "tool_use":
             messages.append({"role": "assistant", "content": resp.content})
             tool_results = [
-                {"type": "tool_result", "tool_use_id": b.id, "content": ""}
+                {
+                    "type": "tool_result",
+                    "tool_use_id": b.id,
+                    "content": "Search executed.",
+                }
                 for b in resp.content
                 if b.type == "tool_use"
             ]
