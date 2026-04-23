@@ -12,6 +12,7 @@ from apscheduler.triggers.cron import CronTrigger
 import portfolio
 import alerts
 from sell_monitor import run_sell_monitor
+from scanner import run_scanner
 from strategy import WATCHLIST
 
 EASTERN = pytz.timezone("America/Toronto")
@@ -75,6 +76,19 @@ def start_scheduler() -> BackgroundScheduler:
         replace_existing=True,
     )
 
+    # Stock discovery scanner — every 30 min, Mon–Fri 7:00–20:00
+    scheduler.add_job(
+        run_scanner,
+        CronTrigger(
+            minute="*/30",
+            hour="7-20",
+            day_of_week="mon-fri",
+            timezone=EASTERN,
+        ),
+        id="scanner",
+        replace_existing=True,
+    )
+
     scheduler.start()
-    print("✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min)")
+    print("✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | scanner every 30 min)")
     return scheduler

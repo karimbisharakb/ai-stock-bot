@@ -70,6 +70,16 @@ def init_db():
         )
     """)
 
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS scanner_alerts (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker      TEXT    NOT NULL,
+            score       REAL    NOT NULL,
+            sent_at     TEXT    NOT NULL,
+            reason      TEXT
+        )
+    """)
+
     # Seed single-row tables
     c.execute("SELECT COUNT(*) FROM tfsa_info")
     if c.fetchone()[0] == 0:
