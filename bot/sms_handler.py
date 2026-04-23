@@ -11,6 +11,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 import portfolio
 import alerts
+from analyst import analyze_stock
 from database import get_connection
 
 logging.basicConfig(
@@ -98,6 +99,11 @@ def handle_command(text: str) -> str:
         amount = float(m.group(1).replace(",", ""))
         return _cmd_room(amount)
 
+    # ANALYZE <ticker>
+    m = re.match(r"ANALYZE\s+([A-Z.]+(?:\.TO)?)", upper)
+    if m:
+        return _cmd_analyze(m.group(1))
+
     # IGNORE <ticker>
     m = re.match(r"IGNORE\s+([A-Z.]+(?:\.TO)?)", upper)
     if m:
@@ -154,6 +160,10 @@ def _cmd_room(amount: float) -> str:
     return f"✅ TFSA room updated to ${amount:,.2f}"
 
 
+def _cmd_analyze(ticker: str) -> str:
+    return analyze_stock(ticker)
+
+
 def _cmd_ignore(ticker: str) -> str:
     alerts.snooze_ticker(ticker, hours=24)
     return f"🔕 {ticker} alerts snoozed for 24 hours"
@@ -190,5 +200,6 @@ def _cmd_help() -> str:
         "500  — get buy recs for $500 budget\n"
         "ROOM 7000  — update TFSA room\n"
         "IGNORE VFV.TO  — snooze 24h alerts\n"
+        "ANALYZE NVDA  — full AI stock analysis\n"
         "HELP  — this message"
     )
