@@ -9,3 +9,4 @@ apscheduler
 twilio
 python-dotenv
 newsapi-python
+gunicorn
