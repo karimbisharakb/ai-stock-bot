@@ -1,5 +1,5 @@
 """
-Outbound SMS via Twilio.
+Outbound WhatsApp via Twilio sandbox.
 Handles quiet hours, anti-spam, and all message formatting.
 """
 import os
@@ -13,8 +13,8 @@ EASTERN = pytz.timezone("America/Toronto")
 
 TWILIO_SID   = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
-FROM_NUMBER  = os.getenv("TWILIO_PHONE_NUMBER")
-TO_NUMBER    = os.getenv("MY_PHONE_NUMBER")
+FROM_NUMBER  = "whatsapp:+14155238886"
+TO_NUMBER    = "whatsapp:+12899718200"
 
 URGENCY_RANK = {"FYI": 1, "WARNING": 2, "URGENT": 3}
 
@@ -35,10 +35,10 @@ def send_sms(message: str, bypass_quiet: bool = False) -> bool:
     try:
         client = Client(TWILIO_SID, TWILIO_TOKEN)
         client.messages.create(body=message, from_=FROM_NUMBER, to=TO_NUMBER)
-        print(f"📤 SMS sent: {message[:80]}…")
+        print(f"📤 WhatsApp sent: {message[:80]}…")
         return True
     except Exception as e:
-        print(f"⚠️  SMS failed: {e}")
+        print(f"⚠️  WhatsApp send failed: {e}")
         return False
 
 

@@ -1,5 +1,5 @@
 """
-Flask webhook for inbound Twilio SMS.
+Flask webhook for inbound Twilio WhatsApp messages.
 Parses commands and replies via TwiML.
 """
 import os
@@ -22,9 +22,7 @@ log = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-MY_NUMBER = os.getenv("MY_PHONE_NUMBER", "")
-if not MY_NUMBER:
-    log.warning("MY_PHONE_NUMBER env var is not set — all inbound messages will be processed")
+MY_WHATSAPP = "whatsapp:+12899718200"
 
 
 # ──────────────────────────────────────────────
@@ -39,15 +37,20 @@ def webhook():
 
     resp = MessagingResponse()
 
-    # TEMP: phone filter disabled — process all inbound messages
-    # if MY_NUMBER:
-    #     norm_from = _normalize(from_number)
-    #     norm_mine = _normalize(MY_NUMBER)
-    #     if norm_from != norm_mine:
-    #         log.warning("Rejected: from=%r (normalized=%r) expected=%r", from_number, norm_from, norm_mine)
-    #         return str(resp)
+    if from_number != MY_WHATSAPP:
+        log.warning("Rejected: from=%r expected=%r", from_number, MY_WHATSAPP)
+        return str(resp)
 
-    resp.message("Hello it works!")
+    try:
+        reply = handle_command(body)
+        if reply:
+            resp.message(reply)
+            log.info("Reply queued (%d chars)", len(reply))
+        else:
+            log.warning("handle_command returned empty for body=%r", body)
+    except Exception:
+        log.error("Unhandled error handling command:\n%s", traceback.format_exc())
+        resp.message("❌ Internal error — check Railway logs.")
 
     return str(resp)
 
