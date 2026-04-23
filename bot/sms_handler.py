@@ -39,13 +39,13 @@ def webhook():
 
     resp = MessagingResponse()
 
-    # Only filter by number when MY_PHONE_NUMBER is configured
-    if MY_NUMBER:
-        norm_from = _normalize(from_number)
-        norm_mine = _normalize(MY_NUMBER)
-        if norm_from != norm_mine:
-            log.warning("Rejected: from=%r (normalized=%r) expected=%r", from_number, norm_from, norm_mine)
-            return str(resp)
+    # TEMP: phone filter disabled — process all inbound messages
+    # if MY_NUMBER:
+    #     norm_from = _normalize(from_number)
+    #     norm_mine = _normalize(MY_NUMBER)
+    #     if norm_from != norm_mine:
+    #         log.warning("Rejected: from=%r (normalized=%r) expected=%r", from_number, norm_from, norm_mine)
+    #         return str(resp)
 
     try:
         reply = handle_command(body)
