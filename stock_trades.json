@@ -13,9 +13,9 @@
       "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
       "status": "OPEN",
       "paper": true,
-      "last_price": 169.8,
-      "last_pnl_pct": -5.96,
-      "days_held": 1
+      "last_price": 168.05,
+      "last_pnl_pct": -6.93,
+      "days_held": 2
     },
     {
       "time": "2026-04-22 15:52",
@@ -31,9 +31,9 @@
       "key_risk": "Regulatory threats including antitrust actions and data privacy restrictions could materially impact the business model, while high beta of 1.31 amplifies downside during market corrections.",
       "status": "OPEN",
       "live": false,
-      "last_price": 659.22,
-      "last_pnl_pct": -2.59,
-      "days_held": 1
+      "last_price": 666.99,
+      "last_pnl_pct": -1.44,
+      "days_held": 2
     },
     {
       "time": "2026-04-23 15:27",
@@ -50,10 +50,10 @@
       "reasoning": "NVDA's fundamental case remains elite with 73% revenue growth against a 18x forward P/E and a $268 analyst target implying 32% upside, justifying a position in a bull regime despite stretched technicals. RSI at 91.2 warrants a partial entry rather than full Kelly sizing, with the expectation of adding on any pullback toward the MA50 near $185.",
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
-      "trail_high": 202.71,
-      "last_price": 199.17,
-      "last_pnl_pct": -1.75,
-      "days_held": 0,
+      "trail_high": 207.28,
+      "last_price": 207.28,
+      "last_pnl_pct": 2.25,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     },
@@ -72,10 +72,10 @@
       "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
-      "trail_high": 380.41,
-      "last_price": 380.41,
-      "last_pnl_pct": 0.0,
-      "days_held": 0,
+      "trail_high": 399.19,
+      "last_price": 399.19,
+      "last_pnl_pct": 4.94,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     },
@@ -95,9 +95,9 @@
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
       "trail_high": 442.86,
-      "last_price": 442.86,
-      "last_pnl_pct": 0.0,
-      "days_held": 0,
+      "last_price": 440.39,
+      "last_pnl_pct": -0.56,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -467,6 +467,10 @@
     {
       "date": "2026-04-23",
       "value": 981.84
+    },
+    {
+      "date": "2026-04-24",
+      "value": 986.66
     }
   ],
   "top_picks": [
@@ -476,9 +480,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSFT offers strong fundamental quality with 16.7% revenue growth, 39% margins, and a credible path to $470+ as AI monetization materializes and price reclaims MA200 resistance; bull regime permits entry at current levels with halved position size given earnings within 7 days and medium conviction. RSI overbought at 71.7 into a binary earnings event warrants reduced sizing rather than a skip, as long-term compounder thesis remains intact.",
-      "price_target": 470.0,
-      "key_risk": "Azure growth disappointment or weak Copilot revenue guidance triggers a 'sell the news' flush from overbought RSI levels, potentially retesting $370-$380 support."
+      "reasoning": "MSFT's 38% upside to analyst consensus, strong fundamentals at 22x forward earnings with 16.7% revenue growth, and bull market regime support a medium-term position despite near-term overbought conditions. Earnings in \u22647 days warrants halved position size per rules given medium conviction, limiting binary event exposure while maintaining upside participation.",
+      "price_target": 490.0,
+      "key_risk": "Earnings disappointment on Azure growth or Copilot monetization could flush the overbought rally and break below the 50-MA support at $393, invalidating the recovery thesis."
     },
     {
       "ticker": "AAPL",
@@ -486,19 +490,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a clean bullish structure above both key MAs with strong near-term momentum, analyst consensus pointing to ~9% upside as Services and AI monetization support premium valuation. Earnings within 7 days warrants halved position size given binary risk, but the bull regime and technical setup justify entry at current levels.",
+      "reasoning": "AAPL trades in a clean bull structure above both moving averages with RSI at 63 and bullish MACD, offering a clear path to the $297 analyst target on earnings reacceleration. Position is halved pre-earnings given medium conviction and the binary risk of a Services or iPhone guidance miss within 7 days.",
       "price_target": 297.71,
-      "key_risk": "A guidance miss or soft China/iPhone demand commentary could rapidly unwind the recent acceleration and push price back to the $260 MA50 support."
+      "key_risk": "Earnings within 7 days could trigger a 5-8% drawdown if Services revenue growth disappoints or iPhone guidance is cautious, undermining the reacceleration thesis."
     },
     {
-      "ticker": "GOOG",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG's 25x forward P/E against 18% revenue growth and 33% margins remains fundamentally defensible in a bull regime, with strong structural uptrend intact above both key moving averages. Position is halved due to earnings within 7 days and RSI at 83.2 presenting elevated reversal risk on any guidance disappointment.",
-      "price_target": 362.5,
-      "key_risk": "RSI at 83.2 with below-average volume and earnings imminent creates asymmetric downside if results or guidance disappoint, potentially triggering a sharp mean-reversion from overbought levels."
+      "reasoning": "PLTR's 70% YoY revenue growth, expanding AIP commercial adoption, and 32.6% analyst-consensus upside justify a medium-term position at oversold RSI levels with a positive MACD crossover providing a tactical entry. Bull market regime supports full Kelly sizing despite the deteriorating price structure, with the $140 zone representing a historically significant demand level before the 2024 breakout.",
+      "price_target": 186.47,
+      "key_risk": "Federal budget uncertainty and DOGE-driven government spending cuts could trigger a violent re-rating to $105\u2013$115 if next earnings reveals government revenue softness, with no meaningful technical support between current price and that range."
     }
   ],
   "regime": "BULL",
@@ -514,5 +518,5 @@
     "underperforming": false
   },
   "pnl": -3.8000000000000007,
-  "last_run": "2026-04-23 18:15"
+  "last_run": "2026-04-24 15:02"
 }
