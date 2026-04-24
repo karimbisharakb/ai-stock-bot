@@ -55,11 +55,27 @@ def morning_summary_job():
 def start_scheduler() -> BackgroundScheduler:
     scheduler = BackgroundScheduler(timezone=EASTERN)
 
-    # Morning summary — 8:45 AM ET, Mon–Fri
+    # Morning summary — 9:00 AM ET, Mon–Fri
     scheduler.add_job(
         morning_summary_job,
-        CronTrigger(hour=8, minute=45, day_of_week="mon-fri", timezone=EASTERN),
+        CronTrigger(hour=9, minute=0, day_of_week="mon-fri", timezone=EASTERN),
         id="morning_summary",
+        replace_existing=True,
+    )
+
+    # Afternoon summary — 2:00 PM ET, Mon–Fri
+    scheduler.add_job(
+        morning_summary_job,
+        CronTrigger(hour=14, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="afternoon_summary",
+        replace_existing=True,
+    )
+
+    # Evening summary — 7:00 PM ET, Mon–Fri
+    scheduler.add_job(
+        morning_summary_job,
+        CronTrigger(hour=19, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="evening_summary",
         replace_existing=True,
     )
 
@@ -90,5 +106,5 @@ def start_scheduler() -> BackgroundScheduler:
     )
 
     scheduler.start()
-    print("✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | scanner every 30 min)")
+    print("✅ Scheduler started (summaries at 9:00 AM, 2:00 PM, 7:00 PM ET | sell monitor every 15 min | scanner every 30 min)")
     return scheduler
