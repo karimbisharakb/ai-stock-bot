@@ -13,8 +13,8 @@
       "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
       "status": "OPEN",
       "paper": true,
-      "last_price": 168.05,
-      "last_pnl_pct": -6.93,
+      "last_price": 170.25,
+      "last_pnl_pct": -5.71,
       "days_held": 2
     },
     {
@@ -31,9 +31,10 @@
       "key_risk": "Regulatory threats including antitrust actions and data privacy restrictions could materially impact the business model, while high beta of 1.31 amplifies downside during market corrections.",
       "status": "OPEN",
       "live": false,
-      "last_price": 666.99,
-      "last_pnl_pct": -1.44,
-      "days_held": 2
+      "last_price": 677.33,
+      "last_pnl_pct": 0.09,
+      "days_held": 2,
+      "trail_high": 677.33
     },
     {
       "time": "2026-04-23 15:27",
@@ -50,9 +51,9 @@
       "reasoning": "NVDA's fundamental case remains elite with 73% revenue growth against a 18x forward P/E and a $268 analyst target implying 32% upside, justifying a position in a bull regime despite stretched technicals. RSI at 91.2 warrants a partial entry rather than full Kelly sizing, with the expectation of adding on any pullback toward the MA50 near $185.",
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
-      "trail_high": 207.28,
-      "last_price": 207.28,
-      "last_pnl_pct": 2.25,
+      "trail_high": 209.56,
+      "last_price": 209.56,
+      "last_pnl_pct": 3.38,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -72,9 +73,9 @@
       "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
-      "trail_high": 399.19,
-      "last_price": 399.19,
-      "last_pnl_pct": 4.94,
+      "trail_high": 405.33,
+      "last_price": 405.33,
+      "last_pnl_pct": 6.55,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -94,9 +95,9 @@
       "reasoning": "CRWD is rebounding with strong short-term momentum, trading above the 50-MA with bullish MACD and analyst consensus pointing to ~10.6% upside toward $490; the BULL regime supports entry at this score threshold under full Kelly sizing. Recovery thesis hinges on ARR resilience and post-outage customer retention holding intact through the next earnings cycle.",
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
-      "trail_high": 442.86,
-      "last_price": 440.39,
-      "last_pnl_pct": -0.56,
+      "trail_high": 445.19,
+      "last_price": 445.19,
+      "last_pnl_pct": 0.53,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -470,29 +471,19 @@
     },
     {
       "date": "2026-04-24",
-      "value": 986.66
+      "value": 992.76
     }
   ],
   "top_picks": [
-    {
-      "ticker": "MSFT",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSFT's 38% upside to analyst consensus, strong fundamentals at 22x forward earnings with 16.7% revenue growth, and bull market regime support a medium-term position despite near-term overbought conditions. Earnings in \u22647 days warrants halved position size per rules given medium conviction, limiting binary event exposure while maintaining upside participation.",
-      "price_target": 490.0,
-      "key_risk": "Earnings disappointment on Azure growth or Copilot monetization could flush the overbought rally and break below the 50-MA support at $393, invalidating the recovery thesis."
-    },
     {
       "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a clean bull structure above both moving averages with RSI at 63 and bullish MACD, offering a clear path to the $297 analyst target on earnings reacceleration. Position is halved pre-earnings given medium conviction and the binary risk of a Services or iPhone guidance miss within 7 days.",
+      "reasoning": "AAPL trades in a clean bullish structure above both key MAs with solid 3-month momentum and a buy-rated analyst target offering 10%+ upside on AI-driven iPhone and services catalysts. Position is halved due to earnings within 7 days given medium conviction, limiting binary event exposure while maintaining participation in the bullish trend.",
       "price_target": 297.71,
-      "key_risk": "Earnings within 7 days could trigger a 5-8% drawdown if Services revenue growth disappoints or iPhone guidance is cautious, undermining the reacceleration thesis."
+      "key_risk": "Earnings miss on iPhone 17 demand or services growth below $30B/quarter could trigger a sharp reversion toward $250 support, invalidating the bull thesis."
     },
     {
       "ticker": "PLTR",
@@ -500,9 +491,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's 70% YoY revenue growth, expanding AIP commercial adoption, and 32.6% analyst-consensus upside justify a medium-term position at oversold RSI levels with a positive MACD crossover providing a tactical entry. Bull market regime supports full Kelly sizing despite the deteriorating price structure, with the $140 zone representing a historically significant demand level before the 2024 breakout.",
+      "reasoning": "PLTR is forming a potential base near key support as MACD divergence signals seller exhaustion, with a 31% upside to analyst consensus driven by its defensible AI/government contract flywheel and 70% revenue growth. Bull regime allows entry at score 7+ despite the bearish price structure, with confirmation watch above $144\u2013$145.",
       "price_target": 186.47,
-      "key_risk": "Federal budget uncertainty and DOGE-driven government spending cuts could trigger a violent re-rating to $105\u2013$115 if next earnings reveals government revenue softness, with no meaningful technical support between current price and that range."
+      "key_risk": "Federal budget sequestration or DoD spending delays could trigger another 15\u201320% leg down given the extreme 76x forward P/E valuation with zero margin for error."
+    },
+    {
+      "ticker": "MSTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "MSTR has broken decisively above MA50 with strong momentum and a 117.9% analyst upside target, supported by a bull market regime and Bitcoin's structural uptrend thesis. The leveraged BTC exposure provides asymmetric upside if BTC breaks above $70K, justifying a medium-term position sized within the 20% crypto proxy cap.",
+      "price_target": 220.0,
+      "key_risk": "RSI at 76.3 signals overbought conditions and MSTR remains 28% below MA200, meaning any BTC reversal below $55K could send shares back toward the $104 floor given the 16.2x debt-to-equity leverage."
     }
   ],
   "regime": "BULL",
@@ -518,5 +519,5 @@
     "underperforming": false
   },
   "pnl": -3.8000000000000007,
-  "last_run": "2026-04-24 15:02"
+  "last_run": "2026-04-24 17:52"
 }
