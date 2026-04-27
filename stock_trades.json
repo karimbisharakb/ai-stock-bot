@@ -1,5 +1,5 @@
 {
-  "cash": 536.9300000000002,
+  "cash": 587.5600000000002,
   "positions": [
     {
       "time": "2026-04-22 15:13",
@@ -13,28 +13,9 @@
       "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
       "status": "OPEN",
       "paper": true,
-      "last_price": 169.58,
-      "last_pnl_pct": -6.08,
+      "last_price": 168.75,
+      "last_pnl_pct": -6.54,
       "days_held": 5
-    },
-    {
-      "time": "2026-04-22 15:52",
-      "ticker": "META",
-      "action": "BUY",
-      "shares": 0.155,
-      "price": 676.72,
-      "cost": 104.89,
-      "target": 785.0,
-      "stop_loss": 590.0,
-      "score": 8,
-      "reasoning": "META shows exceptional fundamentals with 23.8% revenue growth, 30% margins, and operational excellence at scale, trading at a reasonable 19x forward P/E with 26% upside to analyst targets. The combination of AI-driven ad effectiveness, margin expansion, and strong analyst conviction supports significant appreciation potential.",
-      "key_risk": "Regulatory threats including antitrust actions and data privacy restrictions could materially impact the business model, while high beta of 1.31 amplifies downside during market corrections.",
-      "status": "OPEN",
-      "live": false,
-      "last_price": 676.96,
-      "last_pnl_pct": 0.04,
-      "days_held": 5,
-      "trail_high": 677.33
     },
     {
       "time": "2026-04-23 15:27",
@@ -51,9 +32,9 @@
       "reasoning": "NVDA's fundamental case remains elite with 73% revenue growth against a 18x forward P/E and a $268 analyst target implying 32% upside, justifying a position in a bull regime despite stretched technicals. RSI at 91.2 warrants a partial entry rather than full Kelly sizing, with the expectation of adding on any pullback toward the MA50 near $185.",
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
-      "trail_high": 209.56,
-      "last_price": 209.47,
-      "last_pnl_pct": 3.33,
+      "trail_high": 215.03,
+      "last_price": 215.03,
+      "last_pnl_pct": 6.08,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -74,8 +55,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 402.67,
-      "last_pnl_pct": 5.85,
+      "last_price": 403.38,
+      "last_pnl_pct": 6.04,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -96,9 +77,31 @@
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
       "trail_high": 455.62,
-      "last_price": 455.62,
-      "last_pnl_pct": 2.88,
+      "last_price": 455.55,
+      "last_pnl_pct": 2.87,
       "days_held": 4,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-04-27 18:05",
+      "ticker": "SNOW",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3773,
+      "price": 144.72,
+      "cost": 54.6,
+      "target": 185.0,
+      "stop_loss": 128.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "BULL regime with 60.8% analyst upside and 30% revenue growth justifies a starter position at deeply oversold levels, with the nascent MACD bullish crossover providing a near-term technical trigger. Position sizing should remain modest given the confirmed downtrend and lack of volume confirmation, with intent to add on a high-volume 50-MA recapture.",
+      "key_risk": "Without a credible profitability timeline at the next earnings print, price could retest the $118 52-week low, invalidating the thesis entirely.",
+      "earnings_play": false,
+      "trail_high": 144.72,
+      "last_price": 144.72,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -362,6 +365,52 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-04-22 15:52",
+      "ticker": "META",
+      "action": "SELL",
+      "shares": 0.155,
+      "price": 676.72,
+      "cost": 104.89,
+      "target": 785.0,
+      "stop_loss": 590.0,
+      "score": 8,
+      "reasoning": "META shows exceptional fundamentals with 23.8% revenue growth, 30% margins, and operational excellence at scale, trading at a reasonable 19x forward P/E with 26% upside to analyst targets. The combination of AI-driven ad effectiveness, margin expansion, and strong analyst conviction supports significant appreciation potential.",
+      "key_risk": "Regulatory threats including antitrust actions and data privacy restrictions could materially impact the business model, while high beta of 1.31 amplifies downside during market corrections.",
+      "status": "CLOSED",
+      "live": false,
+      "last_price": 678.93,
+      "last_pnl_pct": 0.33,
+      "days_held": 5,
+      "trail_high": 678.93,
+      "sell_price": 678.93,
+      "sell_time": "2026-04-27 18:02",
+      "pnl_dollar": 0.34,
+      "pnl_pct": 0.33,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI at 79.8 signals extreme overbought conditions after a 24% monthly surge, with minimal P&L gain over 5 days suggesting momentum is stalling near exhaustion."
+    },
+    {
+      "time": "2026-04-27 18:05",
+      "ticker": "SNOW",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3773,
+      "price": 144.72,
+      "cost": 54.6,
+      "target": 185.0,
+      "stop_loss": 128.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "BULL regime with 60.8% analyst upside and 30% revenue growth justifies a starter position at deeply oversold levels, with the nascent MACD bullish crossover providing a near-term technical trigger. Position sizing should remain modest given the confirmed downtrend and lack of volume confirmation, with intent to add on a high-volume 50-MA recapture.",
+      "key_risk": "Without a credible profitability timeline at the next earnings print, price could retest the $118 52-week low, invalidating the thesis entirely.",
+      "earnings_play": false,
+      "trail_high": 144.72,
+      "last_price": 144.72,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -462,6 +511,30 @@
       "pnl_dollar": -1.49,
       "pnl_pct": -2.93,
       "sell_reason": "AI thesis break: SELL \u2013 Price broke below the MA50 confirmation level ($144.29) that was the core technical thesis, RSI has weakened to 44.6, and the -8.36% 1M return signals accelerating downside momentum with no support trigger met."
+    },
+    {
+      "time": "2026-04-22 15:52",
+      "ticker": "META",
+      "action": "BUY",
+      "shares": 0.155,
+      "price": 676.72,
+      "cost": 104.89,
+      "target": 785.0,
+      "stop_loss": 590.0,
+      "score": 8,
+      "reasoning": "META shows exceptional fundamentals with 23.8% revenue growth, 30% margins, and operational excellence at scale, trading at a reasonable 19x forward P/E with 26% upside to analyst targets. The combination of AI-driven ad effectiveness, margin expansion, and strong analyst conviction supports significant appreciation potential.",
+      "key_risk": "Regulatory threats including antitrust actions and data privacy restrictions could materially impact the business model, while high beta of 1.31 amplifies downside during market corrections.",
+      "status": "CLOSED",
+      "live": false,
+      "last_price": 678.93,
+      "last_pnl_pct": 0.33,
+      "days_held": 5,
+      "trail_high": 678.93,
+      "sell_price": 678.93,
+      "sell_time": "2026-04-27 18:02",
+      "pnl_dollar": 0.34,
+      "pnl_pct": 0.33,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI at 79.8 signals extreme overbought conditions after a 24% monthly surge, with minimal P&L gain over 5 days suggesting momentum is stalling near exhaustion."
     }
   ],
   "portfolio_history": [
@@ -475,7 +548,7 @@
     },
     {
       "date": "2026-04-27",
-      "value": 992.67
+      "value": 993.65
     }
   ],
   "top_picks": [
@@ -485,9 +558,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSFT trades at a reasonable 22.3x forward P/E with 16.7% revenue growth and strong margins, offering meaningful upside to analyst targets near $576 once the current earnings overhang clears. Despite near-term technical headwinds from overbought RSI and sub-200MA positioning, the fundamental quality and wide opportunity band justify a half-sized entry in a bull regime.",
-      "price_target": 500.0,
-      "key_risk": "Earnings within 7 days on an overbought RSI below the 200-MA could trigger a sharp mean-reversion selloff if guidance disappoints, invalidating the recovery thesis."
+      "reasoning": "MSFT's compressed valuation at 22.5x forward P/E with 16.7% revenue growth and dominant AI monetization via Azure presents a compelling medium-term re-rating opportunity as the stock recovers toward its 200-MA. Analyst consensus at $576 with strong buy rating supports a fundamentally driven recovery, though position is halved given earnings within 7 days and medium conviction.",
+      "price_target": 490.0,
+      "key_risk": "A miss on Azure growth or soft forward guidance at the imminent earnings print could extend the gap below the 200-MA and invalidate the recovery thesis entirely."
     },
     {
       "ticker": "AAPL",
@@ -495,33 +568,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL holds cleanly above both key moving averages in a confirmed bull regime with analyst consensus at $297.71 and solid fundamental execution in Services/iPhone driving premium multiple justification. Earnings binary risk warrants half-size entry per rules given medium conviction score.",
+      "reasoning": "AAPL trades in a clean bull structure above both key moving averages with positive MACD and RSI with room to run, and the $297 analyst target offers reasonable upside supported by Services compounding. Earnings within 7 days warrants half-size entry given medium conviction, limiting downside exposure to a potential guidance miss.",
       "price_target": 297.71,
-      "key_risk": "Earnings miss or China demand warning could collapse price to MA200 support near $253, erasing near-term upside thesis."
+      "key_risk": "Earnings guidance softness on iPhone demand or Services deceleration could break $260 MA support and trigger a sharp multiple re-rating lower."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's reclaim of MA50 with bullish MACD and a 121% analyst upside target driven by BTC NAV appreciation justifies a medium-term position in a confirmed bull regime, with the $220 zone representing a realistic interim target below the MA200 ceiling. Position sizing must respect the 20% crypto proxy cap given the leveraged BTC exposure and deeply overbought RSI at 77.8 warranting a wider stop.",
-      "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ amplified through MSTR's 3.56 beta and 16.2 D/E ratio could trigger forced liquidation fears and a swift collapse toward $120\u2013$130 support."
+      "reasoning": "META's forward P/E of 18.8x against 23%+ revenue growth and 30% margins offers genuine value, with the $855 analyst target reflecting a credible earnings step-up thesis on AI monetization. Earnings risk and RSI at 79.8 with thinning volume warrant half-size entry per protocol, targeting post-earnings consolidation toward fair value.",
+      "price_target": 760.0,
+      "key_risk": "A capex blowout or soft Q3 guidance on an already overbought chart could trigger a rapid reversal toward the $620\u2013$630 MA support zone, representing ~9% downside from entry."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 50.0,
-    "rolling_win_rate": 50.0,
-    "avg_return": -1.16,
-    "sharpe": -0.77,
-    "max_drawdown": 0.01,
-    "total_trades": 4,
-    "wins": 2,
+    "win_rate": 60.0,
+    "rolling_win_rate": 60.0,
+    "avg_return": -0.86,
+    "sharpe": -0.59,
+    "max_drawdown": 0.0,
+    "total_trades": 5,
+    "wins": 3,
     "losses": 2,
     "underperforming": false
   },
-  "pnl": -3.8000000000000007,
-  "last_run": "2026-04-27 15:32"
+  "pnl": -3.460000000000001,
+  "last_run": "2026-04-27 18:10"
 }
