@@ -13,8 +13,8 @@
       "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
       "status": "OPEN",
       "paper": true,
-      "last_price": 168.87,
-      "last_pnl_pct": -6.47,
+      "last_price": 168.49,
+      "last_pnl_pct": -6.68,
       "days_held": 6
     },
     {
@@ -33,8 +33,8 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 209.38,
-      "last_pnl_pct": 3.29,
+      "last_price": 212.02,
+      "last_pnl_pct": 4.59,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -55,8 +55,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 387.34,
-      "last_pnl_pct": 1.82,
+      "last_price": 391.71,
+      "last_pnl_pct": 2.97,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -76,9 +76,9 @@
       "reasoning": "CRWD is rebounding with strong short-term momentum, trading above the 50-MA with bullish MACD and analyst consensus pointing to ~10.6% upside toward $490; the BULL regime supports entry at this score threshold under full Kelly sizing. Recovery thesis hinges on ARR resilience and post-outage customer retention holding intact through the next earnings cycle.",
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
-      "trail_high": 455.62,
-      "last_price": 450.86,
-      "last_pnl_pct": 1.81,
+      "trail_high": 456.09,
+      "last_price": 456.09,
+      "last_pnl_pct": 2.99,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -99,8 +99,8 @@
       "key_risk": "Without a credible profitability timeline at the next earnings print, price could retest the $118 52-week low, invalidating the thesis entirely.",
       "earnings_play": false,
       "trail_high": 144.72,
-      "last_price": 142.07,
-      "last_pnl_pct": -1.83,
+      "last_price": 142.88,
+      "last_pnl_pct": -1.27,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -552,7 +552,7 @@
     },
     {
       "date": "2026-04-28",
-      "value": 987.73
+      "value": 989.75
     }
   ],
   "top_picks": [
@@ -560,31 +560,31 @@
       "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
-      "strategy": "MEDIUM",
+      "strategy": "SWING",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a clean bullish structure above both key moving averages with RSI at 62 leaving room to run, and the analyst consensus target at $297.71 offers a credible 10%+ upside on AI/services re-acceleration. Earnings binary risk and weak volume conviction warrant half-size entry per the earnings rule for medium conviction.",
-      "price_target": 297.71,
-      "key_risk": "Earnings miss or soft China guidance within 7 days could flush price back to MA50 near $260, negating the near-term setup."
+      "reasoning": "Clean bullish structure above both moving averages in a BULL regime with RSI at 62.5 leaving room to run toward the 52-week high at $288.62. Earnings within 7 days warrants half-size position given medium conviction, targeting a beat-and-raise catalyst on services.",
+      "price_target": 288.62,
+      "key_risk": "An earnings miss or weak China iPhone guidance could flush price back to the 200-DMA at $253.92 rapidly, negating the entire technical setup."
     },
     {
-      "ticker": "META",
+      "ticker": "ARM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "SWING",
+      "conviction": "medium",
+      "reasoning": "Institutional accumulation at 1.73x volume with strong MACD in a BULL regime supports a near-term momentum continuation trade despite stretched valuations. A tight swing approach captures upside while limiting exposure to the asymmetric downside risk from hyperscaler CapEx guidance shifts.",
+      "price_target": 215.0,
+      "key_risk": "Beta of 3.3 combined with RSI near overbought and a 15% premium to analyst targets means any CapEx deceleration signal from hyperscalers could trigger a violent mean-reversion exceeding 20% rapidly."
+    },
+    {
+      "ticker": "COIN",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META's 18.6x forward P/E on 24% revenue growth with 30%+ margins represents a quality-growth bargain, and a beat-and-raise earnings catalyst could immediately convert the 200-MA from resistance to support. Position is halved due to earnings within 7 days and medium conviction given technical exhaustion signals near overbought RSI.",
-      "price_target": 855.0,
-      "key_risk": "A guidance miss or ad revenue softness could trigger an 8-12% flush given elevated 1-month expectations, overbought RSI, and the stock trading below its 200-MA."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR has reclaimed MA50 with strong momentum and a 129% analyst upside anchored to Bitcoin bull optionality, making it a leveraged BTC proxy worth holding in a confirmed bull regime. Position is halved due to earnings within 7 days and the binary risk of BTC NAV/equity offering disclosure.",
+      "reasoning": "COIN offers a leveraged crypto proxy in a bull regime with positive near-term technicals \u2014 RSI with room to run, price above 50-MA, and bullish MACD \u2014 while analyst consensus targets $240 on a BTC volume recovery thesis. Position sizing must respect the 20% crypto proxy cap given the 6-month -45% drawdown and 53x D/E, limiting this to a partial allocation with tight risk management.",
       "price_target": 220.0,
-      "key_risk": "Earnings disclosure of dilutive ATM equity offerings or BTC price reversal could collapse the premium and send MSTR back toward $130\u2013$140 support rapidly."
+      "key_risk": "A BTC price reversal from current levels would immediately crush exchange volumes and expose COIN's overleveraged cost structure, likely breaking the $185 support and invalidating the relief rally thesis."
     }
   ],
   "regime": "BULL",
@@ -593,12 +593,12 @@
     "rolling_win_rate": 60.0,
     "avg_return": -0.86,
     "sharpe": -0.59,
-    "max_drawdown": 0.6,
+    "max_drawdown": 0.39,
     "total_trades": 5,
     "wins": 3,
     "losses": 2,
     "underperforming": false
   },
   "pnl": -3.460000000000001,
-  "last_run": "2026-04-28 15:53"
+  "last_run": "2026-04-28 18:22"
 }
