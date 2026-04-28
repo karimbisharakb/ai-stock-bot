@@ -73,13 +73,23 @@ def handle_command(text: str) -> str:
     text = text.strip()
     upper = text.upper()
 
-    # BOUGHT <shares> <ticker> at <price>
+    # BOUGHT <shares> <ticker> at <price> [USD|CAD]
     m = re.match(
-        r"BOUGHT\s+([\d.]+)\s+([A-Z.]+(?:\.TO)?)\s+(?:AT|@)\s+\$?([\d.]+)",
+        r"BOUGHT\s+([\d.]+)\s+([A-Z.]+(?:\.TO)?)\s+(?:AT|@)\s+\$?([\d.]+)(?:\s+(USD|CAD))?",
         upper,
     )
     if m:
-        return _cmd_bought(m.group(2), float(m.group(1)), float(m.group(3)))
+        ticker   = m.group(2)
+        currency = m.group(4) or ("CAD" if ticker.endswith(".TO") else "USD")
+        return _cmd_bought(ticker, float(m.group(1)), float(m.group(3)), currency)
+
+    # DIVIDEND <shares> <ticker> at <price>
+    m = re.match(
+        r"DIVIDEND\s+([\d.]+)\s+([A-Z.]+(?:\.TO)?)\s+(?:AT|@)\s+\$?([\d.]+)",
+        upper,
+    )
+    if m:
+        return _cmd_dividend(m.group(2), float(m.group(1)), float(m.group(3)))
 
     # SOLD <shares> <ticker> at <price>
     m = re.match(
@@ -133,12 +143,36 @@ def handle_command(text: str) -> str:
 # Handlers
 # ──────────────────────────────────────────────
 
-def _cmd_bought(ticker: str, shares: float, price: float) -> str:
-    result = portfolio.add_or_update_holding(ticker, shares, price)
+def _cmd_bought(ticker: str, shares: float, price: float, currency: str = "CAD") -> str:
+    if currency == "USD":
+        from strategy import get_usd_cad_rate
+        fx_rate      = get_usd_cad_rate()
+        fx_with_fee  = round(fx_rate * 1.015, 6)   # 1.5% Wealthsimple FX markup
+        price_cad    = round(price * fx_with_fee, 4)
+        notes        = f"USD {price:.4f} × {fx_with_fee:.4f} (rate {fx_rate:.4f} + 1.5% fee) = CAD {price_cad:.4f}"
+    else:
+        price_cad = price
+        notes     = None
+
+    result = portfolio.add_or_update_holding(ticker, shares, price_cad, notes=notes)
+
+    reply = f"✅ Added {shares} {ticker} @ ${price:.4f} {currency}\n"
+    if currency == "USD":
+        reply += f"CAD: ${price_cad:.4f} (rate {fx_rate:.4f} + 1.5% fee)\n"
+    reply += (
+        f"Avg cost: ${result['avg_cost']:.4f} CAD "
+        f"({result['shares']} shares total)"
+    )
+    return reply
+
+
+def _cmd_dividend(ticker: str, shares: float, price_cad: float) -> str:
+    result  = portfolio.add_dividend(ticker, shares, price_cad)
+    total   = round(shares * price_cad, 4)
     return (
-        f"✅ Added {shares} {ticker} @ ${price:.2f}.\n"
-        f"Avg cost updated to ${result['avg_cost']:.2f} "
-        f"({result['shares']} shares total)."
+        f"✅ Dividend reinvestment recorded\n"
+        f"{shares} {ticker} @ ${price_cad:.4f} CAD = ${total:.4f} total\n"
+        f"Avg cost: ${result['avg_cost']:.4f} ({result['shares']} shares total)"
     )
 
 
@@ -194,8 +228,10 @@ def _cmd_budget(amount: float) -> str:
 def _cmd_help() -> str:
     return (
         "📋 AVAILABLE COMMANDS:\n\n"
+        "BOUGHT 1.5175 AAPL at 270.1585 USD\n"
         "BOUGHT 3 VFV.TO at 162.50\n"
         "SOLD 2 SHOP.TO at 125.00\n"
+        "DIVIDEND 0.0047 VFV.TO at 130.97\n"
         "PORTFOLIO  — view all holdings\n"
         "500  — get buy recs for $500 budget\n"
         "ROOM 7000  — update TFSA room\n"

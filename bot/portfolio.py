@@ -18,9 +18,15 @@ def get_holdings() -> list[dict]:
     return [dict(r) for r in rows]
 
 
-def add_or_update_holding(ticker: str, shares: float, price: float) -> dict:
+def add_or_update_holding(
+    ticker: str,
+    shares: float,
+    price_cad: float,
+    notes: str = None,
+) -> dict:
     """
     Adds a new position or updates avg cost via weighted average.
+    price_cad must already be in CAD (including any FX conversion + fees).
     Returns the updated holding dict.
     """
     conn = get_connection()
@@ -33,7 +39,7 @@ def add_or_update_holding(ticker: str, shares: float, price: float) -> dict:
         old_shares = existing["shares"]
         old_cost   = existing["avg_cost"]
         new_shares = old_shares + shares
-        new_avg    = round((old_shares * old_cost + shares * price) / new_shares, 4)
+        new_avg    = round((old_shares * old_cost + shares * price_cad) / new_shares, 4)
         conn.execute(
             "UPDATE holdings SET shares = ?, avg_cost = ? WHERE ticker = ?",
             (new_shares, new_avg, ticker),
@@ -42,13 +48,55 @@ def add_or_update_holding(ticker: str, shares: float, price: float) -> dict:
     else:
         conn.execute(
             "INSERT INTO holdings (ticker, shares, avg_cost, date_added) VALUES (?,?,?,?)",
-            (ticker, shares, price, now),
+            (ticker, shares, price_cad, now),
         )
-        result = {"ticker": ticker, "shares": shares, "avg_cost": price}
+        result = {"ticker": ticker, "shares": shares, "avg_cost": price_cad}
+
+    total_cad = round(shares * price_cad, 4)
+    conn.execute(
+        "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
+        "VALUES (?,?,?,?,?,?,?)",
+        (ticker, "BUY", shares, price_cad, total_cad, now, notes),
+    )
+    conn.commit()
+    conn.close()
+    return result
+
+
+def add_dividend(ticker: str, shares: float, price_cad: float) -> dict:
+    """
+    Records a dividend reinvestment and updates the holding.
+    Returns the updated holding dict.
+    """
+    conn = get_connection()
+    existing = conn.execute(
+        "SELECT * FROM holdings WHERE ticker = ?", (ticker,)
+    ).fetchone()
+
+    now = datetime.now().isoformat()
+    total_cad = round(shares * price_cad, 4)
+
+    if existing:
+        old_shares = existing["shares"]
+        old_cost   = existing["avg_cost"]
+        new_shares = old_shares + shares
+        new_avg    = round((old_shares * old_cost + shares * price_cad) / new_shares, 4)
+        conn.execute(
+            "UPDATE holdings SET shares = ?, avg_cost = ? WHERE ticker = ?",
+            (new_shares, new_avg, ticker),
+        )
+        result = {"ticker": ticker, "shares": new_shares, "avg_cost": new_avg}
+    else:
+        conn.execute(
+            "INSERT INTO holdings (ticker, shares, avg_cost, date_added) VALUES (?,?,?,?)",
+            (ticker, shares, price_cad, now),
+        )
+        result = {"ticker": ticker, "shares": shares, "avg_cost": price_cad}
 
     conn.execute(
-        "INSERT INTO transactions (ticker, action, shares, price, date) VALUES (?,?,?,?,?)",
-        (ticker, "BUY", shares, price, now),
+        "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
+        "VALUES (?,?,?,?,?,?,?)",
+        (ticker, "DIVIDEND", shares, price_cad, total_cad, now, "Dividend reinvestment"),
     )
     conn.commit()
     conn.close()
@@ -85,9 +133,13 @@ def reduce_or_remove_holding(ticker: str, shares: float, price: float) -> dict:
             (round(new_shares, 6), ticker),
         )
 
+    total_cad = round(price * shares, 4)
+    sign = "+" if gain_loss >= 0 else ""
+    sell_notes = f"Gain: {sign}${gain_loss:.2f} ({sign}{pct:.1f}%)"
     conn.execute(
-        "INSERT INTO transactions (ticker, action, shares, price, date, gain_loss) VALUES (?,?,?,?,?,?)",
-        (ticker, "SELL", shares, price, now, gain_loss),
+        "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
+        "VALUES (?,?,?,?,?,?,?)",
+        (ticker, "SELL", shares, price, total_cad, now, sell_notes),
     )
 
     # Free up cash
@@ -152,6 +204,35 @@ def set_tfsa_room(amount: float):
 # Live portfolio value
 # ──────────────────────────────────────────────
 
+def _avg_cost_from_transactions(ticker: str) -> tuple[float, float]:
+    """
+    Recomputes (shares, avg_cost_cad) from full transaction history.
+    BUY and DIVIDEND add shares at price_cad; SELL reduces at running avg.
+    """
+    conn = get_connection()
+    txns = conn.execute(
+        "SELECT type, shares, price_cad FROM transactions WHERE ticker = ? ORDER BY date",
+        (ticker,),
+    ).fetchall()
+    conn.close()
+
+    total_shares = 0.0
+    total_cost   = 0.0
+    for t in txns:
+        if t["type"] in ("BUY", "DIVIDEND"):
+            total_shares += t["shares"]
+            total_cost   += t["shares"] * t["price_cad"]
+        elif t["type"] == "SELL" and total_shares > 0:
+            avg = total_cost / total_shares
+            sold = min(t["shares"], total_shares)
+            total_cost   -= sold * avg
+            total_shares -= sold
+
+    total_shares = max(0.0, round(total_shares, 6))
+    avg_cost = round(total_cost / total_shares, 4) if total_shares > 0 else 0.0
+    return total_shares, avg_cost
+
+
 def get_portfolio_with_prices() -> list[dict]:
     holdings = get_holdings()
     enriched = []
@@ -162,13 +243,21 @@ def get_portfolio_with_prices() -> list[dict]:
         except Exception:
             price = h["avg_cost"]
 
-        cost_basis  = round(h["shares"] * h["avg_cost"], 2)
-        curr_value  = round(h["shares"] * price, 2)
-        gain        = round(curr_value - cost_basis, 2)
-        gain_pct    = round((price / h["avg_cost"] - 1) * 100, 2)
+        # Recompute shares and avg cost from transaction history for accuracy
+        txn_shares, avg_cost = _avg_cost_from_transactions(h["ticker"])
+        shares = txn_shares if txn_shares > 0 else h["shares"]
+        if avg_cost == 0:
+            avg_cost = h["avg_cost"]
+
+        cost_basis = round(shares * avg_cost, 2)
+        curr_value = round(shares * price, 2)
+        gain       = round(curr_value - cost_basis, 2)
+        gain_pct   = round((price / avg_cost - 1) * 100, 2) if avg_cost > 0 else 0.0
 
         enriched.append({
             **h,
+            "shares":        shares,
+            "avg_cost":      avg_cost,
             "current_price": price,
             "curr_value":    curr_value,
             "gain":          gain,

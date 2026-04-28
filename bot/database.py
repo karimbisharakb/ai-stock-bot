@@ -35,15 +35,45 @@ def init_db():
 
     c.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
-            ticker      TEXT    NOT NULL,
-            action      TEXT    NOT NULL,
-            shares      REAL    NOT NULL,
-            price       REAL    NOT NULL,
-            date        TEXT    NOT NULL,
-            gain_loss   REAL
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker    TEXT    NOT NULL,
+            type      TEXT    NOT NULL,
+            shares    REAL    NOT NULL,
+            price_cad REAL    NOT NULL,
+            total_cad REAL    NOT NULL,
+            date      TEXT    NOT NULL,
+            notes     TEXT
         )
     """)
+
+    # Migrate old schema (action/price/gain_loss → type/price_cad/total_cad/notes)
+    cols = [row[1] for row in c.execute("PRAGMA table_info(transactions)").fetchall()]
+    if "action" in cols:
+        c.execute("ALTER TABLE transactions RENAME TO _transactions_old")
+        c.execute("""
+            CREATE TABLE transactions (
+                id        INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker    TEXT    NOT NULL,
+                type      TEXT    NOT NULL,
+                shares    REAL    NOT NULL,
+                price_cad REAL    NOT NULL,
+                total_cad REAL    NOT NULL,
+                date      TEXT    NOT NULL,
+                notes     TEXT
+            )
+        """)
+        c.execute("""
+            INSERT INTO transactions (id, ticker, type, shares, price_cad, total_cad, date)
+            SELECT id, ticker, action, shares, price, ROUND(price * shares, 4), date
+            FROM _transactions_old
+        """)
+        c.execute("DROP TABLE _transactions_old")
+        print("[database] Migrated transactions table to new schema")
+    else:
+        if "total_cad" not in cols:
+            c.execute("ALTER TABLE transactions ADD COLUMN total_cad REAL NOT NULL DEFAULT 0")
+        if "notes" not in cols:
+            c.execute("ALTER TABLE transactions ADD COLUMN notes TEXT")
 
     c.execute("""
         CREATE TABLE IF NOT EXISTS tfsa_info (
