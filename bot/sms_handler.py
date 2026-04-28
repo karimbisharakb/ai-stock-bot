@@ -119,6 +119,11 @@ def handle_command(text: str) -> str:
     if m:
         return _cmd_ignore(m.group(1))
 
+    # SETCASH <amount> — overwrite cash to exact value
+    m = re.match(r"SETCASH\s+\$?([\d,]+(?:\.\d+)?)", upper)
+    if m:
+        return _cmd_setcash(float(m.group(1).replace(",", "")))
+
     # HELP
     if upper == "HELP":
         return _cmd_help()
@@ -189,6 +194,11 @@ def _cmd_sold(ticker: str, shares: float, price: float) -> str:
     )
 
 
+def _cmd_setcash(amount: float) -> str:
+    portfolio.set_cash_exact(amount)
+    return f"✅ Cash set to ${amount:,.4f} CAD"
+
+
 def _cmd_room(amount: float) -> str:
     portfolio.set_tfsa_room(amount)
     return f"✅ TFSA room updated to ${amount:,.2f}"
@@ -233,6 +243,7 @@ def _cmd_help() -> str:
         "SOLD 2 SHOP.TO at 125.00\n"
         "DIVIDEND 0.0047 VFV.TO at 130.97\n"
         "PORTFOLIO  — view all holdings\n"
+        "SETCASH 0.04  — set cash to exact amount\n"
         "500  — get buy recs for $500 budget\n"
         "ROOM 7000  — update TFSA room\n"
         "IGNORE VFV.TO  — snooze 24h alerts\n"

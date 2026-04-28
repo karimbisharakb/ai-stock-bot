@@ -178,6 +178,11 @@ def set_cash(amount: float):
     conn.close()
 
 
+def set_cash_exact(amount: float):
+    """Overwrite cash balance to exactly amount, ignoring transaction history."""
+    set_cash(amount)
+
+
 def add_cash(amount: float):
     current = get_cash()
     set_cash(current + amount)
@@ -235,13 +240,21 @@ def _avg_cost_from_transactions(ticker: str) -> tuple[float, float]:
 
 def get_portfolio_with_prices() -> list[dict]:
     holdings = get_holdings()
+    from strategy import get_usd_cad_rate
+    usdcad = get_usd_cad_rate()
+
     enriched = []
     for h in holdings:
+        is_usd = not h["ticker"].endswith(".TO")
+
         try:
-            price = yf.Ticker(h["ticker"]).history(period="1d")["Close"].iloc[-1]
-            price = round(float(price), 2)
+            price_native = yf.Ticker(h["ticker"]).history(period="1d")["Close"].iloc[-1]
+            price_native = round(float(price_native), 2)
         except Exception:
-            price = h["avg_cost"]
+            price_native = h["avg_cost"]
+
+        # Convert to CAD for all value calculations; avg_cost is always stored in CAD
+        price_cad = round(price_native * usdcad, 2) if is_usd else price_native
 
         # Recompute shares and avg cost from transaction history for accuracy
         txn_shares, avg_cost = _avg_cost_from_transactions(h["ticker"])
@@ -250,18 +263,20 @@ def get_portfolio_with_prices() -> list[dict]:
             avg_cost = h["avg_cost"]
 
         cost_basis = round(shares * avg_cost, 2)
-        curr_value = round(shares * price, 2)
+        curr_value = round(shares * price_cad, 2)
         gain       = round(curr_value - cost_basis, 2)
-        gain_pct   = round((price / avg_cost - 1) * 100, 2) if avg_cost > 0 else 0.0
+        gain_pct   = round((price_cad / avg_cost - 1) * 100, 2) if avg_cost > 0 else 0.0
 
         enriched.append({
             **h,
-            "shares":        shares,
-            "avg_cost":      avg_cost,
-            "current_price": price,
-            "curr_value":    curr_value,
-            "gain":          gain,
-            "gain_pct":      gain_pct,
+            "shares":            shares,
+            "avg_cost":          avg_cost,
+            "current_price":     price_native,  # native currency (USD or CAD)
+            "current_price_cad": price_cad,     # always CAD
+            "is_usd":            is_usd,
+            "curr_value":        curr_value,    # always CAD
+            "gain":              gain,          # always CAD
+            "gain_pct":          gain_pct,
         })
     return enriched
 
@@ -280,8 +295,13 @@ def format_portfolio_summary() -> str:
         for r in rows:
             total_value += r["curr_value"]
             sign = "+" if r["gain"] >= 0 else ""
+            price_str = (
+                f"${r['current_price']:.2f}USD→${r['current_price_cad']:.2f}"
+                if r["is_usd"]
+                else f"${r['current_price']:.2f}"
+            )
             lines.append(
-                f"  {r['ticker']:<10} {r['shares']} sh  ${r['current_price']:.2f}  "
+                f"  {r['ticker']:<10} {r['shares']} sh  {price_str}  "
                 f"{sign}${r['gain']:.2f} ({sign}{r['gain_pct']:.1f}%)"
             )
         body = "\n".join(lines)
