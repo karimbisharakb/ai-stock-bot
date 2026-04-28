@@ -169,6 +169,7 @@ def format_trade_recommendations(budget: float, recs: list[dict], tfsa_room: flo
             f"Shares: {r['shares']} @ ~${r['price']:.2f} = ${r['cost']:.2f}",
             f"Signal: {r['reasoning'][:80]}",
             f"Target: ${r['target']:.2f} (+{r['upside']:.1f}%)",
+            f"Stop:   ${r['stop']:.2f}",
             f"Strategy: {r['strategy']}",
             f"Confidence: {r['confidence']}",
             "",

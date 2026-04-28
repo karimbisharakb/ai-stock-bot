@@ -97,118 +97,131 @@ def get_sell_signals(ticker: str, avg_cost: float) -> tuple[list[str], str]:
 # Buy opportunity ranking
 # ──────────────────────────────────────────────
 
-def _research_ticker(ticker: str, data: dict) -> str:
-    prompt = (
-        f"Stock: {ticker}\n"
-        f"Price: ${data['price']} | RSI: {data['rsi']} | MACD: {data['macd_dir']} "
-        f"| 1M: {data['pct_1m']:+.1f}% | 3M: {data['pct_3m']:+.1f}%\n"
-        f"MA50: {data['ma50']} | MA200: {data['ma200']}\n\n"
-        "Write a 3-sentence hedge fund analysis: (1) technical setup, "
-        "(2) momentum trajectory, (3) key catalyst or risk in next 30 days."
-    )
-    try:
-        r = client.messages.create(
-            model=MODEL,
-            max_tokens=200,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return r.content[0].text.strip()
-    except Exception:
-        return ""
-
-
-def _predict_ticker(ticker: str, data: dict, research: str):
-    prompt = (
-        f"Stock: {ticker}\n"
-        f"Research: {research}\n"
-        f"Price: ${data['price']} | RSI: {data['rsi']} | MACD: {data['macd_dir']} "
-        f"| 1M: {data['pct_1m']:+.1f}%\n\n"
-        "Return ONLY valid JSON:\n"
-        '{"action":"BUY|SKIP","score":1-10,"target":float,"stop":float,'
-        '"strategy":"SWING|MEDIUM|LONG","reasoning":"one sentence"}'
-    )
-    try:
-        r = client.messages.create(
-            model=MODEL,
-            max_tokens=150,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        text = r.content[0].text.strip()
-        start = text.find("{")
-        end   = text.rfind("}") + 1
-        return json.loads(text[start:end])
-    except Exception:
-        return None
-
-
 def rank_buy_opportunities(budget: float, existing_tickers: list[str]) -> list[dict]:
     """
-    Scan watchlist, run Claude analysis, return top ranked BUY candidates
-    that fit within budget and diversify away from existing holdings.
+    Scan watchlist, run a single Claude batch analysis, return top 3 BUY candidates.
+    Falls back to momentum ranking if Claude is unavailable.
     """
     regime, spy_price, ma50, ma200 = get_market_regime()
     regime_emoji = {"BULL": "🟢", "BEAR": "🔴", "SIDEWAYS": "🟡"}.get(regime, "⚪")
     print(f"  {regime_emoji} Market: {regime} | SPY ${spy_price}")
 
-    candidates = []
-
+    # Gather market data for all watchlist tickers not already held
+    raw_candidates = []
     for ticker in WATCHLIST:
         if ticker in existing_tickers:
-            continue  # already hold it
-
+            continue
         print(f"  Scanning {ticker}…")
         data = get_ticker_data(ticker)
         if data is None:
             continue
-
-        # Quick filter — only scan tickers with reasonable momentum
-        if data["rsi"] < 30 or data["rsi"] > 85:
+        # Skip only catastrophic downtrends
+        if data["pct_1m"] < -25:
             continue
-        if data["pct_1m"] < -15:
+        raw_candidates.append({"ticker": ticker, "data": data})
+
+    if not raw_candidates:
+        return []
+
+    # Pre-rank by momentum score to give Claude the best candidates
+    def _momentum(c):
+        d = c["data"]
+        rsi_bonus  = 1.0 if 40 <= d["rsi"] <= 70 else 0.3
+        macd_bonus = 1.5 if d["macd_dir"] == "▲" else 0.0
+        above_ma50 = 1.0 if not d["below_ma50"] else 0.0
+        mom = max(0.0, d["pct_1m"])
+        return mom * rsi_bonus + macd_bonus + above_ma50
+
+    raw_candidates.sort(key=_momentum, reverse=True)
+    top = raw_candidates[:8]
+
+    # Single Claude call — analyze all top candidates at once
+    lines = []
+    for i, c in enumerate(top, 1):
+        d = c["data"]
+        lines.append(
+            f"{i}. {c['ticker']}: ${d['price']}, RSI={d['rsi']}, MACD={d['macd_dir']}, "
+            f"1M={d['pct_1m']:+.1f}%, 3M={d['pct_3m']:+.1f}%, "
+            f"MA50={'above' if not d['below_ma50'] else 'below'}, "
+            f"MA200={'above' if not d['below_ma200'] else 'below'}"
+        )
+
+    prompt = (
+        f"Market: {regime} | SPY ${spy_price} | Budget: ${budget:.0f}\n"
+        f"Portfolio type: Canadian TFSA\n\n"
+        "Candidates:\n" + "\n".join(lines) + "\n\n"
+        "Pick the 3 BEST buy opportunities. For each provide:\n"
+        "- Realistic price target (+8-15%), stop loss (-7%), "
+        "strategy (SWING/MEDIUM/LONG), one-sentence reasoning, confidence (HIGH/MEDIUM/LOW)\n\n"
+        "Return ONLY a valid JSON array — no extra text:\n"
+        '[{"rank":1,"ticker":"X","target":0.0,"stop":0.0,'
+        '"strategy":"MEDIUM","reasoning":"...","confidence":"HIGH"}]'
+    )
+
+    picks = []
+    try:
+        r = client.messages.create(
+            model=MODEL,
+            max_tokens=500,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        text = r.content[0].text.strip()
+        start = text.find("[")
+        end   = text.rfind("]") + 1
+        if start != -1 and end > start:
+            picks = json.loads(text[start:end])
+    except Exception as e:
+        print(f"  ⚠️  Claude error: {e} — using momentum fallback")
+
+    # Fallback: use top 3 by momentum if Claude failed or returned nothing
+    if not picks:
+        for i, c in enumerate(top[:3], 1):
+            d = c["data"]
+            picks.append({
+                "rank":       i,
+                "ticker":     c["ticker"],
+                "target":     round(d["price"] * 1.10, 2),
+                "stop":       round(d["price"] * 0.93, 2),
+                "strategy":   "MEDIUM",
+                "reasoning":  f"Top momentum: {d['pct_1m']:+.1f}% in 1M, RSI {d['rsi']}, MACD {d['macd_dir']}",
+                "confidence": "MEDIUM",
+            })
+
+    # Build result objects
+    ticker_map = {c["ticker"]: c for c in top}
+    results = []
+    for pick in picks[:3]:
+        ticker = pick.get("ticker", "")
+        c = ticker_map.get(ticker)
+        if c is None:
             continue
+        d      = c["data"]
+        price  = d["price"]
+        target = float(pick.get("target") or price * 1.10)
+        stop   = float(pick.get("stop")   or price * 0.93)
+        upside = round((target / price - 1) * 100, 1)
+        shares = max(1, int(budget / price))
+        cost   = round(shares * price, 2)
+        conf   = pick.get("confidence", "MEDIUM").upper()
+        confidence_label = {
+            "HIGH":   "🟢 High",
+            "MEDIUM": "🟡 Medium",
+            "LOW":    "⚪ Low",
+        }.get(conf, "🟡 Medium")
 
-        research = _research_ticker(ticker, data)
-        pred = _predict_ticker(ticker, data, research)
-        if pred is None or pred.get("action") != "BUY":
-            continue
-
-        score = pred.get("score", 0)
-        if score < 7:
-            continue
-
-        target = pred.get("target", data["price"] * 1.1)
-        stop   = pred.get("stop", data["price"] * 0.92)
-        upside = round((target / data["price"] - 1) * 100, 1)
-
-        # Shares that fit in budget (full position)
-        shares = int(budget / data["price"])
-        if shares < 1:
-            shares = 1
-        cost = round(shares * data["price"], 2)
-
-        # Confidence label
-        if score >= 9:
-            confidence = "🟢 High"
-        elif score >= 7:
-            confidence = "🟡 Medium"
-        else:
-            confidence = "⚪ Low"
-
-        candidates.append({
+        results.append({
             "ticker":     ticker,
-            "price":      data["price"],
-            "score":      score,
-            "strategy":   pred.get("strategy", "MEDIUM"),
+            "price":      price,
+            "score":      9 if conf == "HIGH" else 7,
+            "strategy":   pick.get("strategy", "MEDIUM"),
             "target":     target,
             "stop":       stop,
             "upside":     upside,
             "shares":     shares,
             "cost":       cost,
-            "reasoning":  pred.get("reasoning", research[:120]),
-            "confidence": confidence,
+            "reasoning":  pick.get("reasoning", "")[:120],
+            "confidence": confidence_label,
             "regime":     regime,
         })
 
-    # Sort by score descending
-    candidates.sort(key=lambda x: x["score"], reverse=True)
-    return candidates[:5]
+    return results
