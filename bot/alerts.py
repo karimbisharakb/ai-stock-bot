@@ -151,32 +151,52 @@ def format_market_crash_alert(changes: dict, at_risk: list[dict]) -> str:
 def format_trade_recommendations(budget: float, recs: list[dict], tfsa_room: float) -> str:
     if not recs:
         return (
-            f"📈 Budget: ${budget:,.2f}\n"
+            f"📈 Budget: ${budget:,.2f} CAD\n"
             "No strong buy signals right now. Check back during market hours."
         )
+
+    # Show the exchange rate used (take from first rec if available)
+    rate_note = ""
+    if recs and recs[0].get("is_us") and recs[0].get("usdcad"):
+        rate_note = f"💱 USD/CAD: {recs[0]['usdcad']:.4f} + 1.5% WS fee\n"
 
     lines = [
         "----------------------------------------",
         "📈 WEALTHSIMPLE TFSA TRADE ALERT",
-        f"Budget: ${budget:,.2f}",
-        f"TFSA Room Left: ${tfsa_room:,.2f}",
+        f"Budget: ${budget:,.2f} CAD",
+        f"TFSA Room Left: ${tfsa_room:,.2f} CAD",
+        rate_note.rstrip(),
         "",
     ]
 
     for i, r in enumerate(recs[:3], 1):
+        is_us = r.get("is_us", False)
+        if is_us:
+            price_line = (
+                f"${r['price']:.2f} USD "
+                f"(~${r['price_cad']:.2f} CAD incl. 1.5% FX fee)"
+            )
+            target_line = f"${r['target']:.2f} USD (+{r['upside']:.1f}%)"
+            stop_line   = f"${r['stop']:.2f} USD"
+        else:
+            price_line  = f"${r['price_cad']:.2f} CAD"
+            target_line = f"${r['target']:.2f} CAD (+{r['upside']:.1f}%)"
+            stop_line   = f"${r['stop']:.2f} CAD"
+
         lines += [
             f"#{i} BUY — {r['ticker']}",
-            f"Shares: {r['shares']} @ ~${r['price']:.2f} = ${r['cost']:.2f}",
+            f"Price:  {price_line}",
+            f"Shares: {r['shares']} = ${r['cost']:.2f} CAD total",
             f"Signal: {r['reasoning'][:80]}",
-            f"Target: ${r['target']:.2f} (+{r['upside']:.1f}%)",
-            f"Stop:   ${r['stop']:.2f}",
+            f"Target: {target_line}",
+            f"Stop:   {stop_line}",
             f"Strategy: {r['strategy']}",
             f"Confidence: {r['confidence']}",
             "",
         ]
 
     if tfsa_room > 0 and budget > tfsa_room:
-        lines.append(f"⚠️  Budget ${budget:,.2f} exceeds TFSA room ${tfsa_room:,.2f}!")
+        lines.append(f"⚠️  Budget ${budget:,.2f} exceeds TFSA room ${tfsa_room:,.2f} CAD!")
     lines += [
         "⚠️  Place trades manually in Wealthsimple",
         "⚠️  ETFs settle T+1 after purchase",

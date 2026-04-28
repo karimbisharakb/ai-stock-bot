@@ -4,8 +4,23 @@ Uses Claude for deep research + prediction on each candidate.
 """
 import os
 import json
+import requests
 import anthropic
 from market_data import get_ticker_data, get_market_regime
+
+WS_FX_FEE = 1.015  # Wealthsimple 1.5% currency conversion markup
+
+
+def get_usd_cad_rate() -> float:
+    """Fetch live USD/CAD exchange rate. Falls back to 1.38 if unavailable."""
+    try:
+        r = requests.get(
+            "https://api.exchangerate-api.com/v4/latest/USD", timeout=5
+        )
+        return float(r.json()["rates"]["CAD"])
+    except Exception as e:
+        print(f"  ⚠️  FX rate fetch failed: {e} — using fallback 1.38")
+        return 1.38
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 MODEL  = "claude-sonnet-4-6"
@@ -100,11 +115,17 @@ def get_sell_signals(ticker: str, avg_cost: float) -> tuple[list[str], str]:
 def rank_buy_opportunities(budget: float, existing_tickers: list[str]) -> list[dict]:
     """
     Scan watchlist, run a single Claude batch analysis, return top 3 BUY candidates.
+    budget is treated as CAD. US-listed stocks are converted at the live USD/CAD
+    rate plus the 1.5% Wealthsimple FX fee before calculating share counts.
     Falls back to momentum ranking if Claude is unavailable.
     """
     regime, spy_price, ma50, ma200 = get_market_regime()
     regime_emoji = {"BULL": "🟢", "BEAR": "🔴", "SIDEWAYS": "🟡"}.get(regime, "⚪")
     print(f"  {regime_emoji} Market: {regime} | SPY ${spy_price}")
+
+    usdcad = get_usd_cad_rate()
+    usdcad_with_fee = round(usdcad * WS_FX_FEE, 6)
+    print(f"  💱 USD/CAD: {usdcad:.4f} → {usdcad_with_fee:.4f} incl. 1.5% WS fee")
 
     # Gather market data for all watchlist tickers not already held
     raw_candidates = []
@@ -177,11 +198,12 @@ def rank_buy_opportunities(budget: float, existing_tickers: list[str]) -> list[d
     if not picks:
         for i, c in enumerate(top[:3], 1):
             d = c["data"]
+            p = d["price"]
             picks.append({
                 "rank":       i,
                 "ticker":     c["ticker"],
-                "target":     round(d["price"] * 1.10, 2),
-                "stop":       round(d["price"] * 0.93, 2),
+                "target":     round(p * 1.10, 2),
+                "stop":       round(p * 0.93, 2),
                 "strategy":   "MEDIUM",
                 "reasoning":  f"Top momentum: {d['pct_1m']:+.1f}% in 1M, RSI {d['rsi']}, MACD {d['macd_dir']}",
                 "confidence": "MEDIUM",
@@ -196,13 +218,22 @@ def rank_buy_opportunities(budget: float, existing_tickers: list[str]) -> list[d
         if c is None:
             continue
         d      = c["data"]
-        price  = d["price"]
+        price  = d["price"]   # native currency (USD for US stocks, CAD for .TO)
         target = float(pick.get("target") or price * 1.10)
         stop   = float(pick.get("stop")   or price * 0.93)
         upside = round((target / price - 1) * 100, 1)
-        shares = max(1, int(budget / price))
-        cost   = round(shares * price, 2)
-        conf   = pick.get("confidence", "MEDIUM").upper()
+
+        # Currency handling: budget is always CAD
+        is_us = not ticker.endswith(".TO")
+        if is_us:
+            price_cad = round(price * usdcad_with_fee, 2)
+        else:
+            price_cad = price
+
+        shares   = max(1, int(budget / price_cad))
+        cost_cad = round(shares * price_cad, 2)
+
+        conf = pick.get("confidence", "MEDIUM").upper()
         confidence_label = {
             "HIGH":   "🟢 High",
             "MEDIUM": "🟡 Medium",
@@ -211,14 +242,17 @@ def rank_buy_opportunities(budget: float, existing_tickers: list[str]) -> list[d
 
         results.append({
             "ticker":     ticker,
-            "price":      price,
+            "is_us":      is_us,
+            "price":      price,        # native (USD or CAD)
+            "price_cad":  price_cad,    # always CAD, incl. WS FX fee if US
+            "usdcad":     usdcad,
             "score":      9 if conf == "HIGH" else 7,
             "strategy":   pick.get("strategy", "MEDIUM"),
-            "target":     target,
-            "stop":       stop,
+            "target":     target,       # native currency
+            "stop":       stop,         # native currency
             "upside":     upside,
-            "shares":     shares,
-            "cost":       cost,
+            "shares":     shares,       # computed against CAD budget
+            "cost":       cost_cad,     # total CAD outlay
             "reasoning":  pick.get("reasoning", "")[:120],
             "confidence": confidence_label,
             "regime":     regime,
