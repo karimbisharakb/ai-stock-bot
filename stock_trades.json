@@ -1,22 +1,6 @@
 {
-  "cash": 587.5600000000002,
+  "cash": 696.5700000000002,
   "positions": [
-    {
-      "time": "2026-04-22 15:13",
-      "ticker": "SHOP.TO",
-      "action": "BUY",
-      "shares": 1,
-      "price": 180.56,
-      "cost": 180.56,
-      "target": 210.0,
-      "score": 7,
-      "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
-      "status": "OPEN",
-      "paper": true,
-      "last_price": 168.49,
-      "last_pnl_pct": -6.68,
-      "days_held": 6
-    },
     {
       "time": "2026-04-23 15:27",
       "ticker": "NVDA",
@@ -33,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 212.02,
-      "last_pnl_pct": 4.59,
-      "days_held": 5,
+      "last_price": 211.11,
+      "last_pnl_pct": 4.14,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -55,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 391.71,
-      "last_pnl_pct": 2.97,
-      "days_held": 5,
+      "last_price": 391.65,
+      "last_pnl_pct": 2.95,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -77,9 +61,9 @@
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
       "trail_high": 456.09,
-      "last_price": 456.09,
-      "last_pnl_pct": 2.99,
-      "days_held": 5,
+      "last_price": 449.61,
+      "last_pnl_pct": 1.52,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -99,9 +83,31 @@
       "key_risk": "Without a credible profitability timeline at the next earnings print, price could retest the $118 52-week low, invalidating the thesis entirely.",
       "earnings_play": false,
       "trail_high": 144.72,
-      "last_price": 142.88,
-      "last_pnl_pct": -1.27,
-      "days_held": 1,
+      "last_price": 140.09,
+      "last_pnl_pct": -3.2,
+      "days_held": 2,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-04-29 15:38",
+      "ticker": "MARA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 5.4628,
+      "price": 10.35,
+      "cost": 56.54,
+      "target": 14.5,
+      "stop_loss": 8.75,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MARA offers leveraged upside to a BTC breakout above $100K with 59% analyst upside and a BULL regime supporting risk-on positioning; trading above MA50 with a meaningful technical floor near $8-9 provides an asymmetric risk/reward setup for an aggressive growth portfolio. Position sizing must respect the 20% crypto proxy cap given the purely sentiment-driven, fundamentally weak structure.",
+      "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
+      "earnings_play": false,
+      "trail_high": 10.35,
+      "last_price": 10.35,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -411,6 +417,49 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-04-22 15:13",
+      "ticker": "SHOP.TO",
+      "action": "SELL",
+      "shares": 1,
+      "price": 180.56,
+      "cost": 180.56,
+      "target": 210.0,
+      "score": 7,
+      "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
+      "status": "CLOSED",
+      "paper": true,
+      "last_price": 165.55,
+      "last_pnl_pct": -8.31,
+      "days_held": 7,
+      "sell_price": 165.55,
+      "sell_time": "2026-04-29 15:33",
+      "pnl_dollar": -15.01,
+      "pnl_pct": -8.31,
+      "sell_reason": "Stop loss -8.3% (limit -8%)"
+    },
+    {
+      "time": "2026-04-29 15:38",
+      "ticker": "MARA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 5.4628,
+      "price": 10.35,
+      "cost": 56.54,
+      "target": 14.5,
+      "stop_loss": 8.75,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MARA offers leveraged upside to a BTC breakout above $100K with 59% analyst upside and a BULL regime supporting risk-on positioning; trading above MA50 with a meaningful technical floor near $8-9 provides an asymmetric risk/reward setup for an aggressive growth portfolio. Position sizing must respect the 20% crypto proxy cap given the purely sentiment-driven, fundamentally weak structure.",
+      "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
+      "earnings_play": false,
+      "trail_high": 10.35,
+      "last_price": 10.35,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -535,6 +584,27 @@
       "pnl_dollar": 0.34,
       "pnl_pct": 0.33,
       "sell_reason": "AI thesis break: SELL \u2014 RSI at 79.8 signals extreme overbought conditions after a 24% monthly surge, with minimal P&L gain over 5 days suggesting momentum is stalling near exhaustion."
+    },
+    {
+      "time": "2026-04-22 15:13",
+      "ticker": "SHOP.TO",
+      "action": "BUY",
+      "shares": 1,
+      "price": 180.56,
+      "cost": 180.56,
+      "target": 210.0,
+      "score": 7,
+      "reasoning": "Explosive 30.6% revenue growth with improving margins and forward P/E compression to 58 indicates strong earnings momentum. Recent price consolidation provides attractive entry point for 8-22% upside potential.",
+      "status": "CLOSED",
+      "paper": true,
+      "last_price": 165.55,
+      "last_pnl_pct": -8.31,
+      "days_held": 7,
+      "sell_price": 165.55,
+      "sell_time": "2026-04-29 15:33",
+      "pnl_dollar": -15.01,
+      "pnl_pct": -8.31,
+      "sell_reason": "Stop loss -8.3% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -553,52 +623,56 @@
     {
       "date": "2026-04-28",
       "value": 989.75
+    },
+    {
+      "date": "2026-04-29",
+      "value": 984.79
     }
   ],
   "top_picks": [
     {
-      "ticker": "AAPL",
-      "score": 7,
+      "ticker": "SOXL",
+      "score": 8,
       "action": "BUY",
       "strategy": "SWING",
       "conviction": "medium",
-      "reasoning": "Clean bullish structure above both moving averages in a BULL regime with RSI at 62.5 leaving room to run toward the 52-week high at $288.62. Earnings within 7 days warrants half-size position given medium conviction, targeting a beat-and-raise catalyst on services.",
-      "price_target": 288.62,
-      "key_risk": "An earnings miss or weak China iPhone guidance could flush price back to the 200-DMA at $253.92 rapidly, negating the entire technical setup."
+      "reasoning": "SOXL remains in a confirmed bull regime with strongly bullish MACD and price structure, justifying a trend-following entry despite elevated RSI. Position sizing must be reduced given the parabolic 185% monthly gain, proximity to 52-week highs, and triple-leverage decay risk.",
+      "price_target": 130.0,
+      "key_risk": "A hawkish Fed surprise or negative AI capex guidance from NVDA/AMD could trigger a violent SOX correction, tripling SOXL downside toward $60\u201370."
     },
     {
-      "ticker": "ARM",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "SWING",
-      "conviction": "medium",
-      "reasoning": "Institutional accumulation at 1.73x volume with strong MACD in a BULL regime supports a near-term momentum continuation trade despite stretched valuations. A tight swing approach captures upside while limiting exposure to the asymmetric downside risk from hyperscaler CapEx guidance shifts.",
-      "price_target": 215.0,
-      "key_risk": "Beta of 3.3 combined with RSI near overbought and a 15% premium to analyst targets means any CapEx deceleration signal from hyperscalers could trigger a violent mean-reversion exceeding 20% rapidly."
-    },
-    {
-      "ticker": "COIN",
+      "ticker": "MSFT",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "COIN offers a leveraged crypto proxy in a bull regime with positive near-term technicals \u2014 RSI with room to run, price above 50-MA, and bullish MACD \u2014 while analyst consensus targets $240 on a BTC volume recovery thesis. Position sizing must respect the 20% crypto proxy cap given the 6-month -45% drawdown and 53x D/E, limiting this to a partial allocation with tight risk management.",
-      "price_target": 220.0,
-      "key_risk": "A BTC price reversal from current levels would immediately crush exchange volumes and expose COIN's overleveraged cost structure, likely breaking the $185 support and invalidating the relief rally thesis."
+      "reasoning": "MSFT's forward P/E of 22.4x with 16.7% revenue growth and 39% margins offers defensible value if Azure reaccelerates, and the $572 analyst target reflects legitimate upside on AI monetization execution. However, RSI at 73.8 and earnings within 7 days warrant halved position size per earnings protocol given medium conviction.",
+      "price_target": 490.0,
+      "key_risk": "Azure growth decelerating below 20% in the upcoming earnings report would collapse the AI premium embedded in the multiple and invalidate the thesis."
+    },
+    {
+      "ticker": "META",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "META trades at a compelling 18.6x forward P/E for 23.8% revenue growth with 30%+ margins, offering genuine value for a high-quality digital ad compounder; the 200-MA reclaim post-earnings is the key technical trigger with analyst consensus supporting ~27% upside to $855. Size is halved given earnings within 7 days despite medium conviction.",
+      "price_target": 750.0,
+      "key_risk": "Earnings miss or cautious AI capex guidance could trigger a sharp reversal back below the 50-MA near $631, invalidating the recovery thesis."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 60.0,
-    "rolling_win_rate": 60.0,
-    "avg_return": -0.86,
-    "sharpe": -0.59,
-    "max_drawdown": 0.39,
-    "total_trades": 5,
+    "win_rate": 50.0,
+    "rolling_win_rate": 50.0,
+    "avg_return": -2.1,
+    "sharpe": -0.69,
+    "max_drawdown": 0.89,
+    "total_trades": 6,
     "wins": 3,
-    "losses": 2,
+    "losses": 3,
     "underperforming": false
   },
-  "pnl": -3.460000000000001,
-  "last_run": "2026-04-28 18:22"
+  "pnl": -18.47,
+  "last_run": "2026-04-29 15:41"
 }
