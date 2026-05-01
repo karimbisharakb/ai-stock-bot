@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 201.15,
-      "last_pnl_pct": -0.77,
-      "days_held": 7,
+      "last_price": 197.81,
+      "last_pnl_pct": -2.42,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 395.05,
-      "last_pnl_pct": 3.85,
-      "days_held": 7,
+      "last_price": 395.67,
+      "last_pnl_pct": 4.01,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
       "trail_high": 456.09,
-      "last_price": 444.15,
-      "last_pnl_pct": 0.29,
-      "days_held": 7,
+      "last_price": 451.51,
+      "last_pnl_pct": 1.95,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "MARA offers leveraged upside to a BTC breakout above $100K with 59% analyst upside and a BULL regime supporting risk-on positioning; trading above MA50 with a meaningful technical floor near $8-9 provides an asymmetric risk/reward setup for an aggressive growth portfolio. Position sizing must respect the 20% crypto proxy cap given the purely sentiment-driven, fundamentally weak structure.",
       "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
       "earnings_play": false,
-      "trail_high": 12.02,
-      "last_price": 11.93,
-      "last_pnl_pct": 15.27,
-      "days_held": 1,
+      "trail_high": 12.11,
+      "last_price": 12.11,
+      "last_pnl_pct": 17.0,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "MSFT trades at a historically cheap 21x forward P/E with 16.7% revenue growth and 39% margins, offering compelling re-rating potential if Azure AI monetization accelerates. Bull regime with positive MACD and RSI at 63 supports a tactical entry above the 50-MA with room to run toward analyst targets.",
       "key_risk": "Stock remains 13.5% below its 200-MA, and any Azure growth deceleration at the next earnings print could validate that level as a structural ceiling, invalidating the recovery thesis.",
       "earnings_play": false,
-      "trail_high": 404.41,
-      "last_price": 404.41,
-      "last_pnl_pct": 0.0,
-      "days_held": 0,
+      "trail_high": 413.04,
+      "last_price": 413.04,
+      "last_pnl_pct": 2.13,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -707,28 +707,22 @@
     {
       "date": "2026-04-30",
       "value": 989.42
+    },
+    {
+      "date": "2026-05-01",
+      "value": 991.81
     }
   ],
   "top_picks": [
-    {
-      "ticker": "AAPL",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AAPL is trading above both key moving averages with bullish MACD and a constructive technical setup in a confirmed bull regime, with analyst consensus supporting ~8.7% upside to $297.88. Earnings within 7 days introduces binary risk on a stock already up 8% in a month, so position size is halved per medium-conviction earnings protocol.",
-      "price_target": 297.88,
-      "key_risk": "A guidance miss or margin pressure commentary at the imminent earnings print could rapidly unwind the recent 8% run-up with no support until the $258-260 MA50 zone."
-    },
     {
       "ticker": "AMZN",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMZN's bull regime, strong institutional structure above both MAs, AWS re-acceleration thesis, and analyst consensus target of $284 support a medium-term entry despite elevated RSI. The 25.65% 1-month surge warrants caution, but full Kelly sizing is appropriate in a confirmed bull regime at score 7.",
-      "price_target": 284.0,
-      "key_risk": "RSI at 78.6 signals near-term overbought conditions with elevated mean-reversion risk back to $240\u2013$245 support if no AWS catalyst materializes."
+      "reasoning": "In a confirmed bull regime, AMZN's AWS re-acceleration thesis and structural margin expansion support a continued uptrend, with analyst consensus providing a near-term price target. However, RSI at 83.7 and only 5% upside to target warrant a reduced position size given the extended technical setup and elevated mean-reversion risk.",
+      "price_target": 283.97,
+      "key_risk": "A parabolic unwind from overbought conditions could produce a 5\u201310% air-pocket pullback if AWS guidance disappoints or macro sentiment shifts without a fresh catalyst to sustain momentum."
     },
     {
       "ticker": "META",
@@ -736,9 +730,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 17x forward P/E with 24% revenue growth and a 39% analyst upside, offering rare value-growth combination at current levels. Despite near-term technical weakness, the BULL regime and strong fundamental backdrop justify a medium-term entry ahead of AI monetization catalysts.",
-      "price_target": 720.0,
-      "key_risk": "Continued breakdown below $575 on rising Capex guidance without clear monetization timelines could accelerate the intermediate downtrend toward the $550 support zone."
+      "reasoning": "META trades at a significant discount to intrinsic value at 16.8x forward earnings with 33% revenue growth and best-in-class margins, while the analyst consensus target of $855 implies 41% upside fully supported by fundamentals. In a BULL regime, the technical weakness creates a favorable entry opportunity for a fundamentally superior business experiencing temporary macro-driven multiple compression.",
+      "price_target": 750.0,
+      "key_risk": "Ad spend deceleration driven by tariff uncertainty or consumer softening could trigger further multiple compression before META's own earnings, with $580 breakdown opening a path to $520 support."
+    },
+    {
+      "ticker": "RIOT",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "RIOT trades well above both MAs with a 34% upside to analyst target in a BULL regime, making it a viable BTC proxy bet for aggressive growth despite fading momentum. The consolidation phase after a 51% monthly surge is normal digestion, and a sustained BTC move above $100K remains the key re-acceleration catalyst.",
+      "price_target": 25.6,
+      "key_risk": "Any crypto risk-off event or BTC price reversal would rapidly unwind this recovery rally given RIOT's purely derivative nature and capital-destructive fundamentals in down cycles."
     }
   ],
   "regime": "BULL",
@@ -754,5 +758,5 @@
     "underperforming": false
   },
   "pnl": -21.81,
-  "last_run": "2026-04-30 18:14"
+  "last_run": "2026-05-01 14:44"
 }
