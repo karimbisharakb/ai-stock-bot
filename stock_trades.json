@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 200.0,
-      "last_pnl_pct": -1.34,
-      "days_held": 8,
+      "last_price": 195.85,
+      "last_pnl_pct": -3.38,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 399.68,
-      "last_pnl_pct": 5.07,
-      "days_held": 8,
+      "last_price": 399.25,
+      "last_pnl_pct": 4.95,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -60,10 +60,10 @@
       "reasoning": "CRWD is rebounding with strong short-term momentum, trading above the 50-MA with bullish MACD and analyst consensus pointing to ~10.6% upside toward $490; the BULL regime supports entry at this score threshold under full Kelly sizing. Recovery thesis hinges on ARR resilience and post-outage customer retention holding intact through the next earnings cycle.",
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
-      "trail_high": 456.09,
-      "last_price": 455.79,
-      "last_pnl_pct": 2.92,
-      "days_held": 8,
+      "trail_high": 467.4,
+      "last_price": 467.4,
+      "last_pnl_pct": 5.54,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
       "earnings_play": false,
       "trail_high": 12.11,
-      "last_price": 11.61,
-      "last_pnl_pct": 12.17,
-      "days_held": 2,
+      "last_price": 11.56,
+      "last_pnl_pct": 11.69,
+      "days_held": 5,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "MSFT trades at a historically cheap 21x forward P/E with 16.7% revenue growth and 39% margins, offering compelling re-rating potential if Azure AI monetization accelerates. Bull regime with positive MACD and RSI at 63 supports a tactical entry above the 50-MA with room to run toward analyst targets.",
       "key_risk": "Stock remains 13.5% below its 200-MA, and any Azure growth deceleration at the next earnings print could validate that level as a structural ceiling, invalidating the recovery thesis.",
       "earnings_play": false,
-      "trail_high": 415.04,
-      "last_price": 415.04,
-      "last_pnl_pct": 2.63,
-      "days_held": 1,
+      "trail_high": 416.17,
+      "last_price": 416.17,
+      "last_pnl_pct": 2.91,
+      "days_held": 4,
       "status": "OPEN",
       "live": false
     }
@@ -711,18 +711,32 @@
     {
       "date": "2026-05-01",
       "value": 991.18
+    },
+    {
+      "date": "2026-05-04",
+      "value": 991.28
     }
   ],
   "top_picks": [
+    {
+      "ticker": "META",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "META is fundamentally mispriced at 16.8x forward earnings with 33% revenue growth and best-in-class margins, while RSI near 30 in a bull-market regime historically signals selling exhaustion rather than structural breakdown. The $832 analyst consensus and AI-driven ad monetization tailwind provide a compelling re-rating catalyst over the next 1\u20133 months.",
+      "price_target": 750.0,
+      "key_risk": "A macro-driven ad spend contraction or broader risk-off rotation could extend the technical breakdown toward the $570 support zone before fundamentals reassert."
+    },
     {
       "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a confirmed bullish trend with institutional volume support and strong margin profile justifying its premium valuation in a bull regime. RSI is overbought at 70.2 suggesting a potential near-term pullback before continuation toward the analyst target of $298.",
-      "price_target": 298.45,
-      "key_risk": "Negative iPhone demand signals from China \u2014 whether from Huawei competition, regulatory friction, or weak supply chain data \u2014 could rapidly reprice the stock given its near-perfection valuation at 30x forward earnings."
+      "reasoning": "AAPL trades in clean bullish structure with RSI at 65.8, positive MACD, and a clear path to the $300.65 analyst target supported by 16.6% revenue growth and robust buyback capacity. Bull market regime enables entry despite maturing momentum and China exposure headwinds, with the 50-day MA at $261 providing a solid structural floor.",
+      "price_target": 300.65,
+      "key_risk": "China demand deterioration and escalating tariff/trade policy risks could materially impair the 17-19% Greater China revenue base, compressing the premium 29x forward multiple rapidly."
     },
     {
       "ticker": "AMZN",
@@ -730,19 +744,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMZN is in a confirmed bull trend with AWS reacceleration and advertising margin expansion as durable catalysts, and the BULL regime permits entry at score 7+. RSI at 83.3 signals overbought conditions within 2% of the 52-week high, so position sizing should be conservative with a tight stop below recent consolidation.",
-      "price_target": 284.0,
-      "key_risk": "A miss or soft guidance on AWS growth near the 52-week high with RSI above 83 could trigger a sharp mean-reversion selloff of 10-15% rapidly."
-    },
-    {
-      "ticker": "META",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "META is fundamentally mispriced at 17x forward P/E with 33% revenue growth and 33% margins, offering ~40% upside to analyst consensus with no fundamental deterioration justifying the selloff. Bull market regime permits full Kelly sizing, and the valuation floor from strong_buy consensus provides asymmetric risk/reward despite near-term technical weakness.",
-      "price_target": 855.0,
-      "key_risk": "Macro risk-off from tariff escalation or recession could compress SMB ad spend and drive META toward the $520 range low given its 1.31 beta."
+      "reasoning": "AWS re-acceleration and advertising segment expansion provide durable earnings quality in a confirmed bull regime, with a $307 analyst target offering reasonable upside from current levels. RSI at 81.3 near the 52-week high warrants a smaller position with a disciplined stop, as the near-term breakout-or-reject setup demands risk management over full commitment.",
+      "price_target": 307.0,
+      "key_risk": "Any deceleration in AWS revenue growth at the next earnings print could reprice the AI infrastructure premium and trigger a swift 10-15% drawdown from already-extended positioning."
     }
   ],
   "regime": "BULL",
@@ -758,5 +762,5 @@
     "underperforming": false
   },
   "pnl": -21.81,
-  "last_run": "2026-05-01 18:01"
+  "last_run": "2026-05-04 15:37"
 }
