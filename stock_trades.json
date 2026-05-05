@@ -1,5 +1,5 @@
 {
-  "cash": 687.5800000000002,
+  "cash": 698.7400000000001,
   "positions": [
     {
       "time": "2026-04-23 15:27",
@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 198.96,
-      "last_pnl_pct": -1.85,
-      "days_held": 11,
+      "last_price": 197.16,
+      "last_pnl_pct": -2.74,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 405.33,
-      "last_price": 399.9,
-      "last_pnl_pct": 5.12,
-      "days_held": 11,
+      "last_price": 397.82,
+      "last_pnl_pct": 4.58,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     },
@@ -60,10 +60,10 @@
       "reasoning": "CRWD is rebounding with strong short-term momentum, trading above the 50-MA with bullish MACD and analyst consensus pointing to ~10.6% upside toward $490; the BULL regime supports entry at this score threshold under full Kelly sizing. Recovery thesis hinges on ARR resilience and post-outage customer retention holding intact through the next earnings cycle.",
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
-      "trail_high": 468.05,
-      "last_price": 468.05,
-      "last_pnl_pct": 5.69,
-      "days_held": 11,
+      "trail_high": 477.02,
+      "last_price": 477.02,
+      "last_pnl_pct": 7.71,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     },
@@ -83,31 +83,31 @@
       "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
       "earnings_play": false,
       "trail_high": 12.11,
-      "last_price": 11.64,
-      "last_pnl_pct": 12.46,
-      "days_held": 5,
+      "last_price": 11.83,
+      "last_pnl_pct": 14.3,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
     {
-      "time": "2026-04-30 18:07",
+      "time": "2026-05-05 18:07",
       "ticker": "MSFT",
       "action": "BUY",
       "strategy": "MEDIUM",
-      "shares": 0.149,
-      "price": 404.41,
-      "cost": 60.26,
-      "target": 490.0,
+      "shares": 0.1218,
+      "price": 410.47,
+      "cost": 50.0,
+      "target": 480.0,
       "stop_loss": 375.0,
       "score": 7,
       "conviction": "medium",
-      "reasoning": "MSFT trades at a historically cheap 21x forward P/E with 16.7% revenue growth and 39% margins, offering compelling re-rating potential if Azure AI monetization accelerates. Bull regime with positive MACD and RSI at 63 supports a tactical entry above the 50-MA with room to run toward analyst targets.",
-      "key_risk": "Stock remains 13.5% below its 200-MA, and any Azure growth deceleration at the next earnings print could validate that level as a structural ceiling, invalidating the recovery thesis.",
+      "reasoning": "MSFT trades at a rare discount \u2014 24x forward on 18%+ revenue growth and 39% margins \u2014 with a 36% analyst upside target and exceptional business quality in an AI-driven cloud cycle. The $390\u2013$395 accumulation zone provides a favorable risk/reward entry as Azure re-acceleration remains a high-impact catalyst for violent re-rating.",
+      "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
-      "trail_high": 416.17,
-      "last_price": 414.87,
-      "last_pnl_pct": 2.59,
-      "days_held": 4,
+      "trail_high": 410.47,
+      "last_price": 410.47,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -509,6 +509,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-04-30 18:07",
+      "ticker": "MSFT",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.149,
+      "price": 404.41,
+      "cost": 60.26,
+      "target": 490.0,
+      "stop_loss": 375.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT trades at a historically cheap 21x forward P/E with 16.7% revenue growth and 39% margins, offering compelling re-rating potential if Azure AI monetization accelerates. Bull regime with positive MACD and RSI at 63 supports a tactical entry above the 50-MA with room to run toward analyst targets.",
+      "key_risk": "Stock remains 13.5% below its 200-MA, and any Azure growth deceleration at the next earnings print could validate that level as a structural ceiling, invalidating the recovery thesis.",
+      "earnings_play": false,
+      "trail_high": 416.17,
+      "last_price": 410.47,
+      "last_pnl_pct": 1.5,
+      "days_held": 5,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 410.47,
+      "sell_time": "2026-05-05 18:07",
+      "pnl_dollar": 0.9,
+      "pnl_pct": 1.5,
+      "sell_reason": "AI thesis break: SELL \u2013 MACD has flipped bearish and RSI has dropped from 63 to 49.6, invalidating the bullish technical thesis that justified the entry."
+    },
+    {
+      "time": "2026-05-05 18:07",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1218,
+      "price": 410.47,
+      "cost": 50.0,
+      "target": 480.0,
+      "stop_loss": 375.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT trades at a rare discount \u2014 24x forward on 18%+ revenue growth and 39% margins \u2014 with a 36% analyst upside target and exceptional business quality in an AI-driven cloud cycle. The $390\u2013$395 accumulation zone provides a favorable risk/reward entry as Azure re-acceleration remains a high-impact catalyst for violent re-rating.",
+      "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
+      "earnings_play": false,
+      "trail_high": 410.47,
+      "last_price": 410.47,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -681,6 +730,33 @@
       "pnl_dollar": -3.34,
       "pnl_pct": -6.11,
       "sell_reason": "AI thesis break: SELL \u2014 The -6.1% loss in just 3 days with a -9.91% 1-month return suggests accelerating downside momentum that contradicts the thesis, and the original plan required high-volume 50-MA recapture before adding conviction, which hasn't materialized."
+    },
+    {
+      "time": "2026-04-30 18:07",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.149,
+      "price": 404.41,
+      "cost": 60.26,
+      "target": 490.0,
+      "stop_loss": 375.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT trades at a historically cheap 21x forward P/E with 16.7% revenue growth and 39% margins, offering compelling re-rating potential if Azure AI monetization accelerates. Bull regime with positive MACD and RSI at 63 supports a tactical entry above the 50-MA with room to run toward analyst targets.",
+      "key_risk": "Stock remains 13.5% below its 200-MA, and any Azure growth deceleration at the next earnings print could validate that level as a structural ceiling, invalidating the recovery thesis.",
+      "earnings_play": false,
+      "trail_high": 416.17,
+      "last_price": 410.47,
+      "last_pnl_pct": 1.5,
+      "days_held": 5,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 410.47,
+      "sell_time": "2026-05-05 18:07",
+      "pnl_dollar": 0.9,
+      "pnl_pct": 1.5,
+      "sell_reason": "AI thesis break: SELL \u2013 MACD has flipped bearish and RSI has dropped from 63 to 49.6, invalidating the bullish technical thesis that justified the entry."
     }
   ],
   "portfolio_history": [
@@ -715,18 +791,32 @@
     {
       "date": "2026-05-04",
       "value": 992.49
+    },
+    {
+      "date": "2026-05-05",
+      "value": 993.03
     }
   ],
   "top_picks": [
     {
-      "ticker": "AAPL",
+      "ticker": "META",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL shows textbook momentum re-ignition with institutional-backed volume, clean trend structure above both key MAs, and a constructive RSI that isn't yet overbought. The AI monetization narrative tied to Services growth provides a credible fundamental catalyst to close the gap to analyst targets near $300.",
-      "price_target": 300.65,
-      "key_risk": "Failure to break and hold the 52-week high at $288.62 on strong volume could trigger a momentum reversal, and any disappointment in Services revenue or AI monetization timelines would compress the premium multiple quickly."
+      "reasoning": "META is deeply oversold at RSI 28.2 with capitulatory volume at a 37% discount to analyst consensus, offering a high-quality compounder at 16.7x forward P/E with 33% revenue growth. The breakdown structure demands scale-in discipline with a reclaim of $628 as confirmation, targeting the mean-reversion zone of $680.",
+      "price_target": 680.0,
+      "key_risk": "Macro ad-spend deterioration or broader market selloff could extend the breakdown below $565 before any mean-reversion occurs."
+    },
+    {
+      "ticker": "AAPL",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AAPL is in strong bullish structure with RSI at 65.2, positive MACD, and clean separation above both key moving averages, with a decisive breakout above $288.62 serving as the near-term catalyst for momentum-chasing flows toward the $303 analyst target. Bull regime allows full Kelly sizing, and the combination of 16.6% revenue growth, 27.2% margins, and constructive street sentiment supports holding through the breakout test.",
+      "price_target": 303.38,
+      "key_risk": "Rejection at the 52-week high of $288.62 combined with front-loaded momentum compression could trigger a sharp mean-reversion toward the 50MA support at $261.81."
     },
     {
       "ticker": "AMZN",
@@ -734,33 +824,23 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AWS re-acceleration and expanding ad revenue support the 27.5x forward P/E, with analyst consensus pointing to ~13% upside toward $307. Bull market regime allows entry despite RSI at 80.1, though a 5-8% consolidation near the $276 technical ceiling is likely before the next leg higher.",
-      "price_target": 307.0,
-      "key_risk": "RSI deep in overbought territory with 29% compressed into one month means a swift pullback to $250-255 is probable on any AWS guidance softness or macro shock."
-    },
-    {
-      "ticker": "META",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "META is a high-quality compounder trading at historically cheap multiples (17x forward) with 33% revenue growth and strong AI monetization tailwinds, making the current technical breakdown a value entry rather than a structural impairment. RSI near oversold at 34.8 combined with elevated volume suggests capitulation may be approaching, and the $832 analyst consensus target implies substantial mean-reversion upside over the medium term.",
-      "price_target": 750.0,
-      "key_risk": "Macro-driven ad spend deterioration or enterprise budget cuts could compress CPMs further and push the stock below technical support before fundamentals reassert."
+      "reasoning": "AMZN's AWS+advertising flywheel supports defensible valuation with analyst consensus at $309.51 and strong buy rating in a confirmed bull regime. RSI at 82.4 signals near-term overbought risk, but structural momentum and fundamental quality justify a measured entry with defined downside.",
+      "price_target": 309.51,
+      "key_risk": "A macro rate scare or consumer spending deterioration could trigger a sharp beta-driven unwind given AMZN's 1.468 Beta and current overbought extension."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 42.9,
-    "rolling_win_rate": 42.9,
-    "avg_return": -2.68,
-    "sharpe": -0.85,
+    "win_rate": 50.0,
+    "rolling_win_rate": 50.0,
+    "avg_return": -2.15,
+    "sharpe": -0.66,
     "max_drawdown": 0.85,
-    "total_trades": 7,
-    "wins": 3,
+    "total_trades": 8,
+    "wins": 4,
     "losses": 4,
     "underperforming": false
   },
-  "pnl": -21.81,
-  "last_run": "2026-05-04 18:18"
+  "pnl": -20.91,
+  "last_run": "2026-05-05 18:14"
 }
