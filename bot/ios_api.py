@@ -536,29 +536,52 @@ def parse_screenshot():
 
 @ios.route("/confirm-trade", methods=["POST"])
 def confirm_trade():
-    try:
-        body = request.get_json(force=True, silent=True) or {}
-        ticker    = body.get("ticker", "").upper().strip()
-        shares    = float(body.get("shares", 0))
-        price_cad = float(body.get("price_cad", 0))
-        trade_type = body.get("type", "BUY").upper()
+    # Log raw body first so Railway logs always show what arrived
+    raw = request.get_data(as_text=True)
+    log.info("confirm-trade raw body: %r", raw[:500])
 
-        if not ticker or shares <= 0 or price_cad <= 0:
-            return jsonify({"success": False, "error": "Invalid trade data"}), 400
+    try:
+        # force=True ignores Content-Type; silent=False raises on bad JSON
+        body = request.get_json(force=True, silent=False)
+        if body is None:
+            log.error("confirm-trade: get_json returned None (empty body?)")
+            return jsonify({"success": False, "error": "Empty or non-JSON body"}), 400
+
+        log.info("confirm-trade parsed body: %s", body)
+
+        ticker     = str(body.get("ticker", "")).upper().strip()
+        shares     = float(body.get("shares", 0))
+        price_cad  = float(body.get("price_cad", 0))
+        trade_type = str(body.get("type", "BUY")).upper().strip()
+
+        log.info("confirm-trade: ticker=%s shares=%s price_cad=%s type=%s",
+                 ticker, shares, price_cad, trade_type)
+
+        if not ticker:
+            return jsonify({"success": False, "error": "ticker is required"}), 400
+        if shares <= 0:
+            return jsonify({"success": False, "error": "shares must be > 0"}), 400
+        if price_cad <= 0:
+            return jsonify({"success": False, "error": "price_cad must be > 0"}), 400
 
         if trade_type == "BUY":
-            port.add_or_update_holding(ticker, shares, price_cad)
+            result = port.add_or_update_holding(ticker, shares, price_cad)
+            log.info("confirm-trade: BUY saved — %s", result)
         elif trade_type == "SELL":
             result = port.reduce_or_remove_holding(ticker, shares, price_cad)
+            log.info("confirm-trade: SELL result — %s", result)
             if "error" in result:
                 return jsonify({"success": False, "error": result["error"]}), 400
         else:
-            return jsonify({"success": False, "error": "type must be BUY or SELL"}), 400
+            log.error("confirm-trade: unrecognised type %r", trade_type)
+            return jsonify({"success": False, "error": f"type must be BUY or SELL, got {trade_type!r}"}), 400
 
+        log.info("confirm-trade: success for %s %s @ %.4f CAD", trade_type, ticker, price_cad)
         return jsonify({"success": True})
+
     except Exception:
-        log.error("POST /api/confirm-trade error:\n%s", traceback.format_exc())
-        return jsonify({"success": False, "error": "Trade failed"}), 500
+        log.error("POST /api/confirm-trade unhandled error:\n%s", traceback.format_exc())
+        return jsonify({"success": False, "error": "Trade failed — see Railway logs"}), 500
 
 
 # ─────────────────────────────────────────────
