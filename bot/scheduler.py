@@ -13,6 +13,7 @@ import portfolio
 import alerts
 from sell_monitor import run_sell_monitor
 from scanner import run_scanner
+from predator import run_predator, update_outcomes
 from strategy import WATCHLIST
 
 EASTERN = pytz.timezone("America/Toronto")
@@ -89,6 +90,30 @@ def start_scheduler() -> BackgroundScheduler:
         replace_existing=True,
     )
 
+    # Pre-explosion scanner — every 60 min, Mon–Fri 8:00–20:00
+    scheduler.add_job(
+        run_predator,
+        CronTrigger(
+            minute="0",
+            hour="8-20",
+            day_of_week="mon-fri",
+            timezone=EASTERN,
+        ),
+        id="predator",
+        replace_existing=True,
+    )
+
+    # Daily 7 AM: update outcomes for alerts from 7/14/30 days ago + early predator run
+    scheduler.add_job(
+        update_outcomes,
+        CronTrigger(hour=7, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="predator_outcomes",
+        replace_existing=True,
+    )
+
     scheduler.start()
-    print("✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | scanner every 30 min)")
+    print(
+        "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
+        "scanner every 30 min | predator every 60 min)"
+    )
     return scheduler

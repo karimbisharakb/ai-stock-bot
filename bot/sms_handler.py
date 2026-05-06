@@ -24,7 +24,9 @@ log = logging.getLogger(__name__)
 app = Flask(__name__)
 
 from ios_api import ios as ios_blueprint
+from ios_api_predator import predator_bp
 app.register_blueprint(ios_blueprint)
+app.register_blueprint(predator_bp)
 
 MY_WHATSAPP = "whatsapp:+12899718200"
 

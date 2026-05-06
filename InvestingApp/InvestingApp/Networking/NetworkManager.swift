@@ -88,6 +88,14 @@ final class NetworkManager {
         }
     }
 
+    // MARK: - Predator
+
+    func fetchPredatorAlerts() async throws -> [PredatorAlert] {
+        struct Wrapper: Decodable { let alerts: [PredatorAlert] }
+        let wrapper: Wrapper = try await get(url: APIEndpoints.predatorAlerts)
+        return wrapper.alerts
+    }
+
     // MARK: - Market Data
 
     func fetchMarketData() async throws -> MarketData {

@@ -126,6 +126,23 @@ def init_db():
         )
     """)
 
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS predator_alerts (
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker            TEXT    NOT NULL,
+            score             REAL    NOT NULL,
+            signals_json      TEXT    NOT NULL,
+            entry_price       REAL,
+            stop_price        REAL,
+            position_size_cad REAL,
+            alert_time        TEXT    NOT NULL,
+            price_7d_later    REAL,
+            price_14d_later   REAL,
+            price_30d_later   REAL,
+            outcome           TEXT
+        )
+    """)
+
     # Seed single-row tables
     c.execute("SELECT COUNT(*) FROM tfsa_info")
     if c.fetchone()[0] == 0:

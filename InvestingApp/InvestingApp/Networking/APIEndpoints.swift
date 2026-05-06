@@ -13,4 +13,7 @@ enum APIEndpoints {
     static let cash = "\(base)/api/cash"
     static let testCash = "\(base)/api/test-cash"
     static let settings = "\(base)/api/settings"
+    static let predatorAlerts = "\(base)/api/predator/alerts"
+    static let predatorWatchlist = "\(base)/api/predator/watchlist"
+    static let predatorHistory = "\(base)/api/predator/history"
 }
