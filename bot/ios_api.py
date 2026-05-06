@@ -531,6 +531,21 @@ def parse_screenshot():
 
 
 # ─────────────────────────────────────────────
+# GET /api/test-add  (smoke-test: writes PLTR to DB)
+# ─────────────────────────────────────────────
+
+@ios.route("/test-add", methods=["GET"])
+def test_add():
+    try:
+        result = port.add_or_update_holding("PLTR", 0.7619, 28.50)
+        log.info("test-add: inserted PLTR — %s", result)
+        return jsonify({"success": True, "result": result})
+    except Exception:
+        log.error("GET /api/test-add error:\n%s", traceback.format_exc())
+        return jsonify({"success": False, "error": traceback.format_exc()}), 500
+
+
+# ─────────────────────────────────────────────
 # POST /api/confirm-trade
 # ─────────────────────────────────────────────
 
@@ -566,7 +581,9 @@ def confirm_trade():
 
         if trade_type == "BUY":
             result = port.add_or_update_holding(ticker, shares, price_cad)
-            log.info("confirm-trade: BUY saved — %s", result)
+            trade_cost = round(shares * price_cad, 2)
+            port.add_cash(-trade_cost)
+            log.info("confirm-trade: BUY saved — %s, deducted $%.2f from cash", result, trade_cost)
         elif trade_type == "SELL":
             result = port.reduce_or_remove_holding(ticker, shares, price_cad)
             log.info("confirm-trade: SELL result — %s", result)

@@ -118,6 +118,14 @@ def init_db():
         )
     """)
 
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS portfolio_history (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            date      TEXT    NOT NULL,
+            value_cad REAL    NOT NULL
+        )
+    """)
+
     # Seed single-row tables
     c.execute("SELECT COUNT(*) FROM tfsa_info")
     if c.fetchone()[0] == 0:
