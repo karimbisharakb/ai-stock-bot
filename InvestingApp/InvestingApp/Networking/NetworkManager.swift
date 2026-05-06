@@ -91,9 +91,15 @@ final class NetworkManager {
     // MARK: - Predator
 
     func fetchPredatorAlerts() async throws -> [PredatorAlert] {
-        struct Wrapper: Decodable { let alerts: [PredatorAlert] }
-        let wrapper: Wrapper = try await get(url: APIEndpoints.predatorAlerts)
+        struct AlertsWrapper: Decodable { let alerts: [PredatorAlert] }
+        let wrapper: AlertsWrapper = try await get(url: APIEndpoints.predatorAlerts)
         return wrapper.alerts
+    }
+
+    func fetchPredatorWatchlist() async throws -> [PredatorAlert] {
+        struct WatchlistWrapper: Decodable { let watchlist: [PredatorAlert] }
+        let wrapper: WatchlistWrapper = try await get(url: APIEndpoints.predatorWatchlist)
+        return wrapper.watchlist
     }
 
     // MARK: - Market Data

@@ -5,7 +5,7 @@ import SwiftUI
 final class PredatorViewModel: ObservableObject {
     @Published var alerts: [PredatorAlert] = []
     @Published var isLoading = false
-    @Published var errorMessage: String?
+    @Published var error: String?
 
     private let cacheKey = "cached_predator_alerts"
 
@@ -13,16 +13,16 @@ final class PredatorViewModel: ObservableObject {
         loadFromCache()
     }
 
-    func refresh() async {
+    func fetch() async {
         isLoading = true
-        errorMessage = nil
+        error = nil
         defer { isLoading = false }
         do {
             let items = try await NetworkManager.shared.fetchPredatorAlerts()
             alerts = items
             saveToCache(items)
-        } catch {
-            errorMessage = error.localizedDescription
+        } catch let e {
+            error = e.localizedDescription
         }
     }
 

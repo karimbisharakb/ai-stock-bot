@@ -17,14 +17,23 @@ struct PredatorAlert: Codable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case id, ticker, score, signals, outcome
-        case entryPrice = "entry_price"
-        case stopPrice = "stop_price"
-        case positionSizeCad = "position_size_cad"
-        case alertTime = "alert_time"
-        case price7dLater = "price_7d_later"
-        case price14dLater = "price_14d_later"
-        case price30dLater = "price_30d_later"
+        case entryPrice       = "entry_price"
+        case stopPrice        = "stop_price"
+        case positionSizeCad  = "position_size_cad"
+        case alertTime        = "alert_time"
+        case price7dLater     = "price_7d_later"
+        case price14dLater    = "price_14d_later"
+        case price30dLater    = "price_30d_later"
     }
+}
+
+// MARK: - Signal breakdown
+
+struct SignalItem: Identifiable {
+    let id: String       // unique key, e.g. "options"
+    let name: String     // display label, e.g. "Unusual Options"
+    let detail: PredatorSignals.Detail
+    let maxScore: Int
 }
 
 struct PredatorSignals: Codable {
@@ -45,18 +54,19 @@ struct PredatorSignals: Codable {
         case shortSqueeze = "short_squeeze"
     }
 
-    var all: [(name: String, detail: Detail)] {
+    var all: [SignalItem] {
         [
-            ("Unusual Options", options),
-            ("Insider Buy",     insider),
-            ("Short Squeeze",   shortSqueeze),
-            ("Catalyst",        catalyst),
-            ("Institutions",    institutional),
-            ("Breakout",        breakout),
+            SignalItem(id: "options",       name: "Unusual Options", detail: options,       maxScore: 3),
+            SignalItem(id: "insider",       name: "Insider Buy",     detail: insider,       maxScore: 2),
+            SignalItem(id: "short_squeeze", name: "Short Squeeze",   detail: shortSqueeze,  maxScore: 2),
+            SignalItem(id: "catalyst",      name: "Catalyst",        detail: catalyst,      maxScore: 2),
+            SignalItem(id: "institutional", name: "Institutions",    detail: institutional, maxScore: 1),
+            SignalItem(id: "breakout",      name: "Breakout",        detail: breakout,      maxScore: 2),
         ]
     }
 }
 
+// Lenient decoding: missing or null signal keys fall back to score=0 rather than throwing.
 extension PredatorSignals {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -70,12 +80,14 @@ extension PredatorSignals {
     }
 }
 
+// MARK: - Color helper
+
 extension Color {
     static func forScore(_ score: Double) -> Color {
         switch score {
         case 8...: return .positive
         case 6..<8: return .warning
-        default: return .textSecondary
+        default:   return .textSecondary
         }
     }
 }
