@@ -253,7 +253,8 @@ def get_portfolio_with_prices() -> list[dict]:
         except Exception:
             price_native = h["avg_cost"]
 
-        # Convert to CAD for all value calculations; avg_cost is always stored in CAD
+        # Convert to CAD; avg_cost is always in CAD (actual CAD paid including FX)
+        # For USD stocks: gain/share = price_usd × usdcad − avg_cost_cad
         price_cad = round(price_native * usdcad, 2) if is_usd else price_native
 
         # Recompute shares and avg cost from transaction history for accuracy

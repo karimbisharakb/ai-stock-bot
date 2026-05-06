@@ -163,6 +163,9 @@ def get_portfolio():
                 current_price_cad = round(price_native * fx, 4)
                 prev_price_cad = round(prev_native * fx, 4)
 
+            # For USD stocks: current_price_cad = price_usd × fx_rate
+            # gain = shares × (price_usd × fx_rate − avg_cost_cad)
+            # avg_cost_cad is the actual CAD paid (already includes FX + fees)
             total_value_cad = round(shares * current_price_cad, 2)
             cost_basis_cad = round(shares * avg_cost_cad, 2)
             gain_loss_cad = round(total_value_cad - cost_basis_cad, 2)
@@ -535,9 +538,10 @@ def parse_screenshot():
 # ─────────────────────────────────────────────
 
 ACTUAL_HOLDINGS = [
+    # avg_cost is always in CAD (actual CAD paid, including any FX conversion + fees)
     {"ticker": "VFV.TO", "shares": 22.6487, "avg_cost": 153.27},
-    {"ticker": "QQQ",    "shares":  2.4823, "avg_cost": 574.15},
-    {"ticker": "MDA",    "shares": 10.0,    "avg_cost":  41.79},
+    {"ticker": "QQQ",    "shares":  2.4823, "avg_cost": 573.95},  # 1425.14 CAD ÷ 2.4823 sh
+    {"ticker": "MDA.TO", "shares": 10.0,    "avg_cost":  46.47},  # TSX-listed; price in CAD
 ]
 ACTUAL_CASH = 135.21
 
