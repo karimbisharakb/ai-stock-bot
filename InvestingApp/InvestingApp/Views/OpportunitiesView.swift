@@ -174,8 +174,32 @@ struct OpportunityCard: View {
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.bottom, 12)
+                .padding(.bottom, 8)
             }
+
+            // Analyze button
+            Button {
+                HapticManager.selection()
+                NotificationCenter.default.post(
+                    name: .analyzeTickerRequested,
+                    object: nil,
+                    userInfo: ["ticker": opportunity.ticker]
+                )
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 11, weight: .semibold))
+                    Text("Analyze \(opportunity.ticker.replacingOccurrences(of: ".TO", with: ""))")
+                        .font(.system(size: 12, weight: .semibold))
+                }
+                .foregroundColor(.accent)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(Color.accent.opacity(0.1))
+                .cornerRadius(10)
+            }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 14)
         }
         .background(Color.surface)
         .cornerRadius(16)

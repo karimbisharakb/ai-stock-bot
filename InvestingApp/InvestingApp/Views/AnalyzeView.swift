@@ -75,6 +75,12 @@ struct AnalyzeView: View {
             .toolbarBackground(Color.background, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
         }
+        .onReceive(NotificationCenter.default.publisher(for: .analyzeTickerRequested)) { notification in
+            if let ticker = notification.userInfo?["ticker"] as? String {
+                vm.query = ticker
+                Task { await vm.analyze() }
+            }
+        }
     }
 
     var loadingView: some View {

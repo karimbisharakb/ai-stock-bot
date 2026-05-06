@@ -63,5 +63,8 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .openOpportunitiesTab)) { _ in
             selectedTab = 1
         }
+        .onReceive(NotificationCenter.default.publisher(for: .analyzeTickerRequested)) { _ in
+            selectedTab = 2
+        }
     }
 }

@@ -71,4 +71,5 @@ final class NotificationManager: NSObject, ObservableObject, UNUserNotificationC
 extension Notification.Name {
     static let openOpportunitiesTab = Notification.Name("openOpportunitiesTab")
     static let tradeConfirmed = Notification.Name("tradeConfirmed")
+    static let analyzeTickerRequested = Notification.Name("analyzeTickerRequested")
 }

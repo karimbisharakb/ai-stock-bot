@@ -301,8 +301,8 @@ def get_signals():
 def get_opportunities():
     try:
         conn = get_connection()
-        # 24-hour window so stale alerts don't show forever
-        cutoff = (datetime.now() - timedelta(hours=24)).isoformat()
+        # 7-day window — scanner runs infrequently so extend to keep cards visible
+        cutoff = (datetime.now() - timedelta(days=7)).isoformat()
         rows = conn.execute(
             "SELECT id, ticker, score, sent_at, reason "
             "FROM scanner_alerts "

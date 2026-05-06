@@ -4,6 +4,14 @@ struct SignalRowView: View {
     let signal: Signal
     var isExpanded: Bool = false
 
+    var verdictLabel: String {
+        switch signal.verdict.uppercased() {
+        case "CONFIRMED": return "AI Detected"
+        case "REJECTED": return "Rejected"
+        default: return "Pending"
+        }
+    }
+
     var verdictColor: Color {
         switch signal.verdict.uppercased() {
         case "CONFIRMED": return .positive
@@ -41,7 +49,7 @@ struct SignalRowView: View {
                 Spacer()
 
                 VStack(alignment: .trailing, spacing: 4) {
-                    Text(signal.verdict.capitalized)
+                    Text(verdictLabel)
                         .font(.system(size: 10, weight: .bold))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
@@ -59,28 +67,31 @@ struct SignalRowView: View {
             if isExpanded {
                 Divider().background(Color.border).padding(.horizontal, 14)
 
-                VStack(alignment: .leading, spacing: 10) {
-                    // Indicators
-                    ForEach(signal.indicators) { indicator in
-                        HStack {
-                            Image(systemName: indicator.passed ? "checkmark.circle.fill" : "xmark.circle.fill")
-                                .foregroundColor(indicator.passed ? .positive : .negative)
-                                .font(.system(size: 13))
-                            Text(indicator.name)
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(.textPrimary)
-                            Spacer()
-                            Text(indicator.value)
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.textSecondary)
+                VStack(alignment: .leading, spacing: 12) {
+                    // Technical indicators (only if present)
+                    if !signal.indicators.isEmpty {
+                        VStack(spacing: 8) {
+                            ForEach(signal.indicators) { indicator in
+                                HStack {
+                                    Image(systemName: indicator.passed ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                        .foregroundColor(indicator.passed ? .positive : .negative)
+                                        .font(.system(size: 13))
+                                    Text(indicator.name)
+                                        .font(.system(size: 12, weight: .medium))
+                                        .foregroundColor(.textPrimary)
+                                    Spacer()
+                                    Text(indicator.value)
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .foregroundColor(.textSecondary)
+                                }
+                            }
                         }
+                        Divider().background(Color.border)
                     }
-
-                    Divider().background(Color.border)
 
                     // Confidence
                     HStack {
-                        Text("Confidence")
+                        Text("AI Confidence")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.textSecondary)
                         Spacer()
@@ -89,12 +100,20 @@ struct SignalRowView: View {
                             .foregroundColor(.accent)
                     }
 
-                    // Reasoning
-                    Text(signal.reasoning)
-                        .font(.system(size: 12))
-                        .foregroundColor(.textSecondary)
-                        .lineSpacing(4)
-                        .fixedSize(horizontal: false, vertical: true)
+                    // Scanner reason — always shown
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Why AI Flagged")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.textSecondary)
+                        Text(signal.reasoning.isEmpty ? "No details available" : signal.reasoning)
+                            .font(.system(size: 12))
+                            .foregroundColor(.textPrimary)
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .padding(10)
+                    .background(Color.accent.opacity(0.06))
+                    .cornerRadius(10)
 
                     // Outcome badges
                     if let outcome3d = signal.outcomePercent3d {
