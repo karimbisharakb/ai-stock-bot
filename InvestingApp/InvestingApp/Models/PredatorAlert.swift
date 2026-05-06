@@ -82,12 +82,8 @@ extension PredatorSignals {
 
 // MARK: - Color helper
 
-extension Color {
-    static func forScore(_ score: Double) -> Color {
-        switch score {
-        case 8...: return .positive
-        case 6..<8: return .warning
-        default:   return .textSecondary
-        }
-    }
+func colorForScore(_ score: Double) -> Color {
+    if score >= 8 { return .positive }
+    if score >= 6 { return .warning }
+    return .textSecondary
 }

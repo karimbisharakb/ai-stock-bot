@@ -18,7 +18,7 @@ struct OpportunitiesView: View {
                         LazyVStack(spacing: 12) {
 
                             // ── Pre-Explosion Alerts ──────────────────────
-                            sectionHeader(icon: "bolt.fill", title: "Pre-Explosion Alerts", color: .negative)
+                            sectionHeader(icon: "bolt.fill", title: "Pre-Explosion Alerts", color: Color.red)
                                 .padding(.horizontal, 20)
                                 .padding(.top, 8)
 
@@ -128,7 +128,7 @@ struct PredatorCard: View {
     let alert: PredatorAlert
     var isExpanded: Bool = false
 
-    var scoreColor: Color { Color.forScore(alert.score) }
+    var scoreColor: Color { colorForScore(alert.score) }
     var scoreInt:   Int   { Int(alert.score) }
 
     // Computed outside @ViewBuilder to avoid ambiguity
@@ -209,8 +209,8 @@ struct PredatorCard: View {
                     .font(.system(size: 9, weight: .bold))
                     .padding(.horizontal, 7)
                     .padding(.vertical, 3)
-                    .background(Color.negative.opacity(0.15))
-                    .foregroundColor(.negative)
+                    .background(Color.red.opacity(0.15))
+                    .foregroundColor(Color.red)
                     .cornerRadius(5)
             }
             Text(AppDateFormatter.relative(from: alert.alertTime))
@@ -275,7 +275,7 @@ struct PredatorCard: View {
                     .foregroundColor(.textSecondary)
                 Text("$\(String(format: "%.2f", stop))")
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(.negative)
+                    .foregroundColor(Color.red)
             }
             Spacer()
             if let pos = alert.positionSizeCad, pos > 0 {
@@ -292,7 +292,7 @@ struct PredatorCard: View {
     }
 
     func outcomeBadge(_ outcome: String) -> some View {
-        let color: Color = outcome.hasPrefix("WIN") ? .positive : outcome.hasPrefix("LOSS") ? .negative : .warning
+        let color: Color = outcome.hasPrefix("WIN") ? .positive : outcome.hasPrefix("LOSS") ? Color.red : .warning
         return Text(outcome)
             .font(.system(size: 12, weight: .semibold))
             .padding(.horizontal, 10)
