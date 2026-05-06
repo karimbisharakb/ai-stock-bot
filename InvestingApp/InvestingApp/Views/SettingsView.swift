@@ -14,10 +14,7 @@ struct SettingsView: View {
     @State private var isSavingCash = false
     @State private var cashSaved = false
     @State private var errorMessage: String?
-
-    var storedCash: Double {
-        Double(UserDefaults.standard.string(forKey: "available_cash") ?? "0") ?? 0
-    }
+    @State private var isLoadingCash = false
 
     var body: some View {
         NavigationView {
@@ -93,7 +90,7 @@ struct SettingsView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
         }
         .onAppear {
-            cashAmount = String(format: "%.2f", storedCash)
+            Task { await loadCashFromBackend() }
         }
     }
 
@@ -284,6 +281,18 @@ struct SettingsView: View {
         .padding(.vertical, 5)
         .background(Color.background)
         .cornerRadius(8)
+    }
+
+    func loadCashFromBackend() async {
+        isLoadingCash = true
+        defer { isLoadingCash = false }
+        do {
+            let cash = try await NetworkManager.shared.fetchCash()
+            cashAmount = String(format: "%.2f", cash)
+        } catch {
+            let stored = Double(UserDefaults.standard.string(forKey: "available_cash") ?? "0") ?? 0
+            cashAmount = String(format: "%.2f", stored)
+        }
     }
 
     func saveCash() async {

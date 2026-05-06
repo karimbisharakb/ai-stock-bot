@@ -593,8 +593,17 @@ def confirm_trade():
             log.error("confirm-trade: unrecognised type %r", trade_type)
             return jsonify({"success": False, "error": f"type must be BUY or SELL, got {trade_type!r}"}), 400
 
-        log.info("confirm-trade: success for %s %s @ %.4f CAD", trade_type, ticker, price_cad)
-        return jsonify({"success": True})
+        # Read back from DB to verify write succeeded
+        conn = get_connection()
+        row = conn.execute(
+            "SELECT ticker, shares, avg_cost FROM holdings WHERE ticker = ?", (ticker,)
+        ).fetchone()
+        conn.close()
+        updated_holding = dict(row) if row else {}
+
+        log.info("confirm-trade: success for %s %s @ %.4f CAD — DB verify: %s",
+                 trade_type, ticker, price_cad, updated_holding)
+        return jsonify({"success": True, "holding": updated_holding})
 
     except Exception:
         log.error("POST /api/confirm-trade unhandled error:\n%s", traceback.format_exc())
@@ -602,16 +611,43 @@ def confirm_trade():
 
 
 # ─────────────────────────────────────────────
-# POST /api/cash
+# GET /api/cash  — returns current cash balance
+# POST /api/cash — sets cash balance (field: "cash" or "amount")
+# POST /api/test-cash — alias for testing (field: "amount")
 # ─────────────────────────────────────────────
+
+@ios.route("/cash", methods=["GET"])
+def get_cash_balance():
+    try:
+        return jsonify({"available_cash": round(port.get_cash(), 2)})
+    except Exception:
+        log.error("GET /api/cash error:\n%s", traceback.format_exc())
+        return jsonify({"error": "Failed to get cash"}), 500
+
 
 @ios.route("/cash", methods=["POST"])
 def set_cash():
     try:
         body = request.get_json(force=True, silent=True) or {}
-        amount = float(body.get("cash", 0))
+        # Accept either "cash" or "amount" key
+        amount = float(body.get("cash", body.get("amount", 0)))
         port.set_cash_exact(amount)
-        return jsonify({"success": True})
+        log.info("set_cash: set to %.4f", amount)
+        return jsonify({"success": True, "available_cash": round(amount, 2)})
     except Exception:
         log.error("POST /api/cash error:\n%s", traceback.format_exc())
         return jsonify({"success": False, "error": "Failed to update cash"}), 500
+
+
+@ios.route("/test-cash", methods=["POST"])
+def test_cash():
+    """Test alias: POST {"amount": X} → sets cash and returns new balance."""
+    try:
+        body = request.get_json(force=True, silent=True) or {}
+        amount = float(body.get("amount", body.get("cash", 0)))
+        port.set_cash_exact(amount)
+        log.info("test-cash: set to %.4f", amount)
+        return jsonify({"success": True, "available_cash": round(amount, 2)})
+    except Exception:
+        log.error("POST /api/test-cash error:\n%s", traceback.format_exc())
+        return jsonify({"success": False, "error": traceback.format_exc()}), 500

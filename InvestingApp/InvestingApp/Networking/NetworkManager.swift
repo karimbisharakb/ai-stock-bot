@@ -94,12 +94,30 @@ final class NetworkManager {
         return try await get(url: APIEndpoints.market)
     }
 
-    // MARK: - Settings
+    // MARK: - Cash
+
+    func fetchCash() async throws -> Double {
+        struct CashResponse: Decodable { let availableCash: Double }
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let reqURL = URL(string: APIEndpoints.cash) else { throw NetworkError.invalidURL }
+        var request = URLRequest(url: reqURL)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let (data, response) = try await session.data(for: request)
+        guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode) else {
+            throw NetworkError.serverError(0, "Failed to fetch cash")
+        }
+        return (try decoder.decode(CashResponse.self, from: data)).availableCash
+    }
 
     func updateCash(amount: Double) async throws {
         let body: [String: Any] = ["cash": amount]
-        struct OKResponse: Decodable { let success: Bool }
-        let _: OKResponse = try await postAny(url: APIEndpoints.cash, body: body)
+        struct OKResponse: Decodable { let success: Bool; let error: String? }
+        let response: OKResponse = try await postAny(url: APIEndpoints.cash, body: body)
+        if !response.success {
+            throw NetworkError.serverError(400, response.error ?? "Failed to update cash")
+        }
     }
 
     // MARK: - Generic GET

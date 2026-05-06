@@ -12,6 +12,11 @@ final class PortfolioViewModel: ObservableObject {
     private let cacheKey = "cached_portfolio"
     private let marketCacheKey = "cached_market"
 
+    var isStale: Bool {
+        guard let updated = lastUpdated else { return true }
+        return Date().timeIntervalSince(updated) > 300
+    }
+
     init() {
         loadFromCache()
     }

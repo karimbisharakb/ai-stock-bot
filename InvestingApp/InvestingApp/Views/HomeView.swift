@@ -28,7 +28,7 @@ struct HomeView: View {
             .navigationBarHidden(true)
         }
         .task {
-            if vm.portfolio == nil {
+            if vm.isStale {
                 await vm.refresh()
             }
         }

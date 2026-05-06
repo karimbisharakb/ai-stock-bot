@@ -11,5 +11,6 @@ enum APIEndpoints {
     static let confirmTrade = "\(base)/api/confirm-trade"
     static let market = "\(base)/api/market"
     static let cash = "\(base)/api/cash"
+    static let testCash = "\(base)/api/test-cash"
     static let settings = "\(base)/api/settings"
 }
