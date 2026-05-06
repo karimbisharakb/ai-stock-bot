@@ -531,6 +531,61 @@ def parse_screenshot():
 
 
 # ─────────────────────────────────────────────
+# GET /api/reset-portfolio  — wipes and resets to known Wealthsimple state
+# ─────────────────────────────────────────────
+
+ACTUAL_HOLDINGS = [
+    {"ticker": "VFV.TO", "shares": 22.6487, "avg_cost": 153.27},
+    {"ticker": "QQQ",    "shares":  2.4823, "avg_cost": 574.15},
+    {"ticker": "MDA",    "shares": 10.0,    "avg_cost":  41.79},
+]
+ACTUAL_CASH = 135.21
+
+
+@ios.route("/reset-portfolio", methods=["GET"])
+def reset_portfolio():
+    try:
+        conn = get_connection()
+        conn.execute("DELETE FROM holdings")
+        conn.execute("DELETE FROM transactions")
+        conn.commit()
+        conn.close()
+        log.info("reset-portfolio: cleared all holdings and transactions")
+
+        now = datetime.now().isoformat()
+        for h in ACTUAL_HOLDINGS:
+            conn = get_connection()
+            conn.execute(
+                "INSERT INTO holdings (ticker, shares, avg_cost, date_added) VALUES (?,?,?,?)",
+                (h["ticker"], h["shares"], h["avg_cost"], now),
+            )
+            conn.execute(
+                "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes)"
+                " VALUES (?,?,?,?,?,?,?)",
+                (h["ticker"], "BUY", h["shares"], h["avg_cost"],
+                 round(h["shares"] * h["avg_cost"], 4), now, "Wealthsimple reset"),
+            )
+            conn.commit()
+            conn.close()
+            log.info("reset-portfolio: inserted %s %.4f sh @ %.4f", h["ticker"], h["shares"], h["avg_cost"])
+
+        port.set_cash_exact(ACTUAL_CASH)
+        log.info("reset-portfolio: cash set to %.2f", ACTUAL_CASH)
+
+        holdings = port.get_holdings()
+        return jsonify({
+            "success": True,
+            "holdings": [{"ticker": h["ticker"], "shares": h["shares"], "avg_cost": h["avg_cost"]}
+                         for h in holdings],
+            "cash": port.get_cash(),
+        })
+
+    except Exception:
+        log.error("GET /api/reset-portfolio error:\n%s", traceback.format_exc())
+        return jsonify({"success": False, "error": traceback.format_exc()}), 500
+
+
+# ─────────────────────────────────────────────
 # GET /api/test-add  (smoke-test: writes PLTR to DB)
 # ─────────────────────────────────────────────
 
