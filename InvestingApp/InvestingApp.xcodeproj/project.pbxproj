@@ -1,0 +1,499 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000001000000000000001A /* InvestingAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000001B /* InvestingAppApp.swift */; };
+		AA000002000000000000002A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000002B /* ContentView.swift */; };
+		AA000003000000000000003A /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000003000000000000003B /* Portfolio.swift */; };
+		AA000004000000000000004A /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000004000000000000004B /* Signal.swift */; };
+		AA000005000000000000005A /* Opportunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000005000000000000005B /* Opportunity.swift */; };
+		AA000006000000000000006A /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000006000000000000006B /* MarketData.swift */; };
+		AA000007000000000000007A /* ParsedTrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000007000000000000007B /* ParsedTrade.swift */; };
+		AA000008000000000000008A /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000008000000000000008B /* PortfolioViewModel.swift */; };
+		AA000009000000000000009A /* OpportunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000009000000000000009B /* OpportunityViewModel.swift */; };
+		AA00000A0000000000000AAA /* AnalyzeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000A0000000000000AAB /* AnalyzeViewModel.swift */; };
+		AA00000B0000000000000BBA /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000B0000000000000BBB /* FeedViewModel.swift */; };
+		AA00000C0000000000000CCA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000C0000000000000CCB /* HomeView.swift */; };
+		AA00000D0000000000000DDA /* OpportunitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000D0000000000000DDB /* OpportunitiesView.swift */; };
+		AA00000E0000000000000EEA /* OpportunityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000E0000000000000EEB /* OpportunityDetailView.swift */; };
+		AA00000F0000000000000FFA /* AnalyzeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000F0000000000000FFB /* AnalyzeView.swift */; };
+		AA000010000000000000010A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010000000000000010B /* FeedView.swift */; };
+		AA000011000000000000011A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011000000000000011B /* SettingsView.swift */; };
+		AA000012000000000000012A /* ScreenshotImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012000000000000012B /* ScreenshotImportView.swift */; };
+		AA000013000000000000013A /* TradeConfirmSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000013000000000000013B /* TradeConfirmSheet.swift */; };
+		AA000014000000000000014A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000014000000000000014B /* NetworkManager.swift */; };
+		AA000015000000000000015A /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000015000000000000015B /* APIEndpoints.swift */; };
+		AA000016000000000000016A /* ArcMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000016000000000000016B /* ArcMeterView.swift */; };
+		AA000017000000000000017A /* MetricCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000017000000000000017B /* MetricCardView.swift */; };
+		AA000018000000000000018A /* HoldingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000018000000000000018B /* HoldingRowView.swift */; };
+		AA000019000000000000019A /* SignalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000019000000000000019B /* SignalRowView.swift */; };
+		AA00001A000000000000001AA /* SparklineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001A000000000000001AB /* SparklineView.swift */; };
+		AA00001B000000000000001BA /* ConfidenceRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001B000000000000001BB /* ConfidenceRingView.swift */; };
+		AA00001C000000000000001CA /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001C000000000000001CB /* CurrencyFormatter.swift */; };
+		AA00001D000000000000001DA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001D000000000000001DB /* DateFormatter.swift */; };
+		AA00001E000000000000001EA /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001E000000000000001EB /* HapticManager.swift */; };
+		AA00001F000000000000001FA /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00001F000000000000001FB /* DesignSystem.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA000001000000000000001B /* InvestingAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestingAppApp.swift; sourceTree = "<group>"; };
+		AA000002000000000000002B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA000003000000000000003B /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
+		AA000004000000000000004B /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		AA000005000000000000005B /* Opportunity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opportunity.swift; sourceTree = "<group>"; };
+		AA000006000000000000006B /* MarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketData.swift; sourceTree = "<group>"; };
+		AA000007000000000000007B /* ParsedTrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedTrade.swift; sourceTree = "<group>"; };
+		AA000008000000000000008B /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
+		AA000009000000000000009B /* OpportunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityViewModel.swift; sourceTree = "<group>"; };
+		AA00000A0000000000000AAB /* AnalyzeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeViewModel.swift; sourceTree = "<group>"; };
+		AA00000B0000000000000BBB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		AA00000C0000000000000CCB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA00000D0000000000000DDB /* OpportunitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunitiesView.swift; sourceTree = "<group>"; };
+		AA00000E0000000000000EEB /* OpportunityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityDetailView.swift; sourceTree = "<group>"; };
+		AA00000F0000000000000FFB /* AnalyzeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeView.swift; sourceTree = "<group>"; };
+		AA000010000000000000010B /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		AA000011000000000000011B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA000012000000000000012B /* ScreenshotImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotImportView.swift; sourceTree = "<group>"; };
+		AA000013000000000000013B /* TradeConfirmSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfirmSheet.swift; sourceTree = "<group>"; };
+		AA000014000000000000014B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		AA000015000000000000015B /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		AA000016000000000000016B /* ArcMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcMeterView.swift; sourceTree = "<group>"; };
+		AA000017000000000000017B /* MetricCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricCardView.swift; sourceTree = "<group>"; };
+		AA000018000000000000018B /* HoldingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRowView.swift; sourceTree = "<group>"; };
+		AA000019000000000000019B /* SignalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRowView.swift; sourceTree = "<group>"; };
+		AA00001A000000000000001AB /* SparklineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineView.swift; sourceTree = "<group>"; };
+		AA00001B000000000000001BB /* ConfidenceRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidenceRingView.swift; sourceTree = "<group>"; };
+		AA00001C000000000000001CB /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		AA00001D000000000000001DB /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		AA00001E000000000000001EB /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		AA00001F000000000000001FB /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		AA000020000000000000020B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000030000000000000030B /* InvestingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvestingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA000082000000000000082B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA000040000000000000040B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000030000000000000030B /* InvestingApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA000041000000000000041B /* InvestingApp */ = {
+			isa = PBXGroup;
+			children = (
+				AA000042000000000000042B /* App */,
+				AA000043000000000000043B /* Models */,
+				AA000044000000000000044B /* ViewModels */,
+				AA000045000000000000045B /* Views */,
+				AA000046000000000000046B /* Networking */,
+				AA000047000000000000047B /* Components */,
+				AA000048000000000000048B /* Utilities */,
+				AA000020000000000000020B /* Info.plist */,
+			);
+			path = InvestingApp;
+			sourceTree = "<group>";
+		};
+		AA000042000000000000042B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA000001000000000000001B /* InvestingAppApp.swift */,
+				AA000002000000000000002B /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA000043000000000000043B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA000003000000000000003B /* Portfolio.swift */,
+				AA000004000000000000004B /* Signal.swift */,
+				AA000005000000000000005B /* Opportunity.swift */,
+				AA000006000000000000006B /* MarketData.swift */,
+				AA000007000000000000007B /* ParsedTrade.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA000044000000000000044B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA000008000000000000008B /* PortfolioViewModel.swift */,
+				AA000009000000000000009B /* OpportunityViewModel.swift */,
+				AA00000A0000000000000AAB /* AnalyzeViewModel.swift */,
+				AA00000B0000000000000BBB /* FeedViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AA000045000000000000045B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA00000C0000000000000CCB /* HomeView.swift */,
+				AA00000D0000000000000DDB /* OpportunitiesView.swift */,
+				AA00000E0000000000000EEB /* OpportunityDetailView.swift */,
+				AA00000F0000000000000FFB /* AnalyzeView.swift */,
+				AA000010000000000000010B /* FeedView.swift */,
+				AA000011000000000000011B /* SettingsView.swift */,
+				AA000012000000000000012B /* ScreenshotImportView.swift */,
+				AA000013000000000000013B /* TradeConfirmSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA000046000000000000046B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AA000014000000000000014B /* NetworkManager.swift */,
+				AA000015000000000000015B /* APIEndpoints.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		AA000047000000000000047B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AA000016000000000000016B /* ArcMeterView.swift */,
+				AA000017000000000000017B /* MetricCardView.swift */,
+				AA000018000000000000018B /* HoldingRowView.swift */,
+				AA000019000000000000019B /* SignalRowView.swift */,
+				AA00001A000000000000001AB /* SparklineView.swift */,
+				AA00001B000000000000001BB /* ConfidenceRingView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AA000048000000000000048B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				AA00001C000000000000001CB /* CurrencyFormatter.swift */,
+				AA00001D000000000000001DB /* DateFormatter.swift */,
+				AA00001E000000000000001EB /* HapticManager.swift */,
+				AA00001F000000000000001FB /* DesignSystem.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA000050000000000000050B = {
+			isa = PBXGroup;
+			children = (
+				AA000041000000000000041B /* InvestingApp */,
+				AA000040000000000000040B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA000060000000000000060B /* InvestingApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000070000000000000070B /* Build configuration list for PBXNativeTarget "InvestingApp" */;
+			buildPhases = (
+				AA000080000000000000080B /* Sources */,
+				AA000081000000000000081B /* Resources */,
+				AA000082000000000000082B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InvestingApp;
+			productName = InvestingApp;
+			productReference = AA000030000000000000030B /* InvestingApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA000090000000000000090B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AA000060000000000000060B = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA0000A00000000000000A0B /* Build configuration list for PBXProject "InvestingApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA000050000000000000050B;
+			productRefGroup = AA000040000000000000040B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA000060000000000000060B /* InvestingApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA000081000000000000081B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA000080000000000000080B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000001000000000000001A /* InvestingAppApp.swift in Sources */,
+				AA000002000000000000002A /* ContentView.swift in Sources */,
+				AA000003000000000000003A /* Portfolio.swift in Sources */,
+				AA000004000000000000004A /* Signal.swift in Sources */,
+				AA000005000000000000005A /* Opportunity.swift in Sources */,
+				AA000006000000000000006A /* MarketData.swift in Sources */,
+				AA000007000000000000007A /* ParsedTrade.swift in Sources */,
+				AA000008000000000000008A /* PortfolioViewModel.swift in Sources */,
+				AA000009000000000000009A /* OpportunityViewModel.swift in Sources */,
+				AA00000A0000000000000AAA /* AnalyzeViewModel.swift in Sources */,
+				AA00000B0000000000000BBA /* FeedViewModel.swift in Sources */,
+				AA00000C0000000000000CCA /* HomeView.swift in Sources */,
+				AA00000D0000000000000DDA /* OpportunitiesView.swift in Sources */,
+				AA00000E0000000000000EEA /* OpportunityDetailView.swift in Sources */,
+				AA00000F0000000000000FFA /* AnalyzeView.swift in Sources */,
+				AA000010000000000000010A /* FeedView.swift in Sources */,
+				AA000011000000000000011A /* SettingsView.swift in Sources */,
+				AA000012000000000000012A /* ScreenshotImportView.swift in Sources */,
+				AA000013000000000000013A /* TradeConfirmSheet.swift in Sources */,
+				AA000014000000000000014A /* NetworkManager.swift in Sources */,
+				AA000015000000000000015A /* APIEndpoints.swift in Sources */,
+				AA000016000000000000016A /* ArcMeterView.swift in Sources */,
+				AA000017000000000000017A /* MetricCardView.swift in Sources */,
+				AA000018000000000000018A /* HoldingRowView.swift in Sources */,
+				AA000019000000000000019A /* SignalRowView.swift in Sources */,
+				AA00001A000000000000001AA /* SparklineView.swift in Sources */,
+				AA00001B000000000000001BA /* ConfidenceRingView.swift in Sources */,
+				AA00001C000000000000001CA /* CurrencyFormatter.swift in Sources */,
+				AA00001D000000000000001DA /* DateFormatter.swift in Sources */,
+				AA00001E000000000000001EA /* HapticManager.swift in Sources */,
+				AA00001F000000000000001FA /* DesignSystem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000B00000000000000B0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA0000C00000000000000C0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA0000D00000000000000D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WN7PVY424C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InvestingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karim.InvestingApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA0000E00000000000000E0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WN7PVY424C;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InvestingApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karim.InvestingApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000070000000000000070B /* Build configuration list for PBXNativeTarget "InvestingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000D00000000000000D0B /* Debug */,
+				AA0000E00000000000000E0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000A00000000000000A0B /* Build configuration list for PBXProject "InvestingApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000B00000000000000B0B /* Debug */,
+				AA0000C00000000000000C0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA000090000000000000090B /* Project object */;
+}
