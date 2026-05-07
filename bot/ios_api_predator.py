@@ -4,11 +4,17 @@ Predator API endpoints — pre-explosion alert system.
 Registered under /api/predator prefix.
 """
 import json
+import logging
+import threading
 from datetime import datetime, timedelta
 
 from flask import Blueprint, jsonify
 
 from database import get_connection
+
+log = logging.getLogger(__name__)
+
+DEBUG_TICKERS = ["NVDA", "SOXL", "PLTR", "AMD", "IONQ"]
 
 predator_bp = Blueprint("predator", __name__, url_prefix="/api/predator")
 
@@ -105,22 +111,79 @@ def get_watchlist():
 
 @predator_bp.route("/run-now", methods=["GET"])
 def run_now():
-    """Score every watchlist ticker unconditionally; return full signal breakdown."""
-    from predator import score_all_tickers
+    """Start a full background scan; returns immediately.
+
+    Results are saved to the DB and readable via /api/predator/latest.
+    """
+    from predator import PREDATOR_WATCHLIST, save_scan_results, score_all_tickers
+
     started_at = datetime.now().isoformat()
-    raw = score_all_tickers()
-    results = [_format_scored(r) for r in raw]
-    return jsonify({"results": results, "total": len(results), "scanned_at": started_at})
+
+    def _bg():
+        log.info("Background predator scan started")
+        results = score_all_tickers()
+        save_scan_results(results)
+        log.info("Background predator scan complete: %d tickers scored", len(results))
+
+    threading.Thread(target=_bg, daemon=True).start()
+    return jsonify({
+        "status":     "scan started",
+        "tickers":    len(PREDATOR_WATCHLIST),
+        "started_at": started_at,
+        "results_at": "/api/predator/latest",
+    })
 
 
 @predator_bp.route("/debug", methods=["GET"])
 def debug_scan():
-    """Score every watchlist ticker and return top 10 with full signal breakdown."""
-    from predator import score_all_tickers
+    """Score 5 fast-path tickers synchronously; full signal breakdown returned immediately."""
+    from predator import score_tickers
     started_at = datetime.now().isoformat()
-    raw = score_all_tickers()
-    top10 = [_format_scored(r) for r in raw[:10]]
-    return jsonify({"top10": top10, "scanned_at": started_at})
+    raw = score_tickers(DEBUG_TICKERS)
+    return jsonify({"results": [_format_scored(r) for r in raw], "scanned_at": started_at})
+
+
+@predator_bp.route("/latest", methods=["GET"])
+def get_latest():
+    """Most recent scan result per ticker from the DB — no computation."""
+    cutoff = (datetime.now() - timedelta(hours=24)).isoformat()
+    conn = get_connection()
+    rows = conn.execute(
+        """
+        SELECT p.*
+        FROM predator_alerts p
+        INNER JOIN (
+            SELECT ticker, MAX(alert_time) AS latest
+            FROM predator_alerts
+            WHERE alert_time >= ?
+            GROUP BY ticker
+        ) m ON p.ticker = m.ticker AND p.alert_time = m.latest
+        ORDER BY p.score DESC
+        """,
+        (cutoff,),
+    ).fetchall()
+    conn.close()
+
+    results = []
+    for row in rows:
+        d = dict(row)
+        signals = {}
+        try:
+            signals = json.loads(d["signals_json"]) if d["signals_json"] else {}
+        except (json.JSONDecodeError, TypeError):
+            pass
+        results.append({
+            "ticker":      d["ticker"],
+            "total_score": d["score"],
+            "price":       d["entry_price"],
+            "signals": {
+                k: {"score": s.get("score", 0), "reason": s.get("reason", "")}
+                for k, s in signals.items()
+            },
+            "alert_time":  d["alert_time"],
+        })
+
+    return jsonify({"results": results, "total": len(results)})
 
 
 @predator_bp.route("/history", methods=["GET"])

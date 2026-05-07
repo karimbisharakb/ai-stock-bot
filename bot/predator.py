@@ -14,6 +14,7 @@ Signal weights:
 import json
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as _FuturesTimeout
 from datetime import date, datetime, timedelta
 
 import pytz
@@ -444,25 +445,41 @@ def update_outcomes():
     conn.close()
 
 
-# ── Full score without dedup (for debug/API) ──────────────────────────────────
+# ── Parallel scoring (for debug/API) ─────────────────────────────────────────
 
-def score_all_tickers() -> list[dict]:
-    """Score every ticker in PREDATOR_WATCHLIST unconditionally.
+def score_tickers(tickers: list[str]) -> list[dict]:
+    """Score a specific list of tickers in parallel.
 
-    No dedup, no DB writes, no WhatsApp alerts. Returns a list sorted by score
-    descending, one entry per ticker that yfinance could price.
+    Uses up to 5 worker threads; each ticker is abandoned after 8 seconds.
+    No dedup, no DB writes, no WhatsApp alerts.
+    Returns results sorted by score descending.
     """
     results = []
-    for ticker in PREDATOR_WATCHLIST:
-        try:
-            result = _score_ticker(ticker)
-        except Exception:
-            log.exception("score_all_tickers: error for %s", ticker)
-            result = None
-        if result is not None:
-            results.append(result)
-        time.sleep(0.5)
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_ticker = {executor.submit(_score_ticker, t): t for t in tickers}
+        for future, ticker in future_to_ticker.items():
+            try:
+                result = future.result(timeout=8)
+            except _FuturesTimeout:
+                log.warning("Predator: %s timed out — skip", ticker)
+                result = None
+            except Exception:
+                log.exception("Predator: error for %s", ticker)
+                result = None
+            if result is not None:
+                results.append(result)
     return sorted(results, key=lambda r: r["score"], reverse=True)
+
+
+def score_all_tickers() -> list[dict]:
+    """Score every ticker in PREDATOR_WATCHLIST in parallel."""
+    return score_tickers(PREDATOR_WATCHLIST)
+
+
+def save_scan_results(results: list[dict]):
+    """Persist a list of scored results to the DB without sending alerts."""
+    for r in results:
+        _record_alert_passive(r["ticker"], r["score"], r["signals"], r["price"])
 
 
 # ── Main job ───────────────────────────────────────────────────────────────────
