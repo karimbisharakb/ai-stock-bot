@@ -12,6 +12,7 @@ struct TradeConfirmSheet: View {
     @State private var tickerInput: String = ""
     @State private var sharesInput: String = ""
     @State private var priceInput: String = ""
+    @State private var totalInput: String = ""
     @State private var tradeTypeInput: String = "BUY"
 
     var body: some View {
@@ -39,7 +40,8 @@ struct TradeConfirmSheet: View {
                     VStack(spacing: 16) {
                         TradeField(label: "Ticker", value: $tickerInput, isCapitalized: true)
                         TradeField(label: "Shares", value: $sharesInput, keyboardType: .decimalPad)
-                        TradeField(label: "Price (CAD)", value: $priceInput, keyboardType: .decimalPad)
+                        TradeField(label: "CAD Cost / Share", value: $priceInput, keyboardType: .decimalPad)
+                        TradeField(label: "Total CAD", value: $totalInput, keyboardType: .decimalPad)
 
                         VStack(alignment: .leading, spacing: 6) {
                             Text("Trade Type")
@@ -116,6 +118,7 @@ struct TradeConfirmSheet: View {
             tickerInput = trade.ticker
             sharesInput = String(format: "%.4f", trade.shares)
             priceInput = String(format: "%.2f", trade.priceCAD)
+            totalInput = String(format: "%.2f", trade.totalCAD)
             tradeTypeInput = trade.tradeType.uppercased()
         }
     }
@@ -143,8 +146,7 @@ struct TradeConfirmSheet: View {
                     Text("Total Value")
                         .font(.system(size: 11))
                         .foregroundColor(.textSecondary)
-                    let total = (Double(sharesInput) ?? 0) * (Double(priceInput) ?? 0)
-                    Text(CurrencyFormatter.formatCAD(total))
+                    Text(CurrencyFormatter.formatCAD(Double(totalInput) ?? ((Double(sharesInput) ?? 0) * (Double(priceInput) ?? 0))))
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.textPrimary)
                 }
@@ -157,6 +159,26 @@ struct TradeConfirmSheet: View {
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.accent)
                 }
+            }
+
+            if trade.currency == "USD", let usd = trade.pricePerShareUSD {
+                Divider().background(Color.border)
+                HStack {
+                    Text("Native Price")
+                        .font(.system(size: 11))
+                        .foregroundColor(.textSecondary)
+                    Spacer()
+                    Text("$\(String(format: "%.4f", usd)) USD → $\(String(format: "%.4f", Double(priceInput) ?? trade.priceCAD)) CAD")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.textPrimary)
+                }
+            }
+
+            if let notes = trade.notes, !notes.isEmpty {
+                Text(notes)
+                    .font(.system(size: 11))
+                    .foregroundColor(.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
         .padding(14)
@@ -171,6 +193,7 @@ struct TradeConfirmSheet: View {
             errorMessage = "Invalid shares or price"
             return
         }
+        let total = Double(totalInput) ?? (shares * price)
 
         isConfirming = true
         errorMessage = nil
@@ -178,9 +201,11 @@ struct TradeConfirmSheet: View {
 
         do {
             try await NetworkManager.shared.confirmTrade(
+                trade: trade,
                 ticker: tickerInput.uppercased(),
                 shares: shares,
                 priceCAD: price,
+                totalCAD: total,
                 type: tradeTypeInput
             )
             withAnimation { isConfirmed = true }

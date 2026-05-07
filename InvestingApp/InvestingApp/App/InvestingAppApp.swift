@@ -51,15 +51,23 @@ final class NotificationManager: NSObject, ObservableObject, UNUserNotificationC
     }
 
     func pollSignals() async {
+        await pollScannerSignals()
+        await pollPredatorAlerts()
+    }
+
+    private func pollScannerSignals() async {
         guard let signals = try? await NetworkManager.shared.fetchSignals() else { return }
-        // Dedup: track which signal IDs we've already notified about
         let seenKey = "seen_signal_ids"
         let seenArray = UserDefaults.standard.stringArray(forKey: seenKey) ?? []
         var seenSet = Set(seenArray)
 
         let newSignals = signals.filter { $0.confidence >= 80 && !seenSet.contains($0.id) }
         for signal in newSignals {
-            sendLocalNotification(ticker: signal.ticker, confidence: signal.confidence, direction: signal.direction)
+            sendLocalNotification(
+                ticker: signal.ticker,
+                title: "\(signal.ticker) — Strong \(signal.direction.capitalized) signal",
+                body: "\(signal.confidence)% confidence — tap to view"
+            )
             seenSet.insert(signal.id)
         }
 
@@ -70,11 +78,33 @@ final class NotificationManager: NSObject, ObservableObject, UNUserNotificationC
         }
     }
 
-    func sendLocalNotification(ticker: String, confidence: Int, direction: String) {
+    private func pollPredatorAlerts() async {
+        guard let alerts = try? await NetworkManager.shared.fetchPredatorAlerts() else { return }
+        let seenKey = "seen_predator_alert_ids"
+        let seenArray = UserDefaults.standard.stringArray(forKey: seenKey) ?? []
+        var seenSet = Set(seenArray)
+
+        let newAlerts = alerts.filter { $0.score >= 6 && !seenSet.contains(String($0.id)) }
+        for alert in newAlerts {
+            let topReason = alert.signals.all.first(where: { $0.detail.score > 0 })?.detail.reason ?? "Pre-explosion setup detected"
+            sendLocalNotification(
+                ticker: alert.ticker,
+                title: "🎯 \(alert.ticker) — Pre-explosion alert",
+                body: "Score \(Int(alert.score))/10 — \(topReason)"
+            )
+            seenSet.insert(String(alert.id))
+        }
+
+        if !newAlerts.isEmpty {
+            let trimmed = Array(seenSet.suffix(500))
+            UserDefaults.standard.set(trimmed, forKey: seenKey)
+        }
+    }
+
+    func sendLocalNotification(ticker: String, title: String, body: String) {
         let content = UNMutableNotificationContent()
-        let emoji = direction.lowercased().contains("buy") ? "📈" : "📉"
-        content.title = "\(emoji) \(ticker) — Strong \(direction.capitalized) signal"
-        content.body = "\(confidence)% confidence — tap to view"
+        content.title = title
+        content.body = body
         content.sound = .default
         content.userInfo = ["tab": "opportunities"]
 

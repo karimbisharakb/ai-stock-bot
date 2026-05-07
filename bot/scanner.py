@@ -126,7 +126,7 @@ def _fetch_trending_tickers() -> list[str]:
         return []
 
 
-def _fetch_stocktwits_sentiment(ticker: str) -> float | None:
+def _fetch_stocktwits_sentiment(ticker: str):
     try:
         url = STOCKTWITS_STREAM.format(ticker=ticker)
         r = requests.get(url, timeout=10)
@@ -145,7 +145,7 @@ def _fetch_stocktwits_sentiment(ticker: str) -> float | None:
         return None
 
 
-def _fetch_news_sentiment(ticker: str) -> float | None:
+def _fetch_news_sentiment(ticker: str):
     if not NEWS_API_KEY:
         return None
     try:
@@ -184,7 +184,7 @@ def _fetch_news_sentiment(ticker: str) -> float | None:
 #   1-day price action     0–1
 # ──────────────────────────────────────────────
 
-def _score_ticker(ticker: str) -> tuple[int, str, float] | None:
+def _score_ticker(ticker: str):
     score   = 0
     reasons = []
 

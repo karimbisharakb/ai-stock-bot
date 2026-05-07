@@ -381,7 +381,7 @@ def _score_breakout(ticker: str, data: dict) -> tuple[int, str]:
 
 # ── Scoring orchestrator ────────────────────────────────────────────────────────
 
-def _score_ticker(ticker: str) -> dict | None:
+def _score_ticker(ticker: str):
     data = get_ticker_data(ticker)
     if data is None:
         log.info("Predator: no data for %s — skip", ticker)

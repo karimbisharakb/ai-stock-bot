@@ -74,13 +74,19 @@ final class NetworkManager {
 
     // MARK: - Confirm Trade
 
-    func confirmTrade(ticker: String, shares: Double, priceCAD: Double, type: String) async throws {
-        let body: [String: Any] = [
+    func confirmTrade(trade: ParsedTrade, ticker: String, shares: Double, priceCAD: Double, totalCAD: Double, type: String) async throws {
+        var body: [String: Any] = [
             "ticker": ticker,
             "shares": shares,
             "price_cad": priceCAD,
-            "type": type
+            "total_cad": totalCAD,
+            "type": type,
+            "currency": trade.currency
         ]
+        if let value = trade.pricePerShareUSD { body["price_per_share_usd"] = value }
+        if let value = trade.pricePerShareCAD { body["price_per_share_cad"] = value }
+        if let value = trade.exchangeRate { body["exchange_rate"] = value }
+        if let value = trade.notes { body["notes"] = value }
         struct ConfirmResponse: Decodable { let success: Bool; let error: String? }
         let response: ConfirmResponse = try await postAny(url: APIEndpoints.confirmTrade, body: body)
         if !response.success {

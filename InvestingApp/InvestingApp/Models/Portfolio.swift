@@ -64,16 +64,26 @@ struct ParsedTrade: Codable {
     var ticker: String
     var shares: Double
     var priceCAD: Double
+    var pricePerShareUSD: Double?
+    var pricePerShareCAD: Double?
     var currency: String
     var totalCAD: Double
+    var exchangeRate: Double?
     var tradeType: String
+    var confidence: Int?
+    var notes: String?
 
     enum CodingKeys: String, CodingKey {
         case ticker
         case shares
         case priceCAD = "price_cad"
+        case pricePerShareUSD = "price_per_share_usd"
+        case pricePerShareCAD = "price_per_share_cad"
         case currency
         case totalCAD = "total_cad"
+        case exchangeRate = "exchange_rate"
         case tradeType = "trade_type"
+        case confidence
+        case notes
     }
 }

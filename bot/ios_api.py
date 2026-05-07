@@ -488,7 +488,7 @@ def parse_screenshot():
         client = anthropic.Anthropic(api_key=api_key)
         resp = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=512,
+            max_tokens=900,
             messages=[{
                 "role": "user",
                 "content": [
@@ -503,13 +503,40 @@ def parse_screenshot():
                     {
                         "type": "text",
                         "text": (
-                            "This is a Wealthsimple trade confirmation screenshot. "
-                            "Extract the trade details and reply ONLY with valid JSON "
-                            "(no markdown, no code fences):\n"
-                            '{"ticker":"<UPPER>","shares":<number>,"price_cad":<number>,'
-                            '"currency":"<CAD|USD>","total_cad":<number>,"trade_type":"<BUY|SELL>"}\n'
-                            "If the price is in USD, multiply by 1.38 to get price_cad. "
-                            "Infer trade_type from context (buy/purchase → BUY, sell → SELL)."
+                            "You are parsing a Wealthsimple Canada trade confirmation screenshot. "
+                            "Return ONLY valid JSON. No markdown. No code fences.\n\n"
+                            "Important Wealthsimple rules:\n"
+                            "- The Filled quantity line usually looks like '<shares> shares x $<price> USD' "
+                            "or '<shares> shares x $<price> CAD'. Extract the share count and the per-share "
+                            "price exactly from this line.\n"
+                            "- US-listed tickers such as RGTI, NVDA, QQQ, AAPL, PLTR, SOXL, SOUN, RIOT, AVGO, "
+                            "GME are priced in USD on the Filled quantity line.\n"
+                            "- Canadian tickers ending in .TO, plus TSX names like MDA when shown without suffix, "
+                            "are priced in CAD. If the screenshot says MDA and the market/currency is CAD, return "
+                            "ticker 'MDA.TO'.\n"
+                            "- Total cost, total value, estimated cost, proceeds, or filled value shown by "
+                            "Wealthsimple Canada is CAD unless the screen explicitly says otherwise. Prefer the "
+                            "exact total CAD shown on the screenshot over any estimated conversion.\n"
+                            "- If an exchange rate line exists, extract it. It may already include Wealthsimple's "
+                            "1.5% FX fee. Do not invent an exchange rate.\n"
+                            "- For USD trades, price_cad must equal total_cad / shares when total_cad is visible. "
+                            "Only if total_cad is not visible, estimate price_cad from price_per_share_usd × "
+                            "exchange_rate. Do not use a hard-coded FX rate.\n"
+                            "- Detect type as BUY, SELL, or DIVIDEND from the screen.\n\n"
+                            "JSON schema:\n"
+                            "{"
+                            '"ticker":"<UPPER>",'
+                            '"shares":<number>,'
+                            '"price_per_share_usd":<number|null>,'
+                            '"price_per_share_cad":<number|null>,'
+                            '"price_cad":<number>,'
+                            '"currency":"<USD|CAD>",'
+                            '"total_cad":<number>,'
+                            '"exchange_rate":<number|null>,'
+                            '"trade_type":"<BUY|SELL|DIVIDEND>",'
+                            '"confidence":<0-100>,'
+                            '"notes":"<short note explaining exactly where the numbers came from>"'
+                            "}"
                         ),
                     },
                 ],
@@ -523,7 +550,46 @@ def parse_screenshot():
             if text.lower().startswith("json"):
                 text = text[4:]
         result = json.loads(text.strip())
-        return jsonify(result)
+
+        ticker = str(result.get("ticker", "")).upper().strip()
+        shares = float(result.get("shares") or 0)
+        total_cad = float(result.get("total_cad") or 0)
+        currency = str(result.get("currency", "")).upper().strip()
+        trade_type = str(result.get("trade_type", result.get("type", "BUY"))).upper().strip()
+
+        if ticker == "MDA":
+            ticker = "MDA.TO"
+        if not currency:
+            currency = "CAD" if ticker.endswith(".TO") else "USD"
+        if trade_type not in ("BUY", "SELL", "DIVIDEND"):
+            trade_type = "BUY"
+
+        price_usd = result.get("price_per_share_usd")
+        price_cad_native = result.get("price_per_share_cad")
+        exchange_rate = result.get("exchange_rate")
+
+        # Store the actual CAD cost basis per share. For Wealthsimple receipts,
+        # total CAD is the source of truth because it includes FX and fees.
+        if shares > 0 and total_cad > 0:
+            price_cad = round(total_cad / shares, 4)
+        else:
+            price_cad = float(result.get("price_cad") or price_cad_native or 0)
+
+        normalized = {
+            "ticker": ticker,
+            "shares": shares,
+            "price_per_share_usd": float(price_usd) if price_usd not in (None, "") else None,
+            "price_per_share_cad": float(price_cad_native) if price_cad_native not in (None, "") else None,
+            "price_cad": price_cad,
+            "currency": currency,
+            "total_cad": total_cad if total_cad > 0 else round(shares * price_cad, 4),
+            "exchange_rate": float(exchange_rate) if exchange_rate not in (None, "") else None,
+            "trade_type": trade_type,
+            "confidence": int(result.get("confidence") or 0),
+            "notes": result.get("notes", ""),
+        }
+        log.info("parse-screenshot normalized: %s", normalized)
+        return jsonify(normalized)
 
     except json.JSONDecodeError as e:
         log.error("parse-screenshot: JSON decode failed: %s", e)
@@ -624,12 +690,19 @@ def confirm_trade():
         log.info("confirm-trade parsed body: %s", body)
 
         ticker     = str(body.get("ticker", "")).upper().strip()
+        if ticker == "MDA":
+            ticker = "MDA.TO"
         shares     = float(body.get("shares", 0))
-        price_cad  = float(body.get("price_cad", 0))
-        trade_type = str(body.get("type", "BUY")).upper().strip()
+        total_cad  = float(body.get("total_cad", 0) or 0)
+        price_cad  = float(body.get("price_cad", 0) or 0)
+        if shares > 0 and total_cad > 0:
+            price_cad = round(total_cad / shares, 4)
+        trade_type = str(body.get("type", body.get("trade_type", "BUY"))).upper().strip()
+        if trade_type == "DIVIDEND":
+            trade_type = "BUY"
 
-        log.info("confirm-trade: ticker=%s shares=%s price_cad=%s type=%s",
-                 ticker, shares, price_cad, trade_type)
+        log.info("confirm-trade: ticker=%s shares=%s price_cad=%s total_cad=%s type=%s",
+                 ticker, shares, price_cad, total_cad, trade_type)
 
         if not ticker:
             return jsonify({"success": False, "error": "ticker is required"}), 400

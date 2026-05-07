@@ -57,12 +57,13 @@ def _parse_row(row: dict) -> dict:
 
 @predator_bp.route("/alerts", methods=["GET"])
 def get_alerts():
-    """Last 48 hours of pre-explosion alerts (score >= 8 only)."""
+    """Last 48 hours of actionable pre-explosion alerts."""
+    from predator import ALERT_THRESHOLD
     cutoff = (datetime.now() - timedelta(hours=48)).isoformat()
     conn = get_connection()
     rows = conn.execute(
-        "SELECT * FROM predator_alerts WHERE alert_time >= ? AND score >= 8 ORDER BY alert_time DESC",
-        (cutoff,),
+        "SELECT * FROM predator_alerts WHERE alert_time >= ? AND score >= ? ORDER BY alert_time DESC",
+        (cutoff, ALERT_THRESHOLD),
     ).fetchall()
     conn.close()
     return jsonify({"alerts": [_parse_row(dict(r)) for r in rows]})
