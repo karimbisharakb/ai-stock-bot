@@ -89,6 +89,21 @@ def get_watchlist():
     return jsonify({"watchlist": result})
 
 
+@predator_bp.route("/run-now", methods=["GET"])
+def run_now():
+    """Immediately run a full predator scan and return every ticker result."""
+    from predator import run_predator
+    started_at = datetime.now().isoformat()
+    run_predator()
+    conn = get_connection()
+    rows = conn.execute(
+        "SELECT * FROM predator_alerts WHERE alert_time >= ? ORDER BY score DESC",
+        (started_at,),
+    ).fetchall()
+    conn.close()
+    return jsonify({"results": [_parse_row(dict(r)) for r in rows], "scanned_at": started_at})
+
+
 @predator_bp.route("/history", methods=["GET"])
 def get_history():
     """All-time alert history with outcome tracking and accuracy stats."""
