@@ -444,6 +444,27 @@ def update_outcomes():
     conn.close()
 
 
+# ── Full score without dedup (for debug/API) ──────────────────────────────────
+
+def score_all_tickers() -> list[dict]:
+    """Score every ticker in PREDATOR_WATCHLIST unconditionally.
+
+    No dedup, no DB writes, no WhatsApp alerts. Returns a list sorted by score
+    descending, one entry per ticker that yfinance could price.
+    """
+    results = []
+    for ticker in PREDATOR_WATCHLIST:
+        try:
+            result = _score_ticker(ticker)
+        except Exception:
+            log.exception("score_all_tickers: error for %s", ticker)
+            result = None
+        if result is not None:
+            results.append(result)
+        time.sleep(0.5)
+    return sorted(results, key=lambda r: r["score"], reverse=True)
+
+
 # ── Main job ───────────────────────────────────────────────────────────────────
 
 def run_predator():

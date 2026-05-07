@@ -13,6 +13,20 @@ from database import get_connection
 predator_bp = Blueprint("predator", __name__, url_prefix="/api/predator")
 
 
+def _format_scored(result: dict) -> dict:
+    """Shape a raw _score_ticker result for the run-now / debug endpoints."""
+    signals = result.get("signals", {})
+    return {
+        "ticker":      result["ticker"],
+        "total_score": result["score"],
+        "price":       result.get("price"),
+        "signals": {
+            key: {"score": sig.get("score", 0), "reason": sig.get("reason", "")}
+            for key, sig in signals.items()
+        },
+    }
+
+
 def _parse_row(row: dict) -> dict:
     signals = {}
     try:
@@ -91,17 +105,22 @@ def get_watchlist():
 
 @predator_bp.route("/run-now", methods=["GET"])
 def run_now():
-    """Immediately run a full predator scan and return every ticker result."""
-    from predator import run_predator
+    """Score every watchlist ticker unconditionally; return full signal breakdown."""
+    from predator import score_all_tickers
     started_at = datetime.now().isoformat()
-    run_predator()
-    conn = get_connection()
-    rows = conn.execute(
-        "SELECT * FROM predator_alerts WHERE alert_time >= ? ORDER BY score DESC",
-        (started_at,),
-    ).fetchall()
-    conn.close()
-    return jsonify({"results": [_parse_row(dict(r)) for r in rows], "scanned_at": started_at})
+    raw = score_all_tickers()
+    results = [_format_scored(r) for r in raw]
+    return jsonify({"results": results, "total": len(results), "scanned_at": started_at})
+
+
+@predator_bp.route("/debug", methods=["GET"])
+def debug_scan():
+    """Score every watchlist ticker and return top 10 with full signal breakdown."""
+    from predator import score_all_tickers
+    started_at = datetime.now().isoformat()
+    raw = score_all_tickers()
+    top10 = [_format_scored(r) for r in raw[:10]]
+    return jsonify({"top10": top10, "scanned_at": started_at})
 
 
 @predator_bp.route("/history", methods=["GET"])
