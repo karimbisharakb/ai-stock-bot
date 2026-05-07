@@ -27,7 +27,7 @@ import portfolio
 
 log = logging.getLogger(__name__)
 EASTERN = pytz.timezone("America/Toronto")
-ALERT_THRESHOLD = 8
+ALERT_THRESHOLD = 6
 
 PREDATOR_WATCHLIST = [
     # Semiconductors
@@ -51,8 +51,8 @@ def _already_alerted(ticker: str) -> bool:
     cutoff = (datetime.now() - timedelta(hours=24)).isoformat()
     conn = get_connection()
     row = conn.execute(
-        "SELECT id FROM predator_alerts WHERE ticker = ? AND alert_time >= ?",
-        (ticker, cutoff),
+        "SELECT id FROM predator_alerts WHERE ticker = ? AND alert_time >= ? AND score >= ?",
+        (ticker, cutoff, ALERT_THRESHOLD),
     ).fetchone()
     conn.close()
     return row is not None
@@ -91,6 +91,7 @@ def _score_options(ticker: str) -> tuple[int, str]:
         total_call_vol = 0.0
         total_put_vol = 0.0
         unusual = []
+        urgency_reason = ""
 
         info_price = 0.0
         try:
@@ -112,6 +113,16 @@ def _score_options(ticker: str) -> tuple[int, str]:
             total_call_vol += call_vol
             total_put_vol += put_vol
 
+            # Expiry urgency: calls expiring within 7 days with aggregate vol/OI > 10x
+            if not urgency_reason:
+                days_to_exp = (date.fromisoformat(exp) - date.today()).days
+                if days_to_exp <= 7:
+                    exp_oi = calls["openInterest"].fillna(0).sum()
+                    if exp_oi > 0 and call_vol >= 10 * exp_oi:
+                        urgency_reason = (
+                            f"Expiry urgency: {call_vol/exp_oi:.0f}x OI on calls exp {exp}"
+                        )
+
             if info_price > 0:
                 otm = calls[calls["strike"] > info_price * 1.03]
                 for _, row in otm.iterrows():
@@ -125,7 +136,12 @@ def _score_options(ticker: str) -> tuple[int, str]:
         ratio = total_call_vol / max(total_put_vol, 1)
 
         if unusual:
-            return 3, f"Unusual calls: {unusual[0]}"
+            reason = f"Unusual calls: {unusual[0]}"
+            if urgency_reason:
+                reason += f"; {urgency_reason}"
+            return 3, reason
+        if urgency_reason:
+            return 3, urgency_reason
         if ratio >= 3:
             return 3, f"Call/put ratio {ratio:.1f}:1 on near-term options"
         if ratio >= 2:
@@ -143,33 +159,39 @@ def _score_insider(ticker: str) -> tuple[int, str]:
     if ticker.endswith(".TO"):
         return 0, ""
     try:
+        import pandas as pd
         t = yf.Ticker(ticker)
         txns = t.insider_transactions
         if txns is None or txns.empty:
+            log.info("Insider %s: no transactions returned", ticker)
             return 0, ""
 
-        # Normalise column names
-        txns.columns = [c.strip() for c in txns.columns]
-        buy_keywords = ("purchase", "buy", "bought")
+        txns.columns = [str(c).strip() for c in txns.columns]
+        log.info("Insider %s: columns=%s  sample=%s",
+                 ticker, list(txns.columns), txns.head(2).to_dict("records"))
 
+        # Substring match — handles "Transaction", "Text", "transactionText", etc.
         text_col = next(
-            (c for c in txns.columns if c.lower() in ("text", "transaction", "type")), None
+            (c for c in txns.columns if any(w in c.lower() for w in ("trans", "text", "type"))),
+            None,
         )
         if text_col is None:
+            log.info("Insider %s: no transaction-type column found", ticker)
             return 0, ""
 
-        buys = txns[txns[text_col].str.lower().str.contains("|".join(buy_keywords), na=False)]
+        buy_keywords = ("purchase", "buy", "bought", "acquisition", "p -")
+        buys = txns[
+            txns[text_col].astype(str).str.lower().str.contains("|".join(buy_keywords), na=False)
+        ]
+        log.info("Insider %s: %d buys found (col=%s)", ticker, len(buys), text_col)
         if buys.empty:
             return 0, ""
 
-        date_col = next(
-            (c for c in buys.columns if c.lower() in ("start date", "date", "startdate", "transactiondate")),
-            None,
-        )
+        # Any column with "date" in its name
+        date_col = next((c for c in buys.columns if "date" in c.lower()), None)
         if date_col is None:
             return 1, "Insider buying detected"
 
-        import pandas as pd
         buys = buys.copy()
         buys[date_col] = pd.to_datetime(buys[date_col], errors="coerce")
         now = datetime.now()
@@ -179,7 +201,7 @@ def _score_insider(ticker: str) -> tuple[int, str]:
 
         if not recent_30.empty:
             shares_col = next((c for c in recent_30.columns if "share" in c.lower()), None)
-            total = int(recent_30[shares_col].sum()) if shares_col else 0
+            total = int(recent_30[shares_col].fillna(0).sum()) if shares_col else 0
             suffix = f" ({total:,} sh)" if total > 0 else ""
             return 2, f"Insider bought in last 30d{suffix}"
         if not recent_60.empty:
@@ -187,7 +209,7 @@ def _score_insider(ticker: str) -> tuple[int, str]:
 
         return 0, ""
     except Exception as exc:
-        log.debug("Insider score error for %s: %s", ticker, exc)
+        log.warning("Insider score error for %s: %s", ticker, exc, exc_info=True)
         return 0, ""
 
 
@@ -266,12 +288,17 @@ def _score_institutional(ticker: str) -> tuple[int, str]:
     if ticker.endswith(".TO"):
         return 0, ""
     try:
+        import pandas as pd
         t = yf.Ticker(ticker)
         holders = t.institutional_holders
         if holders is None or holders.empty:
+            log.info("Institutional %s: no data returned", ticker)
             return 0, ""
 
-        holders.columns = [c.strip() for c in holders.columns]
+        holders.columns = [str(c).strip() for c in holders.columns]
+        log.info("Institutional %s: columns=%s  sample=%s",
+                 ticker, list(holders.columns), holders.head(2).to_dict("records"))
+
         pct_col = next(
             (c for c in holders.columns if "%" in c or "pct" in c.lower() or "out" in c.lower()),
             None,
@@ -281,18 +308,33 @@ def _score_institutional(ticker: str) -> tuple[int, str]:
             None,
         )
 
-        if pct_col and name_col and not holders.empty:
-            import pandas as pd
-            holders[pct_col] = pd.to_numeric(holders[pct_col], errors="coerce")
-            top = holders.nlargest(1, pct_col).iloc[0]
-            pct = top[pct_col]
-            name = top[name_col]
-            if pct >= 5:
-                return 1, f"{name} holds {pct:.1f}%"
+        if pct_col is None or name_col is None:
+            log.info("Institutional %s: missing pct_col=%s name_col=%s",
+                     ticker, pct_col, name_col)
+            return 0, ""
+
+        holders = holders.copy()
+        holders[pct_col] = pd.to_numeric(holders[pct_col], errors="coerce")
+        holders = holders.dropna(subset=[pct_col])
+        if holders.empty:
+            return 0, ""
+
+        # yfinance sometimes returns fractions (0.08 = 8%) — normalise to percentage
+        if holders[pct_col].max() < 1.0:
+            holders[pct_col] = holders[pct_col] * 100
+
+        top = holders.nlargest(1, pct_col).iloc[0]
+        pct = float(top[pct_col])
+        name = str(top[name_col])
+        log.info("Institutional %s: top holder %s %.2f%%", ticker, name, pct)
+
+        # 3% threshold — large caps (NVDA, AMD) won't show >5% for any single institution
+        if pct >= 3:
+            return 1, f"{name} holds {pct:.1f}%"
 
         return 0, ""
     except Exception as exc:
-        log.debug("Institutional score error for %s: %s", ticker, exc)
+        log.warning("Institutional score error for %s: %s", ticker, exc, exc_info=True)
         return 0, ""
 
 
