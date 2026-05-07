@@ -16,6 +16,10 @@ struct SettingsView: View {
     @State private var errorMessage: String?
     @State private var isLoadingCash = false
 
+    @StateObject private var plannerVM = PaycheckPlannerViewModel()
+    @StateObject private var watchlistVM = WatchlistViewModel()
+    @State private var plannerExpanded = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -35,6 +39,15 @@ struct SettingsView: View {
                             sensitivityRow
                             Divider().background(Color.border).padding(.leading, 56)
                             notificationsRow
+                        }
+
+                        // Paycheck Planner section
+                        paycheckPlannerSection
+
+                        // Price Alert Watchlist section
+                        settingsSection(title: "Price Alerts") {
+                            WatchlistView()
+                                .padding(.vertical, 8)
                         }
 
                         // Info section
@@ -90,8 +103,178 @@ struct SettingsView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
         }
         .onAppear {
-            Task { await loadCashFromBackend() }
+            Task {
+                await loadCashFromBackend()
+                await plannerVM.load()
+                await watchlistVM.load()
+            }
         }
+    }
+
+    // MARK: - Paycheck Planner
+
+    var paycheckPlannerSection: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Paycheck Planner")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundColor(.textSecondary)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 6)
+
+            VStack(spacing: 0) {
+                // Header row — tap to expand/collapse
+                Button {
+                    HapticManager.selection()
+                    withAnimation(.easeInOut(duration: 0.22)) {
+                        plannerExpanded.toggle()
+                    }
+                } label: {
+                    HStack(spacing: 14) {
+                        settingsIcon("dollarsign.arrow.circlepath", color: .accent)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Next Deployment")
+                                .font(.system(size: 15, weight: .medium))
+                                .foregroundColor(.textPrimary)
+                            if plannerVM.isLoading {
+                                Text("Loading…")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.textSecondary)
+                            } else if let d = plannerVM.deployment, d.configured {
+                                let amt = d.deployableAmount ?? 0
+                                let days = d.daysUntilPaycheck ?? 0
+                                Text("\(CurrencyFormatter.formatCAD(amt)) in \(days) days")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.textSecondary)
+                            } else {
+                                Text("Tap to set up your paycheck schedule")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.textSecondary)
+                            }
+                        }
+                        Spacer()
+                        Image(systemName: plannerExpanded ? "chevron.up" : "chevron.down")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(.textSecondary)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                }
+                .buttonStyle(.plain)
+
+                if plannerExpanded {
+                    Divider().background(Color.border).padding(.leading, 56)
+
+                    VStack(spacing: 14) {
+                        // Form fields
+                        plannerField(icon: "dollarsign.circle", label: "Paycheck ($CAD)",
+                                     placeholder: "e.g. 2000", text: $plannerVM.paycheckAmount,
+                                     keyboardType: .decimalPad)
+                        Divider().background(Color.border).padding(.leading, 56)
+                        plannerField(icon: "calendar", label: "Paycheck Day",
+                                     placeholder: "1–31", text: $plannerVM.paycheckDay,
+                                     keyboardType: .numberPad)
+                        Divider().background(Color.border).padding(.leading, 56)
+                        plannerField(icon: "percent", label: "Invest %",
+                                     placeholder: "e.g. 80", text: $plannerVM.allocationPercent,
+                                     keyboardType: .decimalPad)
+                        Divider().background(Color.border).padding(.leading, 56)
+
+                        // Save button
+                        Button {
+                            Task { await plannerVM.save() }
+                        } label: {
+                            HStack {
+                                if plannerVM.isSaving {
+                                    ProgressView().tint(.black).scaleEffect(0.8)
+                                } else if plannerVM.savedSuccessfully {
+                                    Image(systemName: "checkmark")
+                                        .font(.system(size: 12, weight: .bold))
+                                    Text("Saved!")
+                                        .font(.system(size: 13, weight: .semibold))
+                                } else {
+                                    Text("Save & Get Recommendations")
+                                        .font(.system(size: 13, weight: .semibold))
+                                }
+                            }
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(plannerVM.savedSuccessfully ? Color.positive : Color.accent)
+                            .cornerRadius(10)
+                        }
+                        .padding(.horizontal, 16)
+                        .disabled(plannerVM.isSaving)
+
+                        if let err = plannerVM.errorMessage {
+                            Text(err)
+                                .font(.system(size: 11))
+                                .foregroundColor(.negative)
+                                .padding(.horizontal, 16)
+                        }
+
+                        // Recommendations
+                        if let recs = plannerVM.deployment?.recommendations, !recs.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("RECOMMENDATIONS")
+                                    .font(.system(size: 10, weight: .semibold))
+                                    .foregroundColor(.textSecondary)
+                                    .padding(.horizontal, 16)
+                                ForEach(recs) { rec in
+                                    HStack(spacing: 10) {
+                                        Text(rec.ticker)
+                                            .font(.system(size: 13, weight: .bold))
+                                            .foregroundColor(.accent)
+                                            .frame(width: 72, alignment: .leading)
+                                        VStack(alignment: .leading, spacing: 1) {
+                                            Text(CurrencyFormatter.formatCAD(rec.amount))
+                                                .font(.system(size: 13, weight: .semibold))
+                                                .foregroundColor(.textPrimary)
+                                            Text(rec.rationale)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.textSecondary)
+                                                .lineLimit(2)
+                                        }
+                                    }
+                                    .padding(.horizontal, 16)
+                                }
+                            }
+                            .padding(.bottom, 8)
+                        }
+                    }
+                    .padding(.top, 4)
+                    .padding(.bottom, 8)
+                }
+            }
+            .background(Color.surface)
+            .cornerRadius(16)
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.border, lineWidth: 0.5))
+            .padding(.horizontal, 20)
+        }
+    }
+
+    func plannerField(icon: String, label: String, placeholder: String,
+                      text: Binding<String>, keyboardType: UIKeyboardType) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.accent.opacity(0.12))
+                    .frame(width: 32, height: 32)
+                Image(systemName: icon)
+                    .foregroundColor(.accent)
+                    .font(.system(size: 13))
+            }
+            Text(label)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.textPrimary)
+            Spacer()
+            TextField(placeholder, text: text)
+                .keyboardType(keyboardType)
+                .multilineTextAlignment(.trailing)
+                .foregroundColor(.textPrimary)
+                .frame(width: 80)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
     }
 
     // MARK: - Rows

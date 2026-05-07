@@ -36,16 +36,37 @@ final class NotificationManager: NSObject, ObservableObject, UNUserNotificationC
     }
 
     func scheduleBackgroundPolling() {
-        Timer.scheduledTimer(withTimeInterval: 900, repeats: true) { _ in
-            Task { await self.pollSignals() }
+        // Poll on every app foreground — catches signals while app was suspended
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { await self?.pollSignals() }
+        }
+        // Also poll on a 15-minute timer while in foreground
+        Timer.scheduledTimer(withTimeInterval: 900, repeats: true) { [weak self] _ in
+            Task { await self?.pollSignals() }
         }
     }
 
     func pollSignals() async {
         guard let signals = try? await NetworkManager.shared.fetchSignals() else { return }
-        let highConviction = signals.filter { $0.confidence >= 80 && !$0.notified }
-        for signal in highConviction {
+        // Dedup: track which signal IDs we've already notified about
+        let seenKey = "seen_signal_ids"
+        let seenArray = UserDefaults.standard.stringArray(forKey: seenKey) ?? []
+        var seenSet = Set(seenArray)
+
+        let newSignals = signals.filter { $0.confidence >= 80 && !seenSet.contains($0.id) }
+        for signal in newSignals {
             sendLocalNotification(ticker: signal.ticker, confidence: signal.confidence, direction: signal.direction)
+            seenSet.insert(signal.id)
+        }
+
+        if !newSignals.isEmpty {
+            // Keep only the most recent 500 IDs to prevent unbounded growth
+            let trimmed = Array(seenSet.suffix(500))
+            UserDefaults.standard.set(trimmed, forKey: seenKey)
         }
     }
 

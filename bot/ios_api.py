@@ -710,3 +710,190 @@ def test_cash():
     except Exception:
         log.error("POST /api/test-cash error:\n%s", traceback.format_exc())
         return jsonify({"success": False, "error": traceback.format_exc()}), 500
+
+
+# ─────────────────────────────────────────────
+# GET /api/portfolio/health
+# ─────────────────────────────────────────────
+
+def _score_holding(ticker: str) -> dict:
+    """Score a single holding 1-10 using live technicals. Safe to call from threads."""
+    try:
+        data = md.get_ticker_data(ticker)
+        if not data:
+            return {"ticker": ticker, "score": 5, "detail": "No data available"}
+
+        score = 0
+        reasons = []
+
+        rsi = data.get("rsi", 50)
+        if 40 <= rsi <= 65:
+            score += 2
+            reasons.append(f"RSI {rsi:.0f} ✓")
+        elif 30 <= rsi < 40 or 65 < rsi <= 75:
+            score += 1
+            reasons.append(f"RSI {rsi:.0f} neutral")
+        else:
+            reasons.append(f"RSI {rsi:.0f} ✗")
+
+        macd_hist = data.get("macd_hist", 0)
+        if macd_hist > 0.05:
+            score += 2
+            reasons.append("MACD bullish ✓")
+        elif macd_hist > 0:
+            score += 1
+            reasons.append("MACD flat")
+        else:
+            reasons.append("MACD bearish ✗")
+
+        price = data.get("price", 0)
+        ma50 = data.get("ma50")
+        if ma50 and price > 0:
+            if price >= ma50:
+                score += 2
+                reasons.append("Above MA50 ✓")
+            else:
+                reasons.append("Below MA50 ✗")
+        else:
+            score += 1  # no data → neutral
+
+        vol_ratio = data.get("vol_ratio", 1.0)
+        if vol_ratio >= 1.2:
+            score += 2
+            reasons.append(f"Volume {vol_ratio:.1f}x ✓")
+        elif vol_ratio >= 1.0:
+            score += 1
+            reasons.append(f"Volume {vol_ratio:.1f}x neutral")
+        else:
+            reasons.append(f"Volume {vol_ratio:.1f}x ✗")
+
+        pct_1d = data.get("pct_1d", 0)
+        if pct_1d >= 1.0:
+            score += 2
+            reasons.append(f"Day +{pct_1d:.1f}% ✓")
+        elif pct_1d >= 0:
+            score += 1
+            reasons.append(f"Day {pct_1d:+.1f}% neutral")
+        else:
+            reasons.append(f"Day {pct_1d:+.1f}% ✗")
+
+        # Clamp 1-10
+        final_score = max(1, min(10, score))
+        return {
+            "ticker": ticker,
+            "score": final_score,
+            "detail": " | ".join(reasons[:3]),
+        }
+    except Exception as exc:
+        log.warning("_score_holding %s: %s", ticker, exc)
+        return {"ticker": ticker, "score": 5, "detail": "Scoring error"}
+
+
+@ios.route("/portfolio/health", methods=["GET"])
+def portfolio_health():
+    from concurrent.futures import ThreadPoolExecutor
+
+    try:
+        holdings = port.get_holdings()
+        if not holdings:
+            return jsonify({
+                "overall_score": 0,
+                "grade": "N/A",
+                "summary": "No holdings to score.",
+                "holding_scores": [],
+            })
+
+        tickers = [h["ticker"] for h in holdings]
+
+        with ThreadPoolExecutor(max_workers=min(len(tickers), 6)) as pool:
+            results = list(pool.map(_score_holding, tickers))
+
+        scores = [r["score"] for r in results]
+        overall = round(sum(scores) / len(scores) * 10)  # 0-100
+
+        if overall >= 80:
+            grade, summary = "A", "Portfolio is in strong technical shape."
+        elif overall >= 65:
+            grade, summary = "B", "Portfolio looks healthy overall."
+        elif overall >= 50:
+            grade, summary = "C", "Mixed signals — some positions need attention."
+        elif overall >= 35:
+            grade, summary = "D", "Several holdings showing weakness."
+        else:
+            grade, summary = "F", "Portfolio under broad technical pressure."
+
+        return jsonify({
+            "overall_score": overall,
+            "grade": grade,
+            "summary": summary,
+            "holding_scores": results,
+        })
+    except Exception:
+        log.error("GET /api/portfolio/health error:\n%s", traceback.format_exc())
+        return jsonify({"error": "Health scoring failed"}), 500
+
+
+# ─────────────────────────────────────────────
+# Watchlist CRUD  — GET / POST / DELETE /api/watchlist[/<id>]
+# ─────────────────────────────────────────────
+
+@ios.route("/watchlist", methods=["GET"])
+def get_watchlist():
+    try:
+        conn = get_connection()
+        rows = conn.execute(
+            "SELECT id, ticker, alert_price, direction, note, created_at, triggered, triggered_at "
+            "FROM watchlist ORDER BY created_at DESC"
+        ).fetchall()
+        conn.close()
+        items = [dict(r) for r in rows]
+        return jsonify({"watchlist": items})
+    except Exception:
+        log.error("GET /api/watchlist error:\n%s", traceback.format_exc())
+        return jsonify({"watchlist": []}), 500
+
+
+@ios.route("/watchlist/add", methods=["POST"])
+def add_watchlist():
+    try:
+        body = request.get_json(force=True, silent=True) or {}
+        ticker = str(body.get("ticker", "")).upper().strip()
+        alert_price = float(body.get("alert_price", 0))
+        direction = str(body.get("direction", "above")).lower().strip()
+        note = body.get("note", "")
+
+        if not ticker:
+            return jsonify({"success": False, "error": "ticker required"}), 400
+        if alert_price <= 0:
+            return jsonify({"success": False, "error": "alert_price must be > 0"}), 400
+        if direction not in ("above", "below"):
+            return jsonify({"success": False, "error": "direction must be 'above' or 'below'"}), 400
+
+        now = datetime.now(EASTERN).isoformat()
+        conn = get_connection()
+        cur = conn.execute(
+            "INSERT INTO watchlist (ticker, alert_price, direction, note, created_at) VALUES (?,?,?,?,?)",
+            (ticker, alert_price, direction, note, now),
+        )
+        new_id = cur.lastrowid
+        conn.commit()
+        conn.close()
+        log.info("watchlist/add: %s %s $%.4f", ticker, direction, alert_price)
+        return jsonify({"success": True, "id": new_id})
+    except Exception:
+        log.error("POST /api/watchlist/add error:\n%s", traceback.format_exc())
+        return jsonify({"success": False, "error": "Failed to add alert"}), 500
+
+
+@ios.route("/watchlist/<int:alert_id>", methods=["DELETE"])
+def delete_watchlist(alert_id: int):
+    try:
+        conn = get_connection()
+        conn.execute("DELETE FROM watchlist WHERE id = ?", (alert_id,))
+        conn.commit()
+        conn.close()
+        log.info("watchlist/delete: id=%d", alert_id)
+        return jsonify({"success": True})
+    except Exception:
+        log.error("DELETE /api/watchlist/%d error:\n%s", alert_id, traceback.format_exc())
+        return jsonify({"success": False, "error": "Failed to delete alert"}), 500

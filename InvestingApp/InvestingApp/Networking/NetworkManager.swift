@@ -88,6 +88,62 @@ final class NetworkManager {
         }
     }
 
+    // MARK: - Portfolio Health
+
+    func fetchPortfolioHealth() async throws -> PortfolioHealth {
+        return try await get(url: APIEndpoints.portfolioHealth)
+    }
+
+    // MARK: - Watchlist
+
+    func fetchWatchlist() async throws -> [WatchlistAlert] {
+        struct Wrapper: Decodable { let watchlist: [WatchlistAlert] }
+        let wrapper: Wrapper = try await get(url: APIEndpoints.watchlist)
+        return wrapper.watchlist
+    }
+
+    func addWatchlistAlert(ticker: String, alertPrice: Double, direction: String, note: String) async throws -> Int {
+        let body: [String: Any] = [
+            "ticker": ticker,
+            "alert_price": alertPrice,
+            "direction": direction,
+            "note": note
+        ]
+        struct AddResponse: Decodable { let success: Bool; let id: Int?; let error: String? }
+        let response: AddResponse = try await postAny(url: APIEndpoints.watchlistAdd, body: body)
+        if !response.success {
+            throw NetworkError.serverError(400, response.error ?? "Failed to add alert")
+        }
+        return response.id ?? 0
+    }
+
+    func deleteWatchlistAlert(id: Int) async throws {
+        guard let reqURL = URL(string: APIEndpoints.watchlistDelete(id)) else { throw NetworkError.invalidURL }
+        var request = URLRequest(url: reqURL)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        struct DeleteResponse: Decodable { let success: Bool; let error: String? }
+        let response: DeleteResponse = try await perform(request: request)
+        if !response.success {
+            throw NetworkError.serverError(400, response.error ?? "Failed to delete alert")
+        }
+    }
+
+    // MARK: - Planner
+
+    func fetchPlannerNextDeployment() async throws -> PaycheckDeployment {
+        return try await get(url: APIEndpoints.plannerNextDeployment)
+    }
+
+    func savePlannerSetup(paycheckAmount: Double, paycheckDay: Int, allocationPercent: Double) async throws -> PaycheckDeployment {
+        let body: [String: Any] = [
+            "paycheck_amount": paycheckAmount,
+            "paycheck_day": paycheckDay,
+            "allocation_percent": allocationPercent
+        ]
+        return try await postAny(url: APIEndpoints.plannerSetup, body: body)
+    }
+
     // MARK: - Predator
 
     func fetchPredatorAlerts() async throws -> [PredatorAlert] {

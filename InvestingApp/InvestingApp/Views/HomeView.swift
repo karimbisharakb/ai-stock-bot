@@ -2,7 +2,9 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var vm = PortfolioViewModel()
+    @StateObject private var healthVM = PortfolioHealthViewModel()
     @State private var showValue = true
+    @State private var healthExpanded = false
 
     var body: some View {
         NavigationView {
@@ -31,6 +33,7 @@ struct HomeView: View {
             if vm.isStale {
                 await vm.refresh()
             }
+            await healthVM.load()
         }
         .onReceive(NotificationCenter.default.publisher(for: .tradeConfirmed)) { _ in
             Task { await vm.refresh() }
@@ -96,6 +99,18 @@ struct HomeView: View {
             // Sparkline
             if let history = portfolio.historyPoints, history.count > 1 {
                 sparklineCard(history: history, gain: portfolio.dailyPnL)
+                    .padding(.horizontal, 20)
+            }
+
+            // Portfolio Health Card
+            if let health = healthVM.health {
+                healthCard(health)
+                    .padding(.horizontal, 20)
+            } else if healthVM.isLoading {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.surface)
+                    .frame(height: 56)
+                    .shimmer(isActive: true)
                     .padding(.horizontal, 20)
             }
 
@@ -199,6 +214,123 @@ struct HomeView: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color.border, lineWidth: 0.5)
         )
+    }
+
+    // MARK: - Health Card
+
+    func healthCard(_ health: PortfolioHealth) -> some View {
+        VStack(spacing: 0) {
+            Button {
+                HapticManager.selection()
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    healthExpanded.toggle()
+                }
+            } label: {
+                HStack(spacing: 12) {
+                    // Grade badge
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(healthGradeColor(health.grade).opacity(0.15))
+                            .frame(width: 40, height: 40)
+                        Text(health.grade)
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(healthGradeColor(health.grade))
+                    }
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Portfolio Health")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(.textPrimary)
+                        Text(health.summary)
+                            .font(.system(size: 11))
+                            .foregroundColor(.textSecondary)
+                            .lineLimit(1)
+                    }
+
+                    Spacer()
+
+                    // Score gauge
+                    ZStack {
+                        Circle()
+                            .stroke(Color.border, lineWidth: 3)
+                            .frame(width: 36, height: 36)
+                        Circle()
+                            .trim(from: 0, to: CGFloat(health.overallScore) / 100)
+                            .stroke(healthGradeColor(health.grade), style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                            .frame(width: 36, height: 36)
+                            .rotationEffect(.degrees(-90))
+                        Text("\(health.overallScore)")
+                            .font(.system(size: 10, weight: .bold))
+                            .foregroundColor(.textPrimary)
+                    }
+
+                    Image(systemName: healthExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.textSecondary)
+                }
+                .padding(14)
+            }
+            .buttonStyle(.plain)
+
+            if healthExpanded && !health.holdingScores.isEmpty {
+                Divider().background(Color.border)
+                VStack(spacing: 0) {
+                    ForEach(health.holdingScores) { hs in
+                        HStack(spacing: 10) {
+                            Text(hs.ticker)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(.textPrimary)
+                                .frame(width: 72, alignment: .leading)
+                            // Score bar
+                            GeometryReader { geo in
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 3)
+                                        .fill(Color.border)
+                                        .frame(height: 5)
+                                    RoundedRectangle(cornerRadius: 3)
+                                        .fill(healthScoreColor(hs.score))
+                                        .frame(width: geo.size.width * CGFloat(hs.score) / 10, height: 5)
+                                }
+                            }
+                            .frame(height: 5)
+                            Text("\(hs.score)/10")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(healthScoreColor(hs.score))
+                                .frame(width: 36, alignment: .trailing)
+                        }
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        if hs.id != health.holdingScores.last?.id {
+                            Divider().background(Color.border).padding(.leading, 86)
+                        }
+                    }
+                }
+            }
+        }
+        .background(Color.surface)
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.border, lineWidth: 0.5)
+        )
+    }
+
+    func healthGradeColor(_ grade: String) -> Color {
+        switch grade {
+        case "A": return .positive
+        case "B": return .accent
+        case "C": return .warning
+        default:  return .negative
+        }
+    }
+
+    func healthScoreColor(_ score: Int) -> Color {
+        switch score {
+        case 8...10: return .positive
+        case 6...7:  return .accent
+        case 4...5:  return .warning
+        default:     return .negative
+        }
     }
 
     // MARK: - Skeleton / Error

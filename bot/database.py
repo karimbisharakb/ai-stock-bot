@@ -143,6 +143,29 @@ def init_db():
         )
     """)
 
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS watchlist (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            ticker      TEXT    NOT NULL,
+            alert_price REAL    NOT NULL,
+            direction   TEXT    NOT NULL DEFAULT 'above',
+            note        TEXT,
+            created_at  TEXT    NOT NULL,
+            triggered   INTEGER NOT NULL DEFAULT 0,
+            triggered_at TEXT
+        )
+    """)
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS planner_config (
+            id                  INTEGER PRIMARY KEY,
+            paycheck_amount     REAL    NOT NULL DEFAULT 0,
+            paycheck_day        INTEGER NOT NULL DEFAULT 15,
+            allocation_percent  REAL    NOT NULL DEFAULT 100,
+            last_updated        TEXT    NOT NULL
+        )
+    """)
+
     # Seed single-row tables
     c.execute("SELECT COUNT(*) FROM tfsa_info")
     if c.fetchone()[0] == 0:
@@ -154,6 +177,13 @@ def init_db():
     c.execute("SELECT COUNT(*) FROM cash")
     if c.fetchone()[0] == 0:
         c.execute("INSERT INTO cash (id, available_cash) VALUES (1, 0)")
+
+    c.execute("SELECT COUNT(*) FROM planner_config")
+    if c.fetchone()[0] == 0:
+        c.execute(
+            "INSERT INTO planner_config (id, paycheck_amount, paycheck_day, allocation_percent, last_updated) VALUES (1, 0, 15, 100, ?)",
+            (datetime.now().isoformat(),),
+        )
 
     conn.commit()
     conn.close()

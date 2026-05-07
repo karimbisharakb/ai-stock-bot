@@ -41,6 +41,13 @@
 		AA000021000000000000021A /* PredatorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000021000000000000021B /* PredatorAlert.swift */; };
 		AA000022000000000000022A /* PredatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000022000000000000022B /* PredatorViewModel.swift */; };
 		AA000023000000000000023A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000023000000000000023B /* Assets.xcassets */; };
+		AA000024000000000000024A /* PortfolioHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000024000000000000024B /* PortfolioHealth.swift */; };
+		AA000025000000000000025A /* WatchlistAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000025000000000000025B /* WatchlistAlert.swift */; };
+		AA000026000000000000026A /* PaycheckPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000026000000000000026B /* PaycheckPlan.swift */; };
+		AA000027000000000000027A /* PortfolioHealthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000027000000000000027B /* PortfolioHealthViewModel.swift */; };
+		AA000028000000000000028A /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000028000000000000028B /* WatchlistViewModel.swift */; };
+		AA000029000000000000029A /* PaycheckPlannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000029000000000000029B /* PaycheckPlannerViewModel.swift */; };
+		AA00002A000000000000002AA /* WatchlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002A000000000000002AB /* WatchlistView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +86,13 @@
 		AA000021000000000000021B /* PredatorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredatorAlert.swift; sourceTree = "<group>"; };
 		AA000022000000000000022B /* PredatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredatorViewModel.swift; sourceTree = "<group>"; };
 		AA000023000000000000023B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA000024000000000000024B /* PortfolioHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioHealth.swift; sourceTree = "<group>"; };
+		AA000025000000000000025B /* WatchlistAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistAlert.swift; sourceTree = "<group>"; };
+		AA000026000000000000026B /* PaycheckPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycheckPlan.swift; sourceTree = "<group>"; };
+		AA000027000000000000027B /* PortfolioHealthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioHealthViewModel.swift; sourceTree = "<group>"; };
+		AA000028000000000000028B /* WatchlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModel.swift; sourceTree = "<group>"; };
+		AA000029000000000000029B /* PaycheckPlannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaycheckPlannerViewModel.swift; sourceTree = "<group>"; };
+		AA00002A000000000000002AB /* WatchlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistView.swift; sourceTree = "<group>"; };
 		AA000030000000000000030B /* InvestingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvestingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -135,6 +149,9 @@
 				AA000006000000000000006B /* MarketData.swift */,
 				AA000007000000000000007B /* ParsedTrade.swift */,
 				AA000021000000000000021B /* PredatorAlert.swift */,
+				AA000024000000000000024B /* PortfolioHealth.swift */,
+				AA000025000000000000025B /* WatchlistAlert.swift */,
+				AA000026000000000000026B /* PaycheckPlan.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +164,9 @@
 				AA00000A0000000000000AAB /* AnalyzeViewModel.swift */,
 				AA00000B0000000000000BBB /* FeedViewModel.swift */,
 				AA000022000000000000022B /* PredatorViewModel.swift */,
+				AA000027000000000000027B /* PortfolioHealthViewModel.swift */,
+				AA000028000000000000028B /* WatchlistViewModel.swift */,
+				AA000029000000000000029B /* PaycheckPlannerViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -162,6 +182,7 @@
 				AA000011000000000000011B /* SettingsView.swift */,
 				AA000012000000000000012B /* ScreenshotImportView.swift */,
 				AA000013000000000000013B /* TradeConfirmSheet.swift */,
+				AA00002A000000000000002AB /* WatchlistView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -309,6 +330,13 @@
 				AA00001F000000000000001FA /* DesignSystem.swift in Sources */,
 				AA000021000000000000021A /* PredatorAlert.swift in Sources */,
 				AA000022000000000000022A /* PredatorViewModel.swift in Sources */,
+				AA000024000000000000024A /* PortfolioHealth.swift in Sources */,
+				AA000025000000000000025A /* WatchlistAlert.swift in Sources */,
+				AA000026000000000000026A /* PaycheckPlan.swift in Sources */,
+				AA000027000000000000027A /* PortfolioHealthViewModel.swift in Sources */,
+				AA000028000000000000028A /* WatchlistViewModel.swift in Sources */,
+				AA000029000000000000029A /* PaycheckPlannerViewModel.swift in Sources */,
+				AA00002A000000000000002AA /* WatchlistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
