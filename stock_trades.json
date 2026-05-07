@@ -17,8 +17,8 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 215.03,
-      "last_price": 213.22,
-      "last_pnl_pct": 5.18,
+      "last_price": 213.09,
+      "last_pnl_pct": 5.12,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 419.03,
-      "last_pnl_pct": 10.15,
+      "last_price": 412.59,
+      "last_pnl_pct": 8.46,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Failure to reclaim the 200-MA at $458 on weak volume, combined with any post-Falcon-outage churn signal in the next earnings report, could invalidate the recovery thesis and trigger a sharp re-test of the 50-MA support.",
       "earnings_play": false,
       "trail_high": 503.02,
-      "last_price": 503.02,
-      "last_pnl_pct": 13.58,
+      "last_price": 501.09,
+      "last_pnl_pct": 13.15,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Any BTC consolidation below $85K combined with MARA's 104x D/E leverage and negative margins could rapidly compress the stock back toward $7, erasing the entire setup.",
       "earnings_play": false,
       "trail_high": 12.83,
-      "last_price": 12.83,
-      "last_pnl_pct": 23.96,
+      "last_price": 12.63,
+      "last_pnl_pct": 22.03,
       "days_held": 8,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 424.87,
-      "last_price": 424.87,
-      "last_pnl_pct": 3.51,
+      "last_price": 422.57,
+      "last_pnl_pct": 2.95,
       "days_held": 2,
       "status": "OPEN",
       "live": false
@@ -798,7 +798,7 @@
     },
     {
       "date": "2026-05-07",
-      "value": 1011.26
+      "value": 1008.39
     }
   ],
   "top_picks": [
@@ -808,19 +808,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META at RSI 28 in a bull regime represents classic exhaustion selling on a fundamentally elite asset \u2014 33% revenue growth, 33% margins, and 17x forward P/E make the $826 analyst target credible. The nascent weekly stabilization and deeply oversold technicals favor a mean-reversion entry with asymmetric upside.",
-      "price_target": 826.69,
-      "key_risk": "Another capex guidance raise with pushed-out AI monetization timelines at the next earnings print could break the bull thesis and accelerate the downtrend."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR is riding strong short-term momentum with RSI at 58 and bullish MACD, offering meaningful upside to the MA200 resistance at $224 with analyst targets at $375 providing longer-term conviction. In a BULL regime, the Bitcoin proxy leverage and 107% analyst upside justify a position sized within the 20% crypto cap, targeting the overhead supply zone.",
-      "price_target": 220.0,
-      "key_risk": "Bitcoin price failure below $85K would compress MSTR's mNAV premium sharply, invalidating the recovery thesis and likely breaching the stop."
+      "reasoning": "META at RSI 26 with 22x trailing / 17x forward P/E and 33% revenue growth represents a rare valuation dislocation in a best-in-class ad platform \u2014 macro fear, not business deterioration, is driving the selloff. The 34% gap to analyst consensus and deeply oversold technicals create asymmetric upside once ad spending data stabilizes or surprises to the upside.",
+      "price_target": 750.0,
+      "key_risk": "A confirmed macro-driven collapse in SMB/enterprise ad budgets tied to tariff escalation could invalidate the fundamental thesis and break $580 support, triggering further downside toward $520."
     },
     {
       "ticker": "AAPL",
@@ -828,9 +818,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a confirmed bull structure with price above both key moving averages, bullish MACD, and analyst consensus supporting a move to $303; the BULL regime allows full Kelly deployment on this score. RSI near overbought and proximity to 52-week highs warrant a modest position size with a stop below the MA50 zone.",
+      "reasoning": "AAPL is in a confirmed bull regime with strong institutional momentum, trading near 52-week highs with solid fundamental backing at 30x forward P/E justified by 16.6% revenue growth and 27% margins. The analyst target of $303 offers a clear near-term destination, though compressed short-window momentum warrants measured position sizing given proximity to overbought RSI levels.",
       "price_target": 303.38,
-      "key_risk": "Failure to demonstrate credible AI monetization at the June developer conference could trigger a sharp multiple compression from current 30x forward P/E."
+      "key_risk": "U.S.-China tariff escalation could directly reprice margin assumptions and stall the move to analyst targets, while RSI at 68.1 leaves limited room before a technical pullback forces a shakeout."
+    },
+    {
+      "ticker": "AMZN",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AWS re-acceleration and advertising scaling support genuine earnings power improvement with forward P/E compressing to 27.6x, giving fundamental backing to the analyst $310 target. Bull regime permits full Kelly sizing despite overbought RSI, but position sizing should account for the 52-week high resistance at $278.56 and below-average volume conviction.",
+      "price_target": 310.0,
+      "key_risk": "RSI at 77.9 and price within 2.4% of 52-week high with weak volume (0.84x) leaves the stock vulnerable to sharp mean-reversion if AWS growth fails to re-accelerate toward 20%+ in the next earnings report."
     }
   ],
   "regime": "BULL",
@@ -846,5 +846,5 @@
     "underperforming": false
   },
   "pnl": -20.91,
-  "last_run": "2026-05-07 15:50"
+  "last_run": "2026-05-07 18:28"
 }
