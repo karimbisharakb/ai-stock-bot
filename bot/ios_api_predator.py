@@ -123,7 +123,7 @@ def get_watchlist():
     return jsonify({"watchlist": result})
 
 
-@predator_bp.route("/run-now", methods=["GET"])
+@predator_bp.route("/run-now", methods=["POST"])
 @_require_auth
 def run_now():
     """Start a full background scan; returns immediately.

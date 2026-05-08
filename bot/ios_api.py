@@ -673,7 +673,7 @@ ACTUAL_HOLDINGS = [
 ACTUAL_CASH = 135.21
 
 
-@ios.route("/reset-portfolio", methods=["GET"])
+@ios.route("/reset-portfolio", methods=["POST"])
 @_require_auth
 def reset_portfolio():
     conn = get_connection()
