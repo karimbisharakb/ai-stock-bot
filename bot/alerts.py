@@ -85,6 +85,44 @@ def log_alert(ticker: Optional[str], urgency: str, message: str):
     conn.close()
 
 
+def claim_alert(ticker: Optional[str], urgency: str, message: str) -> bool:
+    """Atomically check dedup and log in one exclusive transaction.
+
+    Returns True only if this call successfully claimed the send slot.
+    Caller should call send_sms() iff True is returned.
+
+    Using BEGIN EXCLUSIVE prevents two concurrent schedulers from both
+    passing the dedup check before either has written the log entry.
+    """
+    if ticker and _is_snoozed(ticker):
+        return False
+
+    today_start = datetime.now(EASTERN).replace(hour=0, minute=0, second=0, microsecond=0)
+    conn = get_connection()
+    try:
+        conn.execute("BEGIN EXCLUSIVE")
+        row = conn.execute(
+            "SELECT urgency FROM alert_log WHERE ticker = ? AND sent_at >= ? "
+            "ORDER BY sent_at DESC LIMIT 1",
+            (ticker, today_start.isoformat()),
+        ).fetchone()
+        if row and URGENCY_RANK.get(row["urgency"], 0) >= URGENCY_RANK.get(urgency, 0):
+            conn.rollback()
+            return False
+        conn.execute(
+            "INSERT INTO alert_log (ticker, urgency, sent_at, message) VALUES (?,?,?,?)",
+            (ticker, urgency, datetime.now().isoformat(), message[:500]),
+        )
+        conn.commit()
+        return True
+    except Exception as exc:
+        conn.rollback()
+        print(f"⚠️  claim_alert failed for {ticker}: {exc}")
+        return False
+    finally:
+        conn.close()
+
+
 def snooze_ticker(ticker: str, hours: int = 24):
     until = (datetime.now() + timedelta(hours=hours)).isoformat()
     conn = get_connection()

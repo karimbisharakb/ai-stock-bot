@@ -55,7 +55,7 @@ def run_sell_monitor():
     changes = get_index_day_change()
     crashed = {k: v for k, v in changes.items() if v <= CRASH_THRESHOLD}
 
-    if crashed and alerts.can_send_alert("MARKET", "URGENT"):
+    if crashed:
         at_risk = []
         for h in holdings:
             t = h["ticker"]
@@ -64,8 +64,8 @@ def run_sell_monitor():
                 at_risk.append({"ticker": t, "risk": risk, "reason": reason})
         if at_risk:
             msg = alerts.format_market_crash_alert(changes, at_risk)
-            if alerts.send_sms(msg):
-                alerts.log_alert("MARKET", "URGENT", msg)
+            if alerts.claim_alert("MARKET", "URGENT", msg):
+                alerts.send_sms(msg)
 
     # ── Check individual holdings ─────────────────────────
     for h in holdings:
@@ -78,15 +78,13 @@ def run_sell_monitor():
         if urgency is None:
             continue
 
-        if not alerts.can_send_alert(ticker, urgency):
-            continue
-
         if urgency == "URGENT":
             msg = alerts.format_sell_alert(ticker, shares, avg_cost, data, signals)
-            if alerts.send_sms(msg):
-                alerts.log_alert(ticker, urgency, msg)
+            if alerts.claim_alert(ticker, urgency, msg):
+                alerts.send_sms(msg)
 
         elif urgency == "WARNING":
-            # Bundle into morning summary — just log for now; scheduler picks them up
-            alerts.log_alert(ticker, urgency, f"{ticker}: {signals[0]}")
-            print(f"  🟡 {ticker}: {signals[0]} — queued for morning summary")
+            # Bundle into morning summary — just log; claim_alert for dedup
+            summary = f"{ticker}: {signals[0]}"
+            if alerts.claim_alert(ticker, urgency, summary):
+                print(f"  🟡 {ticker}: {signals[0]} — queued for morning summary")
