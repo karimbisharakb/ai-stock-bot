@@ -7,6 +7,7 @@ import re
 import logging
 import traceback
 from flask import Flask, request
+from twilio.request_validator import RequestValidator
 from twilio.twiml.messaging_response import MessagingResponse
 
 import portfolio
@@ -44,6 +45,24 @@ def webhook():
     log.info("Webhook hit: from=%r body=%r", from_number, body[:120])
 
     resp = MessagingResponse()
+
+    # Twilio HMAC-SHA1 signature validation.
+    # Fails open (warn + continue) rather than 403 so a URL/proxy mismatch
+    # during initial Railway rollout doesn't silently kill all webhook traffic.
+    # Once "Twilio signature OK" appears consistently in Railway logs, change
+    # the `log.warning` branch to `return str(resp), 403` to enforce hard rejection.
+    auth_token = os.getenv("TWILIO_AUTH_TOKEN", "").strip()
+    if auth_token:
+        validator = RequestValidator(auth_token)
+        sig = request.headers.get("X-Twilio-Signature", "")
+        if validator.validate(request.url, request.form, sig):
+            log.debug("Twilio signature OK")
+        else:
+            log.warning(
+                "Twilio signature mismatch — url=%r sig=%r from=%r "
+                "(allowing through; tighten to 403 once verified in Railway logs)",
+                request.url, sig[:20], from_number,
+            )
 
     if from_number != MY_WHATSAPP:
         log.warning("Rejected: from=%r expected=%r", from_number, MY_WHATSAPP)
