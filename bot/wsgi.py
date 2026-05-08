@@ -22,6 +22,11 @@ if _railway_env and not os.getenv("API_SECRET", "").strip():
         f"API_SECRET must be set in Railway (RAILWAY_ENVIRONMENT={_railway_env!r}). "
         "Generate one: python3 -c \"import secrets; print(secrets.token_hex(32))\""
     )
+if _railway_env and not os.getenv("TWILIO_AUTH_TOKEN", "").strip():
+    raise RuntimeError(
+        f"TWILIO_AUTH_TOKEN must be set in Railway (RAILWAY_ENVIRONMENT={_railway_env!r}). "
+        "Find it at console.twilio.com → Account → Auth Token."
+    )
 
 from database import init_db, run_migrations
 from scheduler import start_scheduler, release_scheduler_lease
