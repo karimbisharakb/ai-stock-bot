@@ -63,6 +63,58 @@ def add_or_update_holding(
     return result
 
 
+def record_buy_trade(ticker: str, shares: float, price_cad: float, notes: str = None) -> dict:
+    """
+    Atomically: upsert holding (weighted avg), insert transaction, deduct cash.
+    All three writes happen in one connection under one BEGIN/COMMIT so a
+    SIGTERM mid-operation cannot leave holdings and cash in an inconsistent state.
+    Returns the updated holding dict.
+    """
+    conn = get_connection()
+    try:
+        conn.execute("BEGIN")
+
+        existing = conn.execute(
+            "SELECT shares, avg_cost FROM holdings WHERE ticker = ?", (ticker,)
+        ).fetchone()
+
+        now = datetime.now().isoformat()
+        if existing:
+            old_shares = existing["shares"]
+            old_cost   = existing["avg_cost"]
+            new_shares = old_shares + shares
+            new_avg    = round((old_shares * old_cost + shares * price_cad) / new_shares, 4)
+            conn.execute(
+                "UPDATE holdings SET shares = ?, avg_cost = ? WHERE ticker = ?",
+                (new_shares, new_avg, ticker),
+            )
+            result = {"ticker": ticker, "shares": new_shares, "avg_cost": new_avg}
+        else:
+            conn.execute(
+                "INSERT INTO holdings (ticker, shares, avg_cost, date_added) VALUES (?,?,?,?)",
+                (ticker, shares, price_cad, now),
+            )
+            result = {"ticker": ticker, "shares": shares, "avg_cost": price_cad}
+
+        total_cad = round(shares * price_cad, 4)
+        conn.execute(
+            "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
+            "VALUES (?,?,?,?,?,?,?)",
+            (ticker, "BUY", shares, price_cad, total_cad, now, notes),
+        )
+        conn.execute(
+            "UPDATE cash SET available_cash = available_cash - ? WHERE id = 1",
+            (total_cad,),
+        )
+        conn.commit()
+        return result
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+
 def add_dividend(ticker: str, shares: float, price_cad: float) -> dict:
     """
     Records a dividend reinvestment and updates the holding.

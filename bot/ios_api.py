@@ -729,10 +729,10 @@ def confirm_trade():
             return jsonify({"success": False, "error": "price_cad must be > 0"}), 400
 
         if trade_type == "BUY":
-            result = port.add_or_update_holding(ticker, shares, price_cad)
-            trade_cost = round(shares * price_cad, 2)
-            port.add_cash(-trade_cost)
-            log.info("confirm-trade: BUY saved — %s, deducted $%.2f from cash", result, trade_cost)
+            # record_buy_trade: single connection, one BEGIN/COMMIT for holding
+            # upsert + transaction insert + cash deduction — atomic against SIGTERM
+            result = port.record_buy_trade(ticker, shares, price_cad)
+            log.info("confirm-trade: BUY saved atomically — %s", result)
         elif trade_type == "SELL":
             result = port.reduce_or_remove_holding(ticker, shares, price_cad)
             log.info("confirm-trade: SELL result — %s", result)
