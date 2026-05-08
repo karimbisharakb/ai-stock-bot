@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 from flask import Blueprint, jsonify
 
 from database import get_connection
+from ios_api import _require_auth
 
 log = logging.getLogger(__name__)
 
@@ -123,6 +124,7 @@ def get_watchlist():
 
 
 @predator_bp.route("/run-now", methods=["GET"])
+@_require_auth
 def run_now():
     """Start a full background scan; returns immediately.
 
@@ -148,6 +150,7 @@ def run_now():
 
 
 @predator_bp.route("/debug", methods=["GET"])
+@_require_auth
 def debug_scan():
     """Score 5 fast-path tickers synchronously; full signal breakdown returned immediately."""
     from predator import score_tickers

@@ -14,6 +14,7 @@ from flask import Blueprint, jsonify, request
 
 import portfolio as port
 from database import get_connection
+from ios_api import _require_auth
 
 log = logging.getLogger(__name__)
 planner_bp = Blueprint("planner", __name__, url_prefix="/api/planner")
@@ -61,6 +62,7 @@ def _next_paycheck_date(paycheck_day: int) -> date:
 # ─────────────────────────────────────────────
 
 @planner_bp.route("/setup", methods=["POST"])
+@_require_auth
 def planner_setup():
     try:
         body = request.get_json(force=True, silent=True) or {}
@@ -106,6 +108,7 @@ def planner_setup():
 # ─────────────────────────────────────────────
 
 @planner_bp.route("/next-deployment", methods=["GET"])
+@_require_auth
 def planner_next_deployment():
     try:
         config = _get_config()

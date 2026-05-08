@@ -1,8 +1,10 @@
 """
 iOS app REST API — Blueprint registered on the main Flask app.
 All heavy lifting delegates to existing portfolio, market_data, analyst,
-scanner, and database modules. No auth (personal sideloaded app).
+scanner, and database modules.
 """
+import functools
+import hmac
 import json
 import logging
 import os
@@ -22,6 +24,32 @@ log = logging.getLogger(__name__)
 ios = Blueprint("ios", __name__, url_prefix="/api")
 
 EASTERN = pytz.timezone("America/New_York")
+
+
+def _require_auth(f):
+    """Bearer token auth for mutating endpoints.
+
+    Reads API_SECRET from env. Fails open when unset so existing clients keep
+    working during the transition period — set API_SECRET in Railway env vars
+    before deploying, then add the header in the iOS app, then optionally
+    remove the fail-open bypass.
+
+    Usage: decorate any mutating route with @_require_auth.
+    """
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        secret = os.getenv("API_SECRET", "").strip()
+        if not secret:
+            log.warning("API_SECRET not set — %s allowed without auth (set env var)", request.path)
+            return f(*args, **kwargs)
+        token = request.headers.get("Authorization", "")
+        if token.startswith("Bearer "):
+            token = token[7:]
+        if not hmac.compare_digest(token.encode(), secret.encode()):
+            log.warning("Auth failed on %s from %s", request.path, request.remote_addr)
+            return jsonify({"error": "Unauthorized"}), 401
+        return f(*args, **kwargs)
+    return wrapper
 
 
 # ─────────────────────────────────────────────
@@ -356,6 +384,7 @@ def get_opportunities():
 # ─────────────────────────────────────────────
 
 @ios.route("/analyze", methods=["POST"])
+@_require_auth
 def api_analyze():
     try:
         body = request.get_json(force=True, silent=True) or {}
@@ -474,6 +503,7 @@ def _rsi_rating(data) -> str:
 # ─────────────────────────────────────────────
 
 @ios.route("/parse-screenshot", methods=["POST"])
+@_require_auth
 def parse_screenshot():
     try:
         body = request.get_json(force=True, silent=True) or {}
@@ -613,6 +643,7 @@ ACTUAL_CASH = 135.21
 
 
 @ios.route("/reset-portfolio", methods=["GET"])
+@_require_auth
 def reset_portfolio():
     try:
         conn = get_connection()
@@ -660,6 +691,7 @@ def reset_portfolio():
 # ─────────────────────────────────────────────
 
 @ios.route("/confirm-trade", methods=["POST"])
+@_require_auth
 def confirm_trade():
     # Log raw body first so Railway logs always show what arrived
     raw = request.get_data(as_text=True)
@@ -742,6 +774,7 @@ def get_cash_balance():
 
 
 @ios.route("/cash", methods=["POST"])
+@_require_auth
 def set_cash():
     try:
         body = request.get_json(force=True, silent=True) or {}
@@ -897,6 +930,7 @@ def get_watchlist():
 
 
 @ios.route("/watchlist/add", methods=["POST"])
+@_require_auth
 def add_watchlist():
     try:
         body = request.get_json(force=True, silent=True) or {}
@@ -929,6 +963,7 @@ def add_watchlist():
 
 
 @ios.route("/watchlist/<int:alert_id>", methods=["DELETE"])
+@_require_auth
 def delete_watchlist(alert_id: int):
     try:
         conn = get_connection()
