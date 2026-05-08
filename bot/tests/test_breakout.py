@@ -1,7 +1,9 @@
 """
-Unit tests for ma200_recent_cross — the redesigned breakout indicator.
+Unit tests for:
+  - ma200_recent_cross  (market_data.py) — redesigned breakout indicator
+  - _score_breakout     (predator.py)    — 52-week-high proximity guard
 
-All tests use synthetic pandas Series; no network calls.
+All tests use synthetic pandas Series; yfinance calls are mocked.
 
 Series construction convention used throughout:
   [HIGH] * H + [LOW] * L + [BREAK] * B
@@ -11,8 +13,10 @@ Series construction convention used throughout:
 import pandas as pd
 import numpy as np
 import pytest
+from unittest.mock import patch
 
 from market_data import ma200_recent_cross
+from predator import _score_breakout
 
 
 # ─────────────────────────────────────────────
@@ -242,3 +246,70 @@ class TestRegressions:
         assert isinstance(days, int)
         # Cross at bar 200 is within the clamped window, last close 120 > MA200 ≈ 100
         assert crossed is True
+
+
+# ─────────────────────────────────────────────
+# _score_breakout — 52-week-high proximity guard
+# ─────────────────────────────────────────────
+
+def _make_data(price: float, ma200: float = None, vol_ratio: float = 1.0,
+               pct_1d: float = 0.0) -> dict:
+    """Minimal data dict for _score_breakout; closes series is all-same (no MA200 cross)."""
+    return {
+        "price":     price,
+        "ma200":     ma200 if ma200 is not None else price * 0.9,
+        "vol_ratio": vol_ratio,
+        "pct_1d":    pct_1d,
+        # Flat series → price always == MA200-of-flat → no recent cross fires
+        "closes":    _s([price] * 220),
+    }
+
+
+class TestScoreBreakout52WkHigh:
+    def test_stale_52wk_high_below_current_price_no_score(self):
+        # fiftyTwoWeekHigh is stale and below current price.
+        # Old code: (140 - 150) / 140 * 100 = -7.1 ≤ 3 → would score. Fixed: must not score.
+        data = _make_data(price=150.0)
+        mock_info = {"fiftyTwoWeekHigh": 140.0}  # stale: 52wk high < current price
+
+        with patch("predator.yf.Ticker") as mock_cls:
+            mock_cls.return_value.info = mock_info
+            score, reason = _score_breakout("FAKE", data)
+
+        assert score == 0
+        assert "52wk" not in reason.lower()
+
+    def test_price_within_3pct_of_52wk_high_scores(self):
+        # Valid case: current price is 1.5% below the 52-week high.
+        data = _make_data(price=98.5)
+        mock_info = {"fiftyTwoWeekHigh": 100.0}  # pct_from_high = 1.5%
+
+        with patch("predator.yf.Ticker") as mock_cls:
+            mock_cls.return_value.info = mock_info
+            score, reason = _score_breakout("FAKE", data)
+
+        assert score >= 1
+        assert "52wk" in reason.lower()
+
+    def test_price_exactly_at_52wk_high_scores(self):
+        # current == high_52w → pct_from_high = 0, clamped to 0 → within 3% → scores.
+        data = _make_data(price=100.0)
+        mock_info = {"fiftyTwoWeekHigh": 100.0}
+
+        with patch("predator.yf.Ticker") as mock_cls:
+            mock_cls.return_value.info = mock_info
+            score, reason = _score_breakout("FAKE", data)
+
+        assert score >= 1
+        assert "52wk" in reason.lower()
+
+    def test_price_well_below_52wk_high_no_proximity_score(self):
+        # Current price is 20% below the 52-week high → outside 3% band.
+        data = _make_data(price=80.0)
+        mock_info = {"fiftyTwoWeekHigh": 100.0}  # pct_from_high = 20%
+
+        with patch("predator.yf.Ticker") as mock_cls:
+            mock_cls.return_value.info = mock_info
+            score, reason = _score_breakout("FAKE", data)
+
+        assert score == 0

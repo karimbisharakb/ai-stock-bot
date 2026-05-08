@@ -360,8 +360,8 @@ def _score_breakout(ticker: str, data: dict) -> tuple[int, str]:
         hits = 0
         reasons = []
 
-        if high_52w and current > 0:
-            pct_from_high = (high_52w - current) / high_52w * 100
+        if high_52w > 0 and 0 < current <= high_52w:
+            pct_from_high = max((high_52w - current) / high_52w * 100, 0.0)
             if pct_from_high <= 3:
                 hits += 1
                 reasons.append(f"within {pct_from_high:.1f}% of 52wk high ${high_52w:.2f}")
