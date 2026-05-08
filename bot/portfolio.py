@@ -158,62 +158,69 @@ def add_dividend(ticker: str, shares: float, price_cad: float) -> dict:
 def reduce_or_remove_holding(ticker: str, shares: float, price: float) -> dict:
     """
     Removes shares from holding, calculates gain/loss.
-    Returns summary dict.
+    Returns summary dict, or {"error": ...} if the sell is invalid.
+    All writes are wrapped in a single explicit transaction.
     """
     conn = get_connection()
-    existing = conn.execute(
-        "SELECT * FROM holdings WHERE ticker = ?", (ticker,)
-    ).fetchone()
+    try:
+        conn.execute("BEGIN")
 
-    if not existing:
-        conn.close()
-        return {"error": f"No holding found for {ticker}"}
+        existing = conn.execute(
+            "SELECT * FROM holdings WHERE ticker = ?", (ticker,)
+        ).fetchone()
 
-    old_shares = existing["shares"]
-    if shares > old_shares + 1e-6:
-        conn.close()
-        return {"error": f"Cannot sell {shares} shares of {ticker}: only {old_shares:.6f} held"}
+        if not existing:
+            conn.rollback()
+            return {"error": f"No holding found for {ticker}"}
 
-    avg_cost  = existing["avg_cost"]
-    gain_loss = round((price - avg_cost) * shares, 2)
-    pct       = round((price / avg_cost - 1) * 100, 2)
-    proceeds  = round(price * shares, 2)
-    now       = datetime.now().isoformat()
+        old_shares = existing["shares"]
+        if shares > old_shares + 1e-6:
+            conn.rollback()
+            return {"error": f"Cannot sell {shares} shares of {ticker}: only {old_shares:.6f} held"}
 
-    new_shares = old_shares - shares
-    if new_shares <= 0.0001:
-        conn.execute("DELETE FROM holdings WHERE ticker = ?", (ticker,))
-    else:
+        avg_cost  = existing["avg_cost"]
+        gain_loss = round((price - avg_cost) * shares, 2)
+        pct       = round((price / avg_cost - 1) * 100, 2)
+        proceeds  = round(price * shares, 2)
+        now       = datetime.now().isoformat()
+
+        new_shares = old_shares - shares
+        if new_shares <= 0.0001:
+            conn.execute("DELETE FROM holdings WHERE ticker = ?", (ticker,))
+        else:
+            conn.execute(
+                "UPDATE holdings SET shares = ? WHERE ticker = ?",
+                (round(new_shares, 6), ticker),
+            )
+
+        total_cad = round(price * shares, 4)
+        sign = "+" if gain_loss >= 0 else ""
+        sell_notes = f"Gain: {sign}${gain_loss:.2f} ({sign}{pct:.1f}%)"
         conn.execute(
-            "UPDATE holdings SET shares = ? WHERE ticker = ?",
-            (round(new_shares, 6), ticker),
+            "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
+            "VALUES (?,?,?,?,?,?,?)",
+            (ticker, "SELL", shares, price, total_cad, now, sell_notes),
+        )
+        conn.execute(
+            "UPDATE cash SET available_cash = available_cash + ? WHERE id = 1",
+            (proceeds,),
         )
 
-    total_cad = round(price * shares, 4)
-    sign = "+" if gain_loss >= 0 else ""
-    sell_notes = f"Gain: {sign}${gain_loss:.2f} ({sign}{pct:.1f}%)"
-    conn.execute(
-        "INSERT INTO transactions (ticker, type, shares, price_cad, total_cad, date, notes) "
-        "VALUES (?,?,?,?,?,?,?)",
-        (ticker, "SELL", shares, price, total_cad, now, sell_notes),
-    )
-
-    conn.execute(
-        "UPDATE cash SET available_cash = available_cash + ? WHERE id = 1",
-        (proceeds,),
-    )
-
-    conn.commit()
-    conn.close()
-    return {
-        "ticker":    ticker,
-        "shares":    shares,
-        "price":     price,
-        "avg_cost":  avg_cost,
-        "gain_loss": gain_loss,
-        "pct":       pct,
-        "proceeds":  proceeds,
-    }
+        conn.commit()
+        return {
+            "ticker":    ticker,
+            "shares":    shares,
+            "price":     price,
+            "avg_cost":  avg_cost,
+            "gain_loss": gain_loss,
+            "pct":       pct,
+            "proceeds":  proceeds,
+        }
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 
 # ──────────────────────────────────────────────
