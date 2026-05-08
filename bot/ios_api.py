@@ -8,6 +8,7 @@ import hmac
 import json
 import logging
 import os
+import re
 import traceback
 from datetime import datetime, timedelta
 
@@ -50,6 +51,30 @@ def _require_auth(f):
             return jsonify({"error": "Unauthorized"}), 401
         return f(*args, **kwargs)
     return wrapper
+
+
+# ─────────────────────────────────────────────
+# Validation helpers
+# ─────────────────────────────────────────────
+
+_TICKER_RE = re.compile(r'^[A-Z0-9]{1,6}(\.TO)?$')
+
+def _valid_ticker(t: str) -> bool:
+    return bool(_TICKER_RE.match(t))
+
+def _valid_shares(v) -> bool:
+    try:
+        f = float(v)
+        return 0 < f < 1_000_000
+    except (TypeError, ValueError):
+        return False
+
+def _valid_price(v) -> bool:
+    try:
+        f = float(v)
+        return 0 < f < 1_000_000
+    except (TypeError, ValueError):
+        return False
 
 
 # ─────────────────────────────────────────────
@@ -389,8 +414,8 @@ def api_analyze():
     try:
         body = request.get_json(force=True, silent=True) or {}
         ticker = body.get("ticker", "").upper().strip()
-        if not ticker:
-            return jsonify({"error": "ticker required"}), 400
+        if not ticker or not _valid_ticker(ticker):
+            return jsonify({"error": "ticker required (1–6 uppercase letters, optional .TO)"}), 400
 
         # Reuse the existing WhatsApp analyst (returns formatted text)
         from analyst import analyze_stock, _fetch_metrics
@@ -510,6 +535,9 @@ def parse_screenshot():
         image_b64 = body.get("image", "")
         if not image_b64:
             return jsonify({"error": "image required"}), 400
+        # 5 MB decoded cap: base64 expands 4:3, so limit raw string to ~6.9 MB
+        if len(image_b64) > 6_971_000:
+            return jsonify({"error": "image too large (max 5 MB)"}), 413
 
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
@@ -721,12 +749,12 @@ def confirm_trade():
         log.info("confirm-trade: ticker=%s shares=%s price_cad=%s total_cad=%s type=%s",
                  ticker, shares, price_cad, total_cad, trade_type)
 
-        if not ticker:
-            return jsonify({"success": False, "error": "ticker is required"}), 400
-        if shares <= 0:
-            return jsonify({"success": False, "error": "shares must be > 0"}), 400
-        if price_cad <= 0:
-            return jsonify({"success": False, "error": "price_cad must be > 0"}), 400
+        if not ticker or not _valid_ticker(ticker):
+            return jsonify({"success": False, "error": "ticker required (1–6 uppercase letters, optional .TO)"}), 400
+        if not _valid_shares(shares):
+            return jsonify({"success": False, "error": "shares must be > 0 and < 1,000,000"}), 400
+        if not _valid_price(price_cad):
+            return jsonify({"success": False, "error": "price_cad must be > 0 and < 1,000,000"}), 400
 
         if trade_type == "BUY":
             # record_buy_trade: single connection, one BEGIN/COMMIT for holding
@@ -780,6 +808,8 @@ def set_cash():
         body = request.get_json(force=True, silent=True) or {}
         # Accept either "cash" or "amount" key
         amount = float(body.get("cash", body.get("amount", 0)))
+        if amount < 0 or amount > 1_000_000:
+            return jsonify({"success": False, "error": "cash must be between 0 and 1,000,000"}), 400
         port.set_cash_exact(amount)
         log.info("set_cash: set to %.4f", amount)
         return jsonify({"success": True, "available_cash": round(amount, 2)})
@@ -939,12 +969,13 @@ def add_watchlist():
         direction = str(body.get("direction", "above")).lower().strip()
         note = body.get("note", "")
 
-        if not ticker:
-            return jsonify({"success": False, "error": "ticker required"}), 400
-        if alert_price <= 0:
-            return jsonify({"success": False, "error": "alert_price must be > 0"}), 400
+        if not ticker or not _valid_ticker(ticker):
+            return jsonify({"success": False, "error": "ticker required (1–6 uppercase letters, optional .TO)"}), 400
+        if alert_price <= 0 or alert_price >= 1_000_000:
+            return jsonify({"success": False, "error": "alert_price must be between 0 and 1,000,000"}), 400
         if direction not in ("above", "below"):
             return jsonify({"success": False, "error": "direction must be 'above' or 'below'"}), 400
+        note = str(note or "")[:500]
 
         now = datetime.now(EASTERN).isoformat()
         conn = get_connection()

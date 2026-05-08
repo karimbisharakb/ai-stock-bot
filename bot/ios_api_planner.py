@@ -70,8 +70,8 @@ def planner_setup():
         paycheck_day = int(body.get("paycheck_day", 15))
         allocation_percent = float(body.get("allocation_percent", 100))
 
-        if paycheck_amount <= 0:
-            return jsonify({"success": False, "error": "paycheck_amount must be > 0"}), 400
+        if paycheck_amount <= 0 or paycheck_amount > 100_000:
+            return jsonify({"success": False, "error": "paycheck_amount must be between 0 and 100,000"}), 400
         if not 1 <= paycheck_day <= 31:
             return jsonify({"success": False, "error": "paycheck_day must be 1–31"}), 400
         if not 1 <= allocation_percent <= 100:
