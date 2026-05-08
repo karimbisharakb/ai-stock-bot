@@ -269,12 +269,21 @@ def _backup_db() -> str:
         return ""
 
     # Checkpoint WAL so the backup is a single self-contained file.
+    # TRUNCATE returns (busy, log, checkpointed); abort if any frames are busy
+    # (active readers prevented a full flush — the backup would be inconsistent).
     try:
         conn = sqlite3.connect(DB_PATH, timeout=10)
-        conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        row = conn.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
         conn.close()
+        if row and row[0] > 0:
+            log.warning(
+                "migration backup: WAL checkpoint busy (%d frames) — skipping backup",
+                row[0],
+            )
+            return ""
     except Exception as exc:
-        log.warning("migration backup: WAL checkpoint failed: %s", exc)
+        log.warning("migration backup: WAL checkpoint failed: %s — skipping backup", exc)
+        return ""
 
     ts = datetime.now().strftime("%Y%m%dT%H%M%S")
     backup_path = f"{DB_PATH}.backup.{ts}"
