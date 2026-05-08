@@ -55,13 +55,25 @@ def webhook():
     if auth_token:
         validator = RequestValidator(auth_token)
         sig = request.headers.get("X-Twilio-Signature", "")
-        if validator.validate(request.url, request.form, sig):
+        # Railway terminates TLS and forwards requests as http://.
+        # Reconstruct the https:// URL Twilio signed using X-Forwarded-Proto.
+        proto = request.headers.get("X-Forwarded-Proto", "").strip()
+        if proto:
+            url_for_sig = request.url.replace("http://", f"{proto}://", 1)
+        else:
+            url_for_sig = request.url
+        if validator.validate(url_for_sig, request.form, sig):
             log.debug("Twilio signature OK")
+        elif os.getenv("RAILWAY_ENVIRONMENT", "").strip():
+            log.error(
+                "Twilio signature REJECTED — url=%r sig=%r from=%r",
+                url_for_sig, sig[:20], from_number,
+            )
+            return str(resp), 403
         else:
             log.warning(
-                "Twilio signature mismatch — url=%r sig=%r from=%r "
-                "(allowing through; tighten to 403 once verified in Railway logs)",
-                request.url, sig[:20], from_number,
+                "Twilio signature mismatch — url=%r sig=%r from=%r (local dev — allowing through)",
+                url_for_sig, sig[:20], from_number,
             )
 
     if from_number != MY_WHATSAPP:
