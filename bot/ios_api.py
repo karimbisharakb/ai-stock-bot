@@ -656,21 +656,6 @@ def reset_portfolio():
 
 
 # ─────────────────────────────────────────────
-# GET /api/test-add  (smoke-test: writes PLTR to DB)
-# ─────────────────────────────────────────────
-
-@ios.route("/test-add", methods=["GET"])
-def test_add():
-    try:
-        result = port.add_or_update_holding("PLTR", 0.7619, 28.50)
-        log.info("test-add: inserted PLTR — %s", result)
-        return jsonify({"success": True, "result": result})
-    except Exception:
-        log.error("GET /api/test-add error:\n%s", traceback.format_exc())
-        return jsonify({"success": False, "error": traceback.format_exc()}), 500
-
-
-# ─────────────────────────────────────────────
 # POST /api/confirm-trade
 # ─────────────────────────────────────────────
 
@@ -745,7 +730,6 @@ def confirm_trade():
 # ─────────────────────────────────────────────
 # GET /api/cash  — returns current cash balance
 # POST /api/cash — sets cash balance (field: "cash" or "amount")
-# POST /api/test-cash — alias for testing (field: "amount")
 # ─────────────────────────────────────────────
 
 @ios.route("/cash", methods=["GET"])
@@ -769,20 +753,6 @@ def set_cash():
     except Exception:
         log.error("POST /api/cash error:\n%s", traceback.format_exc())
         return jsonify({"success": False, "error": "Failed to update cash"}), 500
-
-
-@ios.route("/test-cash", methods=["POST"])
-def test_cash():
-    """Test alias: POST {"amount": X} → sets cash and returns new balance."""
-    try:
-        body = request.get_json(force=True, silent=True) or {}
-        amount = float(body.get("amount", body.get("cash", 0)))
-        port.set_cash_exact(amount)
-        log.info("test-cash: set to %.4f", amount)
-        return jsonify({"success": True, "available_cash": round(amount, 2)})
-    except Exception:
-        log.error("POST /api/test-cash error:\n%s", traceback.format_exc())
-        return jsonify({"success": False, "error": traceback.format_exc()}), 500
 
 
 # ─────────────────────────────────────────────
