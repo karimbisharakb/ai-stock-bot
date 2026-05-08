@@ -287,8 +287,12 @@ def _try_claim_lease() -> bool:
         finally:
             conn.close()
     except Exception:
-        log.exception("Scheduler: lease claim failed — starting scheduler anyway")
-        return True  # fail open: a duplicate scheduler is recoverable; no scheduler is not
+        log.error(
+            "Scheduler: lease claim failed due to DB error — not starting scheduler. "
+            "Railway will restart the process and retry.",
+            exc_info=True,
+        )
+        return False  # fail closed: duplicate schedulers > no scheduler, but DB errors need investigation
 
 
 def release_scheduler_lease() -> None:
