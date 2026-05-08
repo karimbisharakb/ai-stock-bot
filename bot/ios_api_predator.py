@@ -128,17 +128,24 @@ def get_watchlist():
 def run_now():
     """Start a full background scan; returns immediately.
 
+    Returns 429 if a scan is already in progress (scheduler job holds the lock).
     Results are saved to the DB and readable via /api/predator/latest.
     """
-    from predator import PREDATOR_WATCHLIST, save_scan_results, score_all_tickers
+    from predator import PREDATOR_WATCHLIST, _PREDATOR_LOCK, save_scan_results, score_all_tickers
+
+    if not _PREDATOR_LOCK.acquire(blocking=False):
+        return jsonify({"status": "scan already in progress", "results_at": "/api/predator/latest"}), 429
 
     started_at = datetime.now().isoformat()
 
     def _bg():
-        log.info("Background predator scan started")
-        results = score_all_tickers()
-        save_scan_results(results)
-        log.info("Background predator scan complete: %d tickers scored", len(results))
+        try:
+            log.info("Background predator scan started")
+            results = score_all_tickers()
+            save_scan_results(results)
+            log.info("Background predator scan complete: %d tickers scored", len(results))
+        finally:
+            _PREDATOR_LOCK.release()
 
     threading.Thread(target=_bg, daemon=True).start()
     return jsonify({
