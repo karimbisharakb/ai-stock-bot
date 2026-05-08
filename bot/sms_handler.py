@@ -197,7 +197,7 @@ def _cmd_bought(ticker: str, shares: float, price: float, currency: str = "CAD")
         price_cad = price
         notes     = None
 
-    result = portfolio.add_or_update_holding(ticker, shares, price_cad, notes=notes)
+    result = portfolio.record_buy_trade(ticker, shares, price_cad, notes=notes)
 
     reply = f"✅ Added {shares} {ticker} @ ${price:.4f} {currency}\n"
     if currency == "USD":
