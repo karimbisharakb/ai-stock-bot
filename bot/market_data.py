@@ -63,7 +63,8 @@ def rsi_rolling_over(closes: pd.Series) -> bool:
 
 def ma200_recent_cross(closes: pd.Series, lookback: int = 20) -> tuple[bool, int]:
     """Return (crossed, days_ago) if price crossed from below to above its
-    200-day SMA within the last `lookback` trading days.
+    200-day SMA within the last `lookback` trading days AND the most recent
+    close is still strictly above the MA200.
 
     'days_ago' is 0 when the cross happened on the most recent bar, 1 for
     the previous bar, etc.  Only the most recent below→above transition is
@@ -71,21 +72,32 @@ def ma200_recent_cross(closes: pd.Series, lookback: int = 20) -> tuple[bool, int
 
     Returns (False, 0) when:
       - insufficient history (< 201 bars)
+      - most recent close is at or below MA200 (cross was reversed)
       - price has been above MA200 throughout the window (permanent state)
       - no upward crossing found in the window
 
+    Crossover condition is strict (p_curr > m_curr); equality at the MA200
+    is not considered a confirmed breakout.
+
     The extra bar before the window (n = lookback + 1 slice) allows detection
     of a cross that lands on the very first bar of the lookback window.
+    Effective n is clamped to len(closes) so lookback > data never crashes.
     """
     if len(closes) < 201:
         return False, 0
 
     rolling = closes.rolling(200).mean()
 
-    # Take lookback+1 bars so we can check a transition INTO bar 0 of the window
-    n = lookback + 1
+    # Clamp so iloc[-n:] never over-slices when lookback exceeds available rows
+    n = min(lookback + 1, len(closes))
     prices_w = closes.iloc[-n:]
     ma200_w  = rolling.iloc[-n:]
+
+    # Fast exit: if current close is not strictly above MA200 the cross is
+    # either reversed or was never a real breakout.
+    last_ma200 = ma200_w.iloc[-1]
+    if pd.isna(last_ma200) or prices_w.iloc[-1] <= last_ma200:
+        return False, 0
 
     last_cross_days_ago = -1
 
@@ -96,7 +108,8 @@ def ma200_recent_cross(closes: pd.Series, lookback: int = 20) -> tuple[bool, int
             continue
         p_prev = prices_w.iloc[i - 1]
         p_curr = prices_w.iloc[i]
-        if p_prev < m_prev and p_curr >= m_curr:
+        # Strict >: price touching MA200 from below is not a confirmed breakout
+        if p_prev < m_prev and p_curr > m_curr:
             last_cross_days_ago = (n - 1) - i  # 0 = today, 1 = yesterday, …
 
     if last_cross_days_ago >= 0:

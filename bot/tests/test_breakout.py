@@ -202,3 +202,43 @@ class TestMostRecentCross:
         assert crossed is True
         # Most recent cross was at bar 210, which is 9 bars before bar 219
         assert days == 9
+
+
+# ─────────────────────────────────────────────
+# Regression tests
+# ─────────────────────────────────────────────
+
+class TestRegressions:
+    def test_cross_then_fall_back_below_returns_false(self):
+        # Cross occurred within lookback but price has since fallen back below MA200.
+        # "Still above" guard must invalidate the cross.
+        # [130]*100 + [70]*100 + [120]*10 + [70]*10 = 220 bars
+        # Cross at bar 200; last 10 bars back at 70 (below MA200 ≈ 100).
+        base = [130.0] * 100 + [70.0] * 100
+        breakout = [120.0] * 10
+        reversal = [70.0] * 10
+        closes = _s(base + breakout + reversal)
+        crossed, days = ma200_recent_cross(closes, lookback=20)
+        assert crossed is False
+
+    def test_price_equal_to_ma200_not_a_breakout(self):
+        # Price touches MA200 exactly from below — strict > means this is NOT a breakout.
+        # Construct: [130]*100 + [70]*100 + [x] where x == MA200 at that bar.
+        # MA200 at bar 200 = mean(bars 1..200) = (99*130 + 100*70 + x) / 200
+        # Solving x = (19870 + x)/200 → x = 19870/199 ≈ 99.85
+        equal_val = 19870.0 / 199.0  # price that exactly equals MA200 at that bar
+        closes = _s([130.0] * 100 + [70.0] * 100 + [equal_val])
+        crossed, days = ma200_recent_cross(closes, lookback=20)
+        # Caught by both the "still above" guard (equal → <=) and strict crossover (> not >=)
+        assert crossed is False
+        assert days == 0
+
+    def test_lookback_larger_than_dataset_does_not_crash(self):
+        # 210 bars total, lookback=500 → n clamped to min(501, 210) = 210.
+        # Should return a valid result without IndexError.
+        closes = _s([130.0] * 100 + [70.0] * 100 + [120.0] * 10)
+        crossed, days = ma200_recent_cross(closes, lookback=500)
+        assert isinstance(crossed, bool)
+        assert isinstance(days, int)
+        # Cross at bar 200 is within the clamped window, last close 120 > MA200 ≈ 100
+        assert crossed is True
