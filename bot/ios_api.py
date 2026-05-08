@@ -41,7 +41,10 @@ def _require_auth(f):
     def wrapper(*args, **kwargs):
         secret = os.getenv("API_SECRET", "").strip()
         if not secret:
-            log.warning("API_SECRET not set — %s allowed without auth (set env var)", request.path)
+            if os.getenv("RAILWAY_ENVIRONMENT", "").strip():
+                log.error("API_SECRET not set in Railway — rejecting %s", request.path)
+                return jsonify({"error": "Unauthorized"}), 401
+            log.warning("API_SECRET not set — %s allowed without auth (local dev only)", request.path)
             return f(*args, **kwargs)
         token = request.headers.get("Authorization", "")
         if token.startswith("Bearer "):
