@@ -69,31 +69,43 @@ def get_alerts():
     return jsonify({"alerts": [_parse_row(dict(r)) for r in rows]})
 
 
+def _parse_latest_row(row: dict) -> dict:
+    """Shape a predator_latest row into the watchlist response envelope."""
+    signals = {}
+    try:
+        signals = json.loads(row["signals_json"]) if row["signals_json"] else {}
+    except (json.JSONDecodeError, TypeError):
+        pass
+    return {
+        "id":               None,
+        "ticker":           row["ticker"],
+        "score":            row["score"],
+        "signals":          signals,
+        "entry_price":      row["entry_price"],
+        "stop_price":       row["stop_price"],
+        "position_size_cad": None,
+        "alert_time":       row["scan_time"],
+        # outcome fields live only on actual predator_alerts rows
+        "price_7d_later":   None,
+        "price_14d_later":  None,
+        "price_30d_later":  None,
+        "outcome":          None,
+    }
+
+
 @predator_bp.route("/watchlist", methods=["GET"])
 def get_watchlist():
-    """Latest score for each watched ticker (last 7 days, one record per ticker)."""
+    """Latest score for each watched ticker from predator_latest (one row per ticker)."""
     from predator import PREDATOR_WATCHLIST
-    cutoff = (datetime.now() - timedelta(days=7)).isoformat()
     conn = get_connection()
-    # Get the most recent record per ticker
     rows = conn.execute(
-        """
-        SELECT p.*
-        FROM predator_alerts p
-        INNER JOIN (
-            SELECT ticker, MAX(alert_time) AS latest
-            FROM predator_alerts
-            WHERE alert_time >= ?
-            GROUP BY ticker
-        ) m ON p.ticker = m.ticker AND p.alert_time = m.latest
-        ORDER BY p.score DESC
-        """,
-        (cutoff,),
+        "SELECT ticker, score, signals_json, entry_price, stop_price, scan_time "
+        "FROM predator_latest ORDER BY score DESC"
     ).fetchall()
     conn.close()
 
-    # Ensure all watchlist tickers are present
-    scored = {r["ticker"]: _parse_row(dict(r)) for r in rows}
+    # Ensure all watchlist tickers are present, adding stubs for any not yet scanned
+    scored = {r["ticker"]: _parse_latest_row(dict(r)) for r in rows}
     result = []
     for ticker in PREDATOR_WATCHLIST:
         if ticker in scored:
@@ -146,42 +158,30 @@ def debug_scan():
 
 @predator_bp.route("/latest", methods=["GET"])
 def get_latest():
-    """Most recent scan result per ticker from the DB — no computation."""
-    cutoff = (datetime.now() - timedelta(hours=24)).isoformat()
+    """Most recent scan result per ticker from predator_latest — no computation."""
     conn = get_connection()
     rows = conn.execute(
-        """
-        SELECT p.*
-        FROM predator_alerts p
-        INNER JOIN (
-            SELECT ticker, MAX(alert_time) AS latest
-            FROM predator_alerts
-            WHERE alert_time >= ?
-            GROUP BY ticker
-        ) m ON p.ticker = m.ticker AND p.alert_time = m.latest
-        ORDER BY p.score DESC
-        """,
-        (cutoff,),
+        "SELECT ticker, score, signals_json, entry_price, scan_time "
+        "FROM predator_latest ORDER BY score DESC"
     ).fetchall()
     conn.close()
 
     results = []
     for row in rows:
-        d = dict(row)
         signals = {}
         try:
-            signals = json.loads(d["signals_json"]) if d["signals_json"] else {}
+            signals = json.loads(row["signals_json"]) if row["signals_json"] else {}
         except (json.JSONDecodeError, TypeError):
             pass
         results.append({
-            "ticker":      d["ticker"],
-            "total_score": d["score"],
-            "price":       d["entry_price"],
+            "ticker":      row["ticker"],
+            "total_score": row["score"],
+            "price":       row["entry_price"],
             "signals": {
                 k: {"score": s.get("score", 0), "reason": s.get("reason", "")}
                 for k, s in signals.items()
             },
-            "alert_time":  d["alert_time"],
+            "alert_time":  row["scan_time"],
         })
 
     return jsonify({"results": results, "total": len(results)})

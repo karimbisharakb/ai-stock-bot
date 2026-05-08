@@ -13,6 +13,7 @@ Signal weights:
 """
 import json
 import logging
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as _FuturesTimeout
 from datetime import date, datetime, timedelta
@@ -28,6 +29,11 @@ import portfolio
 log = logging.getLogger(__name__)
 EASTERN = pytz.timezone("America/Toronto")
 ALERT_THRESHOLD = 6
+
+# Prevents concurrent predator scans and concurrent outcome updates from
+# overlapping each other's SQLite writes. Non-blocking for the scan job
+# (skip if busy), short-timeout for the outcomes job (wait briefly then skip).
+_PREDATOR_LOCK = threading.Lock()
 
 PREDATOR_WATCHLIST = [
     # Semiconductors
@@ -447,44 +453,62 @@ def _format_alert(ticker: str, score: int, price: float, signals: dict,
 # ── Outcome updater (call daily) ────────────────────────────────────────────────
 
 def update_outcomes():
-    conn = get_connection()
-    now_str = datetime.now().isoformat()
+    if not _PREDATOR_LOCK.acquire(blocking=True, timeout=15):
+        log.warning("Outcomes: predator lock still held after 15s — skipping outcome update")
+        return
 
-    for days, col in ((7, "price_7d_later"), (14, "price_14d_later"), (30, "price_30d_later")):
-        cutoff_start = (datetime.now() - timedelta(days=days + 1)).isoformat()
-        cutoff_end   = (datetime.now() - timedelta(days=days - 1)).isoformat()
-        rows = conn.execute(
-            f"SELECT id, ticker, entry_price FROM predator_alerts "
-            f"WHERE alert_time BETWEEN ? AND ? AND {col} IS NULL",
-            (cutoff_start, cutoff_end),
-        ).fetchall()
-        for row in rows:
-            try:
-                import yfinance as yf3
-                hist = yf3.Ticker(row["ticker"]).history(period="1d")
-                if hist.empty:
-                    continue
-                px = round(float(hist["Close"].iloc[-1]), 2)
-                entry = row["entry_price"] or 0
-                outcome = None
-                if entry > 0:
-                    pct = (px / entry - 1) * 100
-                    if pct >= 10:
-                        outcome = f"WIN +{pct:.1f}%"
-                    elif pct <= -9:
-                        outcome = f"LOSS {pct:.1f}%"
-                    else:
-                        outcome = f"HOLD {pct:+.1f}%"
-                conn.execute(
+    _start = time.monotonic()
+    log.info("Outcomes: lock acquired — updating")
+    try:
+        conn = get_connection()
+
+        for days, col in ((7, "price_7d_later"), (14, "price_14d_later"), (30, "price_30d_later")):
+            cutoff_start = (datetime.now() - timedelta(days=days + 1)).isoformat()
+            cutoff_end   = (datetime.now() - timedelta(days=days - 1)).isoformat()
+            rows = conn.execute(
+                f"SELECT id, ticker, entry_price FROM predator_alerts "
+                f"WHERE alert_time BETWEEN ? AND ? AND {col} IS NULL",
+                (cutoff_start, cutoff_end),
+            ).fetchall()
+
+            # Gather all updates first, then commit once per time-window.
+            # Previously: one conn.commit() per row → hundreds of WAL flushes.
+            updates = []
+            for row in rows:
+                try:
+                    import yfinance as yf3
+                    hist = yf3.Ticker(row["ticker"]).history(period="1d")
+                    if hist.empty:
+                        continue
+                    px = round(float(hist["Close"].iloc[-1]), 2)
+                    entry = row["entry_price"] or 0
+                    outcome = None
+                    if entry > 0:
+                        pct = (px / entry - 1) * 100
+                        if pct >= 10:
+                            outcome = "WIN"
+                        elif pct <= -9:
+                            outcome = "LOSS"
+                        else:
+                            outcome = "HOLD"
+                    updates.append((px, outcome, row["id"]))
+                    log.info("Outcome queued %s id=%d: %s=%.2f (%s)",
+                             row["ticker"], row["id"], col, px, outcome)
+                except Exception as exc:
+                    log.warning("Outcome update failed for %s: %s", row["ticker"], exc)
+
+            if updates:
+                conn.executemany(
                     f"UPDATE predator_alerts SET {col} = ?, outcome = ? WHERE id = ?",
-                    (px, outcome, row["id"]),
+                    updates,
                 )
                 conn.commit()
-                log.info("Outcome update %s id=%d: %s=%s", row["ticker"], row["id"], col, px)
-            except Exception as exc:
-                log.warning("Outcome update failed for %s: %s", row["ticker"], exc)
+                log.info("Outcomes: committed %d %s updates", len(updates), col)
 
-    conn.close()
+        conn.close()
+    finally:
+        _PREDATOR_LOCK.release()
+        log.info("Outcomes: complete in %.1fs — lock released", time.monotonic() - _start)
 
 
 # ── Parallel scoring (for debug/API) ─────────────────────────────────────────
@@ -519,62 +543,106 @@ def score_all_tickers() -> list[dict]:
 
 
 def save_scan_results(results: list[dict]):
-    """Persist a list of scored results to the DB without sending alerts."""
-    for r in results:
-        _record_alert_passive(r["ticker"], r["score"], r["signals"], r["price"])
+    """Persist a list of scored results to predator_latest without sending alerts."""
+    _batch_upsert_latest(results)
 
 
 # ── Main job ───────────────────────────────────────────────────────────────────
 
 def run_predator():
-    log.info("🎯 Predator scan @ %s", datetime.now(EASTERN).strftime("%H:%M"))
+    if not _PREDATOR_LOCK.acquire(blocking=False):
+        log.warning("Predator: previous run still active — skipping scheduled fire @ %s",
+                    datetime.now(EASTERN).strftime("%H:%M"))
+        return
 
-    cash = portfolio.get_cash()
-    position_size = round(cash * 0.25, 2)
+    _start = time.monotonic()
+    log.info("Predator: lock acquired — starting scan @ %s", datetime.now(EASTERN).strftime("%H:%M"))
+    try:
+        cash = portfolio.get_cash()
+        position_size = round(cash * 0.25, 2)
 
-    for ticker in PREDATOR_WATCHLIST:
-        if _already_alerted(ticker):
-            log.debug("Predator: %s already alerted — skip", ticker)
-            continue
-        try:
-            result = _score_ticker(ticker)
-        except Exception:
-            log.exception("Predator: unhandled error for %s", ticker)
-            continue
+        latest_rows = []  # collected for single batch upsert at end of run
 
-        if result is None:
-            continue
+        for ticker in PREDATOR_WATCHLIST:
+            if _already_alerted(ticker):
+                log.debug("Predator: %s already alerted — skip", ticker)
+                continue
+            try:
+                result = _score_ticker(ticker)
+            except Exception:
+                log.exception("Predator: unhandled error for %s", ticker)
+                time.sleep(1)
+                continue
 
-        score   = result["score"]
-        price   = result["price"]
-        signals = result["signals"]
+            if result is None:
+                time.sleep(1)
+                continue
 
-        log.info("Predator: %s score=%d/%d", ticker, score, 10)
+            score   = result["score"]
+            price   = result["price"]
+            signals = result["signals"]
 
-        if score >= ALERT_THRESHOLD:
-            stop = round(price * 0.91, 2)
-            msg  = _format_alert(ticker, score, price, signals, stop, position_size)
-            if send_sms(msg):
-                _record_alert(ticker, score, signals, price, stop, position_size)
-                log.info("Predator alert sent for %s (score %d)", ticker, score)
-        else:
-            # Record non-alerting scores so watchlist endpoint can show them
-            _record_alert_passive(ticker, score, signals, price)
+            log.info("Predator: %s score=%d/%d", ticker, score, 10)
 
-        time.sleep(1)   # gentle rate-limit between tickers
+            if score >= ALERT_THRESHOLD:
+                stop = round(price * 0.91, 2)
+                msg  = _format_alert(ticker, score, price, signals, stop, position_size)
+                if send_sms(msg):
+                    _record_alert(ticker, score, signals, price, stop, position_size)
+                    log.info("Predator alert sent for %s (score %d)", ticker, score)
+
+            # Always collect for predator_latest — one batch write at end of run
+            latest_rows.append(result)
+            time.sleep(1)
+
+        # Single commit for all latest scores — replaces 27 individual INSERTs+commits
+        _batch_upsert_latest(latest_rows)
+
+    finally:
+        _PREDATOR_LOCK.release()
+        log.info("Predator: scan complete in %.0fs — lock released",
+                 time.monotonic() - _start)
 
 
-def _record_alert_passive(ticker: str, score: float, signals: dict, price: float):
-    """Record a scored ticker without sending an alert (for watchlist display)."""
+def _batch_upsert_latest(results: list) -> None:
+    """Upsert latest scan scores into predator_latest in a single transaction.
+
+    Replaces the old _record_alert_passive pattern that did one INSERT + one
+    COMMIT per ticker (27 separate write transactions per hourly run → ~350 new
+    rows/day that were never individually useful).  Now it's one UPSERT batch,
+    one commit, zero table growth.
+    """
+    if not results:
+        return
+    now = datetime.now().isoformat()
+    rows = [
+        (
+            r["ticker"],
+            r["score"],
+            json.dumps(r["signals"]),
+            r.get("price"),
+            round(r["price"] * 0.91, 2) if r.get("price") else None,
+            now,
+        )
+        for r in results
+    ]
     conn = get_connection()
-    conn.execute(
-        """
-        INSERT INTO predator_alerts
-            (ticker, score, signals_json, entry_price, stop_price, position_size_cad, alert_time)
-        VALUES (?,?,?,?,?,?,?)
-        """,
-        (ticker, score, json.dumps(signals), price, round(price * 0.91, 2), 0.0,
-         datetime.now().isoformat()),
-    )
-    conn.commit()
-    conn.close()
+    try:
+        conn.executemany(
+            """
+            INSERT INTO predator_latest
+                (ticker, score, signals_json, entry_price, stop_price, scan_time)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(ticker) DO UPDATE SET
+                score        = excluded.score,
+                signals_json = excluded.signals_json,
+                entry_price  = excluded.entry_price,
+                stop_price   = excluded.stop_price,
+                scan_time    = excluded.scan_time
+            """,
+            rows,
+        )
+        conn.commit()
+        log.info("Predator: upserted %d latest scores into predator_latest", len(rows))
+    finally:
+        conn.close()
