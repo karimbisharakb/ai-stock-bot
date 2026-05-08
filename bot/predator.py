@@ -9,7 +9,7 @@ Signal weights:
   short_squeeze : 2 pts  (high short float + rising price + vol)
   catalyst      : 2 pts  (earnings/FDA within 30 days via yfinance calendar)
   institutional : 1 pt   (large institution in recent 13F snapshot)
-  breakout      : 2 pts  (52wk-high proximity, vol spike, MA200 cross)
+  breakout      : 2 pts  (52wk-high proximity, vol spike, MA200 recent cross event)
 """
 import json
 import logging
@@ -23,7 +23,7 @@ import yfinance as yf
 
 from alerts import send_sms
 from database import get_connection
-from market_data import get_ticker_data
+from market_data import get_ticker_data, ma200_recent_cross
 import portfolio
 
 log = logging.getLogger(__name__)
@@ -370,9 +370,13 @@ def _score_breakout(ticker: str, data: dict) -> tuple[int, str]:
             hits += 1
             reasons.append(f"vol {vol_ratio:.1f}x avg, +{pct_1d:.1f}% today")
 
-        if ma200 and current > 0 and current > ma200 * 1.01:
-            hits += 1
-            reasons.append(f"above 200d MA ${ma200:.2f}")
+        closes = data.get("closes")
+        if closes is not None and ma200:
+            crossed, days_ago = ma200_recent_cross(closes)
+            if crossed:
+                hits += 1
+                when = "today" if days_ago == 0 else f"{days_ago}d ago"
+                reasons.append(f"crossed above 200d MA ${ma200:.2f} ({when})")
 
         if hits >= 2:
             return 2, "Breakout: " + ", ".join(reasons[:2])

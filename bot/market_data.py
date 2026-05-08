@@ -61,6 +61,49 @@ def rsi_rolling_over(closes: pd.Series) -> bool:
     return r_now > 65 and r_now < r_prev < r_prev2
 
 
+def ma200_recent_cross(closes: pd.Series, lookback: int = 20) -> tuple[bool, int]:
+    """Return (crossed, days_ago) if price crossed from below to above its
+    200-day SMA within the last `lookback` trading days.
+
+    'days_ago' is 0 when the cross happened on the most recent bar, 1 for
+    the previous bar, etc.  Only the most recent below→above transition is
+    reported when there are multiple crossings in the window.
+
+    Returns (False, 0) when:
+      - insufficient history (< 201 bars)
+      - price has been above MA200 throughout the window (permanent state)
+      - no upward crossing found in the window
+
+    The extra bar before the window (n = lookback + 1 slice) allows detection
+    of a cross that lands on the very first bar of the lookback window.
+    """
+    if len(closes) < 201:
+        return False, 0
+
+    rolling = closes.rolling(200).mean()
+
+    # Take lookback+1 bars so we can check a transition INTO bar 0 of the window
+    n = lookback + 1
+    prices_w = closes.iloc[-n:]
+    ma200_w  = rolling.iloc[-n:]
+
+    last_cross_days_ago = -1
+
+    for i in range(1, n):
+        m_prev = ma200_w.iloc[i - 1]
+        m_curr = ma200_w.iloc[i]
+        if pd.isna(m_prev) or pd.isna(m_curr):
+            continue
+        p_prev = prices_w.iloc[i - 1]
+        p_curr = prices_w.iloc[i]
+        if p_prev < m_prev and p_curr >= m_curr:
+            last_cross_days_ago = (n - 1) - i  # 0 = today, 1 = yesterday, …
+
+    if last_cross_days_ago >= 0:
+        return True, last_cross_days_ago
+    return False, 0
+
+
 # ──────────────────────────────────────────────
 # Single ticker data
 # ──────────────────────────────────────────────
