@@ -4,7 +4,12 @@ Jobs:
   - Morning summary at 8:45 AM ET (weekdays)
   - Sell monitor every 15 min during market hours (weekdays)
 """
+import logging
+import os
+import socket
 from datetime import datetime, date, timedelta
+from typing import Optional
+
 import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -17,6 +22,7 @@ from predator import run_predator, update_outcomes
 from strategy import WATCHLIST
 from database import get_connection
 
+log = logging.getLogger(__name__)
 EASTERN = pytz.timezone("America/Toronto")
 
 # Give alerts.py access to the watchlist size
@@ -205,7 +211,113 @@ def weekly_summary_job():
         print(f"weekly_summary_job error: {e}")
 
 
-def start_scheduler() -> BackgroundScheduler:
+def _pid_alive(pid: int) -> bool:
+    """Return True if a process with this PID exists on the current host.
+
+    os.kill(pid, 0) raises:
+      ProcessLookupError (ESRCH)  — process does not exist → dead
+      PermissionError    (EPERM)  — process exists but we can't signal it → alive
+      OSError            (other)  — treat as dead to be safe
+    """
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True  # process exists; we just lack permission to signal it
+    except OSError:
+        return False
+
+
+def _try_claim_lease() -> bool:
+    """
+    Claim the scheduler lease using PID liveness on same host, or by
+    taking over a stale lease from a different host (redeploy scenario).
+
+    Returns True if this process should start the scheduler.
+    Fails open: if the lease table is missing or the query errors, returns
+    True so the scheduler always starts rather than silently disappearing.
+    """
+    pid  = os.getpid()
+    host = socket.gethostname()
+    now  = datetime.now().isoformat()
+
+    try:
+        conn = get_connection()
+        try:
+            row = conn.execute(
+                "SELECT pid, hostname, acquired_at FROM scheduler_lease WHERE id = 1"
+            ).fetchone()
+
+            if row is not None:
+                owner_pid  = row["pid"]
+                owner_host = row["hostname"]
+
+                if owner_pid == pid and owner_host == host:
+                    # Same process calling start_scheduler() twice — already own the lease.
+                    return True
+
+                if owner_host == host:
+                    if _pid_alive(owner_pid):
+                        log.info(
+                            "Scheduler: lease held by pid=%d on this host — "
+                            "this worker will not start a scheduler",
+                            owner_pid,
+                        )
+                        return False
+                    log.warning(
+                        "Scheduler: previous owner pid=%d is gone — reclaiming lease",
+                        owner_pid,
+                    )
+                else:
+                    log.info(
+                        "Scheduler: lease from host=%r — claiming for this deployment",
+                        owner_host,
+                    )
+
+            conn.execute(
+                "INSERT OR REPLACE INTO scheduler_lease (id, pid, hostname, acquired_at) "
+                "VALUES (1, ?, ?, ?)",
+                (pid, host, now),
+            )
+            conn.commit()
+            log.info("Scheduler: lease acquired (pid=%d host=%s)", pid, host)
+            return True
+        finally:
+            conn.close()
+    except Exception:
+        log.exception("Scheduler: lease claim failed — starting scheduler anyway")
+        return True  # fail open: a duplicate scheduler is recoverable; no scheduler is not
+
+
+def release_scheduler_lease() -> None:
+    """
+    Delete the lease row if this process owns it.
+    Called from wsgi.py atexit so Railway SIGTERM triggers a clean handoff.
+    """
+    pid  = os.getpid()
+    host = socket.gethostname()
+    try:
+        conn = get_connection()
+        try:
+            conn.execute(
+                "DELETE FROM scheduler_lease WHERE id = 1 AND pid = ? AND hostname = ?",
+                (pid, host),
+            )
+            conn.commit()
+            log.info("Scheduler: lease released (pid=%d)", pid)
+        finally:
+            conn.close()
+    except Exception as exc:
+        log.warning("Scheduler: lease release failed: %s", exc)
+
+
+def start_scheduler() -> Optional[BackgroundScheduler]:
+    if not _try_claim_lease():
+        print("⏭️  Scheduler not started — lease held by another worker on this host")
+        return None
+
     scheduler = BackgroundScheduler(timezone=EASTERN)
 
     # Morning summary — 8:45 AM ET, Mon–Fri
