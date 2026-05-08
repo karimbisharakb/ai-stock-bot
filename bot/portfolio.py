@@ -169,12 +169,16 @@ def reduce_or_remove_holding(ticker: str, shares: float, price: float) -> dict:
         conn.close()
         return {"error": f"No holding found for {ticker}"}
 
-    avg_cost   = existing["avg_cost"]
     old_shares = existing["shares"]
-    gain_loss  = round((price - avg_cost) * shares, 2)
-    pct        = round((price / avg_cost - 1) * 100, 2)
-    proceeds   = round(price * shares, 2)
-    now        = datetime.now().isoformat()
+    if shares > old_shares + 1e-6:
+        conn.close()
+        return {"error": f"Cannot sell {shares} shares of {ticker}: only {old_shares:.6f} held"}
+
+    avg_cost  = existing["avg_cost"]
+    gain_loss = round((price - avg_cost) * shares, 2)
+    pct       = round((price / avg_cost - 1) * 100, 2)
+    proceeds  = round(price * shares, 2)
+    now       = datetime.now().isoformat()
 
     new_shares = old_shares - shares
     if new_shares <= 0.0001:
@@ -194,10 +198,10 @@ def reduce_or_remove_holding(ticker: str, shares: float, price: float) -> dict:
         (ticker, "SELL", shares, price, total_cad, now, sell_notes),
     )
 
-    # Free up cash
-    cash_row = conn.execute("SELECT available_cash FROM cash WHERE id = 1").fetchone()
-    new_cash = (cash_row["available_cash"] if cash_row else 0) + proceeds
-    conn.execute("UPDATE cash SET available_cash = ? WHERE id = 1", (round(new_cash, 2),))
+    conn.execute(
+        "UPDATE cash SET available_cash = available_cash + ? WHERE id = 1",
+        (proceeds,),
+    )
 
     conn.commit()
     conn.close()
