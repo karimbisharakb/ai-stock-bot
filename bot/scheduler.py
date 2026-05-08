@@ -88,12 +88,16 @@ def watchlist_check_job():
 
                 now = datetime.now(EASTERN).isoformat()
                 conn = get_connection()
-                conn.execute(
-                    "UPDATE watchlist SET triggered=1, triggered_at=? WHERE id=?",
+                cursor = conn.execute(
+                    "UPDATE watchlist SET triggered=1, triggered_at=? WHERE id=? AND triggered=0",
                     (now, item["id"]),
                 )
                 conn.commit()
                 conn.close()
+
+                if cursor.rowcount == 0:
+                    # Another scheduler already claimed this row
+                    continue
 
                 direction_word = "above" if item["direction"] == "above" else "below"
                 note_part = f"\n📝 {item['note']}" if item["note"] else ""
