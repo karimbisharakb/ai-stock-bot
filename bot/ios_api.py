@@ -673,17 +673,14 @@ ACTUAL_CASH = 135.21
 @ios.route("/reset-portfolio", methods=["GET"])
 @_require_auth
 def reset_portfolio():
+    conn = get_connection()
     try:
-        conn = get_connection()
+        conn.execute("BEGIN")
         conn.execute("DELETE FROM holdings")
         conn.execute("DELETE FROM transactions")
-        conn.commit()
-        conn.close()
-        log.info("reset-portfolio: cleared all holdings and transactions")
 
         now = datetime.now().isoformat()
         for h in ACTUAL_HOLDINGS:
-            conn = get_connection()
             conn.execute(
                 "INSERT INTO holdings (ticker, shares, avg_cost, date_added) VALUES (?,?,?,?)",
                 (h["ticker"], h["shares"], h["avg_cost"], now),
@@ -694,12 +691,13 @@ def reset_portfolio():
                 (h["ticker"], "BUY", h["shares"], h["avg_cost"],
                  round(h["shares"] * h["avg_cost"], 4), now, "Wealthsimple reset"),
             )
-            conn.commit()
-            conn.close()
-            log.info("reset-portfolio: inserted %s %.4f sh @ %.4f", h["ticker"], h["shares"], h["avg_cost"])
 
-        port.set_cash_exact(ACTUAL_CASH)
-        log.info("reset-portfolio: cash set to %.2f", ACTUAL_CASH)
+        conn.execute(
+            "UPDATE cash SET available_cash = ? WHERE id = 1",
+            (round(ACTUAL_CASH, 2),),
+        )
+        conn.commit()
+        log.info("reset-portfolio: reset to %d holdings, cash=%.2f", len(ACTUAL_HOLDINGS), ACTUAL_CASH)
 
         holdings = port.get_holdings()
         return jsonify({
@@ -710,8 +708,11 @@ def reset_portfolio():
         })
 
     except Exception:
+        conn.rollback()
         log.error("GET /api/reset-portfolio error:\n%s", traceback.format_exc())
         return jsonify({"success": False, "error": traceback.format_exc()}), 500
+    finally:
+        conn.close()
 
 
 # ─────────────────────────────────────────────
