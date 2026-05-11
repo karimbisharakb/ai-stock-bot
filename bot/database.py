@@ -260,6 +260,62 @@ MIGRATIONS: list = [
             """
         ],
     ),
+    Migration(
+        version=2,
+        description=(
+            "predator schema expansion: add confidence_pct, adjusted_score, raw_score, tier, "
+            "per-signal score columns to predator_alerts and predator_latest; "
+            "add predator_signal_weights table with seed data; add query indexes"
+        ),
+        sql=[
+            # ── predator_alerts: new columns ─────────────────────────────────
+            "ALTER TABLE predator_alerts ADD COLUMN confidence_pct      REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN adjusted_score      REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN raw_score           REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN tier                TEXT",
+            "ALTER TABLE predator_alerts ADD COLUMN score_options       REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN score_insider       REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN score_short_squeeze REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN score_catalyst      REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN score_institutional REAL",
+            "ALTER TABLE predator_alerts ADD COLUMN score_breakout      REAL",
+            # ── predator_latest: same new columns ────────────────────────────
+            "ALTER TABLE predator_latest ADD COLUMN confidence_pct      REAL",
+            "ALTER TABLE predator_latest ADD COLUMN adjusted_score      REAL",
+            "ALTER TABLE predator_latest ADD COLUMN raw_score           REAL",
+            "ALTER TABLE predator_latest ADD COLUMN tier                TEXT",
+            "ALTER TABLE predator_latest ADD COLUMN score_options       REAL",
+            "ALTER TABLE predator_latest ADD COLUMN score_insider       REAL",
+            "ALTER TABLE predator_latest ADD COLUMN score_short_squeeze REAL",
+            "ALTER TABLE predator_latest ADD COLUMN score_catalyst      REAL",
+            "ALTER TABLE predator_latest ADD COLUMN score_institutional REAL",
+            "ALTER TABLE predator_latest ADD COLUMN score_breakout      REAL",
+            # ── predator_signal_weights: static config for adaptive scoring ──
+            # weight column is reserved for future adaptive learning — seeds at 1.0
+            """
+            CREATE TABLE IF NOT EXISTS predator_signal_weights (
+                signal_name  TEXT    PRIMARY KEY,
+                max_score    REAL    NOT NULL,
+                weight       REAL    NOT NULL DEFAULT 1.0,
+                last_updated TEXT    NOT NULL
+            )
+            """,
+            # Seed one row per signal; INSERT OR IGNORE makes this re-runnable safely
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('options',       3, 1.0, CURRENT_TIMESTAMP)",
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('insider',       2, 1.0, CURRENT_TIMESTAMP)",
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('short_squeeze', 2, 1.0, CURRENT_TIMESTAMP)",
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('catalyst',      2, 1.0, CURRENT_TIMESTAMP)",
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('institutional', 1, 1.0, CURRENT_TIMESTAMP)",
+            "INSERT OR IGNORE INTO predator_signal_weights (signal_name, max_score, weight, last_updated) VALUES ('breakout',      2, 1.0, CURRENT_TIMESTAMP)",
+            # ── Indexes for predator query patterns ──────────────────────────
+            "CREATE INDEX IF NOT EXISTS idx_predator_alerts_ticker     ON predator_alerts(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_predator_alerts_alert_time ON predator_alerts(alert_time)",
+            "CREATE INDEX IF NOT EXISTS idx_predator_alerts_tier       ON predator_alerts(tier)",
+            "CREATE INDEX IF NOT EXISTS idx_predator_alerts_score      ON predator_alerts(score)",
+            "CREATE INDEX IF NOT EXISTS idx_predator_latest_score      ON predator_latest(score)",
+            "CREATE INDEX IF NOT EXISTS idx_predator_latest_scan_time  ON predator_latest(scan_time)",
+        ],
+    ),
 ]
 
 
