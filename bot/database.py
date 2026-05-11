@@ -345,6 +345,22 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_predator_outcomes_status ON predator_outcomes(outcome_status)",
         ],
     ),
+    Migration(
+        version=4,
+        description="add recommendation_snapshots table for adaptive weight observation (Phase 1G)",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS recommendation_snapshots (
+                id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                snapshot_time TEXT    NOT NULL,
+                row_count     INTEGER NOT NULL,
+                weights_json  TEXT    NOT NULL,
+                metrics_json  TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_rec_snapshots_time ON recommendation_snapshots(snapshot_time)",
+        ],
+    ),
 ]
 
 
