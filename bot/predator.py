@@ -652,6 +652,67 @@ _SIGNAL_LABELS = {
     "breakout":      ("Breakout",        2),
 }
 
+# Sum of individual signal maxes — denominator for quality component.
+# Predator caps the final total at 10, but we normalise against the true
+# per-signal ceiling (12) so the quality component stays in [0, 1].
+_SIGNAL_MAX_TOTAL: int = sum(v[1] for v in _SIGNAL_LABELS.values())  # 12
+
+# Data-quality multipliers — how much a signal's raw score counts toward
+# confidence when its backing data is HIGH / MEDIUM / LOW quality.
+_QUALITY_WEIGHT: dict[str, float] = {
+    "HIGH":   1.0,
+    "MEDIUM": 0.7,
+    "LOW":    0.4,
+}
+
+
+def compute_confidence(signals: dict) -> float:
+    """Return a confidence value in [0.0, 100.0] for a scored ticker.
+
+    `signals` is the dict produced by _score_ticker:
+      { signal_name: {"score": int, "reason": str, "data_quality"?: str} }
+
+    Signals that lack a "data_quality" key default to "MEDIUM" when their
+    score > 0 and "LOW" when their score == 0.
+
+    Two components, linearly combined:
+
+      quality_component   (weight 0.70)
+        = sum(score_i × quality_weight_i) / _SIGNAL_MAX_TOTAL
+        Rewards signals that carry HIGH-quality data; penalises LOW-quality ones.
+
+      convergence_component (weight 0.30)
+        = active_signal_count / total_signal_count
+        Rewards independent signals agreeing: 4 weak signals beat 1 strong one.
+    """
+    total_signals = len(_SIGNAL_LABELS)
+    quality_weighted = 0.0
+    active = 0
+
+    for name in _SIGNAL_LABELS:
+        sig = signals.get(name, {})
+        score = sig.get("score", 0)
+        if score <= 0:
+            continue
+        active += 1
+        quality = sig.get("data_quality") or "MEDIUM"
+        quality_weighted += score * _QUALITY_WEIGHT.get(quality, 0.7)
+
+    quality_component     = quality_weighted / _SIGNAL_MAX_TOTAL
+    convergence_component = active / total_signals
+
+    raw = quality_component * 0.70 + convergence_component * 0.30
+    return round(min(raw * 100.0, 100.0), 1)
+
+
+def compute_adjusted_score(raw_score: int, confidence: float) -> float:
+    """Scale raw_score (0–10) by confidence (0–100). Returns float in [0.0, 10.0].
+
+    A raw score of 8 with 50% confidence → adjusted score of 4.0.
+    Use this to rank candidates by signal quality, not just raw points.
+    """
+    return round(raw_score * confidence / 100.0, 2)
+
 
 def _dot(score: int, max_score: int) -> str:
     if score == 0:
