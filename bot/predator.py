@@ -25,6 +25,7 @@ import yfinance as yf
 from alerts import send_sms
 from database import get_connection
 from market_data import get_ticker_data, ma200_recent_cross
+from market_regime import get_market_regime, apply_regime_penalty
 import portfolio
 
 log = logging.getLogger(__name__)
@@ -948,6 +949,9 @@ def run_predator():
         cash = portfolio.get_cash()
         position_size = round(cash * 0.25, 2)
 
+        regime = get_market_regime()
+        log.info("Predator: market regime = %s | %s", regime.state, regime.reason)
+
         latest_rows = []  # collected for single batch upsert at end of run
 
         for ticker in PREDATOR_WATCHLIST:
@@ -964,6 +968,27 @@ def run_predator():
             if result is None:
                 time.sleep(1)
                 continue
+
+            # Apply market-regime penalty; re-derive adjusted_score and tier
+            penalized_conf, penalized_sigs, suppressed = apply_regime_penalty(
+                result["confidence"], result["signals"], regime
+            )
+            new_adj    = compute_adjusted_score(result["score"], penalized_conf)
+            new_active = sum(1 for s in penalized_sigs.values() if s.get("score", 0) > 0)
+            new_tier   = classify_tier(result["score"], new_adj, penalized_conf, new_active)
+            result = {
+                **result,
+                "confidence":     penalized_conf,
+                "adjusted_score": new_adj,
+                "signals":        penalized_sigs,
+                "active_signals": new_active,
+                "tier":           new_tier,
+            }
+            if suppressed:
+                log.info(
+                    "Predator: %s — %d signal(s) suppressed by %s regime",
+                    ticker, suppressed, regime.state,
+                )
 
             score          = result["score"]
             price          = result["price"]
