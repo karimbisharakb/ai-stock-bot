@@ -17,7 +17,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as _FuturesTimeout
 from datetime import date, datetime, timedelta
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
 import pytz
 import yfinance as yf
@@ -267,64 +267,180 @@ def _score_options(ticker: str) -> SignalResult:
         return SignalResult(0, "", "LOW")
 
 
-# ── Signal 2: Insider buying (0–2 pts) ────────────────────────────────────────
+# ── Signal 2: Insider buying via SEC EDGAR Form 4 (0–2 pts) ───────────────────
 
-def _score_insider(ticker: str) -> tuple[int, str]:
-    if ticker.endswith(".TO"):
-        return 0, ""
+_EDGAR_HEADERS = {
+    "User-Agent": "investing-agent karim.bishara.kb@gmail.com",
+    "Accept-Encoding": "gzip, deflate",
+}
+_EDGAR_TIMEOUT = 8  # seconds
+
+# Module-level CIK cache — avoids repeat company_tickers.json fetches per scan.
+_cik_cache: dict[str, str] = {}
+
+
+def _fetch_json(url: str):
+    """Thin urllib wrapper that returns parsed JSON — isolated so tests can patch it."""
+    import urllib.request, json as _json
+    req = urllib.request.Request(url, headers=_EDGAR_HEADERS)
+    with urllib.request.urlopen(req, timeout=_EDGAR_TIMEOUT) as resp:
+        return _json.loads(resp.read())
+
+
+def _fetch_xml(url: str) -> str:
+    """Thin urllib wrapper that returns raw text — isolated so tests can patch it."""
+    import urllib.request
+    req = urllib.request.Request(url, headers=_EDGAR_HEADERS)
+    with urllib.request.urlopen(req, timeout=_EDGAR_TIMEOUT) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def _edgar_cik(ticker: str) -> Optional[str]:
+    """Return zero-padded 10-digit CIK for a US ticker via EDGAR company_tickers.json."""
+    if ticker in _cik_cache:
+        return _cik_cache[ticker]
     try:
-        import pandas as pd
-        t = yf.Ticker(ticker)
-        txns = t.insider_transactions
-        if txns is None or txns.empty:
-            log.info("Insider %s: no transactions returned", ticker)
-            return 0, ""
+        data = _fetch_json("https://www.sec.gov/files/company_tickers.json")
+        for entry in data.values():
+            if entry.get("ticker", "").upper() == ticker.upper():
+                cik = str(entry["cik_str"]).zfill(10)
+                _cik_cache[ticker] = cik
+                return cik
+    except Exception as exc:
+        log.debug("EDGAR CIK lookup failed for %s: %s", ticker, exc)
+    return None
 
-        txns.columns = [str(c).strip() for c in txns.columns]
-        log.info("Insider %s: columns=%s  sample=%s",
-                 ticker, list(txns.columns), txns.head(2).to_dict("records"))
 
-        # Substring match — handles "Transaction", "Text", "transactionText", etc.
-        text_col = next(
-            (c for c in txns.columns if any(w in c.lower() for w in ("trans", "text", "type"))),
-            None,
+def _parse_form4_purchases(xml: str, filed: date) -> list[dict]:
+    """Parse a Form 4 XML string; return list of {date, shares, amount, name} for
+    transaction code 'P' (open-market purchase) only."""
+    import re
+    name_m = re.search(r"<rptOwnerName>(.*?)</rptOwnerName>", xml, re.DOTALL)
+    name = name_m.group(1).strip() if name_m else "Unknown"
+
+    results = []
+    for block in re.finditer(
+        r"<nonDerivativeTransaction>(.*?)</nonDerivativeTransaction>", xml, re.DOTALL
+    ):
+        blk = block.group(1)
+        code_m = re.search(r"<transactionCode>\s*(.*?)\s*</transactionCode>", blk)
+        if not code_m or code_m.group(1).strip() != "P":
+            continue
+        shares_m = re.search(
+            r"<transactionShares>\s*<value>\s*([\d.]+)\s*</value>", blk, re.DOTALL
         )
-        if text_col is None:
-            log.info("Insider %s: no transaction-type column found", ticker)
-            return 0, ""
+        price_m = re.search(
+            r"<transactionPricePerShare>\s*<value>\s*([\d.]+)\s*</value>", blk, re.DOTALL
+        )
+        shares = float(shares_m.group(1)) if shares_m else 0.0
+        price  = float(price_m.group(1))  if price_m  else 0.0
+        results.append({"date": filed, "shares": shares, "amount": shares * price, "name": name})
+    return results
 
-        buy_keywords = ("purchase", "buy", "bought", "acquisition", "p -")
-        buys = txns[
-            txns[text_col].astype(str).str.lower().str.contains("|".join(buy_keywords), na=False)
-        ]
-        log.info("Insider %s: %d buys found (col=%s)", ticker, len(buys), text_col)
-        if buys.empty:
-            return 0, ""
 
-        # Any column with "date" in its name
-        date_col = next((c for c in buys.columns if "date" in c.lower()), None)
-        if date_col is None:
-            return 1, "Insider buying detected"
+def _edgar_form4_purchases(cik: str, days: int = 60) -> list[dict]:
+    """Fetch recent Form 4 filings for the given CIK and return all P-type
+    (open-market purchase) transactions filed within the last `days` days.
+    Filings from EDGAR are newest-first; iteration stops at the cutoff date."""
+    try:
+        sub = _fetch_json(f"https://data.sec.gov/submissions/CIK{cik}.json")
+    except Exception as exc:
+        log.debug("EDGAR submissions fetch failed CIK=%s: %s", cik, exc)
+        return []
 
-        buys = buys.copy()
-        buys[date_col] = pd.to_datetime(buys[date_col], errors="coerce")
-        now = datetime.now()
+    recent    = sub.get("filings", {}).get("recent", {})
+    cutoff    = (datetime.now() - timedelta(days=days)).date()
+    purchases: list[dict] = []
 
-        recent_30 = buys[buys[date_col] >= now - timedelta(days=30)]
-        recent_60 = buys[buys[date_col] >= now - timedelta(days=60)]
+    for form, date_str, acc, doc in zip(
+        recent.get("form", []),
+        recent.get("filingDate", []),
+        recent.get("accessionNumber", []),
+        recent.get("primaryDocument", []),
+    ):
+        if form != "4":
+            continue
+        try:
+            filed = datetime.strptime(date_str, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        if filed < cutoff:
+            break  # newest-first — nothing older will qualify
 
-        if not recent_30.empty:
-            shares_col = next((c for c in recent_30.columns if "share" in c.lower()), None)
-            total = int(recent_30[shares_col].fillna(0).sum()) if shares_col else 0
-            suffix = f" ({total:,} sh)" if total > 0 else ""
-            return 2, f"Insider bought in last 30d{suffix}"
-        if not recent_60.empty:
-            return 1, "Insider buying in last 60d"
+        acc_nodash = acc.replace("-", "")
+        xml_url = (
+            f"https://www.sec.gov/Archives/edgar/data/{int(cik)}"
+            f"/{acc_nodash}/{doc}"
+        )
+        try:
+            xml = _fetch_xml(xml_url)
+            purchases.extend(_parse_form4_purchases(xml, filed))
+        except Exception as exc:
+            log.debug("EDGAR Form4 XML fetch failed %s: %s", xml_url, exc)
 
-        return 0, ""
+    return purchases
+
+
+def _score_insider(ticker: str) -> SignalResult:
+    """Score recent insider open-market purchases (Form 4, transaction code P)
+    via SEC EDGAR.  Sales, grants, and awards are ignored."""
+    _low = SignalResult(0, "", "LOW")
+
+    if ticker.endswith(".TO"):
+        return _low  # EDGAR covers US issuers only
+
+    try:
+        cik = _edgar_cik(ticker)
+        if not cik:
+            log.info("Insider %s: CIK not found in EDGAR", ticker)
+            return _low
+
+        purchases = _edgar_form4_purchases(cik, days=60)
+        if not purchases:
+            return _low
+
+        cutoff_30 = datetime.now().date() - timedelta(days=30)
+        recent_30 = [p for p in purchases if p["date"] >= cutoff_30]
+        recent_60 = [p for p in purchases if p["date"] <  cutoff_30]
+
+        if recent_30:
+            unique_n     = len({p["name"] for p in recent_30})
+            total_shares = sum(p["shares"] for p in recent_30)
+            total_amount = sum(p["amount"] for p in recent_30)
+
+            if unique_n >= 2:
+                return SignalResult(
+                    2,
+                    f"{unique_n} insiders bought last 30d "
+                    f"({total_shares:,.0f} sh, ${total_amount:,.0f})",
+                    "HIGH",
+                )
+            if total_amount >= 50_000 or total_shares >= 500:
+                return SignalResult(
+                    2,
+                    f"Insider bought last 30d: {total_shares:,.0f} sh (${total_amount:,.0f})",
+                    "HIGH",
+                )
+            return SignalResult(
+                1,
+                f"Insider purchase last 30d: {total_shares:,.0f} sh",
+                "MEDIUM",
+            )
+
+        if recent_60:
+            unique_n     = len({p["name"] for p in recent_60})
+            total_shares = sum(p["shares"] for p in recent_60)
+            return SignalResult(
+                1,
+                f"Insider buying 31–60d ago ({unique_n} insider(s), {total_shares:,.0f} sh)",
+                "MEDIUM",
+            )
+
+        return _low
+
     except Exception as exc:
         log.warning("Insider score error for %s: %s", ticker, exc, exc_info=True)
-        return 0, ""
+        return _low
 
 
 # ── Signal 3: Short squeeze setup (0–2 pts) ────────────────────────────────────
@@ -506,21 +622,21 @@ def _score_ticker(ticker: str):
         return None
 
     opts_sig                    = _score_options(ticker)
-    ins_score,  ins_reason      = _score_insider(ticker)
+    ins_sig                     = _score_insider(ticker)
     sq_score,   sq_reason       = _score_short_squeeze(ticker, data)
     cat_score,  cat_reason      = _score_catalyst(ticker)
     inst_score, inst_reason     = _score_institutional(ticker)
     brk_score,  brk_reason      = _score_breakout(ticker, data)
 
-    total = min(opts_sig.score + ins_score + sq_score + cat_score + inst_score + brk_score, 10)
+    total = min(opts_sig.score + ins_sig.score + sq_score + cat_score + inst_score + brk_score, 10)
 
     signals = {
         "options":       {"score": opts_sig.score, "reason": opts_sig.reason},
-        "insider":       {"score": ins_score,  "reason": ins_reason},
-        "short_squeeze": {"score": sq_score,   "reason": sq_reason},
-        "catalyst":      {"score": cat_score,  "reason": cat_reason},
-        "institutional": {"score": inst_score, "reason": inst_reason},
-        "breakout":      {"score": brk_score,  "reason": brk_reason},
+        "insider":       {"score": ins_sig.score,  "reason": ins_sig.reason},
+        "short_squeeze": {"score": sq_score,        "reason": sq_reason},
+        "catalyst":      {"score": cat_score,       "reason": cat_reason},
+        "institutional": {"score": inst_score,      "reason": inst_reason},
+        "breakout":      {"score": brk_score,       "reason": brk_reason},
     }
     return {"ticker": ticker, "score": total, "price": data["price"], "signals": signals}
 
