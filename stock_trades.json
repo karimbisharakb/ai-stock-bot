@@ -17,8 +17,8 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 221.74,
-      "last_price": 221.74,
-      "last_pnl_pct": 9.39,
+      "last_price": 220.93,
+      "last_pnl_pct": 8.99,
       "days_held": 18,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 406.78,
-      "last_pnl_pct": 6.93,
+      "last_price": 404.89,
+      "last_pnl_pct": 6.44,
       "days_held": 18,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 424.87,
-      "last_price": 410.77,
-      "last_pnl_pct": 0.07,
+      "last_price": 410.94,
+      "last_pnl_pct": 0.11,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
       "earnings_play": false,
       "trail_high": 272.18,
-      "last_price": 272.18,
-      "last_pnl_pct": 0.0,
+      "last_price": 270.05,
+      "last_pnl_pct": -0.78,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 602.64,
-      "last_price": 602.64,
-      "last_pnl_pct": 0.0,
+      "last_price": 600.27,
+      "last_pnl_pct": -0.39,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -1034,39 +1034,39 @@
     },
     {
       "date": "2026-05-11",
-      "value": 1015.5
+      "value": 1014.26
     }
   ],
   "top_picks": [
-    {
-      "ticker": "GOOG",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "GOOG's best-in-class fundamentals \u2014 21.8% revenue growth, 37.9% margins, and a 7% discount to analyst consensus \u2014 justify a medium-term position despite the overbought RSI of 86.4. In a confirmed BULL regime with AI monetization catalysts still ahead, the fundamental floor supports entry even at elevated technicals.",
-      "price_target": 418.0,
-      "key_risk": "RSI at 86.4 with momentum exhaustion signals and proximity to 52-week highs creates meaningful mean-reversion risk if AI competitive threats or search erosion data surface."
-    },
-    {
-      "ticker": "PLTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "PLTR is a high-quality AI compounder with 85%+ revenue growth and 43.7% margins being repriced by macro pressure, not fundamental deterioration, offering a favorable risk/reward entry near oversold RSI levels with 33%+ upside to analyst consensus. In a BULL regime, accumulating a position near the 52-week low support zone with a defined stop provides asymmetric exposure to a potential mean-reversion trade back toward the 200-MA.",
-      "price_target": 175.0,
-      "key_risk": "Sustained rate elevation or risk-off rotation could compress PLTR's premium multiple further toward the $115 52-week low with no technical support floor in between."
-    },
     {
       "ticker": "SNOW",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "BULL regime with 52.7% analyst upside and strong monthly momentum off the $118 floor justifies a tactical position, with AI data platform catalysts providing a fundamental narrative. Stop set below the capitulation low to allow room for the bounce to develop while limiting downside to the prior support zone.",
+      "reasoning": "BULL regime with 56% analyst upside, 30% revenue growth, and AI/data cloud tailwinds support a speculative medium-term position as Cortex AI adoption metrics could catalyze a short squeeze from heavily net-short positioning. Entry here offers asymmetric risk/reward if price can reclaim the 50-MA at $155-156, validating the relief rally as the beginning of a genuine trend reversal.",
       "price_target": 185.0,
-      "key_risk": "Stock remains in a structural downtrend well below both key moving averages, and failure to show AI-driven consumption growth at next earnings could send shares back to $130 or lower."
+      "key_risk": "Trading 28% below the 200-MA with a -28% operating margin and 142x D/E ratio means any consumption guidance miss or failure to hold $132 support would accelerate a retest of the $118 52-week low."
+    },
+    {
+      "ticker": "ARM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "ARM's dominant AI inference architecture and strong bullish structure above key moving averages justify a measured position in a confirmed bull regime, though post-parabolic cooling and a bearish MACD demand disciplined sizing. The 4% analyst target and compressed near-term upside cap conviction at medium, with the thesis dependent on hyperscaler AI capex commentary remaining constructive.",
+      "price_target": 220.0,
+      "key_risk": "Any hyperscaler capex reduction signal or guidance miss will trigger asymmetric downside given the 251x trailing P/E and 5.2x debt load leaving zero margin for error."
+    },
+    {
+      "ticker": "SMCI",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SMCI's sharp reclaim of MA50 on 1.7x volume with accelerating momentum and a deeply discounted 10.7x forward P/E against 122% revenue growth creates a compelling asymmetric setup in a bull regime. The critical test at MA200 ($37.18) is the near-term target, with a full recovery thesis contingent on positive audit/compliance resolution.",
+      "price_target": 40.0,
+      "key_risk": "Binary accounting/Nasdaq compliance outcome could invalidate the entire recovery thesis and send shares back toward prior lows."
     }
   ],
   "regime": "BULL",
@@ -1082,5 +1082,5 @@
     "underperforming": false
   },
   "pnl": 5.649999999999999,
-  "last_run": "2026-05-11 16:23"
+  "last_run": "2026-05-11 19:01"
 }
