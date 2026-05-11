@@ -27,6 +27,7 @@ from confidence_calibration import calibrate_confidence
 from database import get_connection
 from market_data import get_ticker_data, ma200_recent_cross
 from market_regime import get_market_regime, apply_regime_penalty
+from outcome_tracker import insert_pending_outcome
 import portfolio
 
 log = logging.getLogger(__name__)
@@ -1007,6 +1008,7 @@ def run_predator():
                     stop = round(price * 0.91, 2)
                     msg  = _format_alert(ticker, score, price, signals, stop, position_size, tier)
                     if send_sms(msg):
+                        alert_time = datetime.now().isoformat()
                         _record_alert(
                             ticker, score, signals, price, stop, position_size,
                             confidence_pct=confidence,
@@ -1014,6 +1016,16 @@ def run_predator():
                             raw_score=result["raw_score"],
                             tier=tier,
                         )
+                        if tier == TIER_CONVICTION:
+                            insert_pending_outcome(
+                                ticker=ticker,
+                                alert_time=alert_time,
+                                entry_price=price,
+                                confidence_pct=confidence,
+                                regime=regime.state,
+                                tier=tier,
+                                signals=signals,
+                            )
                         log.info("Predator %s alert sent for %s (score %d)", tier, ticker, score)
                 else:
                     log.info("Predator WATCH (no alert): %s score=%d conf=%.1f%%",

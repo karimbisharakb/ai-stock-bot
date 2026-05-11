@@ -104,8 +104,8 @@ class TestMigrationList:
 # ─────────────────────────────────────────────
 
 class TestSchemaVersion:
-    def test_schema_version_is_2_after_full_migration(self, fresh_db):
-        assert _schema_version(fresh_db) == 2
+    def test_schema_version_is_latest_after_full_migration(self, fresh_db):
+        assert _schema_version(fresh_db) == max(m.version for m in MIGRATIONS)
 
     def test_schema_version_is_1_after_v1_only(self, pre_v2_db):
         assert _schema_version(pre_v2_db) == 1
@@ -352,7 +352,7 @@ class TestIdempotency:
             init_db()
             run_migrations()
             run_migrations()  # second call — must be a no-op
-        assert _schema_version(db_path) == 2
+        assert _schema_version(db_path) == max(m.version for m in MIGRATIONS)
 
     def test_insert_or_ignore_on_signal_weights_is_idempotent(self, fresh_db):
         # Manually re-running the INSERT OR IGNORE should not change row count

@@ -316,6 +316,35 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_predator_latest_scan_time  ON predator_latest(scan_time)",
         ],
     ),
+    Migration(
+        version=3,
+        description="add predator_outcomes table for forward-return tracking of CONVICTION alerts",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS predator_outcomes (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker            TEXT    NOT NULL,
+                alert_time        TEXT    NOT NULL,
+                entry_price       REAL,
+                confidence_pct    REAL,
+                regime            TEXT,
+                tier              TEXT,
+                signal_summary    TEXT,
+                outcome_status    TEXT    NOT NULL DEFAULT 'PENDING',
+                return_1d         REAL,
+                return_5d         REAL,
+                return_20d        REAL,
+                max_gain_pct      REAL,
+                max_drawdown_pct  REAL,
+                evaluated_at      TEXT
+            )
+            """,
+            # UNIQUE prevents duplicate rows on retry / scheduler overlap
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_predator_outcomes_dedup ON predator_outcomes(ticker, alert_time)",
+            # Fast lookup of pending rows (the evaluation job's primary query)
+            "CREATE INDEX IF NOT EXISTS idx_predator_outcomes_status ON predator_outcomes(outcome_status)",
+        ],
+    ),
 ]
 
 
