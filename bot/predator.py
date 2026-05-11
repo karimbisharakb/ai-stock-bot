@@ -23,6 +23,7 @@ import pytz
 import yfinance as yf
 
 from alerts import send_sms
+from confidence_calibration import calibrate_confidence
 from database import get_connection
 from market_data import get_ticker_data, ma200_recent_cross
 from market_regime import get_market_regime, apply_regime_penalty
@@ -672,6 +673,7 @@ def _score_ticker(ticker: str):
 
     active_sigs    = sum(1 for s in signals.values() if s.get("score", 0) > 0)
     confidence     = compute_confidence(signals)
+    confidence     = calibrate_confidence(confidence, signals)
     adjusted_score = compute_adjusted_score(total, confidence)
     tier           = classify_tier(total, adjusted_score, confidence, active_sigs)
 
