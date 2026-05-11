@@ -714,6 +714,57 @@ def compute_adjusted_score(raw_score: int, confidence: float) -> float:
     return round(raw_score * confidence / 100.0, 2)
 
 
+# ── Conviction tiers ────────────────────────────────────────────────────────────
+
+TIER_WATCH      = "WATCH"       # score qualifies but quality too low → no WhatsApp
+TIER_ALERT      = "ALERT"       # quality-adjusted score clears the bar → sends alert
+TIER_CONVICTION = "CONVICTION"  # multiple independent HIGH-quality signals agree → sends alert
+
+# Gate for ALERT: adjusted_score = raw_score × confidence/100
+ALERT_MIN_ADJUSTED        = 2.5
+
+# Gates for CONVICTION (both must hold simultaneously)
+CONVICTION_MIN_SIGNALS    = 3    # at least 3 independent signals must fire
+CONVICTION_MIN_CONFIDENCE = 55.0 # confidence must reflect meaningful data quality
+
+
+def classify_tier(
+    raw_score:      int,
+    adjusted_score: float,
+    confidence:     float,
+    active_signals: int,
+) -> str:
+    """Classify a scored ticker into TIER_WATCH / TIER_ALERT / TIER_CONVICTION.
+
+    Designed to be called only when raw_score >= ALERT_THRESHOLD; returns
+    TIER_WATCH for sub-threshold inputs so it stays safe to call unconditionally.
+
+    Decision order (highest tier checked first so CONVICTION wins over ALERT):
+      CONVICTION  — active_signals >= CONVICTION_MIN_SIGNALS
+                    AND confidence  >= CONVICTION_MIN_CONFIDENCE
+                    AND raw_score   >= ALERT_THRESHOLD
+      ALERT       — adjusted_score  >= ALERT_MIN_ADJUSTED
+                    AND raw_score   >= ALERT_THRESHOLD
+      WATCH       — everything else (raw_score < threshold, or quality too low)
+
+    WATCH → caller must NOT send a WhatsApp alert.
+    ALERT and CONVICTION → caller SHOULD send a WhatsApp alert.
+    """
+    if raw_score < ALERT_THRESHOLD:
+        return TIER_WATCH
+
+    if (
+        active_signals >= CONVICTION_MIN_SIGNALS
+        and confidence >= CONVICTION_MIN_CONFIDENCE
+    ):
+        return TIER_CONVICTION
+
+    if adjusted_score >= ALERT_MIN_ADJUSTED:
+        return TIER_ALERT
+
+    return TIER_WATCH
+
+
 def _dot(score: int, max_score: int) -> str:
     if score == 0:
         return "⚫"
@@ -723,8 +774,9 @@ def _dot(score: int, max_score: int) -> str:
 
 
 def _format_alert(ticker: str, score: int, price: float, signals: dict,
-                  stop: float, position: float) -> str:
-    lines = [f"🎯 PRE-EXPLOSION ALERT: ${ticker}", f"Score: {score}/10", ""]
+                  stop: float, position: float, tier: str = TIER_ALERT) -> str:
+    header = "🚀 CONVICTION" if tier == TIER_CONVICTION else "🎯 PRE-EXPLOSION ALERT"
+    lines = [f"{header}: ${ticker}", f"Score: {score}/10", ""]
     for key, (label, max_s) in _SIGNAL_LABELS.items():
         sig = signals.get(key, {})
         s   = sig.get("score", 0)
@@ -874,11 +926,20 @@ def run_predator():
             log.info("Predator: %s score=%d/%d", ticker, score, 10)
 
             if score >= ALERT_THRESHOLD:
-                stop = round(price * 0.91, 2)
-                msg  = _format_alert(ticker, score, price, signals, stop, position_size)
-                if send_sms(msg):
-                    _record_alert(ticker, score, signals, price, stop, position_size)
-                    log.info("Predator alert sent for %s (score %d)", ticker, score)
+                active_sigs    = sum(1 for s in signals.values() if s.get("score", 0) > 0)
+                confidence     = compute_confidence(signals)
+                adjusted_score = compute_adjusted_score(score, confidence)
+                tier           = classify_tier(score, adjusted_score, confidence, active_sigs)
+
+                log.info("Predator: %s %s adj=%.2f conf=%.1f%% signals=%d",
+                         tier, ticker, adjusted_score, confidence, active_sigs)
+
+                if tier in (TIER_ALERT, TIER_CONVICTION):
+                    stop = round(price * 0.91, 2)
+                    msg  = _format_alert(ticker, score, price, signals, stop, position_size, tier)
+                    if send_sms(msg):
+                        _record_alert(ticker, score, signals, price, stop, position_size)
+                        log.info("Predator %s alert sent for %s (score %d)", tier, ticker, score)
 
             # Always collect for predator_latest — one batch write at end of run
             latest_rows.append(result)
