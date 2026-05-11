@@ -81,15 +81,40 @@ def _already_alerted(ticker: str) -> bool:
     return row is not None
 
 
-def _record_alert(ticker: str, score: float, signals: dict, entry: float, stop: float, position: float):
+def _record_alert(
+    ticker: str,
+    score: float,
+    signals: dict,
+    entry: float,
+    stop: float,
+    position: float,
+    *,
+    confidence_pct: float = 0.0,
+    adjusted_score: float = 0.0,
+    raw_score: float = 0.0,
+    tier: str = "ALERT",
+) -> None:
     conn = get_connection()
     conn.execute(
         """
-        INSERT INTO predator_alerts
-            (ticker, score, signals_json, entry_price, stop_price, position_size_cad, alert_time)
-        VALUES (?,?,?,?,?,?,?)
+        INSERT INTO predator_alerts (
+            ticker, score, signals_json, entry_price, stop_price, position_size_cad, alert_time,
+            confidence_pct, adjusted_score, raw_score, tier,
+            score_options, score_insider, score_short_squeeze,
+            score_catalyst, score_institutional, score_breakout
+        ) VALUES (?,?,?,?,?,?,?, ?,?,?,?, ?,?,?,?,?,?)
         """,
-        (ticker, score, json.dumps(signals), entry, stop, position, datetime.now().isoformat()),
+        (
+            ticker, score, json.dumps(signals), entry, stop, position,
+            datetime.now().isoformat(),
+            confidence_pct, adjusted_score, raw_score, tier,
+            float(signals.get("options",       {}).get("score") or 0),
+            float(signals.get("insider",       {}).get("score") or 0),
+            float(signals.get("short_squeeze", {}).get("score") or 0),
+            float(signals.get("catalyst",      {}).get("score") or 0),
+            float(signals.get("institutional", {}).get("score") or 0),
+            float(signals.get("breakout",      {}).get("score") or 0),
+        ),
     )
     conn.commit()
     conn.close()
@@ -628,17 +653,38 @@ def _score_ticker(ticker: str):
     inst_score, inst_reason     = _score_institutional(ticker)
     brk_score,  brk_reason      = _score_breakout(ticker, data)
 
-    total = min(opts_sig.score + ins_sig.score + sq_score + cat_score + inst_score + brk_score, 10)
+    raw_score_uncapped = (
+        opts_sig.score + ins_sig.score + sq_score + cat_score + inst_score + brk_score
+    )
+    total = min(raw_score_uncapped, 10)
 
+    # Include data_quality for signals that carry it so compute_confidence()
+    # can apply the correct quality multiplier (instead of defaulting to MEDIUM).
     signals = {
-        "options":       {"score": opts_sig.score, "reason": opts_sig.reason},
-        "insider":       {"score": ins_sig.score,  "reason": ins_sig.reason},
+        "options":       {"score": opts_sig.score, "reason": opts_sig.reason, "data_quality": opts_sig.data_quality},
+        "insider":       {"score": ins_sig.score,  "reason": ins_sig.reason,  "data_quality": ins_sig.data_quality},
         "short_squeeze": {"score": sq_score,        "reason": sq_reason},
         "catalyst":      {"score": cat_score,       "reason": cat_reason},
         "institutional": {"score": inst_score,      "reason": inst_reason},
         "breakout":      {"score": brk_score,       "reason": brk_reason},
     }
-    return {"ticker": ticker, "score": total, "price": data["price"], "signals": signals}
+
+    active_sigs    = sum(1 for s in signals.values() if s.get("score", 0) > 0)
+    confidence     = compute_confidence(signals)
+    adjusted_score = compute_adjusted_score(total, confidence)
+    tier           = classify_tier(total, adjusted_score, confidence, active_sigs)
+
+    return {
+        "ticker":         ticker,
+        "score":          total,
+        "raw_score":      raw_score_uncapped,
+        "price":          data["price"],
+        "signals":        signals,
+        "confidence":     confidence,
+        "adjusted_score": adjusted_score,
+        "active_signals": active_sigs,
+        "tier":           tier,
+    }
 
 
 # ── WhatsApp alert formatter ────────────────────────────────────────────────────
@@ -919,27 +965,32 @@ def run_predator():
                 time.sleep(1)
                 continue
 
-            score   = result["score"]
-            price   = result["price"]
-            signals = result["signals"]
+            score          = result["score"]
+            price          = result["price"]
+            signals        = result["signals"]
+            confidence     = result["confidence"]
+            adjusted_score = result["adjusted_score"]
+            tier           = result["tier"]
 
-            log.info("Predator: %s score=%d/%d", ticker, score, 10)
+            log.info("Predator: %s score=%d adj=%.2f conf=%.1f%%",
+                     tier, score, adjusted_score, confidence)
 
             if score >= ALERT_THRESHOLD:
-                active_sigs    = sum(1 for s in signals.values() if s.get("score", 0) > 0)
-                confidence     = compute_confidence(signals)
-                adjusted_score = compute_adjusted_score(score, confidence)
-                tier           = classify_tier(score, adjusted_score, confidence, active_sigs)
-
-                log.info("Predator: %s %s adj=%.2f conf=%.1f%% signals=%d",
-                         tier, ticker, adjusted_score, confidence, active_sigs)
-
                 if tier in (TIER_ALERT, TIER_CONVICTION):
                     stop = round(price * 0.91, 2)
                     msg  = _format_alert(ticker, score, price, signals, stop, position_size, tier)
                     if send_sms(msg):
-                        _record_alert(ticker, score, signals, price, stop, position_size)
+                        _record_alert(
+                            ticker, score, signals, price, stop, position_size,
+                            confidence_pct=confidence,
+                            adjusted_score=adjusted_score,
+                            raw_score=result["raw_score"],
+                            tier=tier,
+                        )
                         log.info("Predator %s alert sent for %s (score %d)", tier, ticker, score)
+                else:
+                    log.info("Predator WATCH (no alert): %s score=%d conf=%.1f%%",
+                             ticker, score, confidence)
 
             # Always collect for predator_latest — one batch write at end of run
             latest_rows.append(result)
@@ -961,10 +1012,18 @@ def _batch_upsert_latest(results: list) -> None:
     COMMIT per ticker (27 separate write transactions per hourly run → ~350 new
     rows/day that were never individually useful).  Now it's one UPSERT batch,
     one commit, zero table growth.
+
+    Results that pre-date the v2 schema expansion (missing confidence / tier
+    keys) are handled gracefully: .get() returns None and the columns remain NULL.
     """
     if not results:
         return
     now = datetime.now().isoformat()
+
+    def _sig_score(r: dict, name: str) -> Optional[float]:
+        val = r.get("signals", {}).get(name, {}).get("score")
+        return float(val) if val else None
+
     rows = [
         (
             r["ticker"],
@@ -973,6 +1032,16 @@ def _batch_upsert_latest(results: list) -> None:
             r.get("price"),
             round(r["price"] * 0.91, 2) if r.get("price") else None,
             now,
+            r.get("confidence"),
+            r.get("adjusted_score"),
+            r.get("raw_score"),
+            r.get("tier"),
+            _sig_score(r, "options"),
+            _sig_score(r, "insider"),
+            _sig_score(r, "short_squeeze"),
+            _sig_score(r, "catalyst"),
+            _sig_score(r, "institutional"),
+            _sig_score(r, "breakout"),
         )
         for r in results
     ]
@@ -980,15 +1049,28 @@ def _batch_upsert_latest(results: list) -> None:
     try:
         conn.executemany(
             """
-            INSERT INTO predator_latest
-                (ticker, score, signals_json, entry_price, stop_price, scan_time)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO predator_latest (
+                ticker, score, signals_json, entry_price, stop_price, scan_time,
+                confidence_pct, adjusted_score, raw_score, tier,
+                score_options, score_insider, score_short_squeeze,
+                score_catalyst, score_institutional, score_breakout
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(ticker) DO UPDATE SET
-                score        = excluded.score,
-                signals_json = excluded.signals_json,
-                entry_price  = excluded.entry_price,
-                stop_price   = excluded.stop_price,
-                scan_time    = excluded.scan_time
+                score               = excluded.score,
+                signals_json        = excluded.signals_json,
+                entry_price         = excluded.entry_price,
+                stop_price          = excluded.stop_price,
+                scan_time           = excluded.scan_time,
+                confidence_pct      = excluded.confidence_pct,
+                adjusted_score      = excluded.adjusted_score,
+                raw_score           = excluded.raw_score,
+                tier                = excluded.tier,
+                score_options       = excluded.score_options,
+                score_insider       = excluded.score_insider,
+                score_short_squeeze = excluded.score_short_squeeze,
+                score_catalyst      = excluded.score_catalyst,
+                score_institutional = excluded.score_institutional,
+                score_breakout      = excluded.score_breakout
             """,
             rows,
         )
