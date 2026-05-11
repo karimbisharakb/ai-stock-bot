@@ -17,6 +17,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as _FuturesTimeout
 from datetime import date, datetime, timedelta
+from typing import NamedTuple
 
 import pytz
 import yfinance as yf
@@ -34,6 +35,22 @@ ALERT_THRESHOLD = 6
 # overlapping each other's SQLite writes. Non-blocking for the scan job
 # (skip if busy), short-timeout for the outcomes job (wait briefly then skip).
 _PREDATOR_LOCK = threading.Lock()
+
+
+class SignalResult(NamedTuple):
+    """Return type for individual predator signal scorers.
+
+    score        — raw points awarded (0–max for that signal)
+    reason       — human-readable explanation string
+    data_quality — "HIGH" | "MEDIUM" | "LOW"
+                   HIGH:   all confirmations present, no earnings risk
+                   MEDIUM: base signal found but missing a confirmation
+                   LOW:    earnings within 5 days or insufficient data
+    """
+    score:        int
+    reason:       str
+    data_quality: str
+
 
 PREDATOR_WATCHLIST = [
     # Semiconductors
@@ -80,22 +97,55 @@ def _record_alert(ticker: str, score: float, signals: dict, entry: float, stop: 
 
 # ── Signal 1: Unusual options activity (0–3 pts) ─────────────────────────────
 
-def _score_options(ticker: str) -> tuple[int, str]:
+def _score_options(ticker: str) -> SignalResult:
+    """Score unusual options activity and return a SignalResult.
+
+    Scoring tiers (before caps):
+      3 pts — unusual OTM call volume, expiry urgency, or ratio >= 3
+      1 pt  — elevated ratio >= 2
+      + 1   — strike concentration boost (top-3 strikes >= 70% of vol)
+
+    Caps applied in order:
+      1. OI delta cap: score >= 3 requires call OI >= 2× put OI; else capped at 2
+      2. Earnings cap: earnings within 5 days → max score = 1
+
+    data_quality:
+      LOW    — earnings within 5 days, or no option data
+      MEDIUM — base signal present but OI delta unconfirmed
+      HIGH   — OI delta confirmed and no earnings proximity risk
+    """
+    _low = SignalResult(0, "", "LOW")
+
     if ticker.endswith(".TO"):
-        return 0, ""
+        return _low
     try:
         t = yf.Ticker(ticker)
         expiries = t.options
         if not expiries:
-            return 0, ""
+            return _low
 
         cutoff = (date.today() + timedelta(days=30)).isoformat()
         near_expiries = [d for d in expiries if d <= cutoff][:3]
         if not near_expiries:
-            return 0, ""
+            return _low
+
+        # ── Earnings proximity ────────────────────────────────────────────────
+        earnings_within_5d = False
+        try:
+            cal = t.calendar
+            if cal is not None and not cal.empty and "Earnings Date" in cal.index:
+                ed = cal.loc["Earnings Date"].iloc[0]
+                if hasattr(ed, "date"):
+                    ed = ed.date()
+                earnings_within_5d = 0 <= (ed - date.today()).days <= 5
+        except Exception:
+            pass
 
         total_call_vol = 0.0
-        total_put_vol = 0.0
+        total_put_vol  = 0.0
+        total_call_oi  = 0.0
+        total_put_oi   = 0.0
+        strike_volumes: dict = {}   # strike → aggregate call volume across expiries
         unusual = []
         urgency_reason = ""
 
@@ -112,28 +162,38 @@ def _score_options(ticker: str) -> tuple[int, str]:
                 continue
 
             calls = chain.calls
-            puts = chain.puts
+            puts  = chain.puts
 
             call_vol = calls["volume"].fillna(0).sum()
-            put_vol = puts["volume"].fillna(0).sum()
-            total_call_vol += call_vol
-            total_put_vol += put_vol
+            put_vol  = puts["volume"].fillna(0).sum()
+            call_oi  = calls["openInterest"].fillna(0).sum()
+            put_oi   = puts["openInterest"].fillna(0).sum()
 
-            # Expiry urgency: calls expiring within 7 days with aggregate vol/OI > 10x
+            total_call_vol += call_vol
+            total_put_vol  += put_vol
+            total_call_oi  += call_oi
+            total_put_oi   += put_oi
+
+            # Accumulate per-strike call volumes for concentration analysis
+            for _, row in calls.iterrows():
+                strike = row.get("strike", 0)
+                vol    = row.get("volume", 0) or 0
+                if vol > 0:
+                    strike_volumes[strike] = strike_volumes.get(strike, 0) + vol
+
+            # Expiry urgency: calls expiring within 7 days with vol > 10× OI
             if not urgency_reason:
                 days_to_exp = (date.fromisoformat(exp) - date.today()).days
-                if days_to_exp <= 7:
-                    exp_oi = calls["openInterest"].fillna(0).sum()
-                    if exp_oi > 0 and call_vol >= 10 * exp_oi:
-                        urgency_reason = (
-                            f"Expiry urgency: {call_vol/exp_oi:.0f}x OI on calls exp {exp}"
-                        )
+                if days_to_exp <= 7 and call_oi > 0 and call_vol >= 10 * call_oi:
+                    urgency_reason = (
+                        f"Expiry urgency: {call_vol/call_oi:.0f}x OI on calls exp {exp}"
+                    )
 
             if info_price > 0:
                 otm = calls[calls["strike"] > info_price * 1.03]
                 for _, row in otm.iterrows():
                     vol = row.get("volume", 0) or 0
-                    oi = row.get("openInterest", 0) or 0
+                    oi  = row.get("openInterest", 0) or 0
                     if vol > 0 and oi > 0 and vol >= 10 * oi:
                         unusual.append(
                             f"${row['strike']:.0f} calls {int(vol):,} vol vs {int(oi):,} OI (exp {exp})"
@@ -141,22 +201,70 @@ def _score_options(ticker: str) -> tuple[int, str]:
 
         ratio = total_call_vol / max(total_put_vol, 1)
 
-        if unusual:
-            reason = f"Unusual calls: {unusual[0]}"
-            if urgency_reason:
-                reason += f"; {urgency_reason}"
-            return 3, reason
-        if urgency_reason:
-            return 3, urgency_reason
-        if ratio >= 3:
-            return 3, f"Call/put ratio {ratio:.1f}:1 on near-term options"
-        if ratio >= 2:
-            return 1, f"Elevated call buying (ratio {ratio:.1f}:1)"
+        # ── OI delta confirmation ─────────────────────────────────────────────
+        # Call OI >= 2× put OI confirms bullish positioning is built into open
+        # interest, not just today's volume — required for a score of 3.
+        oi_delta_confirmed = (
+            total_call_oi > 0 and
+            total_call_oi / max(total_put_oi, 1) >= 2.0
+        )
 
-        return 0, ""
+        # ── Strike concentration boost ────────────────────────────────────────
+        concentration_note = ""
+        if strike_volumes:
+            total_sv = sum(strike_volumes.values())
+            top3_vol = sum(sorted(strike_volumes.values(), reverse=True)[:3])
+            if total_sv > 0 and top3_vol / total_sv >= 0.70:
+                top_strike = max(strike_volumes, key=strike_volumes.get)
+                concentration_note = (
+                    f"${top_strike:.0f} strike concentration "
+                    f"({top3_vol / total_sv * 100:.0f}% of call vol)"
+                )
+
+        # ── Raw score assembly ────────────────────────────────────────────────
+        reasons = []
+        if unusual:
+            raw_score = 3
+            reasons.append(f"Unusual calls: {unusual[0]}")
+            if urgency_reason:
+                reasons.append(urgency_reason)
+        elif urgency_reason:
+            raw_score = 3
+            reasons.append(urgency_reason)
+        elif ratio >= 3:
+            raw_score = 3
+            reasons.append(f"Call/put ratio {ratio:.1f}:1 on near-term options")
+        elif ratio >= 2:
+            raw_score = 1
+            reasons.append(f"Elevated call buying (ratio {ratio:.1f}:1)")
+        else:
+            raw_score = 0
+
+        # Concentration boost: +1 when there is already a base signal
+        if concentration_note and raw_score >= 1:
+            raw_score = min(raw_score + 1, 3)
+            reasons.append(concentration_note)
+
+        # ── Apply caps ────────────────────────────────────────────────────────
+        if raw_score >= 3 and not oi_delta_confirmed:
+            raw_score = 2
+            reasons.append("(OI delta unconfirmed)")
+
+        if earnings_within_5d:
+            raw_score = min(raw_score, 1)
+            if reasons:
+                reasons.append("(earnings ≤5d — capped)")
+            data_quality = "LOW"
+        elif oi_delta_confirmed:
+            data_quality = "HIGH"
+        else:
+            data_quality = "MEDIUM"
+
+        return SignalResult(raw_score, "; ".join(reasons), data_quality)
+
     except Exception as exc:
         log.debug("Options score error for %s: %s", ticker, exc)
-        return 0, ""
+        return SignalResult(0, "", "LOW")
 
 
 # ── Signal 2: Insider buying (0–2 pts) ────────────────────────────────────────
@@ -397,17 +505,17 @@ def _score_ticker(ticker: str):
         log.info("Predator: no data for %s — skip", ticker)
         return None
 
-    opts_score, opts_reason     = _score_options(ticker)
+    opts_sig                    = _score_options(ticker)
     ins_score,  ins_reason      = _score_insider(ticker)
     sq_score,   sq_reason       = _score_short_squeeze(ticker, data)
     cat_score,  cat_reason      = _score_catalyst(ticker)
     inst_score, inst_reason     = _score_institutional(ticker)
     brk_score,  brk_reason      = _score_breakout(ticker, data)
 
-    total = min(opts_score + ins_score + sq_score + cat_score + inst_score + brk_score, 10)
+    total = min(opts_sig.score + ins_score + sq_score + cat_score + inst_score + brk_score, 10)
 
     signals = {
-        "options":       {"score": opts_score, "reason": opts_reason},
+        "options":       {"score": opts_sig.score, "reason": opts_sig.reason},
         "insider":       {"score": ins_score,  "reason": ins_reason},
         "short_squeeze": {"score": sq_score,   "reason": sq_reason},
         "catalyst":      {"score": cat_score,  "reason": cat_reason},
