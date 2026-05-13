@@ -16,10 +16,10 @@
       "reasoning": "NVDA's fundamental case remains elite with 73% revenue growth against a 18x forward P/E and a $268 analyst target implying 32% upside, justifying a position in a bull regime despite stretched technicals. RSI at 91.2 warrants a partial entry rather than full Kelly sizing, with the expectation of adding on any pullback toward the MA50 near $185.",
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
-      "trail_high": 221.74,
-      "last_price": 219.49,
-      "last_pnl_pct": 8.28,
-      "days_held": 19,
+      "trail_high": 226.63,
+      "last_price": 226.63,
+      "last_pnl_pct": 11.8,
+      "days_held": 20,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 395.16,
-      "last_pnl_pct": 3.88,
-      "days_held": 19,
+      "last_price": 397.88,
+      "last_pnl_pct": 4.59,
+      "days_held": 20,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 424.87,
-      "last_price": 408.59,
-      "last_pnl_pct": -0.46,
-      "days_held": 7,
+      "last_price": 404.4,
+      "last_pnl_pct": -1.48,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
       "earnings_play": false,
       "trail_high": 272.18,
-      "last_price": 264.19,
-      "last_pnl_pct": -2.94,
-      "days_held": 1,
+      "last_price": 268.45,
+      "last_pnl_pct": -1.37,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "META at 16.7x forward P/E with 33% revenue growth and 33% margins is fundamentally mispriced \u2014 RSI at 27 with thinning distribution volume signals tactical exhaustion after a sharp drawdown, creating an asymmetric entry for a mean-reversion toward fair value. Bull market regime supports full Kelly sizing on this oversold elite compounder.",
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
-      "trail_high": 602.64,
-      "last_price": 599.35,
-      "last_pnl_pct": -0.55,
-      "days_held": 1,
+      "trail_high": 608.43,
+      "last_price": 608.43,
+      "last_pnl_pct": 0.96,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     }
@@ -1039,18 +1039,22 @@
     {
       "date": "2026-05-12",
       "value": 1010.53
+    },
+    {
+      "date": "2026-05-13",
+      "value": 1014.25
     }
   ],
   "top_picks": [
     {
-      "ticker": "XQQ.TO",
-      "score": 8,
+      "ticker": "GOOG",
+      "score": 7,
       "action": "BUY",
-      "strategy": "SWING",
+      "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "XQQ.TO is in a confirmed uptrend trading well above both MAs with the 52-week high at $71.64 acting as the immediate breakout trigger in a bull market regime. A decisive close above $71.64 would open air above with no meaningful resistance, justifying a short-term momentum trade despite the overbought RSI.",
-      "price_target": 74.5,
-      "key_risk": "RSI at 74.6 near the 52-week high signals momentum exhaustion, and any hawkish Fed surprise or mega-cap tech disappointment would be amplified through XQQ's leveraged structure."
+      "reasoning": "GOOG's elite margin profile, 22% revenue growth, and strong analyst conviction support a medium-term hold toward the $418 target despite overbought technicals. Bull regime allows entry at score 7, though RSI at 80.5 and below-average volume warrant a measured position size with a pullback-tolerant stop.",
+      "price_target": 418.0,
+      "key_risk": "DOJ antitrust structural remedy forcing divestiture of Chrome, Android search defaults, or ad-tech assets would trigger a fundamental repricing well below current levels."
     },
     {
       "ticker": "AMD",
@@ -1058,19 +1062,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's forward P/E of 34x against 37.8% revenue growth remains reasonable for a secular AI/datacenter compounder in a confirmed bull regime, with MACD and RSI momentum supporting near-term continuation toward the 52-week high. Late-stage acceleration and thin analyst upside (1.5%) cap conviction, but full Kelly sizing applies in this regime.",
+      "reasoning": "AMD's AI accelerator momentum and 37.8% revenue growth in a BULL regime justify a position, with a break above the 52-week high of $469.22 as the near-term catalyst. RSI at 74.8 and decelerating volume warrant a modest position size given late-stage breakout risk.",
       "price_target": 469.0,
-      "key_risk": "Any hyperscaler earnings commentary redirecting AI capex toward NVIDIA over AMD could trigger an immediate 20-25% de-rating given the stretched multiple and thin net margins."
+      "key_risk": "Failure to demonstrate meaningful MI300X hyperscaler wins vs. Nvidia could trigger a sharp re-rating at 148x trailing P/E with limited technical support until the mid-$300s."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "SNOW",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI near 29.8 signals extreme oversold conditions with 35% upside to analyst consensus target and strong fundamental tailwinds from 85% revenue growth and expanding government AI contracts. Bull regime permits entry at this score, and proximity to the 52-week low at $118.93 defines a clear risk boundary for position sizing.",
-      "price_target": 181.51,
-      "key_risk": "U.S. defense budget delays or DoD contract award disruptions could accelerate the existing downtrend and invalidate the analyst consensus target entirely."
+      "reasoning": "Bull regime with 53% analyst upside, accelerating short-term momentum, and strong buy consensus justify a tactical entry ahead of 50-MA reclaim at $154.92. Full Kelly applies in BULL regime and score of 7 clears the threshold for action.",
+      "price_target": 220.0,
+      "key_risk": "Any revenue growth deceleration or weak RPO guidance in the next earnings print could trigger another catastrophic leg down given 62x forward earnings and a structurally broken chart still 26% below the 200-MA."
     }
   ],
   "regime": "BULL",
@@ -1086,5 +1090,5 @@
     "underperforming": false
   },
   "pnl": 5.649999999999999,
-  "last_run": "2026-05-12 19:00"
+  "last_run": "2026-05-13 16:09"
 }
