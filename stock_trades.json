@@ -17,8 +17,8 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 235.79,
-      "last_price": 228.5,
-      "last_pnl_pct": 12.72,
+      "last_price": 230.35,
+      "last_pnl_pct": 13.64,
       "days_held": 22,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 407.64,
-      "last_pnl_pct": 7.16,
+      "last_price": 408.28,
+      "last_pnl_pct": 7.33,
       "days_held": 22,
       "status": "OPEN",
       "live": false
@@ -60,9 +60,9 @@
       "reasoning": "MSFT trades at a rare discount \u2014 24x forward on 18%+ revenue growth and 39% margins \u2014 with a 36% analyst upside target and exceptional business quality in an AI-driven cloud cycle. The $390\u2013$395 accumulation zone provides a favorable risk/reward entry as Azure re-acceleration remains a high-impact catalyst for violent re-rating.",
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
-      "trail_high": 424.87,
-      "last_price": 422.79,
-      "last_pnl_pct": 3.0,
+      "trail_high": 426.36,
+      "last_price": 426.36,
+      "last_pnl_pct": 3.87,
       "days_held": 10,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
       "earnings_play": false,
       "trail_high": 272.18,
-      "last_price": 263.14,
-      "last_pnl_pct": -3.32,
+      "last_price": 262.9,
+      "last_pnl_pct": -3.41,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "META at 16.7x forward P/E with 33% revenue growth and 33% margins is fundamentally mispriced \u2014 RSI at 27 with thinning distribution volume signals tactical exhaustion after a sharp drawdown, creating an asymmetric entry for a mean-reversion toward fair value. Bull market regime supports full Kelly sizing on this oversold elite compounder.",
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
-      "trail_high": 617.69,
-      "last_price": 614.85,
-      "last_pnl_pct": 2.03,
+      "trail_high": 619.82,
+      "last_price": 619.82,
+      "last_pnl_pct": 2.85,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -1050,7 +1050,7 @@
     },
     {
       "date": "2026-05-15",
-      "value": 1018.68
+      "value": 1020.29
     }
   ],
   "top_picks": [
@@ -1060,9 +1060,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a growth-appropriate multiple with exceptional margins and Cloud/Search catalysts, and a bull regime supports entry even with RSI at 74.5. A breakout above the $400 52-week high would unlock significant technical buying and fresh momentum capital, making the risk/reward favorable for a medium-term hold.",
+      "reasoning": "GOOG offers genuine fundamental value at 27x forward earnings with 21.8% revenue growth and expanding AI monetization, supported by strong MACD and a bull market regime. Entry is tactically extended with RSI at 73.6 near 52-week highs, so position sizing should reflect the elevated technical risk.",
       "price_target": 418.47,
-      "key_risk": "Rejection at the $400 resistance level on below-average volume could trigger a sharp mean-reversion toward the 50-DMA near $330, negating the thesis quickly."
+      "key_risk": "RSI overbought near all-time highs with fading volume could trigger a sharp pullback if the next earnings print shows AI Overviews eroding Search CPC revenue."
     },
     {
       "ticker": "AMD",
@@ -1070,19 +1070,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Bull regime with MACD bullish and analyst consensus target of $457.83 supports a modest long entry, while the forward P/E of 33.6x anchors a credible AI/data center growth thesis. RSI near overbought and fading volume warrant a tight stop to manage mean-reversion risk near 52-week highs.",
+      "reasoning": "In a confirmed BULL regime with strong AI/datacenter tailwinds and analyst consensus supporting upside to $457, AMD warrants a position despite overbought RSI, as the forward P/E compression to 33x reflects a credible earnings inflection story. Position sizing should be reduced given the late-stage momentum signature and below-average volume conviction.",
       "price_target": 457.83,
-      "key_risk": "Any hyperscaler earnings commentary signaling AI capex softness could instantly collapse the forward multiple and trigger a 15-20% drawdown toward $360-$370."
+      "key_risk": "Any MI300X guidance cut, hyperscaler capex reduction, or NVIDIA competitive displacement could trigger a 20%+ drawdown from these elevated multiples."
     },
     {
-      "ticker": "ARM",
+      "ticker": "SNOW",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "ARM remains structurally bullish with strong DMA support and a legitimate AI-driven earnings acceleration thesis supporting the forward P/E compression to ~70x. The current pullback with RSI at 48.8 and low volume represents a healthy digestion phase within the uptrend, offering a reasonable entry ahead of the next catalyst.",
-      "price_target": 229.0,
-      "key_risk": "At 250x trailing P/E with a D/E of 5.2, any macro risk-off rotation, semiconductor sector weakness, or earnings miss could trigger a sharp de-rating given the priced-for-perfection valuation."
+      "reasoning": "SNOW's 30% revenue growth, bullish technicals above the 50-MA, and a 45% analyst upside target justify a tactical medium-term position in a bull market regime where full Kelly sizing applies. The relief rally has momentum but requires disciplined risk management given the structurally bearish longer-term trend and 200-MA overhead resistance at $203.",
+      "price_target": 195.0,
+      "key_risk": "Any guidance cut or AI/data warehouse growth deceleration at the next earnings print could reignite institutional selling and retest the $118 multi-year lows."
     }
   ],
   "regime": "BULL",
@@ -1098,5 +1098,5 @@
     "underperforming": false
   },
   "pnl": 5.649999999999999,
-  "last_run": "2026-05-15 15:44"
+  "last_run": "2026-05-15 18:26"
 }
