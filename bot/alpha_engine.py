@@ -25,8 +25,11 @@ Score math:
 """
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from typing import Optional
+
+log = logging.getLogger(__name__)
 
 
 # ── Dataclasses ────────────────────────────────────────────────────────────────
@@ -977,6 +980,7 @@ def fetch_alpha_input(
     try:
         import yfinance as yf
     except ImportError:
+        log.warning("fetch_alpha_input: yfinance not available — skipping %s", ticker)
         return None
 
     try:
@@ -1170,4 +1174,5 @@ def fetch_alpha_input(
         )
 
     except Exception:
+        log.warning("fetch_alpha_input: unhandled error for %s", ticker, exc_info=True)
         return None

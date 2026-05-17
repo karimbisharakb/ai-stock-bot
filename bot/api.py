@@ -455,6 +455,59 @@ def fmt_alpha_row(row: dict) -> dict:
 
 # ── Alpha endpoints ───────────────────────────────────────────────────────────
 
+@api_bp.route("/alpha/debug", methods=["GET"])
+def alpha_debug():
+    """
+    Alpha shadow diagnostic — never cached.
+
+    Returns:
+      alpha_shadow_enabled  bool   — resolved flag value
+      env_var_raw           str    — raw ALPHA_SHADOW_ENABLED env var (or "(not set)")
+      table_exists          bool   — whether alpha_shadow_log table is in the DB
+      row_count             int    — total rows in alpha_shadow_log
+      latest_scan_time      str|null — MAX(scan_time) across all rows
+    """
+    import os
+
+    try:
+        from feature_flags import alpha_shadow_enabled
+        flag_on  = alpha_shadow_enabled()
+        flag_raw = os.environ.get("ALPHA_SHADOW_ENABLED", "")
+
+        table_exists = False
+        row_count    = 0
+        latest_scan  = None
+
+        try:
+            from database import get_connection
+            conn = get_connection()
+            try:
+                row          = conn.execute(
+                    "SELECT COUNT(*), MAX(scan_time) FROM alpha_shadow_log"
+                ).fetchone()
+                table_exists = True
+                row_count    = int(row[0]) if row else 0
+                latest_scan  = row[1] if row else None
+            except Exception as db_exc:
+                log.warning("alpha_debug: DB query failed — %s", db_exc)
+            finally:
+                conn.close()
+        except Exception as conn_exc:
+            log.warning("alpha_debug: could not open DB — %s", conn_exc)
+
+        return _ok({
+            "alpha_shadow_enabled": flag_on,
+            "env_var_raw":          flag_raw or "(not set)",
+            "table_exists":         table_exists,
+            "row_count":            row_count,
+            "latest_scan_time":     latest_scan,
+        })
+
+    except Exception:
+        log.error("GET /alpha/debug error:\n%s", traceback.format_exc())
+        return _err("alpha debug check failed")
+
+
 @api_bp.route("/alpha/latest", methods=["GET"])
 def alpha_latest():
     """

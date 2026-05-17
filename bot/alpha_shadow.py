@@ -33,6 +33,8 @@ class AlphaShadowManager:
         """
         from alpha_engine import fetch_alpha_input, AlphaEngine
 
+        log.info("alpha_shadow: scoring %s", ticker)
+
         try:
             alpha_input = fetch_alpha_input(ticker)
         except Exception:
@@ -40,7 +42,7 @@ class AlphaShadowManager:
             return None
 
         if alpha_input is None:
-            log.debug("alpha_shadow: no alpha input for %s — skipping", ticker)
+            log.info("alpha_shadow: fetch_alpha_input returned None for %s — skipping", ticker)
             return None
 
         try:
@@ -48,6 +50,9 @@ class AlphaShadowManager:
         except Exception:
             log.warning("alpha_shadow: AlphaEngine.score failed for %s", ticker, exc_info=True)
             return None
+
+        log.info("alpha_shadow: %s scored %.1f tier=%s setup=%s filtered=%s",
+                 ticker, result.alpha_score, result.tier, result.setup_type, result.filtered)
 
         predator_tier  = predator_result.get("tier")
         predator_score = predator_result.get("score")
@@ -113,6 +118,8 @@ class AlphaShadowManager:
                 ),
             )
             conn.commit()
+            log.info("alpha_shadow: row persisted for %s (alpha_score=%s tier=%s)",
+                     ticker, alpha_score, alpha_tier)
         except Exception:
             log.warning("alpha_shadow: DB persist failed for %s", ticker, exc_info=True)
         finally:
