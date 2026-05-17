@@ -361,6 +361,82 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_rec_snapshots_time ON recommendation_snapshots(snapshot_time)",
         ],
     ),
+    Migration(
+        version=5,
+        description=(
+            "Phase N1: add notification_audit_log and notification_suppressed_log tables "
+            "for the unified alert gateway"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS notification_audit_log (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                alert_id          TEXT    NOT NULL,
+                ticker            TEXT    NOT NULL,
+                source            TEXT    NOT NULL,
+                tier              TEXT    NOT NULL,
+                adjusted_score    REAL,
+                confidence_pct    REAL,
+                raw_score         REAL,
+                active_signals    TEXT,
+                suppressed_signals TEXT,
+                regime_context    TEXT,
+                risk_posture      TEXT,
+                trigger_reason    TEXT,
+                formatted_message TEXT,
+                dry_run           INTEGER NOT NULL DEFAULT 0,
+                shadow            INTEGER NOT NULL DEFAULT 0,
+                delivered         INTEGER NOT NULL DEFAULT 0,
+                sent_at           TEXT,
+                evaluated_at      TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_notif_audit_ticker  ON notification_audit_log(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_notif_audit_sent_at ON notification_audit_log(sent_at)",
+            "CREATE INDEX IF NOT EXISTS idx_notif_audit_source  ON notification_audit_log(source)",
+            "CREATE INDEX IF NOT EXISTS idx_notif_audit_shadow  ON notification_audit_log(shadow)",
+            """
+            CREATE TABLE IF NOT EXISTS notification_suppressed_log (
+                id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker              TEXT    NOT NULL,
+                source              TEXT    NOT NULL,
+                suppression_reasons TEXT,
+                resolved_tier       TEXT,
+                adjusted_score      REAL,
+                confidence_pct      REAL,
+                evaluated_at        TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_notif_sup_ticker ON notification_suppressed_log(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_notif_sup_eval   ON notification_suppressed_log(evaluated_at)",
+        ],
+    ),
+    Migration(
+        version=6,
+        description="Phase A2: add alpha_shadow_log table for observation-only alpha engine results",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS alpha_shadow_log (
+                id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker                TEXT    NOT NULL,
+                scan_time             TEXT    NOT NULL,
+                alpha_score           REAL,
+                alpha_tier            TEXT,
+                setup_type            TEXT,
+                predator_tier         TEXT,
+                predator_score        REAL,
+                tier_match            INTEGER NOT NULL DEFAULT 0,
+                filter_reason         TEXT,
+                component_scores_json TEXT,
+                explanation           TEXT
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_alpha_shadow_ticker    ON alpha_shadow_log(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_shadow_scan_time ON alpha_shadow_log(scan_time)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_shadow_tier      ON alpha_shadow_log(alpha_tier)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_shadow_score     ON alpha_shadow_log(alpha_score)",
+        ],
+    ),
 ]
 
 

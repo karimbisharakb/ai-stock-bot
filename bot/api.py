@@ -422,6 +422,118 @@ def paper_portfolio_status():
         return _err("failed to fetch paper portfolio status")
 
 
+MAX_ALPHA    = 50   # alpha shadow result row cap
+MAX_HISTORY  = 90   # portfolio NAV history row cap
+TTL_ALPHA    = 60   # alpha endpoint cache TTL (seconds)
+
+
+# ── Alpha shadow formatters ───────────────────────────────────────────────────
+
+def fmt_alpha_row(row: dict) -> dict:
+    """Serialise one alpha_shadow_log row for API responses."""
+    components = {}
+    try:
+        raw = row.get("component_scores_json")
+        components = json.loads(raw) if raw else {}
+    except (json.JSONDecodeError, TypeError):
+        pass
+
+    return {
+        "ticker":          row.get("ticker", ""),
+        "alpha_score":     _safe_float(row.get("alpha_score")),
+        "alpha_tier":      row.get("alpha_tier"),
+        "setup_type":      row.get("setup_type"),
+        "predator_tier":   row.get("predator_tier"),
+        "predator_score":  _safe_float(row.get("predator_score")),
+        "tier_match":      bool(row.get("tier_match")),
+        "filter_reason":   row.get("filter_reason"),
+        "explanation":     (row.get("explanation") or "")[:300],
+        "scan_time":       row.get("scan_time"),
+        "components":      components,
+    }
+
+
+# ── Alpha endpoints ───────────────────────────────────────────────────────────
+
+@api_bp.route("/alpha/latest", methods=["GET"])
+def alpha_latest():
+    """
+    Most-recent alpha shadow score per ticker.
+    Ordered by alpha_score DESC; capped at MAX_ALPHA rows.
+    Returns empty results when alpha shadow is disabled or the table is empty.
+    Cached for TTL_ALPHA seconds.
+    """
+    try:
+        def _build():
+            from alpha_shadow import get_shadow_manager
+            rows    = get_shadow_manager().get_latest_results(MAX_ALPHA)
+            results = [fmt_alpha_row(r) for r in rows]
+            return {"results": results, "total": len(results)}
+
+        payload, cached = _cached("alpha:latest", TTL_ALPHA, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/latest error:\n%s", traceback.format_exc())
+        return _err("failed to fetch alpha shadow results")
+
+
+@api_bp.route("/alpha/top", methods=["GET"])
+def alpha_top():
+    """
+    Top-N non-filtered alpha candidates from the most recent scan (max MAX_TOP).
+    Only returns tickers with a non-null alpha_score and no filter_reason.
+    Cached for TTL_ALPHA seconds.
+    """
+    try:
+        def _build():
+            from alpha_shadow import get_shadow_manager
+            rows    = get_shadow_manager().get_top_candidates(MAX_TOP)
+            results = [fmt_alpha_row(r) for r in rows]
+            return {"results": results[:MAX_TOP], "total": len(results)}
+
+        payload, cached = _cached("alpha:top", TTL_ALPHA, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/top error:\n%s", traceback.format_exc())
+        return _err("failed to fetch top alpha candidates")
+
+
+@api_bp.route("/paper-portfolio/history", methods=["GET"])
+def paper_portfolio_history():
+    """
+    NAV time-series from portfolio_history table.
+    Ordered date ASC, capped at MAX_HISTORY rows.
+    Cached for TTL_PAPER seconds.
+    """
+    try:
+        def _build():
+            from database import get_connection
+            conn = get_connection()
+            try:
+                rows = conn.execute(
+                    "SELECT date, value_cad FROM portfolio_history "
+                    "ORDER BY date ASC LIMIT ?",
+                    (MAX_HISTORY,),
+                ).fetchall()
+            finally:
+                conn.close()
+            points = [
+                {"date": r["date"], "value": _safe_float(r["value_cad"])}
+                for r in rows
+                if r["value_cad"] is not None
+            ]
+            return {"points": points, "total": len(points)}
+
+        payload, cached = _cached("paper:history", TTL_PAPER, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /paper-portfolio/history error:\n%s", traceback.format_exc())
+        return _err("failed to fetch portfolio history")
+
+
 @api_bp.route("/research/report/<report_type>", methods=["GET"])
 def research_report(report_type: str):
     """
