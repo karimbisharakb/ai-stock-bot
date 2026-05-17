@@ -28,6 +28,7 @@ from database import get_connection
 from market_data import get_ticker_data, ma200_recent_cross
 from market_regime import get_market_regime, apply_regime_penalty
 from outcome_tracker import insert_pending_outcome
+from feature_flags import alpha_shadow_enabled
 import portfolio
 
 log = logging.getLogger(__name__)
@@ -1033,6 +1034,16 @@ def run_predator():
 
             # Always collect for predator_latest — one batch write at end of run
             latest_rows.append(result)
+
+            # Alpha shadow: observation-only, never blocks or raises
+            if alpha_shadow_enabled():
+                try:
+                    from alpha_shadow import get_shadow_manager
+                    get_shadow_manager().run_shadow_score(ticker, result)
+                except Exception:
+                    log.warning("Predator: alpha shadow error for %s (non-fatal)", ticker,
+                                exc_info=True)
+
             time.sleep(1)
 
         # Single commit for all latest scores — replaces 27 individual INSERTs+commits
