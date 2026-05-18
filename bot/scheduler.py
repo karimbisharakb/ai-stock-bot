@@ -321,6 +321,16 @@ def release_scheduler_lease() -> None:
         log.warning("Scheduler: lease release failed: %s", exc)
 
 
+def _run_alpha_universe_scan():
+    """Scan ALPHA_UNIVERSE in alpha shadow mode. No alerts."""
+    try:
+        from alpha_universe import scan_alpha_universe
+        count = scan_alpha_universe()
+        log.info("Alpha universe scan complete: %d tickers scored", count)
+    except Exception:
+        log.warning("Alpha universe scan failed (non-fatal)", exc_info=True)
+
+
 def start_scheduler() -> Optional[BackgroundScheduler]:
     if not _try_claim_lease():
         print("⏭️  Scheduler not started — lease held by another worker on this host")
@@ -401,6 +411,19 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         weekly_summary_job,
         CronTrigger(hour=9, minute=0, day_of_week="sun", timezone=EASTERN),
         id="weekly_summary",
+        replace_existing=True,
+    )
+
+    # Alpha universe scan — every 4 hours, Mon–Fri 8:00–20:00
+    scheduler.add_job(
+        _run_alpha_universe_scan,
+        CronTrigger(
+            hour="8,12,16,20",
+            minute="0",
+            day_of_week="mon-fri",
+            timezone=EASTERN,
+        ),
+        id="alpha_universe_scan",
         replace_existing=True,
     )
 

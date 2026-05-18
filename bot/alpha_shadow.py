@@ -86,6 +86,19 @@ class AlphaShadowManager:
             for cs in result.components
         }
 
+        detail_json = None
+        try:
+            detail_json = json.dumps({
+                "why_scored_high":        result.why_scored_high,
+                "what_must_happen_next":  result.what_must_happen_next,
+                "what_could_invalidate":  result.what_could_invalidate,
+                "risk_factors":           result.risk_factors,
+                "expected_holding_window": result.expected_holding_window,
+                "tier_gate_note":         result.tier_gate_note,
+            })
+        except Exception:
+            pass
+
         self._persist(
             ticker=ticker,
             alpha_score=alpha_score,
@@ -97,6 +110,7 @@ class AlphaShadowManager:
             filter_reason=filter_reason,
             component_scores=component_scores,
             explanation="; ".join(result.why_scored_high) if result.why_scored_high else None,
+            detail_json=detail_json,
         )
 
         if alpha_tier and predator_tier and alpha_tier != predator_tier:
@@ -114,7 +128,8 @@ class AlphaShadowManager:
 
     def _persist(self, *, ticker, alpha_score, alpha_tier, setup_type,
                  predator_tier, predator_score, tier_match,
-                 filter_reason, component_scores, explanation):
+                 filter_reason, component_scores, explanation,
+                 detail_json: Optional[str] = None):
         from database import get_connection
         conn = get_connection()
         try:
@@ -123,14 +138,15 @@ class AlphaShadowManager:
                 INSERT INTO alpha_shadow_log
                     (ticker, scan_time, alpha_score, alpha_tier, setup_type,
                      predator_tier, predator_score, tier_match, filter_reason,
-                     component_scores_json, explanation)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     component_scores_json, explanation, detail_json)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     ticker, _now_iso(), alpha_score, alpha_tier, setup_type,
                     predator_tier, predator_score, tier_match, filter_reason,
                     json.dumps(component_scores) if component_scores else None,
                     explanation,
+                    detail_json,
                 ),
             )
             conn.commit()
@@ -262,6 +278,97 @@ class AlphaShadowManager:
                 (limit,),
             ).fetchall()
             return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+
+    def count_by_tier(self) -> dict:
+        """Count of most-recent alpha results per tier."""
+        from database import get_connection
+        conn = get_connection()
+        try:
+            rows = conn.execute(
+                """
+                SELECT a.alpha_tier, COUNT(*) as cnt
+                FROM alpha_shadow_log a
+                INNER JOIN (
+                    SELECT ticker, MAX(scan_time) AS latest
+                    FROM alpha_shadow_log GROUP BY ticker
+                ) g ON a.ticker = g.ticker AND a.scan_time = g.latest
+                WHERE a.alpha_tier IS NOT NULL
+                GROUP BY a.alpha_tier
+                ORDER BY cnt DESC
+                """
+            ).fetchall()
+            return {row[0]: row[1] for row in rows}
+        finally:
+            conn.close()
+
+    def get_top_setup_types(self, limit: int = 10) -> list:
+        """Top setup types by count and average alpha score (most-recent per ticker)."""
+        from database import get_connection
+        conn = get_connection()
+        try:
+            rows = conn.execute(
+                """
+                SELECT a.setup_type, COUNT(*) AS cnt, AVG(a.alpha_score) AS avg_score
+                FROM alpha_shadow_log a
+                INNER JOIN (
+                    SELECT ticker, MAX(scan_time) AS latest
+                    FROM alpha_shadow_log GROUP BY ticker
+                ) g ON a.ticker = g.ticker AND a.scan_time = g.latest
+                WHERE a.setup_type IS NOT NULL AND a.alpha_score IS NOT NULL
+                GROUP BY a.setup_type
+                ORDER BY avg_score DESC, cnt DESC
+                LIMIT ?
+                """,
+                (limit,),
+            ).fetchall()
+            return [{"setup_type": r[0], "count": r[1], "avg_score": round(r[2], 2)} for r in rows]
+        finally:
+            conn.close()
+
+    def get_best_non_predator(self, predator_tickers: list, limit: int = 10) -> list:
+        """Highest-scoring tickers NOT in predator_tickers (most-recent per ticker)."""
+        from database import get_connection
+        conn = get_connection()
+        try:
+            placeholders = ",".join("?" * len(predator_tickers)) if predator_tickers else "'__none__'"
+            rows = conn.execute(
+                f"""
+                SELECT a.*
+                FROM alpha_shadow_log a
+                INNER JOIN (
+                    SELECT ticker, MAX(scan_time) AS latest
+                    FROM alpha_shadow_log GROUP BY ticker
+                ) g ON a.ticker = g.ticker AND a.scan_time = g.latest
+                WHERE a.alpha_score IS NOT NULL
+                  AND a.filter_reason IS NULL
+                  {"AND a.ticker NOT IN (" + placeholders + ")" if predator_tickers else ""}
+                ORDER BY a.alpha_score DESC, a.ticker ASC
+                LIMIT ?
+                """,
+                (*predator_tickers, limit),
+            ).fetchall()
+            return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+    def get_universe_coverage(self, universe_tickers: list) -> dict:
+        """How many universe tickers have been scored and are in the DB."""
+        from database import get_connection
+        conn = get_connection()
+        try:
+            rows = conn.execute(
+                "SELECT DISTINCT ticker FROM alpha_shadow_log"
+            ).fetchall()
+            in_db = {r[0] for r in rows}
+            covered = [t for t in universe_tickers if t in in_db]
+            return {
+                "universe_size": len(universe_tickers),
+                "covered_in_db": len(covered),
+                "missing":       [t for t in universe_tickers if t not in in_db],
+            }
         finally:
             conn.close()
 

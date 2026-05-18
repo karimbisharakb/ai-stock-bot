@@ -162,9 +162,9 @@ assert abs(sum(_WEIGHTS.values()) - 1.0) < 1e-9, "Weights must sum to 1.0"
 
 _TIER_ORDER: list[tuple[float, str]] = [
     (80.0, "RARE_SETUP"),
-    (66.0, "HIGH_CONVICTION"),
-    (52.0, "STRONG_WATCH"),
-    (38.0, "WATCH"),
+    (65.0, "HIGH_CONVICTION"),
+    (50.0, "STRONG_WATCH"),
+    (35.0, "WATCH"),
     ( 0.0, "IGNORE"),
 ]
 
@@ -435,6 +435,16 @@ def _score_catalyst(inp: AlphaInput) -> ComponentScore:
     reasons: list[str] = []
     score = 0.0
 
+    # When no catalyst data can be verified, score neutral to avoid silent penalty
+    if (inp.earnings_days is None
+            and not inp.has_catalyst_news
+            and not inp.has_sec_8k
+            and inp.news_sentiment is None):
+        return ComponentScore(
+            "catalyst", 5.0, _WEIGHTS["catalyst"],
+            ["Catalyst data unavailable — scored neutral"], "MISSING",
+        )
+
     if inp.earnings_days is not None:
         ed = inp.earnings_days
         if 1 <= ed <= 7:
@@ -515,8 +525,8 @@ def _score_options(inp: AlphaInput) -> ComponentScore:
 
     if not has_data:
         return ComponentScore(
-            "options", 1.0, _WEIGHTS["options"],
-            ["No options data available — pressure unconfirmed"], "MISSING",
+            "options", 5.0, _WEIGHTS["options"],
+            ["No options data — scored neutral"], "MISSING",
         )
 
     if not reasons:
@@ -648,6 +658,22 @@ def _score_risk_reward(inp: AlphaInput) -> ComponentScore:
             score -= 1.5
             reasons.append(f"Poor R:R {rr:.1f}:1 — skip unless thesis is strong")
 
+    # ATR-based stop estimate when no explicit stop is available
+    if not has_data and inp.atr and entry and inp.atr > 0:
+        atr_stop = entry - (1.5 * inp.atr)
+        if 0 < atr_stop < entry:
+            has_data = True
+            stop_pct = (entry - atr_stop) / entry
+            if stop_pct < 0.05:
+                score += 1.5
+                reasons.append(f"ATR-based stop: {stop_pct*100:.1f}% risk")
+            elif stop_pct < 0.10:
+                score += 1.0
+                reasons.append(f"ATR-based stop: {stop_pct*100:.1f}% risk")
+            else:
+                score += 0.5
+                reasons.append(f"ATR-based stop wide: {stop_pct*100:.1f}% risk")
+
     # ATR penalty for erratic names
     if inp.atr and entry and entry > 0:
         atr_pct = inp.atr / entry
@@ -656,8 +682,7 @@ def _score_risk_reward(inp: AlphaInput) -> ComponentScore:
             reasons.append(f"High ATR ({atr_pct*100:.0f}% of price) — erratic moves")
 
     if not has_data:
-        reasons.append("No stop or upside target — position sizing unverified")
-        return ComponentScore("risk_reward", 3.0, _WEIGHTS["risk_reward"], reasons, "LOW")
+        return ComponentScore("risk_reward", 5.0, _WEIGHTS["risk_reward"], ["No risk data available — scored neutral"], "MISSING")
 
     if not reasons:
         reasons.append("Risk setup data present")
@@ -960,6 +985,28 @@ class AlphaEngine:
         )
 
 
+# ── Catalyst keyword sets (used by fetch_alpha_input) ─────────────────────
+
+_CATALYST_KW = frozenset({
+    "fda", "approved", "approval", "clearance", "authorized",
+    "earnings", "revenue", "guidance", "beat", "beats", "outlook",
+    "acquisition", "merger", "deal", "contract", "wins", "awarded",
+    "launch", "launches", "launched", "partnership", "agreement",
+    "upgrade", "upgraded", "raises", "raised",
+    "record", "breakthrough", "collaboration",
+    "buyback", "dividend", "offering",
+})
+_POSITIVE_KW = frozenset({
+    "approved", "clearance", "wins", "awarded", "beat", "beats",
+    "upgrade", "upgraded", "raised", "record", "breakthrough",
+    "launched", "partnership", "agreement",
+})
+_NEGATIVE_KW = frozenset({
+    "miss", "misses", "downgrade", "downgraded", "cut",
+    "recall", "investigation", "lawsuit", "warning", "suspended",
+})
+
+
 # ── Data fetcher (network, side effects) ───────────────────────────────────────
 
 def fetch_alpha_input(
@@ -1072,6 +1119,20 @@ def fetch_alpha_input(
     price_high_52w = info.get("fiftyTwoWeekHigh")
     price_low_52w  = info.get("fiftyTwoWeekLow")
 
+    # When info is unavailable, use 90-day history as proxy for 52w high/low
+    if price_high_52w is None:
+        try:
+            if "High" in hist.columns:
+                price_high_52w = float(hist["High"].max())
+        except Exception:
+            pass
+    if price_low_52w is None:
+        try:
+            if "Low" in hist.columns:
+                price_low_52w = float(hist["Low"].min())
+        except Exception:
+            pass
+
     # ── Benchmark returns (all optional, each individually safe) ──────────────
     def _bench_return(sym: str, days: int) -> Optional[float]:
         try:
@@ -1111,6 +1172,33 @@ def fetch_alpha_input(
                 put_oi   = float(chain.puts["openInterest"].sum())  if "openInterest" in chain.puts.columns  else None
                 if call_vol and avg_vol_20d and avg_vol_20d > 0:
                     unusual_options = call_vol > (avg_vol_20d * 0.15)
+    except Exception:
+        pass
+
+    # ── Catalyst news (best-effort) ───────────────────────────────────────────
+    has_catalyst_news = False
+    news_sentiment_raw: Optional[float] = None
+    try:
+        news_items = tkr.news or []
+        catalyst_hits = 0
+        positive_hits = 0
+        negative_hits = 0
+        for item in (news_items or [])[:7]:
+            title = (item.get("title") or "").lower()
+            if any(kw in title for kw in _CATALYST_KW):
+                catalyst_hits += 1
+            if any(kw in title for kw in _POSITIVE_KW):
+                positive_hits += 1
+            if any(kw in title for kw in _NEGATIVE_KW):
+                negative_hits += 1
+        if catalyst_hits >= 1:
+            has_catalyst_news = True
+            if positive_hits > negative_hits:
+                news_sentiment_raw = min(1.0, 0.3 + positive_hits * 0.15)
+            elif negative_hits > positive_hits:
+                news_sentiment_raw = max(-1.0, -0.3 - negative_hits * 0.15)
+            else:
+                news_sentiment_raw = 0.0
     except Exception:
         pass
 
@@ -1205,6 +1293,8 @@ def fetch_alpha_input(
         put_oi=put_oi,
         unusual_options=unusual_options,
         earnings_days=earnings_days,
+        has_catalyst_news=has_catalyst_news,
+        news_sentiment=news_sentiment_raw,
         atr=atr,
         stop_price=stop_price,
         regime=regime,

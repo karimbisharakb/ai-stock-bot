@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS alpha_shadow_log (
     tier_match            INTEGER NOT NULL DEFAULT 0,
     filter_reason         TEXT,
     component_scores_json TEXT,
-    explanation           TEXT
+    explanation           TEXT,
+    detail_json           TEXT
 )
 """
 
@@ -57,6 +58,7 @@ def _seed_row(path: str, **kwargs):
         filter_reason=None,
         component_scores_json=json.dumps({"breakout": {"score": 8.0}}),
         explanation="Fresh MA200 cross with volume surge",
+        detail_json=None,
     )
     defaults.update(kwargs)
     conn = sqlite3.connect(path)
@@ -65,10 +67,10 @@ def _seed_row(path: str, **kwargs):
         INSERT INTO alpha_shadow_log
             (ticker, scan_time, alpha_score, alpha_tier, setup_type,
              predator_tier, predator_score, tier_match, filter_reason,
-             component_scores_json, explanation)
+             component_scores_json, explanation, detail_json)
         VALUES (:ticker, :scan_time, :alpha_score, :alpha_tier, :setup_type,
                 :predator_tier, :predator_score, :tier_match, :filter_reason,
-                :component_scores_json, :explanation)
+                :component_scores_json, :explanation, :detail_json)
         """,
         defaults,
     )

@@ -437,6 +437,13 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_alpha_shadow_score     ON alpha_shadow_log(alpha_score)",
         ],
     ),
+    Migration(
+        version=7,
+        description="Phase A3: add detail_json to alpha_shadow_log for full explanation storage",
+        sql=[
+            "ALTER TABLE alpha_shadow_log ADD COLUMN detail_json TEXT",
+        ],
+    ),
 ]
 
 

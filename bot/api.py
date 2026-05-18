@@ -438,18 +438,31 @@ def fmt_alpha_row(row: dict) -> dict:
     except (json.JSONDecodeError, TypeError):
         pass
 
+    detail = {}
+    try:
+        raw_detail = row.get("detail_json")
+        detail = json.loads(raw_detail) if raw_detail else {}
+    except (json.JSONDecodeError, TypeError):
+        pass
+
     return {
-        "ticker":          row.get("ticker", ""),
-        "alpha_score":     _safe_float(row.get("alpha_score")),
-        "alpha_tier":      row.get("alpha_tier"),
-        "setup_type":      row.get("setup_type"),
-        "predator_tier":   row.get("predator_tier"),
-        "predator_score":  _safe_float(row.get("predator_score")),
-        "tier_match":      bool(row.get("tier_match")),
-        "filter_reason":   row.get("filter_reason"),
-        "explanation":     (row.get("explanation") or "")[:300],
-        "scan_time":       row.get("scan_time"),
-        "components":      components,
+        "ticker":                  row.get("ticker", ""),
+        "alpha_score":             _safe_float(row.get("alpha_score")),
+        "alpha_tier":              row.get("alpha_tier"),
+        "setup_type":              row.get("setup_type"),
+        "predator_tier":           row.get("predator_tier"),
+        "predator_score":          _safe_float(row.get("predator_score")),
+        "tier_match":              bool(row.get("tier_match")),
+        "filter_reason":           row.get("filter_reason"),
+        "explanation":             (row.get("explanation") or "")[:300],
+        "scan_time":               row.get("scan_time"),
+        "components":              components,
+        "why_scored_high":         detail.get("why_scored_high", []),
+        "what_must_happen_next":   detail.get("what_must_happen_next", []),
+        "what_could_invalidate":   detail.get("what_could_invalidate", []),
+        "risk_factors":            detail.get("risk_factors", []),
+        "expected_holding_window": detail.get("expected_holding_window"),
+        "tier_gate_note":          detail.get("tier_gate_note"),
     }
 
 
@@ -560,6 +573,42 @@ def alpha_top():
     except Exception:
         log.error("GET /alpha/top error:\n%s", traceback.format_exc())
         return _err("failed to fetch top alpha candidates")
+
+
+@api_bp.route("/alpha/analytics", methods=["GET"])
+def alpha_analytics():
+    """
+    Alpha shadow analytics summary — tier distribution, top setups,
+    best non-Predator candidates, universe coverage.
+    Never cached.
+    """
+    try:
+        from alpha_shadow import get_shadow_manager
+        from alpha_universe import get_alpha_universe
+        from predator import PREDATOR_WATCHLIST
+        mgr = get_shadow_manager()
+
+        tier_counts   = {}
+        setup_types   = []
+        non_predator  = []
+        coverage      = {}
+        try:
+            tier_counts  = mgr.count_by_tier()
+            setup_types  = mgr.get_top_setup_types(limit=10)
+            non_predator = [fmt_alpha_row(r) for r in mgr.get_best_non_predator(PREDATOR_WATCHLIST, limit=10)]
+            coverage     = mgr.get_universe_coverage(get_alpha_universe())
+        except Exception:
+            log.warning("alpha_analytics: partial failure", exc_info=True)
+
+        return _ok({
+            "tier_counts":         tier_counts,
+            "top_setup_types":     setup_types,
+            "best_non_predator":   non_predator,
+            "universe_coverage":   coverage,
+        })
+    except Exception:
+        log.error("GET /alpha/analytics error:\n%s", traceback.format_exc())
+        return _err("alpha analytics failed")
 
 
 @api_bp.route("/paper-portfolio/history", methods=["GET"])
