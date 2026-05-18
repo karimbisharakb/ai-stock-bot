@@ -872,3 +872,44 @@ def alpha_learning():
     except Exception:
         log.error("GET /alpha/learning error:\n%s", traceback.format_exc())
         return _err("alpha learning analytics failed")
+
+
+# ── Alpha L2: shadow weight recommendations and policy simulation ──────────────
+
+@api_bp.route("/alpha/learning/recommendations", methods=["GET"])
+def alpha_learning_recommendations():
+    """
+    Shadow weight recommendations from COMPLETE alpha outcomes.
+    Includes per-component lift, setup effectiveness, tier calibration,
+    weight change recommendations, and threshold recommendations.
+    Cached 10 min.
+    """
+    try:
+        def _build():
+            from alpha_learning_engine import generate_recommendations_report
+            return generate_recommendations_report()
+
+        payload, cached = _cached("alpha:learning:recommendations", 600, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /alpha/learning/recommendations error:\n%s", traceback.format_exc())
+        return _err("recommendations report failed")
+
+
+@api_bp.route("/alpha/learning/shadow-policy", methods=["GET"])
+def alpha_learning_shadow_policy():
+    """
+    Shadow policy simulation: applies recommended weights and replays past
+    COMPLETE outcomes to estimate false-positive reduction and missed-winner risk.
+    Cached 10 min.
+    """
+    try:
+        def _build():
+            from alpha_learning_engine import generate_shadow_policy_report
+            return generate_shadow_policy_report()
+
+        payload, cached = _cached("alpha:learning:shadow-policy", 600, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /alpha/learning/shadow-policy error:\n%s", traceback.format_exc())
+        return _err("shadow policy report failed")
