@@ -973,9 +973,11 @@ def fetch_alpha_input(
 ) -> Optional[AlphaInput]:
     """Hydrate AlphaInput from yfinance and the local market_data module.
 
-    Returns None if the ticker is unreachable or critically missing data.
-    All network errors are caught; missing fields are set to None and scored
-    as MISSING by the engine.
+    Returns None ONLY when price history is truly unavailable (< 5 bars).
+    Every other field — options, earnings, short interest, benchmarks — is
+    best-effort: failure sets the field to None and the engine scores it MISSING.
+    Each data source is isolated in its own try/except so one failing source
+    never prevents the others from being collected.
     """
     try:
         import yfinance as yf
@@ -983,196 +985,233 @@ def fetch_alpha_input(
         log.warning("fetch_alpha_input: yfinance not available — skipping %s", ticker)
         return None
 
+    tkr = yf.Ticker(ticker)
+
+    # ── info (best-effort) ────────────────────────────────────────────────────
+    # yfinance 0.2+ raises for unlisted/delisted tickers; treat as empty dict.
+    info: dict = {}
     try:
-        tkr  = yf.Ticker(ticker)
-        info = tkr.info or {}
+        raw = tkr.info
+        if isinstance(raw, dict):
+            info = raw
+    except Exception as exc:
+        log.info("fetch_alpha_input: %s info unavailable (%s) — continuing without it", ticker, exc)
 
-        # Use market_data for the standard technical fields
-        price = rsi = macd_v = macd_sig = ma_50 = ma_200 = None
-        vol_today = avg_vol_20d = avg_vol_5d = None
-        ma_200_cross_days = None
+    # ── Standard technical fields from market_data ────────────────────────────
+    price = rsi = macd_v = macd_sig = ma_50 = ma_200 = None
+    ma_200_cross_days = None
 
-        try:
-            from market_data import get_ticker_data, ma200_recent_cross
-            mdata = get_ticker_data(ticker)
-            if mdata:
-                price        = mdata["price"]
-                rsi          = mdata.get("rsi")
-                macd_v       = mdata.get("macd_val")
-                macd_sig     = mdata.get("macd_signal")
-                ma_50        = mdata.get("ma50")
-                ma_200       = mdata.get("ma200")
-                avg_vol_20d  = float(mdata["closes"].index.__class__)  # placeholder
-                closes       = mdata.get("closes")
-                if closes is not None:
-                    avg_vol_20d = None  # recompute below from raw history
-                    crossed, days_ago = ma200_recent_cross(closes, lookback=30)
+    try:
+        from market_data import get_ticker_data, ma200_recent_cross
+        mdata = get_ticker_data(ticker)
+        if mdata:
+            price    = mdata.get("price")
+            rsi      = mdata.get("rsi")
+            macd_v   = mdata.get("macd_val")
+            macd_sig = mdata.get("macd_signal")
+            ma_50    = mdata.get("ma50")
+            ma_200   = mdata.get("ma200")
+            closes_s = mdata.get("closes")
+            if closes_s is not None:
+                try:
+                    crossed, days_ago = ma200_recent_cross(closes_s, lookback=30)
                     if crossed:
                         ma_200_cross_days = days_ago
-        except Exception:
-            pass
+                except Exception:
+                    pass
+    except Exception as exc:
+        log.info("fetch_alpha_input: %s market_data unavailable (%s) — will use raw history", ticker, exc)
 
-        # Fetch 90-day price history directly for price windows + volume
-        try:
-            hist = tkr.history(period="90d")
-            if hist.empty or len(hist) < 5:
-                return None
+    # ── Raw 90-day history — THE ONE HARD REQUIREMENT ─────────────────────────
+    # Without at least 5 bars there is nothing to score; return None.
+    hist = None
+    try:
+        hist = tkr.history(period="90d")
+    except Exception as exc:
+        log.warning("fetch_alpha_input: %s history() raised — %s", ticker, exc)
 
-            if price is None:
-                price = float(hist["Close"].iloc[-1])
-
-            def _price_n_days_ago(n: int) -> Optional[float]:
-                if len(hist) > n:
-                    return float(hist["Close"].iloc[-(n + 1)])
-                return None
-
-            price_5d_ago  = _price_n_days_ago(5)
-            price_20d_ago = _price_n_days_ago(20)
-            price_60d_ago = _price_n_days_ago(60)
-
-            if "Volume" in hist.columns:
-                vol_today   = float(hist["Volume"].iloc[-1])
-                avg_vol_20d = float(hist["Volume"].tail(20).mean())
-                avg_vol_5d  = float(hist["Volume"].tail(5).mean())
-        except Exception:
-            return None
-
-        if not price:
-            return None
-
-        # 52-week high/low
-        price_high_52w = info.get("fiftyTwoWeekHigh")
-        price_low_52w  = info.get("fiftyTwoWeekLow")
-
-        # Benchmark returns
-        def _bench_return(sym: str, days: int) -> Optional[float]:
-            try:
-                bh = yf.Ticker(sym).history(period=f"{days + 10}d")
-                if len(bh) <= days:
-                    return None
-                old = float(bh["Close"].iloc[-(days + 1)])
-                new = float(bh["Close"].iloc[-1])
-                return (new / old - 1.0) if old > 0 else None
-            except Exception:
-                return None
-
-        spy_r5, spy_r20, spy_r60 = _bench_return("SPY", 5), _bench_return("SPY", 20), _bench_return("SPY", 60)
-        bench_sym = "XUS.TO" if ticker.upper().endswith((".TO", ".V")) else "QQQ"
-        qqq_r5, qqq_r20, qqq_r60 = _bench_return(bench_sym, 5), _bench_return(bench_sym, 20), _bench_return(bench_sym, 60)
-
-        # Short interest
-        short_pct     = info.get("shortPercentOfFloat")
-        days_to_cover = info.get("shortRatio")
-        shares_float  = info.get("floatShares")
-
-        # Options (best-effort; Canadian tickers often lack this)
-        call_vol = put_vol = call_oi = put_oi = None
-        unusual_options = False
-        try:
-            expiries = tkr.options
-            if expiries:
-                chain = tkr.option_chain(expiries[0])
-                if chain and hasattr(chain, "calls") and hasattr(chain, "puts"):
-                    call_vol = float(chain.calls["volume"].sum()) if "volume" in chain.calls.columns else None
-                    put_vol  = float(chain.puts["volume"].sum())  if "volume" in chain.puts.columns  else None
-                    call_oi  = float(chain.calls["openInterest"].sum()) if "openInterest" in chain.calls.columns else None
-                    put_oi   = float(chain.puts["openInterest"].sum())  if "openInterest" in chain.puts.columns  else None
-                    if call_vol and avg_vol_20d and avg_vol_20d > 0:
-                        unusual_options = call_vol > (avg_vol_20d * 0.15)
-        except Exception:
-            pass
-
-        # Earnings days
-        earnings_days: Optional[int] = None
-        try:
-            from datetime import date as _date
-            cal = tkr.calendar
-            if cal is not None and not (hasattr(cal, "empty") and cal.empty):
-                import pandas as _pd
-                if hasattr(cal, "loc") and "Earnings Date" in cal.index:
-                    ed = cal.loc["Earnings Date"].iloc[0]
-                elif hasattr(cal, "iloc"):
-                    ed = cal.iloc[0, 0]
-                else:
-                    ed = None
-                if ed is not None:
-                    earnings_days = (_pd.Timestamp(ed).date() - _date.today()).days
-        except Exception:
-            pass
-
-        # ATR (14-period average true range)
-        atr: Optional[float] = None
-        try:
-            if all(c in hist.columns for c in ("High", "Low", "Close")):
-                highs  = hist["High"].tail(15).values
-                lows   = hist["Low"].tail(15).values
-                closes = hist["Close"].tail(15).values
-                trs = [
-                    max(highs[i] - lows[i], abs(highs[i] - closes[i - 1]), abs(lows[i] - closes[i - 1]))
-                    for i in range(1, len(highs))
-                ]
-                atr = sum(trs) / len(trs) if trs else None
-        except Exception:
-            pass
-
-        # Market cap
-        mcap_raw = info.get("marketCap")
-        market_cap_millions = mcap_raw / 1_000_000 if mcap_raw else None
-
-        # VIX
-        vix: Optional[float] = None
-        try:
-            vix_hist = yf.Ticker("^VIX").history(period="2d")
-            if not vix_hist.empty:
-                vix = float(vix_hist["Close"].iloc[-1])
-        except Exception:
-            pass
-
-        is_canadian = ticker.upper().endswith((".TO", ".V"))
-
-        return AlphaInput(
-            ticker=ticker,
-            price=price,
-            price_5d_ago=price_5d_ago,
-            price_20d_ago=price_20d_ago,
-            price_60d_ago=price_60d_ago,
-            price_high_52w=price_high_52w,
-            price_low_52w=price_low_52w,
-            volume_today=vol_today,
-            avg_volume_20d=avg_vol_20d,
-            avg_volume_5d=avg_vol_5d,
-            spy_return_5d=spy_r5,
-            spy_return_20d=spy_r20,
-            spy_return_60d=spy_r60,
-            qqq_return_5d=qqq_r5,
-            qqq_return_20d=qqq_r20,
-            qqq_return_60d=qqq_r60,
-            rsi=rsi,
-            macd=macd_v,
-            macd_signal=macd_sig,
-            ma_50=ma_50,
-            ma_200=ma_200,
-            ma_200_days_since_cross=ma_200_cross_days,
-            short_percent_float=short_pct,
-            days_to_cover=days_to_cover,
-            shares_float=shares_float,
-            call_volume=call_vol,
-            put_volume=put_vol,
-            call_oi=call_oi,
-            put_oi=put_oi,
-            unusual_options=unusual_options,
-            earnings_days=earnings_days,
-            atr=atr,
-            stop_price=stop_price,
-            regime=regime,
-            vix=vix,
-            last_alerted_hours_ago=last_alerted_hours_ago,
-            alert_count_30d=alert_count_30d,
-            market_cap_millions=market_cap_millions,
-            is_canadian=is_canadian,
-            penny_enabled=penny_enabled,
-        )
-
-    except Exception:
-        log.warning("fetch_alpha_input: unhandled error for %s", ticker, exc_info=True)
+    if hist is None or hist.empty or len(hist) < 5:
+        log.info("fetch_alpha_input: %s — insufficient price history, returning None", ticker)
         return None
+
+    # Price fallback from raw history when market_data was unavailable
+    if price is None:
+        try:
+            price = float(hist["Close"].iloc[-1])
+        except Exception:
+            pass
+
+    if price is None:
+        log.info("fetch_alpha_input: %s — could not resolve price, returning None", ticker)
+        return None
+
+    # ── Price windows ─────────────────────────────────────────────────────────
+    def _price_n_days_ago(n: int) -> Optional[float]:
+        try:
+            if len(hist) > n:
+                return float(hist["Close"].iloc[-(n + 1)])
+        except Exception:
+            pass
+        return None
+
+    price_5d_ago  = _price_n_days_ago(5)
+    price_20d_ago = _price_n_days_ago(20)
+    price_60d_ago = _price_n_days_ago(60)
+
+    # ── Volume ────────────────────────────────────────────────────────────────
+    vol_today = avg_vol_20d = avg_vol_5d = None
+    try:
+        if "Volume" in hist.columns:
+            vol_today   = float(hist["Volume"].iloc[-1])
+            avg_vol_20d = float(hist["Volume"].tail(20).mean())
+            avg_vol_5d  = float(hist["Volume"].tail(5).mean())
+    except Exception as exc:
+        log.info("fetch_alpha_input: %s volume parse failed (%s)", ticker, exc)
+
+    # ── 52-week high/low ──────────────────────────────────────────────────────
+    price_high_52w = info.get("fiftyTwoWeekHigh")
+    price_low_52w  = info.get("fiftyTwoWeekLow")
+
+    # ── Benchmark returns (all optional, each individually safe) ──────────────
+    def _bench_return(sym: str, days: int) -> Optional[float]:
+        try:
+            bh = yf.Ticker(sym).history(period=f"{days + 10}d")
+            if len(bh) <= days:
+                return None
+            old = float(bh["Close"].iloc[-(days + 1)])
+            new = float(bh["Close"].iloc[-1])
+            return (new / old - 1.0) if old > 0 else None
+        except Exception:
+            return None
+
+    spy_r5, spy_r20, spy_r60 = (
+        _bench_return("SPY", 5), _bench_return("SPY", 20), _bench_return("SPY", 60)
+    )
+    bench_sym = "XUS.TO" if ticker.upper().endswith((".TO", ".V")) else "QQQ"
+    qqq_r5, qqq_r20, qqq_r60 = (
+        _bench_return(bench_sym, 5), _bench_return(bench_sym, 20), _bench_return(bench_sym, 60)
+    )
+
+    # ── Short interest ────────────────────────────────────────────────────────
+    short_pct     = info.get("shortPercentOfFloat")
+    days_to_cover = info.get("shortRatio")
+    shares_float  = info.get("floatShares")
+
+    # ── Options (best-effort; Canadian tickers usually lack this) ─────────────
+    call_vol = put_vol = call_oi = put_oi = None
+    unusual_options = False
+    try:
+        expiries = tkr.options
+        if expiries:
+            chain = tkr.option_chain(expiries[0])
+            if chain and hasattr(chain, "calls") and hasattr(chain, "puts"):
+                call_vol = float(chain.calls["volume"].sum()) if "volume" in chain.calls.columns else None
+                put_vol  = float(chain.puts["volume"].sum())  if "volume" in chain.puts.columns  else None
+                call_oi  = float(chain.calls["openInterest"].sum()) if "openInterest" in chain.calls.columns else None
+                put_oi   = float(chain.puts["openInterest"].sum())  if "openInterest" in chain.puts.columns  else None
+                if call_vol and avg_vol_20d and avg_vol_20d > 0:
+                    unusual_options = call_vol > (avg_vol_20d * 0.15)
+    except Exception:
+        pass
+
+    # ── Earnings days (optional) ──────────────────────────────────────────────
+    earnings_days: Optional[int] = None
+    try:
+        from datetime import date as _date
+        cal = tkr.calendar
+        if cal is not None and not (hasattr(cal, "empty") and cal.empty):
+            import pandas as _pd
+            if hasattr(cal, "loc") and "Earnings Date" in cal.index:
+                ed = cal.loc["Earnings Date"].iloc[0]
+            elif hasattr(cal, "iloc"):
+                ed = cal.iloc[0, 0]
+            else:
+                ed = None
+            if ed is not None:
+                earnings_days = (_pd.Timestamp(ed).date() - _date.today()).days
+    except Exception:
+        pass
+
+    # ── ATR (optional) ────────────────────────────────────────────────────────
+    atr: Optional[float] = None
+    try:
+        if all(c in hist.columns for c in ("High", "Low", "Close")):
+            highs      = hist["High"].tail(15).values
+            lows       = hist["Low"].tail(15).values
+            closes_arr = hist["Close"].tail(15).values
+            trs = [
+                max(highs[i] - lows[i],
+                    abs(highs[i] - closes_arr[i - 1]),
+                    abs(lows[i]  - closes_arr[i - 1]))
+                for i in range(1, len(highs))
+            ]
+            atr = sum(trs) / len(trs) if trs else None
+    except Exception:
+        pass
+
+    # ── Market cap (optional) ─────────────────────────────────────────────────
+    mcap_raw = info.get("marketCap")
+    market_cap_millions = mcap_raw / 1_000_000 if mcap_raw else None
+
+    # ── VIX (optional) ────────────────────────────────────────────────────────
+    vix: Optional[float] = None
+    try:
+        vix_hist = yf.Ticker("^VIX").history(period="2d")
+        if not vix_hist.empty:
+            vix = float(vix_hist["Close"].iloc[-1])
+    except Exception:
+        pass
+
+    is_canadian = ticker.upper().endswith((".TO", ".V"))
+
+    log.info(
+        "fetch_alpha_input: built AlphaInput for %s — price=%.2f hist=%d bars"
+        " rsi=%s ma200=%s short=%.0f%%",
+        ticker, price, len(hist),
+        f"{rsi:.1f}" if rsi is not None else "N/A",
+        f"{ma_200:.2f}" if ma_200 is not None else "N/A",
+        (short_pct or 0) * 100,
+    )
+
+    return AlphaInput(
+        ticker=ticker,
+        price=price,
+        price_5d_ago=price_5d_ago,
+        price_20d_ago=price_20d_ago,
+        price_60d_ago=price_60d_ago,
+        price_high_52w=price_high_52w,
+        price_low_52w=price_low_52w,
+        volume_today=vol_today,
+        avg_volume_20d=avg_vol_20d,
+        avg_volume_5d=avg_vol_5d,
+        spy_return_5d=spy_r5,
+        spy_return_20d=spy_r20,
+        spy_return_60d=spy_r60,
+        qqq_return_5d=qqq_r5,
+        qqq_return_20d=qqq_r20,
+        qqq_return_60d=qqq_r60,
+        rsi=rsi,
+        macd=macd_v,
+        macd_signal=macd_sig,
+        ma_50=ma_50,
+        ma_200=ma_200,
+        ma_200_days_since_cross=ma_200_cross_days,
+        short_percent_float=short_pct,
+        days_to_cover=days_to_cover,
+        shares_float=shares_float,
+        call_volume=call_vol,
+        put_volume=put_vol,
+        call_oi=call_oi,
+        put_oi=put_oi,
+        unusual_options=unusual_options,
+        earnings_days=earnings_days,
+        atr=atr,
+        stop_price=stop_price,
+        regime=regime,
+        vix=vix,
+        last_alerted_hours_ago=last_alerted_hours_ago,
+        alert_count_30d=alert_count_30d,
+        market_cap_millions=market_cap_millions,
+        is_canadian=is_canadian,
+        penny_enabled=penny_enabled,
+    )
