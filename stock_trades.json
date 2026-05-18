@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 235.79,
-      "last_price": 230.35,
-      "last_pnl_pct": 13.64,
-      "days_held": 22,
+      "last_price": 219.32,
+      "last_pnl_pct": 8.19,
+      "days_held": 25,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 408.28,
-      "last_pnl_pct": 7.33,
-      "days_held": 22,
+      "last_price": 391.14,
+      "last_pnl_pct": 2.82,
+      "days_held": 25,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 426.36,
-      "last_price": 426.36,
-      "last_pnl_pct": 3.87,
-      "days_held": 10,
+      "last_price": 423.39,
+      "last_pnl_pct": 3.15,
+      "days_held": 13,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
       "earnings_play": false,
       "trail_high": 272.18,
-      "last_price": 262.9,
-      "last_pnl_pct": -3.41,
-      "days_held": 4,
+      "last_price": 263.21,
+      "last_pnl_pct": -3.3,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 619.82,
-      "last_price": 619.82,
-      "last_pnl_pct": 2.85,
-      "days_held": 4,
+      "last_price": 610.03,
+      "last_pnl_pct": 1.23,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     }
@@ -1051,6 +1051,10 @@
     {
       "date": "2026-05-15",
       "value": 1020.29
+    },
+    {
+      "date": "2026-05-18",
+      "value": 1012.69
     }
   ],
   "top_picks": [
@@ -1060,19 +1064,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG offers genuine fundamental value at 27x forward earnings with 21.8% revenue growth and expanding AI monetization, supported by strong MACD and a bull market regime. Entry is tactically extended with RSI at 73.6 near 52-week highs, so position sizing should reflect the elevated technical risk.",
-      "price_target": 418.47,
-      "key_risk": "RSI overbought near all-time highs with fading volume could trigger a sharp pullback if the next earnings print shows AI Overviews eroding Search CPC revenue."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "In a confirmed BULL regime with strong AI/datacenter tailwinds and analyst consensus supporting upside to $457, AMD warrants a position despite overbought RSI, as the forward P/E compression to 33x reflects a credible earnings inflection story. Position sizing should be reduced given the late-stage momentum signature and below-average volume conviction.",
-      "price_target": 457.83,
-      "key_risk": "Any MI300X guidance cut, hyperscaler capex reduction, or NVIDIA competitive displacement could trigger a 20%+ drawdown from these elevated multiples."
+      "reasoning": "GOOG's strong fundamental quality \u2014 22% revenue growth, 38% margins, and credible AI monetization via Cloud and Search \u2014 supports a medium-term position in a bull regime despite near-term overbought technicals. The analyst target of $420 offers reasonable upside if Cloud accelerates past 30% YoY, justifying a measured entry with a stop below key support.",
+      "price_target": 420.44,
+      "key_risk": "Negative MACD divergence and RSI at 75.5 pressing against the 52-week high resistance at $404 could trigger an 8\u201312% mean reversion to ~$350 on any Cloud or Search ad revenue disappointment."
     },
     {
       "ticker": "SNOW",
@@ -1080,9 +1074,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW's 30% revenue growth, bullish technicals above the 50-MA, and a 45% analyst upside target justify a tactical medium-term position in a bull market regime where full Kelly sizing applies. The relief rally has momentum but requires disciplined risk management given the structurally bearish longer-term trend and 200-MA overhead resistance at $203.",
+      "reasoning": "BULL regime with bullish MACD, strong breakout above MA50, and 40% analyst upside provide sufficient tailwind for a medium-term position despite overbought RSI. Counter-trend rally risk is managed with a stop below the MA50 reclaim level.",
       "price_target": 195.0,
-      "key_risk": "Any guidance cut or AI/data warehouse growth deceleration at the next earnings print could reignite institutional selling and retest the $118 multi-year lows."
+      "key_risk": "RPO deceleration or NRR miss at next earnings could rapidly retest $130\u2013140, invalidating the entire rally thesis."
+    },
+    {
+      "ticker": "ARM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "ARM's bull market structure remains intact with strong AI/data center royalty tailwinds and analyst consensus pointing to $229 target, and the current consolidation at neutral RSI offers a reasonable entry within the longer uptrend. The BULL regime permits this score-7 entry, with valuation risk mitigated by genuine earnings acceleration expected in forward estimates.",
+      "price_target": 229.0,
+      "key_risk": "At 240x trailing P/E with fading short-term momentum and 5.2x debt-to-equity, any licensing deal slowdown or hyperscaler pricing pushback could trigger a sharp de-rating from perfection-priced levels."
     }
   ],
   "regime": "BULL",
@@ -1091,12 +1095,12 @@
     "rolling_win_rate": 54.5,
     "avg_return": 2.92,
     "sharpe": 0.27,
-    "max_drawdown": 0.85,
+    "max_drawdown": 0.9,
     "total_trades": 11,
     "wins": 6,
     "losses": 5,
     "underperforming": false
   },
   "pnl": 5.649999999999999,
-  "last_run": "2026-05-15 18:26"
+  "last_run": "2026-05-18 18:35"
 }
