@@ -444,6 +444,45 @@ MIGRATIONS: list = [
             "ALTER TABLE alpha_shadow_log ADD COLUMN detail_json TEXT",
         ],
     ),
+    Migration(
+        version=8,
+        description="Phase A5: add alpha_outcomes table for outcome tracking and learning dataset",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS alpha_outcomes (
+                id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker                TEXT    NOT NULL,
+                scan_time             TEXT    NOT NULL,
+                alpha_score           REAL,
+                alpha_tier            TEXT,
+                setup_type            TEXT,
+                source                TEXT,
+                component_scores_json TEXT,
+                price_at_scan         REAL,
+                price_1d              REAL,
+                price_3d              REAL,
+                price_5d              REAL,
+                price_10d             REAL,
+                price_20d             REAL,
+                return_1d             REAL,
+                return_3d             REAL,
+                return_5d             REAL,
+                return_10d            REAL,
+                return_20d            REAL,
+                max_gain              REAL,
+                max_drawdown          REAL,
+                status                TEXT NOT NULL DEFAULT 'PENDING',
+                created_at            TEXT NOT NULL,
+                updated_at            TEXT,
+                UNIQUE(ticker, scan_time)
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_alpha_outcomes_ticker    ON alpha_outcomes(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_outcomes_scan_time ON alpha_outcomes(scan_time)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_outcomes_status    ON alpha_outcomes(status)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_outcomes_tier      ON alpha_outcomes(alpha_tier)",
+        ],
+    ),
 ]
 
 

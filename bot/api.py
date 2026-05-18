@@ -809,3 +809,66 @@ def research_report(report_type: str):
     except Exception:
         log.error("GET /research/report/%s error:\n%s", report_type, traceback.format_exc())
         return _err(f"failed to generate {report_type!r} report")
+
+
+# ── Alpha A5: monitoring report, outcomes, learning ───────────────────────────
+
+@api_bp.route("/alpha/report", methods=["GET"])
+def alpha_report():
+    """
+    Full alpha monitoring report — tier distribution, top candidates,
+    data quality analysis, quality diagnosis, and actionable recommendations.
+    Cached for 5 minutes.
+    """
+    try:
+        def _build():
+            from alpha_monitor import generate_alpha_report
+            return generate_alpha_report()
+
+        payload, cached = _cached("alpha:report", 300, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /alpha/report error:\n%s", traceback.format_exc())
+        return _err("alpha report generation failed")
+
+
+@api_bp.route("/alpha/outcomes", methods=["GET"])
+def alpha_outcomes_endpoint():
+    """
+    Alpha outcome tracking rows ordered scan_time DESC.
+    Query params:
+      status  — filter by PENDING / COMPLETE / STALE (optional)
+      limit   — max rows (default 50, max 200)
+    """
+    try:
+        status = request.args.get("status") or None
+        limit  = min(int(request.args.get("limit", 50)), 200)
+
+        if status and status not in ("PENDING", "COMPLETE", "STALE"):
+            return _err("status must be PENDING, COMPLETE, or STALE", code=400)
+
+        from alpha_outcomes import get_outcomes
+        rows = get_outcomes(limit=limit, status=status)
+        return _ok({"results": rows, "total": len(rows), "status_filter": status})
+    except Exception:
+        log.error("GET /alpha/outcomes error:\n%s", traceback.format_exc())
+        return _err("failed to fetch alpha outcomes")
+
+
+@api_bp.route("/alpha/learning", methods=["GET"])
+def alpha_learning():
+    """
+    Learning analytics from completed alpha outcomes:
+    per-setup, per-tier, per-source effectiveness with avg 5-day return and win rate.
+    Cached for 10 minutes.
+    """
+    try:
+        def _build():
+            from alpha_outcomes import compute_learning_analytics
+            return compute_learning_analytics()
+
+        payload, cached = _cached("alpha:learning", 600, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /alpha/learning error:\n%s", traceback.format_exc())
+        return _err("alpha learning analytics failed")

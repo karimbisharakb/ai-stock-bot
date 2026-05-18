@@ -322,13 +322,53 @@ def release_scheduler_lease() -> None:
 
 
 def _run_alpha_universe_scan():
-    """Scan ALPHA_UNIVERSE in alpha shadow mode. No alerts."""
+    """Scan ALPHA_UNIVERSE in alpha shadow mode, then queue outcome tracking rows."""
     try:
         from alpha_universe import scan_alpha_universe
         count = scan_alpha_universe()
         log.info("Alpha universe scan complete: %d tickers scored", count)
     except Exception:
         log.warning("Alpha universe scan failed (non-fatal)", exc_info=True)
+        return
+
+    # After scan, record pending outcomes for top candidates (non-fatal)
+    try:
+        from alpha_shadow import get_shadow_manager
+        from alpha_outcomes import insert_pending_outcomes
+        candidates = get_shadow_manager().get_top_candidates(limit=20)
+        n = insert_pending_outcomes(candidates)
+        log.info("Alpha outcomes: inserted %d pending rows after universe scan", n)
+    except Exception:
+        log.warning("Alpha outcomes insert failed (non-fatal)", exc_info=True)
+
+
+def _run_alpha_daily_tasks():
+    """Daily alpha maintenance: update outcome prices and log monitoring report."""
+    # Update return windows for PENDING outcomes
+    try:
+        from alpha_outcomes import update_outcome_prices
+        stats = update_outcome_prices()
+        log.info("Alpha outcome price update: %s", stats)
+    except Exception:
+        log.warning("Alpha outcome price update failed (non-fatal)", exc_info=True)
+
+    # Generate and log the daily monitoring report
+    try:
+        from alpha_monitor import generate_alpha_report
+        report = generate_alpha_report()
+        diag = report.get("diagnosis", [])
+        recs = report.get("recommendations", [])
+        log.info(
+            "Alpha daily report: %d tickers scored | %d issues | %d recommendations",
+            report.get("summary", {}).get("total_unique_scored", 0),
+            len(diag), len(recs),
+        )
+        for issue in diag:
+            log.info("Alpha diagnosis [%s]: %s", issue["severity"], issue["message"])
+        for rec in recs:
+            log.info("Alpha recommendation: %s", rec)
+    except Exception:
+        log.warning("Alpha daily report failed (non-fatal)", exc_info=True)
 
 
 def start_scheduler() -> Optional[BackgroundScheduler]:
@@ -427,11 +467,20 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # Alpha daily tasks — 9:30 AM ET weekdays (after market open, before predator peak)
+    # Updates outcome return windows and logs quality report. Never blocks Predator.
+    scheduler.add_job(
+        _run_alpha_daily_tasks,
+        CronTrigger(hour=9, minute=30, day_of_week="mon-fri", timezone=EASTERN),
+        id="alpha_daily_tasks",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
         "scanner every 30 min | predator every 60 min | "
         "watchlist check every 15 min | weekly summary Sundays 9 AM | "
-        "alpha universe scan every 4 h Mon-Fri)"
+        "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri)"
     )
     return scheduler
