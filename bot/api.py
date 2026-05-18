@@ -515,6 +515,13 @@ def alpha_debug():
         except Exception:
             pass
 
+        engine_version = "unknown"
+        try:
+            from alpha_engine import ALPHA_ENGINE_VERSION
+            engine_version = ALPHA_ENGINE_VERSION
+        except Exception:
+            pass
+
         return _ok({
             "alpha_shadow_enabled": flag_on,
             "env_var_raw":          flag_raw or "(not set)",
@@ -523,6 +530,7 @@ def alpha_debug():
             "latest_scan_time":     latest_scan,
             "hook_last_seen_at":    hook_diag.get("hook_last_seen_at"),
             "last_error":           hook_diag.get("last_error"),
+            "alpha_engine_version": engine_version,
         })
 
     except Exception:

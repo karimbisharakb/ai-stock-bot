@@ -792,3 +792,161 @@ class TestDetailJsonPersisted:
         assert "what_must_happen_next" in parsed
         assert "what_could_invalidate" in parsed
         assert "risk_factors" in parsed
+
+
+# ── A3 deployment verification tests ─────────────────────────────────────────
+# These tests confirm the exact A3 runtime behaviors that were missing in
+# production: neutral MISSING scoring and the analytics endpoint.
+
+class TestA3NeutralScoringDeployed:
+    """
+    Direct unit tests — do NOT mock the scoring functions.
+    Verifies that A3 neutral defaults are in the live alpha_engine module.
+    """
+
+    def test_missing_catalyst_scores_50(self):
+        from alpha_engine import _score_catalyst
+        inp = AlphaInput(
+            ticker="X", price=100.0,
+            earnings_days=None, has_catalyst_news=False,
+            has_sec_8k=False, news_sentiment=None,
+        )
+        comp = _score_catalyst(inp)
+        assert comp.score == 5.0, f"Expected 5.0 neutral, got {comp.score}"
+        assert comp.data_quality == "MISSING"
+
+    def test_missing_options_scores_50(self):
+        from alpha_engine import _score_options
+        inp = AlphaInput(
+            ticker="X", price=100.0,
+            call_volume=None, put_volume=None,
+            call_oi=None, put_oi=None, unusual_options=False,
+        )
+        comp = _score_options(inp)
+        assert comp.score == 5.0, f"Expected 5.0 neutral, got {comp.score}"
+        assert comp.data_quality == "MISSING"
+
+    def test_missing_risk_reward_scores_50(self):
+        from alpha_engine import _score_risk_reward
+        inp = AlphaInput(
+            ticker="X", price=100.0,
+            stop_price=None, price_high_52w=None, atr=None,
+        )
+        comp = _score_risk_reward(inp)
+        assert comp.score == 5.0, f"Expected 5.0 neutral, got {comp.score}"
+        assert comp.data_quality == "MISSING"
+
+    def test_alpha_engine_version_is_a3(self):
+        from alpha_engine import ALPHA_ENGINE_VERSION
+        assert ALPHA_ENGINE_VERSION == "A3"
+
+    def test_all_missing_input_scores_above_ignore(self):
+        """
+        A ticker with nothing but price should score above the old A2 baseline of ~28
+        now that MISSING components return 5.0 instead of 0/1/3.
+        """
+        inp = AlphaInput(ticker="X", price=100.0)
+        result = AlphaEngine().score(inp)
+        assert result.alpha_score > 28.0, (
+            f"All-sparse input scored {result.alpha_score} — A3 neutrals not active"
+        )
+
+
+class TestA3ApiEndpoints:
+    """Verify A3 endpoints are registered and return correct shapes."""
+
+    def _make_app(self, tmp_path, monkeypatch):
+        import sqlite3 as sq
+        path = _make_db(str(tmp_path / "t.db"))
+        import database as _db
+        monkeypatch.setattr(_db, "get_connection", lambda: _row_conn(sq.connect(path)))
+        from flask import Flask
+        from api import api_bp, cache_clear
+        app = Flask(__name__)
+        app.register_blueprint(api_bp)
+        cache_clear()
+        return app, path
+
+    def test_analytics_endpoint_exists_and_returns_200(self, tmp_path, monkeypatch):
+        app, _ = self._make_app(tmp_path, monkeypatch)
+        with app.test_client() as c:
+            resp = c.get("/api/v1/alpha/analytics")
+        assert resp.status_code == 200
+        body = resp.get_json()
+        assert body["ok"] is True
+        assert "tier_counts" in body["data"]
+        assert "top_setup_types" in body["data"]
+        assert "best_non_predator" in body["data"]
+        assert "universe_coverage" in body["data"]
+
+    def test_debug_endpoint_returns_a3_version(self, tmp_path, monkeypatch):
+        app, _ = self._make_app(tmp_path, monkeypatch)
+        with app.test_client() as c:
+            resp = c.get("/api/v1/alpha/debug")
+        body = resp.get_json()
+        assert body["ok"] is True
+        assert body["data"]["alpha_engine_version"] == "A3"
+
+    def test_top_endpoint_returns_a3_fields(self, tmp_path, monkeypatch):
+        """fmt_alpha_row must include detail_json fields (A3 enrichment)."""
+        import sqlite3 as sq
+        app, path = self._make_app(tmp_path, monkeypatch)
+        _seed_row(path, alpha_score=60.0, filter_reason=None,
+                  detail_json=json.dumps({
+                      "why_scored_high": ["Strong RS"],
+                      "what_must_happen_next": ["Close above breakout"],
+                      "what_could_invalidate": ["Volume fails"],
+                      "risk_factors": ["High ATR"],
+                      "expected_holding_window": "5-15 days",
+                      "tier_gate_note": "",
+                  }))
+        with app.test_client() as c:
+            resp = c.get("/api/v1/alpha/top")
+        body = resp.get_json()
+        assert body["ok"] is True
+        rows = body["data"]["results"]
+        assert len(rows) > 0
+        row = rows[0]
+        assert "why_scored_high" in row
+        assert "what_must_happen_next" in row
+        assert "what_could_invalidate" in row
+        assert "risk_factors" in row
+
+    def test_persist_fallback_when_detail_json_column_missing(self, tmp_path, monkeypatch):
+        """_persist() must write the row even when detail_json column does not exist."""
+        import sqlite3 as sq
+
+        # Create DB WITHOUT detail_json column (simulates pre-migration-v7 production)
+        old_schema = """
+        CREATE TABLE IF NOT EXISTS alpha_shadow_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, ticker TEXT NOT NULL,
+            scan_time TEXT NOT NULL, alpha_score REAL, alpha_tier TEXT,
+            setup_type TEXT, predator_tier TEXT, predator_score REAL,
+            tier_match INTEGER NOT NULL DEFAULT 0, filter_reason TEXT,
+            component_scores_json TEXT, explanation TEXT
+        )
+        """
+        path = str(tmp_path / "pre_v7.db")
+        conn = sq.connect(path)
+        conn.execute(old_schema)
+        conn.commit()
+        conn.close()
+
+        import database as _db
+        monkeypatch.setattr(_db, "get_connection",
+                            lambda: _row_conn(sq.connect(path)))
+
+        from alpha_shadow import AlphaShadowManager
+        mgr = AlphaShadowManager()
+        mgr._persist(
+            ticker="AAPL", alpha_score=42.0, alpha_tier="WATCH",
+            setup_type="BREAKOUT_EXPANSION", predator_tier="ALERT",
+            predator_score=6.0, tier_match=0, filter_reason=None,
+            component_scores={}, explanation="test", detail_json='{"test":1}',
+        )
+
+        conn = sq.connect(path)
+        row = conn.execute("SELECT alpha_score FROM alpha_shadow_log WHERE ticker='AAPL'").fetchone()
+        conn.close()
+        assert row is not None, "Row was not written — fallback INSERT failed"
+        assert row[0] == 42.0

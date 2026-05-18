@@ -31,6 +31,7 @@ from typing import Optional
 
 log = logging.getLogger(__name__)
 
+ALPHA_ENGINE_VERSION = "A3"
 
 # ── Dataclasses ────────────────────────────────────────────────────────────────
 

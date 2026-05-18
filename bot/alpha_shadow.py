@@ -132,23 +132,37 @@ class AlphaShadowManager:
                  detail_json: Optional[str] = None):
         from database import get_connection
         conn = get_connection()
+        base_args = (
+            ticker, _now_iso(), alpha_score, alpha_tier, setup_type,
+            predator_tier, predator_score, tier_match, filter_reason,
+            json.dumps(component_scores) if component_scores else None,
+            explanation,
+        )
         try:
-            conn.execute(
-                """
-                INSERT INTO alpha_shadow_log
-                    (ticker, scan_time, alpha_score, alpha_tier, setup_type,
-                     predator_tier, predator_score, tier_match, filter_reason,
-                     component_scores_json, explanation, detail_json)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    ticker, _now_iso(), alpha_score, alpha_tier, setup_type,
-                    predator_tier, predator_score, tier_match, filter_reason,
-                    json.dumps(component_scores) if component_scores else None,
-                    explanation,
-                    detail_json,
-                ),
-            )
+            try:
+                # Preferred: full 12-column insert including detail_json (migration v7)
+                conn.execute(
+                    """
+                    INSERT INTO alpha_shadow_log
+                        (ticker, scan_time, alpha_score, alpha_tier, setup_type,
+                         predator_tier, predator_score, tier_match, filter_reason,
+                         component_scores_json, explanation, detail_json)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (*base_args, detail_json),
+                )
+            except Exception:
+                # Fallback: 11-column insert for pre-migration-v7 databases
+                conn.execute(
+                    """
+                    INSERT INTO alpha_shadow_log
+                        (ticker, scan_time, alpha_score, alpha_tier, setup_type,
+                         predator_tier, predator_score, tier_match, filter_reason,
+                         component_scores_json, explanation)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    base_args,
+                )
             conn.commit()
             log.info("alpha_shadow: row persisted for %s (alpha_score=%s tier=%s)",
                      ticker, alpha_score, alpha_tier)
