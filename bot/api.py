@@ -24,7 +24,6 @@ import threading
 import time
 import traceback
 from datetime import datetime, timezone
-from functools import wraps
 from typing import Any, Optional
 
 from flask import Blueprint, jsonify, request
@@ -36,25 +35,21 @@ api_bp = Blueprint("api_v1", __name__, url_prefix="/api/v1")
 
 # ── Auth helper (write endpoints only) ───────────────────────────────────────
 
-def _alpha_require_auth(f):
-    """Bearer-token guard for mutating alpha endpoints.
+def _check_alpha_auth() -> bool:
+    """Return True if the request is authorized (or no secret is configured).
 
     Checks Authorization: Bearer <token> against API_SECRET env var.
-    Fails-open if API_SECRET is unset (local dev). Rejects if set and mismatched.
+    Fails-open when API_SECRET is unset (local dev / Railway before secret is set).
     """
     import hmac
-
-    @wraps(f)
-    def _wrapper(*args, **kwargs):
-        secret = os.environ.get("API_SECRET", "")
-        if secret:
-            auth_header = request.headers.get("Authorization", "")
-            token = auth_header.removeprefix("Bearer ").strip()
-            if not hmac.compare_digest(token.encode(), secret.encode()):
-                return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
-        return f(*args, **kwargs)
-
-    return _wrapper
+    secret = os.environ.get("API_SECRET", "")
+    if not secret:
+        return True
+    auth_header = request.headers.get("Authorization", "")
+    # Strip "Bearer " prefix safely (compatible with Python 3.8+)
+    prefix = "Bearer "
+    token = auth_header[len(prefix):].strip() if auth_header.startswith(prefix) else auth_header.strip()
+    return hmac.compare_digest(token.encode(), secret.encode())
 
 
 # ── Size caps ─────────────────────────────────────────────────────────────────
@@ -693,24 +688,38 @@ _universe_scan_running = False
 
 
 @api_bp.route("/alpha/run-universe", methods=["POST"])
-@_alpha_require_auth
 def alpha_run_universe():
     """
     Manually trigger a full alpha universe scan in a background thread.
     Auth-protected (Bearer token matching API_SECRET env var).
     Observation-only — no WhatsApp alerts sent.
-    Returns immediately; use /alpha/debug to check last_universe_scan_time.
+    Returns immediately; poll /alpha/debug for last_universe_scan_time.
     """
     global _universe_scan_running
 
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+
     try:
+        from alpha_universe import get_alpha_universe
+        universe = get_alpha_universe()
+        universe_size = len(universe)
+
         from feature_flags import alpha_shadow_enabled
         if not alpha_shadow_enabled():
-            return _ok({"queued": False, "reason": "ALPHA_SHADOW_ENABLED is off"})
+            return _ok({
+                "status": "skipped",
+                "reason": "ALPHA_SHADOW_ENABLED is off",
+                "universe_size": universe_size,
+            })
 
         with _universe_scan_lock:
             if _universe_scan_running:
-                return _ok({"queued": False, "reason": "scan already in progress"})
+                return _ok({
+                    "status": "already running",
+                    "reason": "scan already in progress",
+                    "universe_size": universe_size,
+                })
             _universe_scan_running = True
 
         def _run():
@@ -726,7 +735,10 @@ def alpha_run_universe():
                     _universe_scan_running = False
 
         threading.Thread(target=_run, daemon=True, name="alpha-universe-manual").start()
-        return _ok({"queued": True, "reason": "scan started in background"})
+        return _ok({
+            "status": "scan started",
+            "universe_size": universe_size,
+        })
 
     except Exception:
         log.error("POST /alpha/run-universe error:\n%s", traceback.format_exc())

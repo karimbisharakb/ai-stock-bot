@@ -326,18 +326,37 @@ class TestAlphaRunUniverse:
         _make_db(db_path)
         monkeypatch.setenv("DATABASE_PATH", db_path)
         monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "true")
-        # No API_SECRET → fails-open locally
+        monkeypatch.delenv("API_SECRET", raising=False)  # fails-open when unset
 
         import importlib, sms_handler, api
         importlib.reload(api)
-
-        # Reset lock state
         api._universe_scan_running = False
 
         from sms_handler import app
         app.config["TESTING"] = True
         with app.test_client() as c:
             yield c
+
+    def test_route_exists_and_returns_200(self, client, monkeypatch):
+        """Core regression: POST /api/v1/alpha/run-universe must not 404."""
+        monkeypatch.setattr("alpha_universe.scan_alpha_universe", lambda: 0)
+        resp = client.post("/api/v1/alpha/run-universe")
+        assert resp.status_code == 200, f"Expected 200, got {resp.status_code}: {resp.data}"
+
+    def test_response_has_status_scan_started(self, client, monkeypatch):
+        monkeypatch.setattr("alpha_universe.scan_alpha_universe", lambda: 0)
+        resp = client.post("/api/v1/alpha/run-universe")
+        data = resp.get_json()
+        assert data["ok"]
+        assert data["data"]["status"] == "scan started"
+
+    def test_response_has_universe_size(self, client, monkeypatch):
+        monkeypatch.setattr("alpha_universe.scan_alpha_universe", lambda: 0)
+        resp = client.post("/api/v1/alpha/run-universe")
+        data = resp.get_json()
+        assert "universe_size" in data["data"]
+        assert isinstance(data["data"]["universe_size"], int)
+        assert data["data"]["universe_size"] >= 50
 
     def test_run_universe_queues_scan(self, client, monkeypatch):
         scan_called = []
@@ -348,18 +367,10 @@ class TestAlphaRunUniverse:
 
         monkeypatch.setattr("alpha_universe.scan_alpha_universe", _fake_scan)
         resp = client.post("/api/v1/alpha/run-universe")
-        data = resp.get_json()
         assert resp.status_code == 200
-        assert data["ok"]
-        # Give the background thread a moment
+        assert resp.get_json()["ok"]
         time.sleep(0.2)
-        assert scan_called, "scan_alpha_universe was not called"
-
-    def test_run_universe_returns_queued_true(self, client, monkeypatch):
-        monkeypatch.setattr("alpha_universe.scan_alpha_universe", lambda: 0)
-        resp = client.post("/api/v1/alpha/run-universe")
-        data = resp.get_json()
-        assert data["data"]["queued"] is True
+        assert scan_called, "scan_alpha_universe was not called by background thread"
 
     def test_run_universe_rejects_second_call_while_running(self, client, monkeypatch):
         import api as api_mod
@@ -368,17 +379,16 @@ class TestAlphaRunUniverse:
         resp = client.post("/api/v1/alpha/run-universe")
         data = resp.get_json()
         assert data["ok"]
-        assert data["data"]["queued"] is False
-        assert "in progress" in data["data"]["reason"]
+        assert data["data"]["status"] == "already running"
 
         api_mod._universe_scan_running = False
 
-    def test_run_universe_flag_off_returns_not_queued(self, client, monkeypatch):
+    def test_run_universe_flag_off_returns_skipped(self, client, monkeypatch):
         monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "false")
         resp = client.post("/api/v1/alpha/run-universe")
         data = resp.get_json()
         assert data["ok"]
-        assert data["data"]["queued"] is False
+        assert data["data"]["status"] == "skipped"
 
     def test_run_universe_auth_rejects_bad_token(self, monkeypatch, tmp_path):
         """When API_SECRET is set, wrong token gets 401."""
