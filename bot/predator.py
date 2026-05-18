@@ -935,8 +935,31 @@ def score_all_tickers() -> list[dict]:
 
 
 def save_scan_results(results: list[dict]):
-    """Persist a list of scored results to predator_latest without sending alerts."""
+    """Persist scored results to predator_latest and run alpha shadow (if enabled)."""
     _batch_upsert_latest(results)
+    _run_alpha_shadow_batch(results, source="run-now")
+
+
+def _run_alpha_shadow_batch(results: list[dict], source: str = "unknown") -> None:
+    if not alpha_shadow_enabled():
+        log.info("Predator alpha shadow: flag off — skipping batch (%s, %d tickers)",
+                 source, len(results))
+        return
+    log.info("Predator alpha shadow: running batch for %d tickers (%s)", len(results), source)
+    try:
+        from alpha_shadow import get_shadow_manager
+        mgr = get_shadow_manager()
+    except Exception:
+        log.warning("Predator alpha shadow: could not load shadow manager", exc_info=True)
+        return
+    for result in results:
+        ticker = result.get("ticker", "")
+        if not ticker:
+            continue
+        try:
+            mgr.run_shadow_score(ticker, result)
+        except Exception:
+            log.warning("Predator: alpha shadow error for %s (non-fatal)", ticker, exc_info=True)
 
 
 # ── Main job ───────────────────────────────────────────────────────────────────

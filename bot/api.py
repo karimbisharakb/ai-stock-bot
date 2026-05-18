@@ -495,12 +495,21 @@ def alpha_debug():
         except Exception as conn_exc:
             log.warning("alpha_debug: could not open DB — %s", conn_exc)
 
+        hook_diag: dict = {}
+        try:
+            from alpha_shadow import get_hook_diagnostics
+            hook_diag = get_hook_diagnostics()
+        except Exception:
+            pass
+
         return _ok({
             "alpha_shadow_enabled": flag_on,
             "env_var_raw":          flag_raw or "(not set)",
             "table_exists":         table_exists,
             "row_count":            row_count,
             "latest_scan_time":     latest_scan,
+            "hook_last_seen_at":    hook_diag.get("hook_last_seen_at"),
+            "last_error":           hook_diag.get("last_error"),
         })
 
     except Exception:

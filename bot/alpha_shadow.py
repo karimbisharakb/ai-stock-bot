@@ -18,9 +18,21 @@ from typing import Optional
 
 log = logging.getLogger(__name__)
 
+# ── Module-level state for diagnostics ───────────────────────────────────────
+_hook_last_seen_at: Optional[str] = None
+_last_error: Optional[str]        = None
+
 
 def _now_iso() -> str:
     return datetime.now().isoformat()
+
+
+def get_hook_diagnostics() -> dict:
+    """Return hook_last_seen_at and last_error for the /alpha/debug endpoint."""
+    return {
+        "hook_last_seen_at": _hook_last_seen_at,
+        "last_error":        _last_error,
+    }
 
 
 class AlphaShadowManager:
@@ -31,13 +43,16 @@ class AlphaShadowManager:
         Returns AlphaResult on success, None if input fetch fails or is unavailable.
         All exceptions are caught — shadow must not disrupt Predator.
         """
+        global _hook_last_seen_at, _last_error
         from alpha_engine import fetch_alpha_input, AlphaEngine
 
         log.info("alpha_shadow: scoring %s", ticker)
+        _hook_last_seen_at = _now_iso()
 
         try:
             alpha_input = fetch_alpha_input(ticker)
-        except Exception:
+        except Exception as exc:
+            _last_error = f"fetch_alpha_input({ticker}): {exc}"
             log.warning("alpha_shadow: fetch_alpha_input failed for %s", ticker, exc_info=True)
             return None
 
@@ -47,7 +62,8 @@ class AlphaShadowManager:
 
         try:
             result = AlphaEngine().score(alpha_input)
-        except Exception:
+        except Exception as exc:
+            _last_error = f"AlphaEngine.score({ticker}): {exc}"
             log.warning("alpha_shadow: AlphaEngine.score failed for %s", ticker, exc_info=True)
             return None
 

@@ -563,6 +563,142 @@ class TestAlphaDebugEndpoint:
             resp = c.get("/api/v1/alpha/debug")
         assert resp.get_json()["data"]["alpha_shadow_enabled"] is expected
 
+    def test_debug_exposes_hook_last_seen_at_and_last_error(self, tmp_path, monkeypatch):
+        """Debug endpoint must include hook_last_seen_at and last_error keys."""
+        app, _ = _make_flask_app(tmp_path, monkeypatch)
+        with app.test_client() as c:
+            resp = c.get("/api/v1/alpha/debug")
+        data = resp.get_json()["data"]
+        assert "hook_last_seen_at" in data
+        assert "last_error" in data
+
+    def test_debug_hook_last_seen_at_null_before_any_run(self, tmp_path, monkeypatch):
+        """hook_last_seen_at is None when shadow manager has never been called."""
+        import alpha_shadow as _mod
+        monkeypatch.setattr(_mod, "_hook_last_seen_at", None)
+        monkeypatch.setattr(_mod, "_last_error",        None)
+        app, _ = _make_flask_app(tmp_path, monkeypatch)
+        with app.test_client() as c:
+            resp = c.get("/api/v1/alpha/debug")
+        data = resp.get_json()["data"]
+        assert data["hook_last_seen_at"] is None
+        assert data["last_error"]        is None
+
+
+# ── save_scan_results / _run_alpha_shadow_batch (run-now path) ─────────────────
+
+class TestRunNowAlphaShadowBatch:
+    """
+    _run_alpha_shadow_batch() is the shared helper that save_scan_results() calls.
+    Tests confirm:
+      - flag off  → run_shadow_score never called
+      - flag on   → run_shadow_score called once per ticker
+      - alpha failure → does not raise
+      - save_scan_results passes source='run-now'
+    """
+
+    _RESULTS = [
+        {"ticker": "NVDA", "score": 8, "tier": "ALERT",      "price": 100.0},
+        {"ticker": "AAPL", "score": 6, "tier": "WATCH",       "price": 200.0},
+        {"ticker": "MSFT", "score": 9, "tier": "CONVICTION",  "price": 400.0},
+    ]
+
+    def _run_batch(self, results, monkeypatch, *, flag_on: bool):
+        from unittest.mock import MagicMock, patch
+        monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "true" if flag_on else "false")
+
+        mock_mgr = MagicMock()
+        with patch("alpha_shadow.get_shadow_manager", return_value=mock_mgr):
+            from predator import _run_alpha_shadow_batch
+            _run_alpha_shadow_batch(results, source="test")
+        return mock_mgr
+
+    def test_flag_off_skips_all_scoring(self, monkeypatch):
+        mock_mgr = self._run_batch(self._RESULTS, monkeypatch, flag_on=False)
+        mock_mgr.run_shadow_score.assert_not_called()
+
+    def test_flag_on_scores_every_ticker(self, monkeypatch):
+        mock_mgr = self._run_batch(self._RESULTS, monkeypatch, flag_on=True)
+        assert mock_mgr.run_shadow_score.call_count == len(self._RESULTS)
+
+    def test_flag_on_passes_correct_ticker(self, monkeypatch):
+        mock_mgr = self._run_batch(self._RESULTS, monkeypatch, flag_on=True)
+        called_tickers = [call.args[0] for call in mock_mgr.run_shadow_score.call_args_list]
+        assert set(called_tickers) == {"NVDA", "AAPL", "MSFT"}
+
+    def test_alpha_failure_does_not_raise(self, monkeypatch):
+        from unittest.mock import MagicMock, patch
+        monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "true")
+        mock_mgr = MagicMock()
+        mock_mgr.run_shadow_score.side_effect = RuntimeError("boom")
+        with patch("alpha_shadow.get_shadow_manager", return_value=mock_mgr):
+            from predator import _run_alpha_shadow_batch
+            _run_alpha_shadow_batch(self._RESULTS, source="test")  # must not raise
+
+    def test_save_scan_results_uses_run_now_source(self, monkeypatch):
+        """save_scan_results() must call _run_alpha_shadow_batch with source='run-now'."""
+        from unittest.mock import patch, call
+        monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "true")
+
+        captured: list = []
+
+        def _fake_batch(results, source="unknown"):
+            captured.append(source)
+
+        with patch("predator._batch_upsert_latest"), \
+             patch("predator._run_alpha_shadow_batch", side_effect=_fake_batch):
+            from predator import save_scan_results
+            save_scan_results(self._RESULTS)
+
+        assert captured == ["run-now"]
+
+    def test_empty_ticker_skipped(self, monkeypatch):
+        """Results with no ticker field are silently skipped."""
+        from unittest.mock import MagicMock, patch
+        monkeypatch.setenv("ALPHA_SHADOW_ENABLED", "true")
+        mock_mgr = MagicMock()
+        with patch("alpha_shadow.get_shadow_manager", return_value=mock_mgr):
+            from predator import _run_alpha_shadow_batch
+            _run_alpha_shadow_batch([{"score": 5}], source="test")
+        mock_mgr.run_shadow_score.assert_not_called()
+
+
+# ── Hook diagnostics in alpha_shadow state ─────────────────────────────────────
+
+class TestHookDiagnostics:
+    def test_hook_last_seen_updates_on_run(self, tmp_path, monkeypatch):
+        """hook_last_seen_at is set after run_shadow_score is called."""
+        import sqlite3 as sq
+        import alpha_shadow as _mod
+        monkeypatch.setattr(_mod, "_hook_last_seen_at", None)
+        path = _make_db(str(tmp_path / "t.db"))
+        monkeypatch.setattr(
+            __import__("database"), "get_connection",
+            lambda: _row_conn(sq.connect(path)),
+        )
+        from unittest.mock import patch
+        from alpha_engine import AlphaInput
+        inp = AlphaInput(ticker="AAPL", price=150.0)
+        with patch("alpha_engine.fetch_alpha_input", return_value=inp):
+            _mod.AlphaShadowManager().run_shadow_score("AAPL", {"tier": "WATCH", "score": 5.0})
+        assert _mod._hook_last_seen_at is not None
+
+    def test_get_hook_diagnostics_returns_dict(self):
+        from alpha_shadow import get_hook_diagnostics
+        d = get_hook_diagnostics()
+        assert "hook_last_seen_at" in d
+        assert "last_error" in d
+
+    def test_last_error_set_on_fetch_failure(self, monkeypatch):
+        """last_error is populated when fetch_alpha_input raises."""
+        import alpha_shadow as _mod
+        monkeypatch.setattr(_mod, "_last_error", None)
+        from unittest.mock import patch
+        with patch("alpha_engine.fetch_alpha_input", side_effect=RuntimeError("network")):
+            _mod.AlphaShadowManager().run_shadow_score("TSLA", {"tier": "WATCH", "score": 4.0})
+        assert _mod._last_error is not None
+        assert "TSLA" in _mod._last_error
+
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
