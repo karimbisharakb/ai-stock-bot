@@ -431,6 +431,7 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
         "scanner every 30 min | predator every 60 min | "
-        "watchlist check every 15 min | weekly summary Sundays 9 AM)"
+        "watchlist check every 15 min | weekly summary Sundays 9 AM | "
+        "alpha universe scan every 4 h Mon-Fri)"
     )
     return scheduler

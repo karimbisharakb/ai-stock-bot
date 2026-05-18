@@ -211,7 +211,7 @@ class AlphaShadowManager:
                     GROUP BY ticker
                 ) g ON a.ticker = g.ticker AND a.scan_time = g.latest
                 WHERE a.filter_reason IS NULL AND a.alpha_score IS NOT NULL
-                ORDER BY a.alpha_score DESC, a.ticker ASC
+                ORDER BY a.alpha_score DESC, a.scan_time DESC, a.ticker ASC
                 LIMIT ?
                 """,
                 (limit,),

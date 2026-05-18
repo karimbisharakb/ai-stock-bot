@@ -19,16 +19,43 @@ Design rules
 """
 import json
 import logging
+import os
+import threading
 import time
 import traceback
 from datetime import datetime, timezone
+from functools import wraps
 from typing import Any, Optional
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 log = logging.getLogger(__name__)
 
 api_bp = Blueprint("api_v1", __name__, url_prefix="/api/v1")
+
+
+# ── Auth helper (write endpoints only) ───────────────────────────────────────
+
+def _alpha_require_auth(f):
+    """Bearer-token guard for mutating alpha endpoints.
+
+    Checks Authorization: Bearer <token> against API_SECRET env var.
+    Fails-open if API_SECRET is unset (local dev). Rejects if set and mismatched.
+    """
+    import hmac
+
+    @wraps(f)
+    def _wrapper(*args, **kwargs):
+        secret = os.environ.get("API_SECRET", "")
+        if secret:
+            auth_header = request.headers.get("Authorization", "")
+            token = auth_header.removeprefix("Bearer ").strip()
+            if not hmac.compare_digest(token.encode(), secret.encode()):
+                return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+        return f(*args, **kwargs)
+
+    return _wrapper
+
 
 # ── Size caps ─────────────────────────────────────────────────────────────────
 
@@ -445,6 +472,8 @@ def fmt_alpha_row(row: dict) -> dict:
     except (json.JSONDecodeError, TypeError):
         pass
 
+    source = "predator_shadow" if row.get("predator_tier") else "alpha_universe"
+
     return {
         "ticker":                  row.get("ticker", ""),
         "alpha_score":             _safe_float(row.get("alpha_score")),
@@ -456,6 +485,7 @@ def fmt_alpha_row(row: dict) -> dict:
         "filter_reason":           row.get("filter_reason"),
         "explanation":             (row.get("explanation") or "")[:300],
         "scan_time":               row.get("scan_time"),
+        "source":                  source,
         "components":              components,
         "why_scored_high":         detail.get("why_scored_high", []),
         "what_must_happen_next":   detail.get("what_must_happen_next", []),
@@ -522,15 +552,26 @@ def alpha_debug():
         except Exception:
             pass
 
+        universe_diag: dict = {}
+        try:
+            from alpha_universe import get_universe_diagnostics
+            universe_diag = get_universe_diagnostics()
+        except Exception:
+            pass
+
         return _ok({
-            "alpha_shadow_enabled": flag_on,
-            "env_var_raw":          flag_raw or "(not set)",
-            "table_exists":         table_exists,
-            "row_count":            row_count,
-            "latest_scan_time":     latest_scan,
-            "hook_last_seen_at":    hook_diag.get("hook_last_seen_at"),
-            "last_error":           hook_diag.get("last_error"),
-            "alpha_engine_version": engine_version,
+            "alpha_shadow_enabled":     flag_on,
+            "env_var_raw":              flag_raw or "(not set)",
+            "table_exists":             table_exists,
+            "row_count":                row_count,
+            "latest_scan_time":         latest_scan,
+            "hook_last_seen_at":        hook_diag.get("hook_last_seen_at"),
+            "last_error":               hook_diag.get("last_error"),
+            "alpha_engine_version":     engine_version,
+            "alpha_universe_enabled":   flag_on,
+            "universe_size":            universe_diag.get("universe_size"),
+            "last_universe_scan_time":  universe_diag.get("last_universe_scan_time"),
+            "last_universe_scan_count": universe_diag.get("last_universe_scan_count"),
         })
 
     except Exception:
@@ -608,15 +649,88 @@ def alpha_analytics():
         except Exception:
             log.warning("alpha_analytics: partial failure", exc_info=True)
 
+        engine_version = "unknown"
+        total_rows     = 0
+        rejected_alerts: list = []
+        try:
+            from alpha_engine import ALPHA_ENGINE_VERSION
+            engine_version = ALPHA_ENGINE_VERSION
+        except Exception:
+            pass
+        try:
+            from database import get_connection
+            conn = get_connection()
+            try:
+                row = conn.execute("SELECT COUNT(*) FROM alpha_shadow_log").fetchone()
+                total_rows = int(row[0]) if row else 0
+            finally:
+                conn.close()
+        except Exception:
+            pass
+        try:
+            rejected_alerts = [fmt_alpha_row(r) for r in mgr.get_rejected_alerts(limit=10)]
+        except Exception:
+            log.warning("alpha_analytics: rejected_alerts partial failure", exc_info=True)
+
         return _ok({
-            "tier_counts":         tier_counts,
-            "top_setup_types":     setup_types,
-            "best_non_predator":   non_predator,
-            "universe_coverage":   coverage,
+            "alpha_engine_version":    engine_version,
+            "total_rows":              total_rows,
+            "tier_counts":             tier_counts,
+            "top_setup_types":         setup_types,
+            "best_non_predator":       non_predator,
+            "universe_coverage":       coverage,
+            "rejected_predator_alerts": rejected_alerts,
         })
     except Exception:
         log.error("GET /alpha/analytics error:\n%s", traceback.format_exc())
         return _err("alpha analytics failed")
+
+
+# ── Alpha universe manual trigger ─────────────────────────────────────────────
+
+_universe_scan_lock = threading.Lock()
+_universe_scan_running = False
+
+
+@api_bp.route("/alpha/run-universe", methods=["POST"])
+@_alpha_require_auth
+def alpha_run_universe():
+    """
+    Manually trigger a full alpha universe scan in a background thread.
+    Auth-protected (Bearer token matching API_SECRET env var).
+    Observation-only — no WhatsApp alerts sent.
+    Returns immediately; use /alpha/debug to check last_universe_scan_time.
+    """
+    global _universe_scan_running
+
+    try:
+        from feature_flags import alpha_shadow_enabled
+        if not alpha_shadow_enabled():
+            return _ok({"queued": False, "reason": "ALPHA_SHADOW_ENABLED is off"})
+
+        with _universe_scan_lock:
+            if _universe_scan_running:
+                return _ok({"queued": False, "reason": "scan already in progress"})
+            _universe_scan_running = True
+
+        def _run():
+            global _universe_scan_running
+            try:
+                from alpha_universe import scan_alpha_universe
+                count = scan_alpha_universe()
+                log.info("Manual alpha universe scan complete: %d scored", count)
+            except Exception:
+                log.warning("Manual alpha universe scan failed", exc_info=True)
+            finally:
+                with _universe_scan_lock:
+                    _universe_scan_running = False
+
+        threading.Thread(target=_run, daemon=True, name="alpha-universe-manual").start()
+        return _ok({"queued": True, "reason": "scan started in background"})
+
+    except Exception:
+        log.error("POST /alpha/run-universe error:\n%s", traceback.format_exc())
+        return _err("failed to start universe scan")
 
 
 @api_bp.route("/paper-portfolio/history", methods=["GET"])

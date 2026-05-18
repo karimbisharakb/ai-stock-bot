@@ -6,6 +6,7 @@ for opportunity discovery. No alerts. Feature-flagged via ALPHA_SHADOW_ENABLED.
 """
 import logging
 import time
+from typing import Optional
 
 log = logging.getLogger(__name__)
 
@@ -26,12 +27,29 @@ ALPHA_UNIVERSE: list[str] = [
     # US mega-cap growth (also in Predator — cross-scored for alpha tier)
     "NVDA", "MSFT", "AAPL", "AMZN", "META", "GOOG", "PLTR", "TSM",
     # Canadian additions
-    "SHOP.TO", "WELL.TO", "IMG.TO",
+    "SHOP.TO", "WELL.TO", "IMG.TO", "MDA.TO", "BITF.TO", "CLS.TO",
+    # Biotech / regulatory catalysts
+    "MRNA", "ROIV",
+    # AI voice / autonomy
+    "SOUN", "LAZR",
 ]
+
+# ── Module-level diagnostics ──────────────────────────────────────────────────
+_last_scan_time:  Optional[str] = None
+_last_scan_count: int           = 0
 
 
 def get_alpha_universe() -> list[str]:
     return list(ALPHA_UNIVERSE)
+
+
+def get_universe_diagnostics() -> dict:
+    """Return diagnostics for the /alpha/debug endpoint."""
+    return {
+        "universe_size":           len(ALPHA_UNIVERSE),
+        "last_universe_scan_time": _last_scan_time,
+        "last_universe_scan_count": _last_scan_count,
+    }
 
 
 def scan_alpha_universe() -> int:
@@ -41,6 +59,8 @@ def scan_alpha_universe() -> int:
     Feature-flagged behind ALPHA_SHADOW_ENABLED.
     Returns count of tickers successfully scored.
     """
+    global _last_scan_time, _last_scan_count
+    from datetime import datetime
     from feature_flags import alpha_shadow_enabled
     from alpha_shadow import get_shadow_manager
 
@@ -62,5 +82,7 @@ def scan_alpha_universe() -> int:
             log.warning("alpha_universe: error scoring %s (non-fatal)", ticker, exc_info=True)
         time.sleep(0.5)
 
+    _last_scan_time  = datetime.now().isoformat()
+    _last_scan_count = scored
     log.info("alpha_universe: scan complete — %d/%d scored", scored, len(universe))
     return scored
