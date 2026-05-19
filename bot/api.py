@@ -913,3 +913,131 @@ def alpha_learning_shadow_policy():
     except Exception:
         log.error("GET /alpha/learning/shadow-policy error:\n%s", traceback.format_exc())
         return _err("shadow policy report failed")
+
+
+# ── Alpha L3: controlled promotion workflow ────────────────────────────────────
+
+@api_bp.route("/alpha/learning/proposals", methods=["GET"])
+def alpha_proposals_list():
+    """
+    List Alpha learning proposals.
+    Query params:
+      status            — filter by status (optional)
+      include_historical — if "true", include REJECTED/EXPIRED/ROLLBACK_READY
+    """
+    try:
+        status_filter      = request.args.get("status") or None
+        include_historical = request.args.get("include_historical", "").lower() == "true"
+
+        from alpha_proposals import get_proposals
+        proposals = get_proposals(
+            status_filter=status_filter,
+            include_historical=include_historical,
+        )
+        active = sum(1 for p in proposals if p["status"] in ("PROPOSED", "APPROVED_FOR_SHADOW"))
+        return _ok({
+            "proposals":   proposals,
+            "total":       len(proposals),
+            "active":      active,
+            "status_filter": status_filter,
+        })
+    except Exception:
+        log.error("GET /alpha/learning/proposals error:\n%s", traceback.format_exc())
+        return _err("failed to fetch proposals")
+
+
+@api_bp.route("/alpha/learning/proposals/generate", methods=["POST"])
+def alpha_proposals_generate():
+    """
+    Generate promotion proposals from current L2 recommendations.
+    Auth required.  Idempotent — re-running produces no duplicates.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from alpha_proposals import generate_proposals
+        proposals = generate_proposals()
+        return _ok({
+            "generated": len(proposals),
+            "proposals": proposals,
+            "note":      "Proposals are idempotent — identical recommendations produce no duplicates",
+        })
+    except Exception:
+        log.error("POST /alpha/learning/proposals/generate error:\n%s", traceback.format_exc())
+        return _err("proposal generation failed")
+
+
+@api_bp.route("/alpha/learning/proposals/<proposal_id>/approve-shadow", methods=["POST"])
+def alpha_proposals_approve(proposal_id: str):
+    """
+    Approve a PROPOSED proposal for shadow testing.
+    Auth required.  Body (JSON, optional): {"note": "..."}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        body  = request.get_json(silent=True) or {}
+        note  = body.get("note")
+        actor = request.headers.get("X-Actor", "api")
+
+        from alpha_proposals import approve_for_shadow
+        proposal = approve_for_shadow(proposal_id, actor=actor, note=note)
+        return _ok({
+            "proposal_id": proposal["proposal_id"],
+            "status":      proposal["status"],
+            "reviewed_at": proposal["reviewed_at"],
+            "reviewed_by": proposal["reviewed_by"],
+        })
+    except ValueError as e:
+        return _err(str(e), code=400)
+    except Exception:
+        log.error("POST /alpha/learning/proposals/%s/approve-shadow error:\n%s",
+                  proposal_id, traceback.format_exc())
+        return _err("approve-shadow failed")
+
+
+@api_bp.route("/alpha/learning/proposals/<proposal_id>/reject", methods=["POST"])
+def alpha_proposals_reject(proposal_id: str):
+    """
+    Reject a PROPOSED proposal.
+    Auth required.  Body (JSON, optional): {"reason": "..."}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        body   = request.get_json(silent=True) or {}
+        reason = body.get("reason")
+        actor  = request.headers.get("X-Actor", "api")
+
+        from alpha_proposals import reject_proposal
+        proposal = reject_proposal(proposal_id, reason=reason, actor=actor)
+        return _ok({
+            "proposal_id": proposal["proposal_id"],
+            "status":      proposal["status"],
+            "reviewed_at": proposal["reviewed_at"],
+            "reviewed_by": proposal["reviewed_by"],
+        })
+    except ValueError as e:
+        return _err(str(e), code=400)
+    except Exception:
+        log.error("POST /alpha/learning/proposals/%s/reject error:\n%s",
+                  proposal_id, traceback.format_exc())
+        return _err("reject failed")
+
+
+@api_bp.route("/alpha/learning/proposals/<proposal_id>/shadow-results", methods=["GET"])
+def alpha_proposals_shadow_results(proposal_id: str):
+    """
+    On-demand shadow replay for a specific proposal using its stored shadow weights.
+    No auth required (read-only).
+    """
+    try:
+        from alpha_proposals import get_shadow_results
+        results = get_shadow_results(proposal_id)
+        if "error" in results and "not found" in results.get("error", ""):
+            return _err(results["error"], code=404)
+        return _ok(results)
+    except Exception:
+        log.error("GET /alpha/learning/proposals/%s/shadow-results error:\n%s",
+                  proposal_id, traceback.format_exc())
+        return _err("shadow results failed")

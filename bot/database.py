@@ -483,6 +483,51 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_alpha_outcomes_tier      ON alpha_outcomes(alpha_tier)",
         ],
     ),
+    Migration(
+        version=9,
+        description="Phase L3: add learning_proposals and learning_proposal_audit tables",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS learning_proposals (
+                id                     INTEGER PRIMARY KEY AUTOINCREMENT,
+                proposal_id            TEXT    NOT NULL UNIQUE,
+                status                 TEXT    NOT NULL DEFAULT 'PROPOSED',
+                kind                   TEXT    NOT NULL,
+                weight_changes_json    TEXT,
+                threshold_changes_json TEXT,
+                shadow_weights_json    TEXT,
+                evidence_summary       TEXT,
+                sample_size            INTEGER NOT NULL DEFAULT 0,
+                confidence             TEXT    NOT NULL,
+                risk_warning           TEXT,
+                expected_benefit       TEXT,
+                expected_downside      TEXT,
+                created_at             TEXT    NOT NULL,
+                expires_at             TEXT    NOT NULL,
+                reviewed_at            TEXT,
+                reviewed_by            TEXT,
+                review_note            TEXT,
+                shadow_results_json    TEXT
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_proposals_status     ON learning_proposals(status)",
+            "CREATE INDEX IF NOT EXISTS idx_proposals_created_at ON learning_proposals(created_at)",
+            "CREATE INDEX IF NOT EXISTS idx_proposals_kind       ON learning_proposals(kind)",
+            """
+            CREATE TABLE IF NOT EXISTS learning_proposal_audit (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                proposal_id TEXT    NOT NULL,
+                from_status TEXT,
+                to_status   TEXT    NOT NULL,
+                reason      TEXT,
+                actor       TEXT,
+                ts          TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_proposal_audit_proposal_id ON learning_proposal_audit(proposal_id)",
+            "CREATE INDEX IF NOT EXISTS idx_proposal_audit_ts          ON learning_proposal_audit(ts)",
+        ],
+    ),
 ]
 
 
