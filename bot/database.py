@@ -992,6 +992,44 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_replay_runs_created   ON replay_runs(created_at)",
         ],
     ),
+    Migration(
+        version=21,
+        description="Phase A18: add portfolio_stress_runs and portfolio_stress_events tables",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS portfolio_stress_runs (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_id            TEXT    UNIQUE NOT NULL,
+                created_at        TEXT    NOT NULL,
+                portfolio_value   REAL    NOT NULL DEFAULT 0.0,
+                cash              REAL    NOT NULL DEFAULT 0.0,
+                position_count    INTEGER NOT NULL DEFAULT 0,
+                scenario_count    INTEGER NOT NULL DEFAULT 0,
+                worst_scenario    TEXT,
+                worst_loss_pct    REAL,
+                avg_loss_pct      REAL,
+                warnings_json     TEXT    NOT NULL DEFAULT '[]',
+                summary_json      TEXT    NOT NULL DEFAULT '{}'
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS portfolio_stress_events (
+                id                        INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_id                    TEXT    NOT NULL,
+                scenario_type             TEXT    NOT NULL,
+                estimated_loss_pct        REAL    NOT NULL,
+                estimated_loss_amount     REAL    NOT NULL,
+                risk_level                TEXT    NOT NULL,
+                position_results_json     TEXT    NOT NULL DEFAULT '[]',
+                recommended_actions_json  TEXT    NOT NULL DEFAULT '[]',
+                created_at                TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_psr_run_id     ON portfolio_stress_runs(run_id)",
+            "CREATE INDEX IF NOT EXISTS idx_psr_created_at ON portfolio_stress_runs(created_at)",
+            "CREATE INDEX IF NOT EXISTS idx_pse_run_id     ON portfolio_stress_events(run_id)",
+        ],
+    ),
 ]
 
 

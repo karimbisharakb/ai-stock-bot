@@ -2255,3 +2255,96 @@ def replay_run_events(run_id: str):
     except Exception:
         log.error("GET /replay/runs/%s/events error:\n%s", run_id, traceback.format_exc())
         return _err("failed to fetch replay events")
+
+
+# ── Portfolio stress testing (Phase A18) ──────────────────────────────────────
+
+TTL_STRESS = 60  # seconds
+
+
+@api_bp.route("/portfolio/stress", methods=["GET"])
+def portfolio_stress_latest():
+    """
+    Return the most recent portfolio stress run (with embedded scenario events).
+    No auth required.  Cached for TTL_STRESS seconds.
+    """
+    def _build():
+        from portfolio_stress_testing import get_stress_history, get_stress_run
+        runs = get_stress_history(limit=1)
+        if not runs:
+            return {"run": None}
+        run = get_stress_run(runs[0]["run_id"])
+        return {"run": run}
+
+    try:
+        payload, cached = _cached("stress:latest", TTL_STRESS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /portfolio/stress error:\n%s", traceback.format_exc())
+        return _err("failed to fetch latest stress run")
+
+
+@api_bp.route("/portfolio/stress/run", methods=["POST"])
+def portfolio_stress_run():
+    """
+    Trigger a fresh portfolio stress test.
+    Auth-protected (Bearer token matching API_SECRET env var).
+    Accepts optional JSON body:
+      {
+        "custom_scenarios": [{"NVDA": -50.0, "_default": -10.0, "_label": "Bear"}],
+        "include_regime":   true
+      }
+    Returns the full aggregate report.
+    Busts the stress:latest cache on success.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body             = request.get_json(silent=True) or {}
+    custom_scenarios = body.get("custom_scenarios")
+    include_regime   = bool(body.get("include_regime", False))
+
+    regime_context = None
+    if include_regime:
+        try:
+            from market_regime_intelligence import get_regime_context_for_checklist
+            regime_context = get_regime_context_for_checklist()
+        except Exception:
+            log.warning("portfolio_stress_run: regime context unavailable", exc_info=True)
+
+    try:
+        from portfolio_stress_testing import run_stress_test
+        report = run_stress_test(
+            custom_scenarios=custom_scenarios,
+            regime_context=regime_context,
+        )
+        _CACHE.pop("stress:latest", None)
+        return _ok({"report": report})
+    except Exception:
+        log.error("POST /portfolio/stress/run error:\n%s", traceback.format_exc())
+        return _err("stress test failed")
+
+
+@api_bp.route("/portfolio/stress/history", methods=["GET"])
+def portfolio_stress_history():
+    """
+    Return recent portfolio stress runs (without embedded events), newest first.
+    No auth required.  Cached for TTL_STRESS seconds.
+    Accepts optional ?limit=N (max 100, default 20).
+    """
+    try:
+        limit = min(int(request.args.get("limit", 20)), 100)
+    except (TypeError, ValueError):
+        limit = 20
+
+    def _build():
+        from portfolio_stress_testing import get_stress_history
+        runs = get_stress_history(limit=limit)
+        return {"runs": runs, "total": len(runs)}
+
+    try:
+        payload, cached = _cached(f"stress:history:{limit}", TTL_STRESS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /portfolio/stress/history error:\n%s", traceback.format_exc())
+        return _err("failed to fetch stress history")
