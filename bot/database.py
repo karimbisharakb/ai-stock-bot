@@ -631,6 +631,29 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_qc_allow        ON notification_qc_history(allow_notification)",
         ],
     ),
+    Migration(
+        version=13,
+        description="Phase A10: add alpha_notification_delivery_log table for delivery audit trail",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS alpha_notification_delivery_log (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                dry_run_id        TEXT    NOT NULL,
+                ticker            TEXT    NOT NULL DEFAULT '',
+                readiness_tier    TEXT    NOT NULL DEFAULT '',
+                message_hash      TEXT    NOT NULL DEFAULT '',
+                status            TEXT    NOT NULL,
+                reason            TEXT,
+                provider_response TEXT,
+                sent_at           TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_delivery_dry_run_id ON alpha_notification_delivery_log(dry_run_id)",
+            "CREATE INDEX IF NOT EXISTS idx_delivery_ticker      ON alpha_notification_delivery_log(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_delivery_status      ON alpha_notification_delivery_log(status)",
+            "CREATE INDEX IF NOT EXISTS idx_delivery_sent_at     ON alpha_notification_delivery_log(sent_at)",
+        ],
+    ),
 ]
 
 

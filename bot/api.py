@@ -1347,3 +1347,66 @@ def alpha_notifications_qc_summary():
     except Exception:
         log.error("GET /alpha/notifications/qc/summary error:\n%s", traceback.format_exc())
         return _err("failed to fetch QC summary")
+
+
+# ── A10: Notification delivery bridge ────────────────────────────────────────
+
+@api_bp.route("/alpha/notifications/delivery-log", methods=["GET"])
+def alpha_notifications_delivery_log():
+    """
+    List delivery audit log entries.
+    No auth required (read-only).
+    Optional query params: ?ticker=AAPL  ?limit=50
+    """
+    ticker = request.args.get("ticker")
+    try:
+        limit = min(int(request.args.get("limit", 50)), 200)
+    except (ValueError, TypeError):
+        limit = 50
+
+    cache_key = f"alpha:delivery-log:{ticker}:{limit}"
+
+    def _build():
+        from alpha_notification_delivery import get_delivery_log, get_delivery_flags
+        rows  = get_delivery_log(ticker=ticker, limit=limit)
+        flags = get_delivery_flags()
+        return {
+            "count":         len(rows),
+            "entries":       rows,
+            "feature_flags": {
+                "enabled":          flags["enabled"],
+                "dry_run_only":     flags["dry_run_only"],
+                "min_qc_tier":      flags["min_qc_tier"],
+                "require_reviewed": flags["require_reviewed"],
+            },
+            "note": "Delivery bridge is disabled by default — see feature_flags",
+        }
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /alpha/notifications/delivery-log error:\n%s", traceback.format_exc())
+        return _err("failed to fetch delivery log")
+
+
+@api_bp.route("/alpha/notifications/<dry_run_id>/send", methods=["POST"])
+def alpha_notifications_send(dry_run_id: str):
+    """
+    Attempt to deliver one Alpha WhatsApp notification.
+
+    Auth required.  Runs all eligibility gates before any send.
+    Sending is blocked by default unless feature flags explicitly enable it.
+    No batch sending — one dry-run per POST.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from alpha_notification_delivery import deliver_notification
+        result = deliver_notification(dry_run_id)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /alpha/notifications/%s/send error:\n%s",
+                  dry_run_id, traceback.format_exc())
+        return _err("delivery attempt failed")
