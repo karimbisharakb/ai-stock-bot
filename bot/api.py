@@ -1286,3 +1286,64 @@ def alpha_dry_run_dismiss(dry_run_id: str):
         log.error("POST /alpha/notifications/dry-run/%s/dismiss error:\n%s",
                   dry_run_id, traceback.format_exc())
         return _err("dismiss failed")
+
+
+# ── A9: Notification QC ───────────────────────────────────────────────────────
+
+@api_bp.route("/alpha/notifications/qc", methods=["GET"])
+def alpha_notifications_qc():
+    """
+    List QC history records.
+    No auth required.
+    Optional query params: ?ticker=AAPL  ?qc_tier=PRIORITY  ?limit=50
+    No real notifications are sent at any point.
+    """
+    ticker  = request.args.get("ticker")
+    qc_tier = request.args.get("qc_tier")
+    try:
+        limit = min(int(request.args.get("limit", 50)), 200)
+    except (ValueError, TypeError):
+        limit = 50
+
+    if qc_tier and qc_tier not in ("BLOCK", "SUPPRESS", "ALLOW", "PRIORITY"):
+        return _err(
+            f"invalid qc_tier {qc_tier!r}; must be one of BLOCK, SUPPRESS, ALLOW, PRIORITY",
+            code=400,
+        )
+
+    cache_key = f"alpha:qc:{ticker}:{qc_tier}:{limit}"
+
+    def _build():
+        from alpha_notification_qc import get_qc_records
+        records = get_qc_records(ticker=ticker, qc_tier=qc_tier, limit=limit)
+        return {
+            "count":   len(records),
+            "records": records,
+            "note":    "Simulation only — no real notifications sent",
+        }
+
+    try:
+        payload, cached = _cached(cache_key, 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /alpha/notifications/qc error:\n%s", traceback.format_exc())
+        return _err("failed to fetch QC records")
+
+
+@api_bp.route("/alpha/notifications/qc/summary", methods=["GET"])
+def alpha_notifications_qc_summary():
+    """
+    Aggregate QC statistics: suppressed count, duplicates, unstable suppressions,
+    avg qc_score, priority candidates, cooldown-active count.
+    No auth required.  No real notifications are sent.
+    """
+    def _build():
+        from alpha_notification_qc import get_qc_summary
+        return get_qc_summary()
+
+    try:
+        payload, cached = _cached("alpha:qc:summary", 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /alpha/notifications/qc/summary error:\n%s", traceback.format_exc())
+        return _err("failed to fetch QC summary")

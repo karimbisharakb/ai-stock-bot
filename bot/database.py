@@ -598,6 +598,39 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_dryrun_created_at     ON alpha_notification_dryruns(created_at)",
         ],
     ),
+    Migration(
+        version=12,
+        description="Phase A9: add notification_qc_history table for notification quality-control layer",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS notification_qc_history (
+                id                     INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker                 TEXT    NOT NULL,
+                readiness_tier         TEXT    NOT NULL,
+                alpha_tier             TEXT    NOT NULL,
+                setup_type             TEXT    NOT NULL,
+                alpha_score            REAL,
+                readiness_score        REAL,
+                qc_score               REAL    NOT NULL,
+                qc_tier                TEXT    NOT NULL,
+                allow_notification     INTEGER NOT NULL DEFAULT 0,
+                suppression_reason     TEXT,
+                cooldown_remaining     REAL    NOT NULL DEFAULT 0.0,
+                novelty_score          REAL    NOT NULL DEFAULT 0.0,
+                stability_score        REAL    NOT NULL DEFAULT 0.0,
+                information_gain_score REAL    NOT NULL DEFAULT 0.0,
+                quality_flags_json     TEXT    NOT NULL DEFAULT '[]',
+                behavior_class         TEXT,
+                dry_run_id             TEXT,
+                evaluated_at           TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_qc_ticker       ON notification_qc_history(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_qc_qc_tier      ON notification_qc_history(qc_tier)",
+            "CREATE INDEX IF NOT EXISTS idx_qc_evaluated_at ON notification_qc_history(evaluated_at)",
+            "CREATE INDEX IF NOT EXISTS idx_qc_allow        ON notification_qc_history(allow_notification)",
+        ],
+    ),
 ]
 
 
