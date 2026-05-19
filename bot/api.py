@@ -2348,3 +2348,71 @@ def portfolio_stress_history():
     except Exception:
         log.error("GET /portfolio/stress/history error:\n%s", traceback.format_exc())
         return _err("failed to fetch stress history")
+
+
+# ── Strategy scorecards (Phase A19) ───────────────────────────────────────────
+
+TTL_SCORECARDS = 120  # seconds — scorecards are relatively expensive to compute
+
+
+@api_bp.route("/strategies/scorecards", methods=["GET"])
+def strategies_scorecards():
+    """
+    All strategy scorecards with behaviour metrics and recommendations.
+    No auth required.  Cached for TTL_SCORECARDS seconds.
+    """
+    def _build():
+        from strategy_scorecards import compute_all_scorecards
+        return compute_all_scorecards()
+
+    try:
+        payload, cached = _cached("strategies:scorecards", TTL_SCORECARDS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /strategies/scorecards error:\n%s", traceback.format_exc())
+        return _err("failed to compute strategy scorecards")
+
+
+@api_bp.route("/strategies/summary", methods=["GET"])
+def strategies_summary():
+    """
+    Compact summary: top/bottom 3 strategies, behaviour metrics,
+    high-priority recommendations across all strategies.
+    No auth required.  Cached for TTL_SCORECARDS seconds.
+    """
+    def _build():
+        from strategy_scorecards import get_scorecards_summary
+        return get_scorecards_summary()
+
+    try:
+        payload, cached = _cached("strategies:summary", TTL_SCORECARDS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /strategies/summary error:\n%s", traceback.format_exc())
+        return _err("failed to compute strategy summary")
+
+
+@api_bp.route("/strategies/<strategy>", methods=["GET"])
+def strategy_scorecard(strategy: str):
+    """
+    Single-strategy scorecard.  <strategy> must be one of STRATEGY_TYPES.
+    No auth required.  Cached for TTL_SCORECARDS seconds.
+    Returns 404 for unknown strategy names.
+    """
+    def _build():
+        from strategy_scorecards import get_scorecard, STRATEGY_TYPES
+        if strategy not in STRATEGY_TYPES:
+            raise LookupError(f"unknown strategy: {strategy!r}")
+        card = get_scorecard(strategy)
+        if card is None:
+            raise LookupError(f"unknown strategy: {strategy!r}")
+        return {"scorecard": card}
+
+    try:
+        payload, cached = _cached(f"strategies:single:{strategy}", TTL_SCORECARDS, _build)
+        return _ok(payload, cached)
+    except LookupError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("GET /strategies/%s error:\n%s", strategy, traceback.format_exc())
+        return _err("failed to compute strategy scorecard")
