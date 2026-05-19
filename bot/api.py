@@ -1097,3 +1097,60 @@ def alpha_validation_summary():
     except Exception:
         log.error("GET /alpha/validation/summary error:\n%s", traceback.format_exc())
         return _err("validation summary failed")
+
+
+# ── Alpha A7: alert candidate gate ────────────────────────────────────────────
+
+TTL_GATE = 60  # 1 minute — same as alpha scan results
+
+
+@api_bp.route("/alpha/alert-candidates", methods=["GET"])
+def alpha_alert_candidates():
+    """
+    All current Alpha candidates scored for alert readiness.
+    Sorted by readiness_score DESC.
+    Query params:
+      limit — max rows (default 50, max 200)
+    Cached 1 min.
+    """
+    try:
+        limit = min(int(request.args.get("limit", 50)), 200)
+        cache_key = f"alpha:alert-candidates:{limit}"
+
+        def _build():
+            from alpha_alert_gate import get_alert_candidates
+            results = get_alert_candidates(limit=limit)
+            alert_ready = sum(1 for r in results if r["alert_ready"])
+            return {
+                "results":     results,
+                "total":       len(results),
+                "alert_ready": alert_ready,
+                "note":        "Simulation only — no WhatsApp alerts sent",
+            }
+
+        payload, cached = _cached(cache_key, TTL_GATE, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/alert-candidates error:\n%s", traceback.format_exc())
+        return _err("failed to score alert candidates")
+
+
+@api_bp.route("/alpha/alert-gate/summary", methods=["GET"])
+def alpha_alert_gate_summary():
+    """
+    Aggregate alert gate analytics: tier distribution, top blockers,
+    confirmation needs, candidates close to alert-ready.
+    Cached 1 min.
+    """
+    try:
+        def _build():
+            from alpha_alert_gate import get_alert_gate_summary
+            return get_alert_gate_summary()
+
+        payload, cached = _cached("alpha:alert-gate:summary", TTL_GATE, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/alert-gate/summary error:\n%s", traceback.format_exc())
+        return _err("alert gate summary failed")
