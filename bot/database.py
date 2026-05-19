@@ -820,6 +820,66 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_journal_created_at ON position_journal(created_at)",
         ],
     ),
+    Migration(
+        version=17,
+        description=(
+            "Phase A14: add decision_checklists, decision_checklist_items, "
+            "and decision_checklist_audit tables for entry/exit discipline"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS decision_checklists (
+                id                        INTEGER PRIMARY KEY AUTOINCREMENT,
+                checklist_id              TEXT    NOT NULL UNIQUE,
+                ticker                    TEXT    NOT NULL,
+                decision_type             TEXT    NOT NULL,
+                linked_alpha_candidate_id TEXT,
+                linked_thesis_id          INTEGER,
+                checklist_status          TEXT    NOT NULL DEFAULT 'DRAFT',
+                checklist_completion      REAL    NOT NULL DEFAULT 0.0,
+                blocking_items            INTEGER NOT NULL DEFAULT 0,
+                readiness                 TEXT    NOT NULL DEFAULT 'NOT_READY',
+                notes                     TEXT    NOT NULL DEFAULT '',
+                created_at                TEXT    NOT NULL,
+                reviewed_at               TEXT,
+                updated_at                TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_dcl_ticker        ON decision_checklists(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_dcl_status        ON decision_checklists(checklist_status)",
+            "CREATE INDEX IF NOT EXISTS idx_dcl_decision_type ON decision_checklists(decision_type)",
+            "CREATE INDEX IF NOT EXISTS idx_dcl_created_at    ON decision_checklists(created_at)",
+            """
+            CREATE TABLE IF NOT EXISTS decision_checklist_items (
+                id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                checklist_id TEXT    NOT NULL,
+                item_key     TEXT    NOT NULL,
+                label        TEXT    NOT NULL DEFAULT '',
+                passed       INTEGER,
+                note         TEXT    NOT NULL DEFAULT '',
+                required     INTEGER NOT NULL DEFAULT 1,
+                created_at   TEXT    NOT NULL,
+                updated_at   TEXT    NOT NULL,
+                UNIQUE(checklist_id, item_key)
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_dcl_items_checklist_id ON decision_checklist_items(checklist_id)",
+            """
+            CREATE TABLE IF NOT EXISTS decision_checklist_audit (
+                id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                checklist_id TEXT    NOT NULL,
+                action       TEXT    NOT NULL,
+                from_status  TEXT,
+                to_status    TEXT,
+                actor        TEXT,
+                detail_json  TEXT,
+                performed_at TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_dcl_audit_checklist_id ON decision_checklist_audit(checklist_id)",
+            "CREATE INDEX IF NOT EXISTS idx_dcl_audit_performed_at ON decision_checklist_audit(performed_at)",
+        ],
+    ),
 ]
 
 

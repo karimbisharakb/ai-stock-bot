@@ -85,6 +85,18 @@ def morning_summary_job():
     except Exception:
         pass
 
+    # A14: append pending decision checklists (max 3 to keep brief concise)
+    try:
+        from decision_checklist import get_pending_checklists
+        pending = get_pending_checklists()
+        for cl in pending[:3]:
+            overnight_signals.append(
+                f"📋 Pending decision: {cl['ticker']} {cl['decision_type']} "
+                f"({cl['checklist_status']})"
+            )
+    except Exception:
+        pass
+
     msg = alerts.format_morning_summary(holdings, overnight_signals, cash, room)
     if alerts.send_sms(msg, bypass_quiet=True):
         alerts.log_alert(None, "FYI", msg)

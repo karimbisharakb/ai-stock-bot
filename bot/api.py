@@ -1822,3 +1822,202 @@ def portfolio_reviews():
     except Exception:
         log.error("GET /portfolio/reviews error:\n%s", traceback.format_exc())
         return _err("failed to fetch review summary")
+
+
+# ── Phase A14: decision checklist endpoints ───────────────────────────────────
+
+@api_bp.route("/decisions/checklists", methods=["GET"])
+def decisions_checklists_list():
+    """
+    Return decision checklists.  No auth required (read-only).  TTL 30 s.
+    Optional query params: ?ticker=, ?status=, ?decision_type=
+    """
+    ticker        = request.args.get("ticker", "").strip().upper() or None
+    status_filter = request.args.get("status", "").strip().upper() or None
+    dt_filter     = request.args.get("decision_type", "").strip().upper() or None
+
+    cache_key = f"decisions:checklists:{ticker}:{status_filter}:{dt_filter}"
+
+    def _build():
+        from decision_checklist import get_all_checklists
+        return {"checklists": get_all_checklists(ticker=ticker, decision_type=dt_filter,
+                                                  status=status_filter)}
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /decisions/checklists error:\n%s", traceback.format_exc())
+        return _err("failed to fetch checklists")
+
+
+@api_bp.route("/decisions/checklists/<checklist_id>", methods=["GET"])
+def decisions_checklist_get(checklist_id: str):
+    """
+    Return a single checklist with its items.  No auth required.  TTL 30 s.
+    Returns 404 if not found.
+    """
+    def _build():
+        from decision_checklist import get_checklist
+        return get_checklist(checklist_id)
+
+    cache_key = f"decisions:checklist:{checklist_id}"
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        if payload is None:
+            return _err(f"checklist {checklist_id} not found", code=404)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /decisions/checklists/%s error:\n%s", checklist_id, traceback.format_exc())
+        return _err("failed to fetch checklist")
+
+
+@api_bp.route("/decisions/checklists/create", methods=["POST"])
+def decisions_checklist_create():
+    """
+    Create a new decision checklist with 10 default items seeded as NULL.
+    Auth required.
+    Body (JSON): ticker, decision_type, [linked_alpha_candidate_id],
+                 [linked_thesis_id], [notes]
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body = request.get_json(silent=True) or {}
+    ticker        = str(body.get("ticker", "")).strip().upper()
+    decision_type = str(body.get("decision_type", "")).strip().upper()
+    notes         = str(body.get("notes", ""))
+
+    linked_thesis_id = body.get("linked_thesis_id")
+    if linked_thesis_id is not None:
+        try:
+            linked_thesis_id = int(linked_thesis_id)
+        except (TypeError, ValueError):
+            return _err("linked_thesis_id must be an integer", code=400)
+
+    try:
+        from decision_checklist import create_checklist
+        result = create_checklist(
+            ticker                   = ticker,
+            decision_type            = decision_type,
+            linked_alpha_candidate_id = body.get("linked_alpha_candidate_id") or None,
+            linked_thesis_id         = linked_thesis_id,
+            notes                    = notes,
+        )
+        if not result.get("ok"):
+            return _err(f"validation failed: {result.get('errors')}", code=422)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /decisions/checklists/create error:\n%s", traceback.format_exc())
+        return _err("checklist creation failed")
+
+
+@api_bp.route("/decisions/checklists/<checklist_id>/item", methods=["POST"])
+def decisions_checklist_item(checklist_id: str):
+    """
+    Update a checklist item (pass / fail / reset to null).
+    Auth required.
+    Body (JSON): item_key, passed (true/false/null), [note]
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body     = request.get_json(silent=True) or {}
+    item_key = str(body.get("item_key", "")).strip()
+    note     = str(body.get("note", ""))
+    passed_raw = body.get("passed")
+
+    passed: object
+    if passed_raw is None:
+        passed = None
+    elif isinstance(passed_raw, bool):
+        passed = passed_raw
+    else:
+        passed = bool(passed_raw)
+
+    try:
+        from decision_checklist import update_item
+        result = update_item(checklist_id, item_key, passed, note)
+        if not result.get("ok"):
+            code = 404 if any("NOT_FOUND" in e for e in result.get("errors", [])) else 400
+            return _err(result.get("errors"), code=code)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /decisions/checklists/%s/item error:\n%s",
+                  checklist_id, traceback.format_exc())
+        return _err("item update failed")
+
+
+@api_bp.route("/decisions/checklists/<checklist_id>/approve", methods=["POST"])
+def decisions_checklist_approve(checklist_id: str):
+    """
+    Approve a checklist.  Requires readiness = READY_FOR_MANUAL_DECISION.
+    Auth required.  Does NOT place any trade.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body  = request.get_json(silent=True) or {}
+    actor = body.get("actor") or None
+
+    try:
+        from decision_checklist import approve_checklist
+        result = approve_checklist(checklist_id, actor=actor)
+        if not result.get("ok"):
+            errors = result.get("errors", [])
+            code   = 404 if "CHECKLIST_NOT_FOUND" in errors else 422
+            return _err(errors, code=code)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /decisions/checklists/%s/approve error:\n%s",
+                  checklist_id, traceback.format_exc())
+        return _err("approve failed")
+
+
+@api_bp.route("/decisions/checklists/<checklist_id>/reject", methods=["POST"])
+def decisions_checklist_reject(checklist_id: str):
+    """
+    Reject a checklist.  Auth required.
+    Body (JSON): [reason], [actor]
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body   = request.get_json(silent=True) or {}
+    reason = str(body.get("reason", ""))
+    actor  = body.get("actor") or None
+
+    try:
+        from decision_checklist import reject_checklist
+        result = reject_checklist(checklist_id, reason=reason, actor=actor)
+        if not result.get("ok"):
+            errors = result.get("errors", [])
+            code   = 404 if "CHECKLIST_NOT_FOUND" in errors else 422
+            return _err(errors, code=code)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /decisions/checklists/%s/reject error:\n%s",
+                  checklist_id, traceback.format_exc())
+        return _err("reject failed")
+
+
+@api_bp.route("/decisions/summary", methods=["GET"])
+def decisions_summary():
+    """
+    Return aggregate counts and pending checklists.
+    No auth required (read-only).  TTL 30 s.
+    """
+    def _build():
+        from decision_checklist import get_summary
+        return get_summary()
+
+    try:
+        payload, cached = _cached("decisions:summary", 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /decisions/summary error:\n%s", traceback.format_exc())
+        return _err("failed to fetch decisions summary")
