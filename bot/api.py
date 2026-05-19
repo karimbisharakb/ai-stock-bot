@@ -1154,3 +1154,135 @@ def alpha_alert_gate_summary():
     except Exception:
         log.error("GET /alpha/alert-gate/summary error:\n%s", traceback.format_exc())
         return _err("alert gate summary failed")
+
+
+# ── Alpha A8: notification dry-run review ─────────────────────────────────────
+
+TTL_DRYRUN = 30   # 30 s — short TTL; operator expects fresh state after actions
+
+
+@api_bp.route("/alpha/notifications/dry-run", methods=["GET"])
+def alpha_dry_run_list():
+    """
+    List Alpha notification dry-runs.
+    Query params:
+      status — filter by DRY_RUN, REVIEWED, DISMISSED, EXPIRED (default: active only)
+      limit  — max rows (default 50, max 200)
+    Cached 30 s.
+    """
+    try:
+        status_filter = request.args.get("status") or None
+        limit         = min(int(request.args.get("limit", 50)), 200)
+
+        valid_statuses = {"DRY_RUN", "REVIEWED", "DISMISSED", "EXPIRED"}
+        if status_filter and status_filter not in valid_statuses:
+            return _err(
+                f"invalid status {status_filter!r}; valid: {sorted(valid_statuses)}",
+                code=400,
+            )
+
+        cache_key = f"alpha:dryrun:list:{status_filter}:{limit}"
+
+        def _build():
+            from alpha_notification_dryrun import get_dry_runs
+            rows = get_dry_runs(status_filter=status_filter, limit=limit)
+            active = sum(1 for r in rows if r["status"] in ("DRY_RUN", "REVIEWED"))
+            return {
+                "results":       rows,
+                "total":         len(rows),
+                "active":        active,
+                "status_filter": status_filter,
+                "note":          "Dry-run only — no real notifications sent",
+            }
+
+        payload, cached = _cached(cache_key, TTL_DRYRUN, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/notifications/dry-run error:\n%s", traceback.format_exc())
+        return _err("failed to fetch dry-run notifications")
+
+
+@api_bp.route("/alpha/notifications/dry-run/generate", methods=["POST"])
+def alpha_dry_run_generate():
+    """
+    Generate dry-run notification rows for all eligible Alpha candidates.
+    Auth required.  Idempotent — same candidate identity produces no duplicates.
+    No real messages are sent.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from alpha_notification_dryrun import generate_dry_runs
+        rows     = generate_dry_runs()
+        new_rows = [r for r in rows if r["status"] == "DRY_RUN"]
+        cache_clear()  # invalidate list cache after generation
+        return _ok({
+            "generated": len(new_rows),
+            "total":     len(rows),
+            "dry_runs":  rows,
+            "note":      "Dry-run only — no real notifications sent",
+        })
+    except Exception:
+        log.error("POST /alpha/notifications/dry-run/generate error:\n%s", traceback.format_exc())
+        return _err("dry-run generation failed")
+
+
+@api_bp.route("/alpha/notifications/dry-run/<dry_run_id>/review", methods=["POST"])
+def alpha_dry_run_review(dry_run_id: str):
+    """
+    Mark a DRY_RUN notification as REVIEWED.
+    Auth required.  Body (JSON, optional): {"note": "..."}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        body  = request.get_json(silent=True) or {}
+        note  = body.get("note")
+        actor = request.headers.get("X-Actor", "api")
+
+        from alpha_notification_dryrun import mark_reviewed
+        row = mark_reviewed(dry_run_id, actor=actor, note=note)
+        cache_clear()
+        return _ok({
+            "dry_run_id":  row["dry_run_id"],
+            "status":      row["status"],
+            "reviewed_at": row["reviewed_at"],
+            "reviewed_by": row["reviewed_by"],
+        })
+    except ValueError as e:
+        return _err(str(e), code=400)
+    except Exception:
+        log.error("POST /alpha/notifications/dry-run/%s/review error:\n%s",
+                  dry_run_id, traceback.format_exc())
+        return _err("review failed")
+
+
+@api_bp.route("/alpha/notifications/dry-run/<dry_run_id>/dismiss", methods=["POST"])
+def alpha_dry_run_dismiss(dry_run_id: str):
+    """
+    Dismiss a DRY_RUN notification.
+    Auth required.  Body (JSON, optional): {"reason": "..."}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        body   = request.get_json(silent=True) or {}
+        reason = body.get("reason")
+        actor  = request.headers.get("X-Actor", "api")
+
+        from alpha_notification_dryrun import dismiss_dry_run
+        row = dismiss_dry_run(dry_run_id, reason=reason, actor=actor)
+        cache_clear()
+        return _ok({
+            "dry_run_id":   row["dry_run_id"],
+            "status":       row["status"],
+            "dismissed_at": row["dismissed_at"],
+            "dismissed_by": row["dismissed_by"],
+        })
+    except ValueError as e:
+        return _err(str(e), code=400)
+    except Exception:
+        log.error("POST /alpha/notifications/dry-run/%s/dismiss error:\n%s",
+                  dry_run_id, traceback.format_exc())
+        return _err("dismiss failed")

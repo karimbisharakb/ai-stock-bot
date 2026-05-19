@@ -564,6 +564,40 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_alpha_validation_alpha_tier     ON alpha_validation(alpha_tier)",
         ],
     ),
+    Migration(
+        version=11,
+        description="Phase A8: add alpha_notification_dryruns table for dry-run review workflow",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS alpha_notification_dryruns (
+                id                       INTEGER PRIMARY KEY AUTOINCREMENT,
+                dry_run_id               TEXT    NOT NULL UNIQUE,
+                ticker                   TEXT    NOT NULL,
+                readiness_tier           TEXT    NOT NULL,
+                alpha_score              REAL,
+                alpha_tier               TEXT,
+                setup_type               TEXT,
+                message_text             TEXT    NOT NULL,
+                reason                   TEXT,
+                blocking_factors_json    TEXT,
+                confirmation_needed_json TEXT,
+                status                   TEXT    NOT NULL DEFAULT 'DRY_RUN',
+                created_at               TEXT    NOT NULL,
+                expires_at               TEXT    NOT NULL,
+                reviewed_at              TEXT,
+                reviewed_by              TEXT,
+                review_note              TEXT,
+                dismissed_at             TEXT,
+                dismissed_by             TEXT,
+                dismiss_reason           TEXT
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_dryrun_ticker         ON alpha_notification_dryruns(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_dryrun_status         ON alpha_notification_dryruns(status)",
+            "CREATE INDEX IF NOT EXISTS idx_dryrun_readiness_tier ON alpha_notification_dryruns(readiness_tier)",
+            "CREATE INDEX IF NOT EXISTS idx_dryrun_created_at     ON alpha_notification_dryruns(created_at)",
+        ],
+    ),
 ]
 
 
