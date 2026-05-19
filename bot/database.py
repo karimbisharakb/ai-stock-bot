@@ -932,6 +932,66 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_mri_captured_at ON market_regime_snapshots(captured_at)",
         ],
     ),
+    Migration(
+        version=20,
+        description=(
+            "Phase A17: add replay_runs and replay_events tables for historical "
+            "replay and decision simulation"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS replay_runs (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_id            TEXT    NOT NULL UNIQUE,
+                created_at        TEXT    NOT NULL,
+                start_date        TEXT    NOT NULL,
+                end_date          TEXT    NOT NULL,
+                ticker_filter     TEXT,
+                source_filter     TEXT,
+                setup_type_filter TEXT,
+                max_rows          INTEGER NOT NULL DEFAULT 500,
+                status            TEXT    NOT NULL DEFAULT 'PENDING',
+                event_count       INTEGER NOT NULL DEFAULT 0,
+                completed_at      TEXT,
+                summary_json      TEXT    NOT NULL DEFAULT '{}'
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS replay_events (
+                id                     INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_id                 TEXT    NOT NULL,
+                shadow_log_id          INTEGER,
+                ticker                 TEXT    NOT NULL,
+                scan_time              TEXT    NOT NULL,
+                alpha_score            REAL,
+                alpha_tier             TEXT,
+                setup_type             TEXT,
+                source                 TEXT,
+                filter_reason          TEXT,
+                readiness_tier         TEXT,
+                readiness_score        REAL,
+                alert_ready            INTEGER,
+                qc_tier                TEXT,
+                qc_score               REAL,
+                allow_notification     INTEGER,
+                regime_overall         TEXT,
+                regime_score           REAL,
+                regime_captured_at     TEXT,
+                simulated_decision     TEXT    NOT NULL,
+                outcome_status         TEXT,
+                return_5d              REAL,
+                return_10d             REAL,
+                max_gain               REAL,
+                max_drawdown           REAL,
+                outcome_classification TEXT,
+                created_at             TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_replay_events_run_id ON replay_events(run_id)",
+            "CREATE INDEX IF NOT EXISTS idx_replay_events_ticker  ON replay_events(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_replay_runs_created   ON replay_runs(created_at)",
+        ],
+    ),
 ]
 
 

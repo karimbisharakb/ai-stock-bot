@@ -2140,3 +2140,118 @@ def market_regime_refresh():
     except Exception:
         log.error("POST /market/regime/refresh error:\n%s", traceback.format_exc())
         return _err("failed to refresh market regime")
+
+
+# ── Phase A17: historical replay and decision simulator endpoints ──────────────
+
+@api_bp.route("/replay/runs", methods=["GET"])
+def replay_runs_list():
+    """
+    List recent replay runs, newest first.
+    Optional query param: ?limit=N (default 20, max 100).
+    No auth required (read-only).  TTL 30 s.
+    """
+    try:
+        limit = min(int(request.args.get("limit", 20)), 100)
+    except (TypeError, ValueError):
+        limit = 20
+
+    cache_key = f"replay:runs:{limit}"
+
+    def _build():
+        from historical_replay import get_replay_runs
+        return {"runs": get_replay_runs(limit=limit)}
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /replay/runs error:\n%s", traceback.format_exc())
+        return _err("failed to fetch replay runs")
+
+
+@api_bp.route("/replay/run", methods=["POST"])
+def replay_run_create():
+    """
+    Create and execute a replay run.
+    Auth required.  Clears replay list cache.
+    Body (JSON): start_date, end_date, ticker_filter?, source_filter?,
+                 setup_type_filter?, max_rows? (default 500, max 2000).
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body = request.get_json(silent=True) or {}
+
+    try:
+        from historical_replay import run_replay
+        result = run_replay(body)
+        # Bust list cache
+        for key in list(_CACHE.keys()):
+            if key.startswith("replay:runs"):
+                _CACHE.pop(key, None)
+        return _ok({
+            "run_id":      result["run_id"],
+            "status":      result["status"],
+            "event_count": result["event_count"],
+            "summary":     result["summary"],
+        })
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /replay/run error:\n%s", traceback.format_exc())
+        return _err("failed to execute replay run")
+
+
+@api_bp.route("/replay/runs/<run_id>", methods=["GET"])
+def replay_run_get(run_id: str):
+    """
+    Get a single replay run with its summary.
+    No auth required (read-only).  TTL 30 s.
+    """
+    cache_key = f"replay:run:{run_id}"
+
+    def _build():
+        from historical_replay import get_replay_run
+        run = get_replay_run(run_id)
+        if run is None:
+            raise LookupError(f"replay run not found: {run_id}")
+        return {"run": run}
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except LookupError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("GET /replay/runs/%s error:\n%s", run_id, traceback.format_exc())
+        return _err("failed to fetch replay run")
+
+
+@api_bp.route("/replay/runs/<run_id>/events", methods=["GET"])
+def replay_run_events(run_id: str):
+    """
+    Get events for a replay run.
+    Optional query param: ?limit=N (default 200, max 2000).
+    No auth required (read-only).  TTL 30 s.
+    """
+    try:
+        limit = min(int(request.args.get("limit", 200)), 2000)
+    except (TypeError, ValueError):
+        limit = 200
+
+    def _build():
+        from historical_replay import get_replay_run, get_replay_events
+        run = get_replay_run(run_id)
+        if run is None:
+            raise LookupError(f"replay run not found: {run_id}")
+        return {"events": get_replay_events(run_id, limit=limit)}
+
+    try:
+        payload, cached = _cached(f"replay:events:{run_id}:{limit}", 30, _build)
+        return _ok(payload, cached=cached)
+    except LookupError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("GET /replay/runs/%s/events error:\n%s", run_id, traceback.format_exc())
+        return _err("failed to fetch replay events")
