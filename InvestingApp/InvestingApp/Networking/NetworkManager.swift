@@ -7,6 +7,8 @@ enum NetworkError: LocalizedError {
     case decodingError(Error)
     case serverError(Int, String)
     case networkError(Error)
+    case offline
+    case timeout
 
     var errorDescription: String? {
         switch self {
@@ -15,6 +17,8 @@ enum NetworkError: LocalizedError {
         case .decodingError(let e): return "Decode error: \(e.localizedDescription)"
         case .serverError(let code, let msg): return "Server error \(code): \(msg)"
         case .networkError(let e): return e.localizedDescription
+        case .offline: return "Offline. Showing cached data when available."
+        case .timeout: return "Request timed out. Try again in a moment."
         }
     }
 }
@@ -27,8 +31,9 @@ final class NetworkManager {
 
     private init() {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 60
-        config.timeoutIntervalForResource = 120
+        config.timeoutIntervalForRequest = 18
+        config.timeoutIntervalForResource = 30
+        config.waitsForConnectivity = false
         session = URLSession(configuration: config)
     }
 
@@ -170,6 +175,68 @@ final class NetworkManager {
         return try await get(url: APIEndpoints.market)
     }
 
+    // MARK: - Operator / Alpha
+
+    func fetchBackendHealth() async throws -> BackendHealth {
+        return try await getV1(url: APIEndpoints.v1Health)
+    }
+
+    func fetchRootHealth() async throws -> RootHealth {
+        return try await get(url: "\(APIEndpoints.base)/health")
+    }
+
+    func fetchAlphaTop() async throws -> AlphaTopResponse {
+        return try await getV1(url: APIEndpoints.alphaTop)
+    }
+
+    func fetchAlphaReport() async throws -> AlphaReport {
+        return try await getV1(url: APIEndpoints.alphaReport)
+    }
+
+    func fetchAlphaOutcomes() async throws -> AlphaOutcomesResponse {
+        return try await getV1(url: APIEndpoints.alphaOutcomes)
+    }
+
+    func fetchAlphaLearning() async throws -> AlphaLearning {
+        return try await getV1(url: APIEndpoints.alphaLearning)
+    }
+
+    func fetchAlphaLearningRecommendations() async throws -> AlphaLearningRecommendations {
+        return try await getV1(url: APIEndpoints.alphaLearningRecommendations)
+    }
+
+    func fetchAlphaShadowPolicy() async throws -> AlphaShadowPolicy {
+        return try await getV1(url: APIEndpoints.alphaShadowPolicy)
+    }
+
+    // MARK: - Operator / Alpha L3 Proposals
+
+    func fetchAlphaProposals(includeHistorical: Bool = false) async throws -> AlphaProposalsResponse {
+        var url = APIEndpoints.alphaProposals
+        if includeHistorical { url += "?include_historical=true" }
+        return try await getV1(url: url)
+    }
+
+    func generateAlphaProposals(secret: String) async throws -> AlphaProposalsGenerateResponse {
+        return try await postV1Auth(url: APIEndpoints.alphaProposalsGenerate, body: [:], secret: secret)
+    }
+
+    func approveAlphaProposal(id: String, note: String?, secret: String) async throws -> AlphaProposalActionResponse {
+        var body: [String: Any] = [:]
+        if let note { body["note"] = note }
+        return try await postV1Auth(url: APIEndpoints.alphaProposalsApproveShadow(id), body: body, secret: secret)
+    }
+
+    func rejectAlphaProposal(id: String, reason: String?, secret: String) async throws -> AlphaProposalActionResponse {
+        var body: [String: Any] = [:]
+        if let reason { body["reason"] = reason }
+        return try await postV1Auth(url: APIEndpoints.alphaProposalsReject(id), body: body, secret: secret)
+    }
+
+    func fetchAlphaProposalShadowResults(id: String) async throws -> AlphaProposalShadowResults {
+        return try await getV1(url: APIEndpoints.alphaProposalShadowResults(id))
+    }
+
     // MARK: - Cash
 
     func fetchCash() async throws -> Double {
@@ -206,6 +273,18 @@ final class NetworkManager {
         return try await perform(request: request)
     }
 
+    private func getV1<T: Decodable>(url: String) async throws -> T {
+        guard let reqURL = URL(string: url) else { throw NetworkError.invalidURL }
+        var request = URLRequest(url: reqURL)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let envelope: APIEnvelope<T> = try await perform(request: request)
+        guard envelope.ok, let data = envelope.data else {
+            throw NetworkError.serverError(envelope.error?.code ?? 500, envelope.error?.message ?? "API request failed")
+        }
+        return data
+    }
+
     // MARK: - Generic POST (Encodable body)
 
     private func post<T: Decodable, B: Encodable>(url: String, body: B) async throws -> T {
@@ -216,6 +295,23 @@ final class NetworkManager {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = try JSONEncoder().encode(body)
         return try await perform(request: request)
+    }
+
+    // MARK: - Authenticated POST for v1 envelope endpoints (auth = Bearer token)
+
+    private func postV1Auth<T: Decodable>(url: String, body: [String: Any], secret: String) async throws -> T {
+        guard let reqURL = URL(string: url) else { throw NetworkError.invalidURL }
+        var request = URLRequest(url: reqURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(secret)", forHTTPHeaderField: "Authorization")
+        request.httpBody = body.isEmpty ? "{}".data(using: .utf8) : try JSONSerialization.data(withJSONObject: body)
+        let envelope: APIEnvelope<T> = try await perform(request: request)
+        guard envelope.ok, let data = envelope.data else {
+            throw NetworkError.serverError(envelope.error?.code ?? 500, envelope.error?.message ?? "API request failed")
+        }
+        return data
     }
 
     // MARK: - Generic POST (Any body)
@@ -234,6 +330,16 @@ final class NetworkManager {
 
     private func perform<T: Decodable>(request: URLRequest) async throws -> T {
         do {
+            return try await performOnce(request: request)
+        } catch {
+            guard shouldRetry(error) else { throw error }
+            try? await Task.sleep(nanoseconds: 350_000_000)
+            return try await performOnce(request: request)
+        }
+    }
+
+    private func performOnce<T: Decodable>(request: URLRequest) async throws -> T {
+        do {
             let (data, response) = try await session.data(for: request)
             guard let http = response as? HTTPURLResponse else { throw NetworkError.noData }
             guard (200...299).contains(http.statusCode) else {
@@ -247,8 +353,31 @@ final class NetworkManager {
             }
         } catch let error as NetworkError {
             throw error
+        } catch let error as URLError where error.code == .timedOut {
+            throw NetworkError.timeout
+        } catch let error as URLError where error.code == .notConnectedToInternet || error.code == .networkConnectionLost {
+            throw NetworkError.offline
         } catch {
             throw NetworkError.networkError(error)
         }
     }
+
+    private func shouldRetry(_ error: Error) -> Bool {
+        if case NetworkError.timeout = error { return true }
+        if case NetworkError.offline = error { return false }
+        if case NetworkError.networkError = error { return true }
+        if case NetworkError.serverError(let code, _) = error { return code == 408 || code == 429 || code >= 500 }
+        return false
+    }
+}
+
+struct APIEnvelope<T: Decodable>: Decodable {
+    let ok: Bool
+    let data: T?
+    let error: APIEnvelopeError?
+}
+
+struct APIEnvelopeError: Decodable {
+    let code: Int
+    let message: String
 }
