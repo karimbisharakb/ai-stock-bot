@@ -772,6 +772,54 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_manual_audit_performed_at ON manual_portfolio_audit_log(performed_at)",
         ],
     ),
+    Migration(
+        version=16,
+        description=(
+            "Phase A13: add position_theses and position_journal tables "
+            "for position journal and trade thesis tracking"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS position_theses (
+                id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker                TEXT    NOT NULL UNIQUE,
+                thesis_title          TEXT    NOT NULL DEFAULT '',
+                thesis_text           TEXT    NOT NULL DEFAULT '',
+                setup_type            TEXT    NOT NULL DEFAULT '',
+                conviction_level      TEXT    NOT NULL DEFAULT 'MEDIUM',
+                time_horizon          TEXT    NOT NULL DEFAULT 'MEDIUM',
+                entry_reason          TEXT    NOT NULL DEFAULT '',
+                expected_catalysts    TEXT    NOT NULL DEFAULT '',
+                risk_factors          TEXT    NOT NULL DEFAULT '',
+                invalidation_level    REAL,
+                target_level          REAL,
+                exit_plan             TEXT    NOT NULL DEFAULT '',
+                review_frequency_days INTEGER NOT NULL DEFAULT 30,
+                next_review_at        TEXT    NOT NULL,
+                status                TEXT    NOT NULL DEFAULT 'ACTIVE',
+                created_at            TEXT    NOT NULL,
+                updated_at            TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_theses_ticker      ON position_theses(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_theses_status      ON position_theses(status)",
+            "CREATE INDEX IF NOT EXISTS idx_theses_next_review ON position_theses(next_review_at)",
+            """
+            CREATE TABLE IF NOT EXISTS position_journal (
+                id                INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker            TEXT    NOT NULL,
+                entry_type        TEXT    NOT NULL,
+                text              TEXT    NOT NULL DEFAULT '',
+                tags_json         TEXT    NOT NULL DEFAULT '[]',
+                confidence_change TEXT,
+                created_at        TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_journal_ticker     ON position_journal(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_journal_entry_type ON position_journal(entry_type)",
+            "CREATE INDEX IF NOT EXISTS idx_journal_created_at ON position_journal(created_at)",
+        ],
+    ),
 ]
 
 

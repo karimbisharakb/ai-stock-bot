@@ -1421,10 +1421,19 @@ def portfolio_canonical():
     No auth required (read-only).  TTL 30 s.
     Reads from the positions table — does NOT trigger a fresh yfinance fetch.
     POST /portfolio/reconcile to refresh prices.
+    Each position includes a thesis_summary field (or null if no thesis exists).
     """
     def _build():
         from portfolio_reconciliation import get_canonical_portfolio
-        return get_canonical_portfolio()
+        from position_journal import get_thesis_summaries
+        result = get_canonical_portfolio()
+        positions = result.get("positions", [])
+        if positions:
+            tickers   = [p["ticker"] for p in positions]
+            summaries = get_thesis_summaries(tickers)
+            for p in positions:
+                p["thesis_summary"] = summaries.get(p["ticker"])
+        return result
 
     try:
         payload, cached = _cached("portfolio:canonical", 30, _build)
@@ -1649,3 +1658,167 @@ def portfolio_reconcile_manual():
     except Exception:
         log.error("POST /portfolio/reconcile/manual error:\n%s", traceback.format_exc())
         return _err("manual reconciliation failed")
+
+
+# ── Phase A13: position journal and thesis endpoints ─────────────────────────
+
+@api_bp.route("/portfolio/thesis", methods=["GET"])
+def portfolio_thesis_list():
+    """
+    Return all position theses.  Optional ?status= filter.
+    No auth required (read-only).  TTL 60 s.
+    """
+    status_filter = request.args.get("status", "").strip().upper() or None
+
+    def _build():
+        from position_journal import get_all_theses
+        return {"theses": get_all_theses(status=status_filter)}
+
+    cache_key = f"portfolio:thesis:all:{status_filter or 'ALL'}"
+    try:
+        payload, cached = _cached(cache_key, 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/thesis error:\n%s", traceback.format_exc())
+        return _err("failed to fetch theses")
+
+
+@api_bp.route("/portfolio/thesis/<ticker>", methods=["GET"])
+def portfolio_thesis_get(ticker: str):
+    """
+    Return the thesis and recent journal entries for a ticker.
+    No auth required (read-only).  TTL 30 s.  404 if no thesis found.
+    """
+    ticker = ticker.strip().upper()
+
+    def _build():
+        from position_journal import get_thesis, get_journal_entries
+        thesis = get_thesis(ticker)
+        if thesis is None:
+            return None
+        entries = get_journal_entries(ticker, limit=50)
+        return {"thesis": thesis, "journal": entries}
+
+    cache_key = f"portfolio:thesis:{ticker}"
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        if payload is None:
+            return _err(f"no thesis found for {ticker}", code=404)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/thesis/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to fetch thesis")
+
+
+@api_bp.route("/portfolio/thesis/<ticker>/upsert", methods=["POST"])
+def portfolio_thesis_upsert(ticker: str):
+    """
+    Insert or update a position thesis for a ticker.
+    Auth required.  Body (JSON): thesis_title, thesis_text, setup_type,
+    conviction_level, time_horizon, entry_reason, expected_catalysts, risk_factors,
+    invalidation_level, target_level, exit_plan, review_frequency_days,
+    next_review_at, status.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    ticker = ticker.strip().upper()
+    body   = request.get_json(silent=True) or {}
+
+    numeric_fields = {}
+    for key in ("invalidation_level", "target_level"):
+        if key in body and body[key] is not None:
+            try:
+                numeric_fields[key] = float(body[key])
+            except (TypeError, ValueError):
+                return _err(f"{key} must be a number", code=400)
+
+    freq = body.get("review_frequency_days", 30)
+    try:
+        freq = int(freq)
+    except (TypeError, ValueError):
+        return _err("review_frequency_days must be an integer", code=400)
+
+    try:
+        from position_journal import upsert_thesis
+        result = upsert_thesis(
+            ticker               = ticker,
+            thesis_title         = str(body.get("thesis_title", "")),
+            thesis_text          = str(body.get("thesis_text", "")),
+            setup_type           = str(body.get("setup_type", "")),
+            conviction_level     = str(body.get("conviction_level", "MEDIUM")),
+            time_horizon         = str(body.get("time_horizon", "MEDIUM")),
+            entry_reason         = str(body.get("entry_reason", "")),
+            expected_catalysts   = str(body.get("expected_catalysts", "")),
+            risk_factors         = str(body.get("risk_factors", "")),
+            invalidation_level   = numeric_fields.get("invalidation_level"),
+            target_level         = numeric_fields.get("target_level"),
+            exit_plan            = str(body.get("exit_plan", "")),
+            review_frequency_days = freq,
+            next_review_at       = body.get("next_review_at") or None,
+            status               = str(body.get("status", "ACTIVE")),
+        )
+        if not result.get("ok"):
+            return _err(f"validation failed: {result.get('errors')}", code=422)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/thesis/%s/upsert error:\n%s", ticker, traceback.format_exc())
+        return _err("thesis upsert failed")
+
+
+@api_bp.route("/portfolio/thesis/<ticker>/journal", methods=["POST"])
+def portfolio_thesis_journal(ticker: str):
+    """
+    Append a journal entry for a ticker's thesis.
+    Auth required.  Body (JSON): entry_type, text, [tags], [confidence_change].
+    entry_type must be one of: NOTE, REVIEW, THESIS_UPDATE, RISK_UPDATE,
+    CATALYST_UPDATE, EXIT_PLAN_UPDATE.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    ticker = ticker.strip().upper()
+    body   = request.get_json(silent=True) or {}
+
+    entry_type = str(body.get("entry_type", "")).strip().upper()
+    text       = str(body.get("text", "")).strip()
+    tags       = body.get("tags") or []
+    confidence_change = body.get("confidence_change")
+    if confidence_change is not None:
+        confidence_change = str(confidence_change)
+
+    try:
+        from position_journal import add_journal_entry
+        result = add_journal_entry(
+            ticker            = ticker,
+            entry_type        = entry_type,
+            text              = text,
+            tags              = tags,
+            confidence_change = confidence_change,
+        )
+        if not result.get("ok"):
+            return _err(f"validation failed: {result.get('errors')}", code=422)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/thesis/%s/journal error:\n%s", ticker, traceback.format_exc())
+        return _err("journal entry failed")
+
+
+@api_bp.route("/portfolio/reviews", methods=["GET"])
+def portfolio_reviews():
+    """
+    Return due/overdue/upcoming thesis reviews and quality warnings.
+    No auth required (read-only).  TTL 30 s.
+    """
+    def _build():
+        from position_journal import get_review_summary
+        return get_review_summary()
+
+    try:
+        payload, cached = _cached("portfolio:reviews", 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/reviews error:\n%s", traceback.format_exc())
+        return _err("failed to fetch review summary")

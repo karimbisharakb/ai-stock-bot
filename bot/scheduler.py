@@ -74,6 +74,17 @@ def morning_summary_job():
             short = message[:80]
             overnight_signals.append(f"🟡 {short}")
 
+    # A13: append overdue review and missing-thesis warnings
+    try:
+        from position_journal import get_review_summary
+        review_data = get_review_summary()
+        for t in review_data.get("reviews", {}).get("overdue", []):
+            overnight_signals.append(f"📖 Review overdue: {t['ticker']}")
+        for ticker in review_data.get("warnings", {}).get("missing_thesis", []):
+            overnight_signals.append(f"⚠️ No thesis for {ticker}")
+    except Exception:
+        pass
+
     msg = alerts.format_morning_summary(holdings, overnight_signals, cash, room)
     if alerts.send_sms(msg, bypass_quiet=True):
         alerts.log_alert(None, "FYI", msg)
