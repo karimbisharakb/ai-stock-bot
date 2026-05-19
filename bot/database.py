@@ -880,6 +880,29 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_dcl_audit_performed_at ON decision_checklist_audit(performed_at)",
         ],
     ),
+    Migration(
+        version=18,
+        description=(
+            "Phase A15: add risk_policy table for configurable portfolio "
+            "risk and position-sizing guardrails"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS risk_policy (
+                id                      INTEGER PRIMARY KEY CHECK (id = 1),
+                max_single_position_pct REAL    NOT NULL DEFAULT 10.0,
+                max_speculative_pct     REAL    NOT NULL DEFAULT 20.0,
+                max_same_theme_pct      REAL    NOT NULL DEFAULT 25.0,
+                max_expected_loss_pct   REAL    NOT NULL DEFAULT 2.0,
+                min_cash_reserve_pct    REAL    NOT NULL DEFAULT 5.0,
+                high_volatility_haircut REAL    NOT NULL DEFAULT 0.5,
+                risk_off_haircut        REAL    NOT NULL DEFAULT 0.5,
+                risk_off_mode           INTEGER NOT NULL DEFAULT 0,
+                updated_at              TEXT    NOT NULL
+            )
+            """,
+        ],
+    ),
 ]
 
 

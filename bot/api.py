@@ -2021,3 +2021,53 @@ def decisions_summary():
     except Exception:
         log.error("GET /decisions/summary error:\n%s", traceback.format_exc())
         return _err("failed to fetch decisions summary")
+
+
+# ── Phase A15: portfolio risk and position-sizing endpoints ───────────────────
+
+@api_bp.route("/portfolio/risk", methods=["GET"])
+def portfolio_risk():
+    """
+    Full portfolio risk report: concentration warnings, sizing warnings,
+    cash reserve, drawdown, theme exposure, and ticker-level risk table.
+    No auth required (read-only).  TTL 60 s.
+    """
+    def _build():
+        from portfolio_risk_guardrails import get_portfolio_risk_report
+        return get_portfolio_risk_report()
+
+    try:
+        payload, cached = _cached("portfolio:risk", 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/risk error:\n%s", traceback.format_exc())
+        return _err("failed to fetch portfolio risk report")
+
+
+@api_bp.route("/decisions/size-check", methods=["GET"])
+def decisions_size_check():
+    """
+    Sizing guidance for a specific ticker and decision type.
+    No auth required (read-only).  TTL 30 s.
+    Required query param: ?ticker=XYZ
+    Optional query param: ?decision_type=ENTER (default ENTER)
+    Returns sizing guidance, blockers, warnings, and checklist item suggestions.
+    """
+    ticker        = request.args.get("ticker", "").strip().upper()
+    decision_type = request.args.get("decision_type", "ENTER").strip().upper()
+
+    if not ticker:
+        return _err("ticker parameter is required", code=400)
+
+    cache_key = f"decisions:size-check:{ticker}:{decision_type}"
+
+    def _build():
+        from portfolio_risk_guardrails import get_size_check
+        return get_size_check(ticker, decision_type)
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /decisions/size-check error:\n%s", traceback.format_exc())
+        return _err("failed to compute size check")
