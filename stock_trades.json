@@ -1,5 +1,5 @@
 {
-  "cash": 705.3100000000002,
+  "cash": 699.2400000000001,
   "positions": [
     {
       "time": "2026-04-23 15:27",
@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 235.79,
-      "last_price": 219.32,
-      "last_pnl_pct": 8.19,
-      "days_held": 25,
+      "last_price": 222.69,
+      "last_pnl_pct": 9.86,
+      "days_held": 26,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 391.14,
-      "last_pnl_pct": 2.82,
-      "days_held": 25,
+      "last_price": 396.33,
+      "last_pnl_pct": 4.18,
+      "days_held": 26,
       "status": "OPEN",
       "live": false
     },
@@ -61,31 +61,9 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 426.36,
-      "last_price": 423.39,
-      "last_pnl_pct": 3.15,
-      "days_held": 13,
-      "status": "OPEN",
-      "live": false
-    },
-    {
-      "time": "2026-05-11 16:16",
-      "ticker": "AMZN",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.1837,
-      "price": 272.18,
-      "cost": 50.0,
-      "target": 311.55,
-      "stop_loss": 252.0,
-      "score": 7,
-      "conviction": "medium",
-      "reasoning": "In a confirmed bull regime, AMZN's defensible fundamentals, AWS re-acceleration thesis, and $311 street consensus support a medium-term hold despite near-term technical overextension at resistance. The MACD bearish cross and RSI at 77.8 suggest entering in tranches or waiting for a mild pullback toward $260\u2013265 to improve risk/reward before full allocation.",
-      "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
-      "earnings_play": false,
-      "trail_high": 272.18,
-      "last_price": 263.21,
-      "last_pnl_pct": -3.3,
-      "days_held": 7,
+      "last_price": 417.52,
+      "last_pnl_pct": 1.72,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 619.82,
-      "last_price": 610.03,
-      "last_pnl_pct": 1.23,
-      "days_held": 7,
+      "last_price": 600.99,
+      "last_pnl_pct": -0.27,
+      "days_held": 8,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-05-19 16:38",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2074,
+      "price": 256.17,
+      "cost": 53.13,
+      "target": 311.7,
+      "stop_loss": 232.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AMZN is pulling back constructively above key moving averages with RSI nearing oversold, offering a favorable entry point into a structurally improving margin story with 22% upside to analyst target. Bull market regime supports full Kelly sizing on this quality growth name trading at a reasonable 26x forward earnings.",
+      "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
+      "earnings_play": false,
+      "trail_high": 256.17,
+      "last_price": 256.17,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -705,6 +705,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-05-11 16:16",
+      "ticker": "AMZN",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.1837,
+      "price": 272.18,
+      "cost": 50.0,
+      "target": 311.55,
+      "stop_loss": 252.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "In a confirmed bull regime, AMZN's defensible fundamentals, AWS re-acceleration thesis, and $311 street consensus support a medium-term hold despite near-term technical overextension at resistance. The MACD bearish cross and RSI at 77.8 suggest entering in tranches or waiting for a mild pullback toward $260\u2013265 to improve risk/reward before full allocation.",
+      "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
+      "earnings_play": false,
+      "trail_high": 272.18,
+      "last_price": 256.17,
+      "last_pnl_pct": -5.88,
+      "days_held": 8,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 256.17,
+      "sell_time": "2026-05-19 16:37",
+      "pnl_dollar": -2.94,
+      "pnl_pct": -5.88,
+      "sell_reason": "AI thesis break: SELL \u2013 Price has broken below the $260\u2013265 entry target and is approaching the $252 stop level identified at entry, with bearish MACD and RSI confirming deteriorating momentum that invalidates the near-term thesis."
+    },
+    {
+      "time": "2026-05-19 16:38",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2074,
+      "price": 256.17,
+      "cost": 53.13,
+      "target": 311.7,
+      "stop_loss": 232.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AMZN is pulling back constructively above key moving averages with RSI nearing oversold, offering a favorable entry point into a structurally improving margin story with 22% upside to analyst target. Bull market regime supports full Kelly sizing on this quality growth name trading at a reasonable 26x forward earnings.",
+      "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
+      "earnings_play": false,
+      "trail_high": 256.17,
+      "last_price": 256.17,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -985,6 +1034,33 @@
       "pnl_dollar": -0.02,
       "pnl_pct": -0.03,
       "sell_reason": "AI thesis break: SELL \u2013 RSI at 77.2 is overbought and the position has barely moved after 3 days, confirming the key risk of failure to break ATH resistance while upside remains razor-thin at 3.8%."
+    },
+    {
+      "time": "2026-05-11 16:16",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1837,
+      "price": 272.18,
+      "cost": 50.0,
+      "target": 311.55,
+      "stop_loss": 252.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "In a confirmed bull regime, AMZN's defensible fundamentals, AWS re-acceleration thesis, and $311 street consensus support a medium-term hold despite near-term technical overextension at resistance. The MACD bearish cross and RSI at 77.8 suggest entering in tranches or waiting for a mild pullback toward $260\u2013265 to improve risk/reward before full allocation.",
+      "key_risk": "Failure to break above the $278.56 52-week high triggers mean-reversion toward $250\u2013255 support, invalidating the near-term setup and requiring a stop near $252.",
+      "earnings_play": false,
+      "trail_high": 272.18,
+      "last_price": 256.17,
+      "last_pnl_pct": -5.88,
+      "days_held": 8,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 256.17,
+      "sell_time": "2026-05-19 16:37",
+      "pnl_dollar": -2.94,
+      "pnl_pct": -5.88,
+      "sell_reason": "AI thesis break: SELL \u2013 Price has broken below the $260\u2013265 entry target and is approaching the $252 stop level identified at entry, with bearish MACD and RSI confirming deteriorating momentum that invalidates the near-term thesis."
     }
   ],
   "portfolio_history": [
@@ -1055,6 +1131,10 @@
     {
       "date": "2026-05-18",
       "value": 1012.69
+    },
+    {
+      "date": "2026-05-19",
+      "value": 1011.37
     }
   ],
   "top_picks": [
@@ -1064,43 +1144,43 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG's strong fundamental quality \u2014 22% revenue growth, 38% margins, and credible AI monetization via Cloud and Search \u2014 supports a medium-term position in a bull regime despite near-term overbought technicals. The analyst target of $420 offers reasonable upside if Cloud accelerates past 30% YoY, justifying a measured entry with a stop below key support.",
-      "price_target": 420.44,
-      "key_risk": "Negative MACD divergence and RSI at 75.5 pressing against the 52-week high resistance at $404 could trigger an 8\u201312% mean reversion to ~$350 on any Cloud or Search ad revenue disappointment."
+      "reasoning": "GOOG offers compelling value at 26.6x forward earnings with 21.8% revenue growth and expanding AI/cloud monetization, making the fundamental case strong despite near-term technical fatigue. Bull market regime permits entry at this score, and any pullback toward support would improve the risk/reward on a position already backed by a strong_buy consensus and $421 analyst target.",
+      "price_target": 421.69,
+      "key_risk": "Bearish MACD divergence and extended RSI near 69 after a 27% three-month run suggest a 5\u201310% consolidation or pullback is likely before the next leg higher, risking a stop-out before the thesis plays out."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "BULL regime with bullish MACD, strong breakout above MA50, and 40% analyst upside provide sufficient tailwind for a medium-term position despite overbought RSI. Counter-trend rally risk is managed with a stop below the MA50 reclaim level.",
-      "price_target": 195.0,
-      "key_risk": "RPO deceleration or NRR miss at next earnings could rapidly retest $130\u2013140, invalidating the entire rally thesis."
+      "reasoning": "AMD remains in a confirmed bull trend with strong fundamentals \u2014 38% revenue growth against a reasonable 32x forward P/E \u2014 and the current -7% pullback with fading volume looks like a healthy consolidation rather than a structural breakdown. Bull regime conditions permit entry at score 7, with the $380\u2013390 MA50 gap zone serving as the critical support backstop.",
+      "price_target": 461.0,
+      "key_risk": "Near-parabolic 3-month move of +108% combined with MACD turning bearish and thin 13% margins could accelerate a deeper correction to $340\u2013360 if AI/semiconductor sentiment shifts or macro conditions tighten."
     },
     {
-      "ticker": "ARM",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "ARM's bull market structure remains intact with strong AI/data center royalty tailwinds and analyst consensus pointing to $229 target, and the current consolidation at neutral RSI offers a reasonable entry within the longer uptrend. The BULL regime permits this score-7 entry, with valuation risk mitigated by genuine earnings acceleration expected in forward estimates.",
-      "price_target": 229.0,
-      "key_risk": "At 240x trailing P/E with fading short-term momentum and 5.2x debt-to-equity, any licensing deal slowdown or hyperscaler pricing pushback could trigger a sharp de-rating from perfection-priced levels."
+      "reasoning": "In a confirmed bull market regime, PLTR's exceptional 84.7% revenue growth, 43.7% margins, and 37% analyst upside justify accumulation during this exhaustion-phase pullback despite bearish technicals. The -23% drawdown with decelerating selling pressure offers an asymmetric entry for a growth compounder with a dominant AI/defense platform.",
+      "price_target": 175.0,
+      "key_risk": "DoD budget freezes, DOGE-driven contract scrutiny, or further AI valuation multiple compression could accelerate the downtrend well below current support levels."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 54.5,
-    "rolling_win_rate": 54.5,
-    "avg_return": 2.92,
-    "sharpe": 0.27,
-    "max_drawdown": 0.9,
-    "total_trades": 11,
+    "win_rate": 50.0,
+    "rolling_win_rate": 50.0,
+    "avg_return": 2.19,
+    "sharpe": 0.2,
+    "max_drawdown": 1.03,
+    "total_trades": 12,
     "wins": 6,
-    "losses": 5,
+    "losses": 6,
     "underperforming": false
   },
-  "pnl": 5.649999999999999,
-  "last_run": "2026-05-18 18:35"
+  "pnl": 2.7099999999999986,
+  "last_run": "2026-05-19 16:45"
 }
