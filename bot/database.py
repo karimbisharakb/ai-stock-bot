@@ -654,6 +654,73 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_delivery_sent_at     ON alpha_notification_delivery_log(sent_at)",
         ],
     ),
+    Migration(
+        version=14,
+        description=(
+            "Phase A11: add portfolio_positions, portfolio_snapshots, "
+            "and portfolio_reconciliation_log tables for canonical portfolio truth layer"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS portfolio_positions (
+                id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker             TEXT    NOT NULL UNIQUE,
+                quantity           REAL    NOT NULL,
+                avg_cost           REAL    NOT NULL,
+                market_price       REAL,
+                market_value       REAL,
+                cost_basis         REAL,
+                unrealized_pnl     REAL,
+                unrealized_pnl_pct REAL,
+                realized_pnl       REAL    NOT NULL DEFAULT 0.0,
+                source             TEXT    NOT NULL DEFAULT 'manual',
+                is_stale           INTEGER NOT NULL DEFAULT 0,
+                concentration_pct  REAL    NOT NULL DEFAULT 0.0,
+                price_fetched_at   TEXT,
+                reconciled_at      TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_positions_ticker        ON portfolio_positions(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_positions_reconciled_at ON portfolio_positions(reconciled_at)",
+            "CREATE INDEX IF NOT EXISTS idx_positions_is_stale      ON portfolio_positions(is_stale)",
+            """
+            CREATE TABLE IF NOT EXISTS portfolio_snapshots (
+                id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+                snapshot_id           TEXT    NOT NULL UNIQUE,
+                trigger               TEXT    NOT NULL DEFAULT 'manual',
+                total_market_value    REAL    NOT NULL,
+                total_cost_basis      REAL    NOT NULL,
+                total_unrealized_pnl  REAL    NOT NULL,
+                total_realized_pnl    REAL    NOT NULL,
+                cash                  REAL    NOT NULL,
+                total_portfolio_value REAL    NOT NULL,
+                position_count        INTEGER NOT NULL,
+                stale_count           INTEGER NOT NULL DEFAULT 0,
+                positions_json        TEXT    NOT NULL,
+                taken_at              TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_snapshots_snapshot_id ON portfolio_snapshots(snapshot_id)",
+            "CREATE INDEX IF NOT EXISTS idx_snapshots_taken_at    ON portfolio_snapshots(taken_at)",
+            "CREATE INDEX IF NOT EXISTS idx_snapshots_trigger     ON portfolio_snapshots(trigger)",
+            """
+            CREATE TABLE IF NOT EXISTS portfolio_reconciliation_log (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_id          TEXT    NOT NULL UNIQUE,
+                trigger         TEXT    NOT NULL DEFAULT 'manual',
+                positions_found INTEGER NOT NULL DEFAULT 0,
+                issues_found    INTEGER NOT NULL DEFAULT 0,
+                issues_json     TEXT    NOT NULL DEFAULT '[]',
+                duration_ms     REAL,
+                status          TEXT    NOT NULL DEFAULT 'OK',
+                reconciled_at   TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_recon_log_run_id        ON portfolio_reconciliation_log(run_id)",
+            "CREATE INDEX IF NOT EXISTS idx_recon_log_reconciled_at ON portfolio_reconciliation_log(reconciled_at)",
+            "CREATE INDEX IF NOT EXISTS idx_recon_log_status        ON portfolio_reconciliation_log(status)",
+        ],
+    ),
 ]
 
 

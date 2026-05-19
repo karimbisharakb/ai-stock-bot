@@ -31,9 +31,28 @@ alerts.WATCHLIST_REF = WATCHLIST
 
 def morning_summary_job():
     print(f"☀️  Morning summary job @ {datetime.now(EASTERN).strftime('%H:%M')}")
-    holdings = portfolio.get_portfolio_with_prices()
-    cash     = portfolio.get_cash()
-    room     = portfolio.get_tfsa_room()
+
+    # Fetch canonical portfolio state (fresh prices via reconciliation layer)
+    from portfolio_reconciliation import reconcile_portfolio
+    recon_result = reconcile_portfolio(trigger="morning_brief")
+    positions    = recon_result.get("positions", [])
+
+    # Map canonical positions to the legacy format expected by format_morning_summary
+    holdings = [
+        {
+            "ticker":        p["ticker"],
+            "shares":        p["quantity"],
+            "avg_cost":      p["avg_cost"],
+            "current_price": p["market_price"],
+            "curr_value":    p["market_value"],
+            "gain":          p["unrealized_pnl"],
+            "gain_pct":      p["unrealized_pnl_pct"],
+        }
+        for p in positions
+    ]
+
+    cash = portfolio.get_cash()
+    room = portfolio.get_tfsa_room()
 
     # Collect WARNING signals logged overnight / this morning
     from database import get_connection

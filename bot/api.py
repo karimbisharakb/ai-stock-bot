@@ -1410,3 +1410,101 @@ def alpha_notifications_send(dry_run_id: str):
         log.error("POST /alpha/notifications/%s/send error:\n%s",
                   dry_run_id, traceback.format_exc())
         return _err("delivery attempt failed")
+
+
+# ── A11: Canonical portfolio truth layer ─────────────────────────────────────
+
+@api_bp.route("/portfolio", methods=["GET"])
+def portfolio_canonical():
+    """
+    Return the latest canonical portfolio state from portfolio_positions.
+    No auth required (read-only).  TTL 30 s.
+    Reads from the positions table — does NOT trigger a fresh yfinance fetch.
+    POST /portfolio/reconcile to refresh prices.
+    """
+    def _build():
+        from portfolio_reconciliation import get_canonical_portfolio
+        return get_canonical_portfolio()
+
+    try:
+        payload, cached = _cached("portfolio:canonical", 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio error:\n%s", traceback.format_exc())
+        return _err("failed to fetch canonical portfolio")
+
+
+@api_bp.route("/portfolio/snapshots", methods=["GET"])
+def portfolio_snapshots():
+    """
+    Return recent portfolio snapshots ordered by taken_at DESC.
+    No auth required.  TTL 60 s.
+    Optional query param: ?limit=20
+    """
+    try:
+        limit = min(int(request.args.get("limit", 20)), 100)
+    except (ValueError, TypeError):
+        limit = 20
+
+    cache_key = f"portfolio:snapshots:{limit}"
+
+    def _build():
+        from portfolio_reconciliation import get_snapshots
+        snaps = get_snapshots(limit=limit)
+        return {"count": len(snaps), "snapshots": snaps}
+
+    try:
+        payload, cached = _cached(cache_key, 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/snapshots error:\n%s", traceback.format_exc())
+        return _err("failed to fetch portfolio snapshots")
+
+
+@api_bp.route("/portfolio/reconciliation", methods=["GET"])
+def portfolio_reconciliation_log():
+    """
+    Return reconciliation run history ordered by reconciled_at DESC.
+    No auth required.  TTL 30 s.
+    Optional query param: ?limit=50
+    """
+    try:
+        limit = min(int(request.args.get("limit", 50)), 200)
+    except (ValueError, TypeError):
+        limit = 50
+
+    cache_key = f"portfolio:reconciliation-log:{limit}"
+
+    def _build():
+        from portfolio_reconciliation import get_reconciliation_log
+        runs = get_reconciliation_log(limit=limit)
+        return {"count": len(runs), "runs": runs}
+
+    try:
+        payload, cached = _cached(cache_key, 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/reconciliation error:\n%s", traceback.format_exc())
+        return _err("failed to fetch reconciliation log")
+
+
+@api_bp.route("/portfolio/reconcile", methods=["POST"])
+def portfolio_reconcile():
+    """
+    Trigger a fresh portfolio reconciliation.
+
+    Auth required.  Fetches live prices via market_data, rebuilds portfolio_positions,
+    logs the run to portfolio_reconciliation_log.
+    Never writes to holdings, transactions, or cash.
+    Returns the full reconciliation result including canonical positions and issues.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from portfolio_reconciliation import reconcile_portfolio
+        result = reconcile_portfolio(trigger="api")
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/reconcile error:\n%s", traceback.format_exc())
+        return _err("reconciliation failed")
