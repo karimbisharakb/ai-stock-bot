@@ -97,6 +97,22 @@ def morning_summary_job():
     except Exception:
         pass
 
+    # A16: append current market regime context
+    try:
+        from market_regime_intelligence import get_regime_context_for_checklist
+        regime_ctx = get_regime_context_for_checklist()
+        if regime_ctx.get("available"):
+            overall = regime_ctx.get("overall_regime", "NEUTRAL")
+            score   = regime_ctx.get("regime_score", 50.0)
+            if overall in ("RISK_OFF", "PANIC"):
+                overnight_signals.append(f"🔴 Regime: {overall} (score={score:.0f})")
+            elif overall == "NEUTRAL":
+                overnight_signals.append(f"🟡 Regime: {overall} (score={score:.0f})")
+            else:
+                overnight_signals.append(f"🟢 Regime: {overall} (score={score:.0f})")
+    except Exception:
+        pass
+
     msg = alerts.format_morning_summary(holdings, overnight_signals, cash, room)
     if alerts.send_sms(msg, bypass_quiet=True):
         alerts.log_alert(None, "FYI", msg)
@@ -363,6 +379,21 @@ def release_scheduler_lease() -> None:
         log.warning("Scheduler: lease release failed: %s", exc)
 
 
+def _run_regime_refresh():
+    """Refresh market regime snapshot (non-fatal — never blocks Alpha or Predator)."""
+    try:
+        from market_regime_intelligence import refresh_regime
+        result = refresh_regime()
+        log.info(
+            "Regime refresh complete: %s | score=%.1f | quality=%s",
+            result.get("overall_regime"),
+            result.get("regime_score", 0),
+            result.get("data_quality"),
+        )
+    except Exception:
+        log.warning("Regime refresh failed (non-fatal)", exc_info=True)
+
+
 def _run_alpha_universe_scan():
     """Scan ALPHA_UNIVERSE in alpha shadow mode, then queue outcome tracking rows."""
     try:
@@ -518,11 +549,33 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # Market regime refresh — pre-market, midday, near-close (Mon-Fri)
+    # Non-fatal; never blocks Alpha or Predator.
+    scheduler.add_job(
+        _run_regime_refresh,
+        CronTrigger(hour=8, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="regime_refresh_premarket",
+        replace_existing=True,
+    )
+    scheduler.add_job(
+        _run_regime_refresh,
+        CronTrigger(hour=12, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="regime_refresh_midday",
+        replace_existing=True,
+    )
+    scheduler.add_job(
+        _run_regime_refresh,
+        CronTrigger(hour=15, minute=30, day_of_week="mon-fri", timezone=EASTERN),
+        id="regime_refresh_nearclose",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
         "scanner every 30 min | predator every 60 min | "
         "watchlist check every 15 min | weekly summary Sundays 9 AM | "
-        "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri)"
+        "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri | "
+        "regime refresh 8:00/12:00/15:30 ET Mon-Fri)"
     )
     return scheduler

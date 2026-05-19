@@ -2071,3 +2071,72 @@ def decisions_size_check():
     except Exception:
         log.error("GET /decisions/size-check error:\n%s", traceback.format_exc())
         return _err("failed to compute size check")
+
+
+# ── Phase A16: market regime intelligence endpoints ───────────────────────────
+
+@api_bp.route("/market/regime", methods=["GET"])
+def market_regime():
+    """
+    Latest market regime snapshot.
+    Returns the most recent snapshot, or {data: null} if none have been captured yet.
+    No auth required (read-only).  TTL 60 s.
+    """
+    def _build():
+        from market_regime_intelligence import get_latest_regime
+        return {"regime": get_latest_regime()}
+
+    try:
+        payload, cached = _cached("market:regime:latest", 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /market/regime error:\n%s", traceback.format_exc())
+        return _err("failed to fetch market regime")
+
+
+@api_bp.route("/market/regime/history", methods=["GET"])
+def market_regime_history():
+    """
+    Recent market regime snapshots.
+    Optional query param: ?limit=N (default 20, max 100).
+    No auth required (read-only).  TTL 60 s.
+    """
+    try:
+        limit = min(int(request.args.get("limit", 20)), 100)
+    except (TypeError, ValueError):
+        limit = 20
+
+    cache_key = f"market:regime:history:{limit}"
+
+    def _build():
+        from market_regime_intelligence import get_regime_history
+        return {"history": get_regime_history(limit=limit)}
+
+    try:
+        payload, cached = _cached(cache_key, 60, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /market/regime/history error:\n%s", traceback.format_exc())
+        return _err("failed to fetch regime history")
+
+
+@api_bp.route("/market/regime/refresh", methods=["POST"])
+def market_regime_refresh():
+    """
+    Trigger a live regime refresh: fetch signals, classify, persist snapshot.
+    Auth required.  Clears related caches.  Never sends alerts or trades.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    try:
+        from market_regime_intelligence import refresh_regime
+        regime = refresh_regime()
+        # Bust stale cache entries for regime
+        for key in list(_CACHE.keys()):
+            if key.startswith("market:regime"):
+                _CACHE.pop(key, None)
+        return _ok({"regime": regime})
+    except Exception:
+        log.error("POST /market/regime/refresh error:\n%s", traceback.format_exc())
+        return _err("failed to refresh market regime")

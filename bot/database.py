@@ -903,6 +903,35 @@ MIGRATIONS: list = [
             """,
         ],
     ),
+    Migration(
+        version=19,
+        description=(
+            "Phase A16: add market_regime_snapshots table for immutable "
+            "regime intelligence history"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS market_regime_snapshots (
+                id                         INTEGER PRIMARY KEY AUTOINCREMENT,
+                captured_at                TEXT    NOT NULL,
+                overall_regime             TEXT    NOT NULL,
+                volatility_regime          TEXT    NOT NULL,
+                breadth_regime             TEXT    NOT NULL,
+                speculative_regime         TEXT    NOT NULL,
+                regime_score               REAL    NOT NULL,
+                risk_multiplier            REAL    NOT NULL,
+                sizing_multiplier          REAL    NOT NULL,
+                alpha_threshold_adjustment REAL    NOT NULL,
+                confidence_adjustment      REAL    NOT NULL,
+                explanation                TEXT    NOT NULL,
+                warnings_json              TEXT    NOT NULL DEFAULT '[]',
+                data_quality               TEXT    NOT NULL,
+                raw_signals_json           TEXT    NOT NULL DEFAULT '{}'
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_mri_captured_at ON market_regime_snapshots(captured_at)",
+        ],
+    ),
 ]
 
 
