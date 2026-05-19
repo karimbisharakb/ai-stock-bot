@@ -721,6 +721,57 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_recon_log_status        ON portfolio_reconciliation_log(status)",
         ],
     ),
+    Migration(
+        version=15,
+        description=(
+            "Phase A12: add manual_portfolio_positions, manual_account_settings, "
+            "and manual_portfolio_audit_log tables for manual portfolio control"
+        ),
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS manual_portfolio_positions (
+                id           INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker       TEXT    NOT NULL UNIQUE,
+                quantity     REAL    NOT NULL,
+                avg_cost     REAL    NOT NULL,
+                realized_pnl REAL    NOT NULL DEFAULT 0.0,
+                account_type TEXT    NOT NULL DEFAULT 'TFSA',
+                currency     TEXT    NOT NULL DEFAULT 'CAD',
+                note         TEXT    NOT NULL DEFAULT '',
+                active       INTEGER NOT NULL DEFAULT 1,
+                created_at   TEXT    NOT NULL,
+                updated_at   TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_manual_pos_ticker  ON manual_portfolio_positions(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_manual_pos_active  ON manual_portfolio_positions(active)",
+            """
+            CREATE TABLE IF NOT EXISTS manual_account_settings (
+                id                INTEGER PRIMARY KEY CHECK (id = 1),
+                account_name      TEXT    NOT NULL DEFAULT '',
+                account_type      TEXT    NOT NULL DEFAULT 'TFSA',
+                base_currency     TEXT    NOT NULL DEFAULT 'CAD',
+                available_cash    REAL    NOT NULL DEFAULT 0.0,
+                contribution_room REAL,
+                notes             TEXT    NOT NULL DEFAULT '',
+                updated_at        TEXT    NOT NULL
+            )
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS manual_portfolio_audit_log (
+                id             INTEGER PRIMARY KEY AUTOINCREMENT,
+                action         TEXT    NOT NULL,
+                subject        TEXT    NOT NULL,
+                old_value_json TEXT,
+                new_value_json TEXT,
+                performed_at   TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_manual_audit_action       ON manual_portfolio_audit_log(action)",
+            "CREATE INDEX IF NOT EXISTS idx_manual_audit_subject      ON manual_portfolio_audit_log(subject)",
+            "CREATE INDEX IF NOT EXISTS idx_manual_audit_performed_at ON manual_portfolio_audit_log(performed_at)",
+        ],
+    ),
 ]
 
 

@@ -1508,3 +1508,144 @@ def portfolio_reconcile():
     except Exception:
         log.error("POST /portfolio/reconcile error:\n%s", traceback.format_exc())
         return _err("reconciliation failed")
+
+
+# ── A12: Manual portfolio control ─────────────────────────────────────────────
+
+@api_bp.route("/portfolio/manual", methods=["GET"])
+def portfolio_manual_get():
+    """
+    Return the manual portfolio: active positions + account settings.
+    No auth required (read-only).  TTL 30 s.
+    """
+    def _build():
+        from manual_portfolio import get_manual_portfolio
+        return get_manual_portfolio()
+
+    try:
+        payload, cached = _cached("portfolio:manual", 30, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /portfolio/manual error:\n%s", traceback.format_exc())
+        return _err("failed to fetch manual portfolio")
+
+
+@api_bp.route("/portfolio/manual/positions/upsert", methods=["POST"])
+def portfolio_manual_upsert():
+    """
+    Insert or update a manual position.
+
+    Auth required.  Validates inputs.  Logs to audit trail.
+    Body (JSON): ticker, quantity, avg_cost, [realized_pnl], [account_type],
+                 [currency], [note]
+    Re-activates a previously deactivated position on upsert.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    body = request.get_json(silent=True) or {}
+    ticker = body.get("ticker")
+    if not ticker:
+        return _err("ticker is required", code=400)
+    try:
+        quantity = float(body.get("quantity", 0))
+        avg_cost = float(body.get("avg_cost", 0))
+    except (TypeError, ValueError):
+        return _err("quantity and avg_cost must be numbers", code=400)
+
+    try:
+        from manual_portfolio import upsert_position
+        result = upsert_position(
+            ticker       = ticker,
+            quantity     = quantity,
+            avg_cost     = avg_cost,
+            realized_pnl = float(body.get("realized_pnl", 0)),
+            account_type = str(body.get("account_type", "TFSA")),
+            currency     = str(body.get("currency", "CAD")),
+            note         = str(body.get("note", "")),
+        )
+        if not result.get("ok"):
+            return _err(f"validation failed: {result.get('errors')}", code=422)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/manual/positions/upsert error:\n%s", traceback.format_exc())
+        return _err("upsert failed")
+
+
+@api_bp.route("/portfolio/manual/positions/<ticker>/deactivate", methods=["POST"])
+def portfolio_manual_deactivate(ticker: str):
+    """
+    Deactivate a manual position.  Does NOT delete the row (audit safety).
+    Auth required.  Returns error if the position is not found.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from manual_portfolio import deactivate_position
+        result = deactivate_position(ticker)
+        if not result.get("ok"):
+            code = 404 if result.get("error") == "POSITION_NOT_FOUND" else 400
+            return _err(result.get("error", "deactivate failed"), code=code)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/manual/positions/%s/deactivate error:\n%s",
+                  ticker, traceback.format_exc())
+        return _err("deactivate failed")
+
+
+@api_bp.route("/portfolio/manual/account", methods=["POST"])
+def portfolio_manual_account():
+    """
+    Update manual account settings (partial update — only supplied fields change).
+
+    Auth required.  Validates account_type, base_currency, available_cash.
+    Body (JSON): [account_name], [account_type], [base_currency], [available_cash],
+                 [contribution_room], [notes]
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    body = request.get_json(silent=True) or {}
+
+    kwargs = {}
+    for key in ("account_name", "account_type", "base_currency", "notes"):
+        if key in body:
+            kwargs[key] = str(body[key])
+    for key in ("available_cash", "contribution_room"):
+        if key in body:
+            try:
+                kwargs[key] = float(body[key])
+            except (TypeError, ValueError):
+                return _err(f"{key} must be a number", code=400)
+
+    try:
+        from manual_portfolio import update_account_settings
+        result = update_account_settings(**kwargs)
+        if not result.get("ok"):
+            return _err(f"validation failed: {result.get('errors')}", code=422)
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/manual/account error:\n%s", traceback.format_exc())
+        return _err("account settings update failed")
+
+
+@api_bp.route("/portfolio/reconcile/manual", methods=["POST"])
+def portfolio_reconcile_manual():
+    """
+    Trigger a manual reconciliation from manual_portfolio_positions + manual_account_settings.
+
+    Auth required.  Fetches live prices, rebuilds portfolio_positions using manual
+    positions as truth source, takes an immutable snapshot, logs run.
+    No trading operations performed.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from manual_portfolio import reconcile_manual
+        result = reconcile_manual()
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /portfolio/reconcile/manual error:\n%s", traceback.format_exc())
+        return _err("manual reconciliation failed")
