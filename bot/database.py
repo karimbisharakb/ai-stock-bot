@@ -528,6 +528,42 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_proposal_audit_ts          ON learning_proposal_audit(ts)",
         ],
     ),
+    Migration(
+        version=10,
+        description="Phase A6: add alpha_validation table for reality validation layer",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS alpha_validation (
+                id                       INTEGER PRIMARY KEY AUTOINCREMENT,
+                outcome_id               INTEGER NOT NULL UNIQUE,
+                ticker                   TEXT    NOT NULL,
+                scan_time                TEXT    NOT NULL,
+                setup_type               TEXT,
+                alpha_tier               TEXT,
+                behavior_class           TEXT    NOT NULL,
+                validation_score         REAL    NOT NULL,
+                confidence               TEXT    NOT NULL,
+                follow_through_score     REAL,
+                gain_retention           REAL,
+                drawdown_severity        REAL,
+                continuation_quality     REAL,
+                multi_window_consistency REAL,
+                sustained_strength       REAL,
+                reversal_severity        REAL,
+                n_windows                INTEGER NOT NULL DEFAULT 0,
+                evidence_summary         TEXT,
+                key_failure_reason       TEXT,
+                key_success_reason       TEXT,
+                computed_at              TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_alpha_validation_outcome_id    ON alpha_validation(outcome_id)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_validation_ticker         ON alpha_validation(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_validation_behavior_class ON alpha_validation(behavior_class)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_validation_setup_type     ON alpha_validation(setup_type)",
+            "CREATE INDEX IF NOT EXISTS idx_alpha_validation_alpha_tier     ON alpha_validation(alpha_tier)",
+        ],
+    ),
 ]
 
 

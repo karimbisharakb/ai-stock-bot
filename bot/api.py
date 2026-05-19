@@ -1041,3 +1041,59 @@ def alpha_proposals_shadow_results(proposal_id: str):
         log.error("GET /alpha/learning/proposals/%s/shadow-results error:\n%s",
                   proposal_id, traceback.format_exc())
         return _err("shadow results failed")
+
+
+# ── Alpha A6: reality validation layer ────────────────────────────────────────
+
+TTL_VALIDATION = 300  # 5 minutes
+
+
+@api_bp.route("/alpha/validation", methods=["GET"])
+def alpha_validation():
+    """
+    Alpha reality validation rows.
+    Query params:
+      setup_type     — filter by setup_type (optional)
+      behavior_class — filter by behavior_class (optional)
+      limit          — max rows (default 100, max 500)
+    Cached 5 min.
+    """
+    try:
+        setup_type     = request.args.get("setup_type") or None
+        behavior_class = request.args.get("behavior_class") or None
+        limit          = min(int(request.args.get("limit", 100)), 500)
+
+        cache_key = f"alpha:validation:{setup_type}:{behavior_class}:{limit}"
+
+        def _build():
+            from alpha_validation import get_validations
+            rows = get_validations(limit=limit, setup_type=setup_type, behavior_class=behavior_class)
+            return {"results": rows, "total": len(rows),
+                    "setup_type_filter": setup_type, "behavior_class_filter": behavior_class}
+
+        payload, cached = _cached(cache_key, TTL_VALIDATION, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/validation error:\n%s", traceback.format_exc())
+        return _err("failed to fetch validation rows")
+
+
+@api_bp.route("/alpha/validation/summary", methods=["GET"])
+def alpha_validation_summary():
+    """
+    Aggregate validation analytics: behavior distribution, trap rates,
+    sustainability rates, leaderboards, per-tier averages.
+    Cached 5 min.
+    """
+    try:
+        def _build():
+            from alpha_validation import get_validation_summary
+            return get_validation_summary()
+
+        payload, cached = _cached("alpha:validation:summary", TTL_VALIDATION, _build)
+        return _ok(payload, cached)
+
+    except Exception:
+        log.error("GET /alpha/validation/summary error:\n%s", traceback.format_exc())
+        return _err("validation summary failed")

@@ -258,6 +258,20 @@ def _build_weight_proposal(weight_recs: list, n_outcomes: int) -> Optional[dict]
     from alpha_learning_engine import _compute_shadow_weights
     shadow_w = _compute_shadow_weights(actionable)
 
+    # Append validation metrics when available
+    try:
+        from alpha_validation import get_validation_metrics_for_proposals
+        vm = get_validation_metrics_for_proposals()
+        if vm and vm.get("validation_count", 0) > 0:
+            evidence_parts.append(
+                f"validation: {vm['validation_count']} validated outcomes, "
+                f"trap_rate={vm.get('trap_rate', 'N/A')}, "
+                f"sustainability={vm.get('sustainability_rate', 'N/A')}, "
+                f"avg_score={vm.get('avg_validation_score', 'N/A')}"
+            )
+    except Exception:
+        pass
+
     return {
         "proposal_id":            proposal_id,
         "kind":                   "WEIGHT",
@@ -319,6 +333,19 @@ def _build_threshold_proposal(threshold_recs: list, n_outcomes: int) -> Optional
 
     from alpha_learning_engine import _CURRENT_WEIGHTS
     shadow_w = dict(_CURRENT_WEIGHTS)
+
+    # Append validation metrics when available
+    try:
+        from alpha_validation import get_validation_metrics_for_proposals
+        vm = get_validation_metrics_for_proposals()
+        if vm and vm.get("validation_count", 0) > 0:
+            evidence_parts.append(
+                f"validation: {vm['validation_count']} validated outcomes, "
+                f"trap_rate={vm.get('trap_rate', 'N/A')}, "
+                f"sustainability={vm.get('sustainability_rate', 'N/A')}"
+            )
+    except Exception:
+        pass
 
     return {
         "proposal_id":            proposal_id,

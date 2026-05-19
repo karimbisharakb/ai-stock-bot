@@ -161,6 +161,140 @@ def _compute_shadow_weights(weight_recs: list) -> dict:
     return {comp: round(w / total, 6) for comp, w in raw.items()}
 
 
+# ── Validation integration ────────────────────────────────────────────────────
+
+def _load_validations() -> dict:
+    """
+    Load alpha_validation rows and return a dict keyed by outcome_id.
+
+    Returns {} when the table is empty or missing (safe — callers treat
+    validation as optional evidence, not a hard requirement).
+    """
+    try:
+        from database import get_connection
+        conn = get_connection()
+        try:
+            rows = conn.execute(
+                "SELECT outcome_id, behavior_class, validation_score FROM alpha_validation"
+            ).fetchall()
+            return {r["outcome_id"]: dict(r) for r in rows}
+        finally:
+            conn.close()
+    except Exception:
+        log.warning("alpha_learning_engine: _load_validations failed", exc_info=True)
+        return {}
+
+
+def compute_validated_component_effectiveness(outcomes: list, validations: dict) -> dict:
+    """
+    Like compute_component_effectiveness but weights each outcome by its
+    validation quality weight.
+
+    POSITIVE_BEHAVIORS get 1.3-1.5x, NEGATIVE_BEHAVIORS get 0.4x,
+    MIXED_BEHAVIORS get 0.75x, INCONCLUSIVE stays 1.0x.
+
+    Falls back to compute_component_effectiveness when validations is empty.
+    """
+    if not validations:
+        return compute_component_effectiveness(outcomes)
+
+    from alpha_validation import VALIDATION_QUALITY_WEIGHTS
+
+    if not outcomes:
+        return {}
+
+    all_r5 = [r.get("return_5d") for r in outcomes if r.get("return_5d") is not None]
+    baseline_wins     = sum(1 for r in all_r5 if r > _WIN_THRESHOLD)
+    baseline_win_rate = baseline_wins / len(all_r5) if all_r5 else 0.0
+
+    per_comp: dict = {name: {
+        "high_weighted_wins": 0.0, "high_weighted_fp": 0.0, "high_weighted_n": 0.0,
+        "high_returns_weighted": [], "high_gains_weighted": [],
+        "low_weighted_wins": 0.0, "low_weighted_n": 0.0, "low_returns_weighted": [],
+        "active_n": 0, "missing_n": 0, "total_n": 0,
+    } for name in _CURRENT_WEIGHTS}
+
+    for row in outcomes:
+        r5d      = row.get("return_5d")
+        mg       = row.get("max_gain")
+        cs       = _parse_component_scores(row)
+        outcome_id = row.get("id")
+
+        v = validations.get(outcome_id)
+        quality_weight = VALIDATION_QUALITY_WEIGHTS.get(
+            v["behavior_class"] if v else "INCONCLUSIVE", 1.0
+        )
+
+        for comp, b in per_comp.items():
+            b["total_n"] += 1
+            comp_data = cs.get(comp, {})
+            score     = comp_data.get("score")
+            dq        = comp_data.get("data_quality", "MISSING")
+
+            if dq == "MISSING" or score is None:
+                b["missing_n"] += 1
+                continue
+
+            b["active_n"] += 1
+
+            if score >= _HIGH_SCORE_THRESHOLD:
+                b["high_weighted_n"] += quality_weight
+                if r5d is not None:
+                    b["high_returns_weighted"].append((r5d, quality_weight))
+                    if r5d > _WIN_THRESHOLD:
+                        b["high_weighted_wins"] += quality_weight
+                    if r5d < _FP_THRESHOLD:
+                        b["high_weighted_fp"] += quality_weight
+                if mg is not None:
+                    b["high_gains_weighted"].append((mg, quality_weight))
+            else:
+                b["low_weighted_n"] += quality_weight
+                if r5d is not None:
+                    b["low_returns_weighted"].append((r5d, quality_weight))
+                    if r5d > _WIN_THRESHOLD:
+                        b["low_weighted_wins"] += quality_weight
+
+    def _wmean(pairs: list) -> Optional[float]:
+        if not pairs:
+            return None
+        total_w = sum(w for _, w in pairs)
+        if total_w < 1e-9:
+            return None
+        return round(sum(v * w for v, w in pairs) / total_w, 6)
+
+    def _wrate(n: float, d: float) -> Optional[float]:
+        return round(n / d, 4) if d > 1e-9 else None
+
+    result: dict = {}
+    for comp, b in per_comp.items():
+        n      = b["total_n"]
+        hw_n   = b["high_weighted_n"]
+        hr_w   = b["high_returns_weighted"]
+        wwr_h  = _wrate(b["high_weighted_wins"], hw_n)
+        wwr_l  = _wrate(b["low_weighted_wins"],  b["low_weighted_n"])
+        lift: Optional[float] = None
+        if wwr_h is not None and baseline_win_rate > 0:
+            lift = round(wwr_h / baseline_win_rate, 4)
+
+        result[comp] = {
+            "active_count":                    b["active_n"],
+            "high_count":                      int(b["high_weighted_n"]),
+            "missing_rate":                    _safe_rate(b["missing_n"], n),
+            "win_rate_when_high":              wwr_h,
+            "win_rate_when_low":               wwr_l,
+            "avg_return_when_high":            _wmean(hr_w),
+            "avg_return_when_low":             _wmean(b["low_returns_weighted"]),
+            "max_gain_when_high":              _wmean(b["high_gains_weighted"]),
+            "false_positive_rate_when_high":   _wrate(b["high_weighted_fp"], hw_n),
+            "lift":                            lift,
+            "data_quality_penalty":            _safe_rate(b["missing_n"], n),
+            "baseline_win_rate":               round(baseline_win_rate, 4),
+            "validation_weighted":             True,
+        }
+
+    return result
+
+
 # ── Core analytics ─────────────────────────────────────────────────────────────
 
 def compute_component_effectiveness(outcomes: list) -> dict:
@@ -645,9 +779,20 @@ def generate_recommendations_report() -> dict:
             f"need {_MIN_SAMPLES}+"
         )
 
-    component_eff: dict = {}
+    validations: dict = {}
     try:
-        component_eff = compute_component_effectiveness(outcomes)
+        validations = _load_validations()
+    except Exception as exc:
+        errors.append(f"load_validations error: {exc}")
+
+    component_eff: dict = {}
+    validation_weighted = False
+    try:
+        if validations:
+            component_eff = compute_validated_component_effectiveness(outcomes, validations)
+            validation_weighted = True
+        else:
+            component_eff = compute_component_effectiveness(outcomes)
     except Exception as exc:
         errors.append(f"component_effectiveness error: {exc}")
 
@@ -684,6 +829,8 @@ def generate_recommendations_report() -> dict:
         "generated_at":              datetime.now().isoformat(),
         "note":                      "Shadow mode only — no live weight changes applied automatically",
         "total_complete_outcomes":   n,
+        "total_validations":         len(validations),
+        "validation_weighted":       validation_weighted,
         "sample_size_warning":       sample_size_warning,
         "errors":                    errors,
         "current_weights":           dict(_CURRENT_WEIGHTS),
