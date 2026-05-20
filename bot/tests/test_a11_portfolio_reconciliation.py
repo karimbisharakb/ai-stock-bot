@@ -782,10 +782,13 @@ class TestNoTradingCalls:
 # ── TestMorningBriefIntegration ───────────────────────────────────────────────
 
 class TestMorningBriefIntegration:
-    def test_morning_brief_calls_reconcile_portfolio(self):
+    def test_morning_brief_calls_operator_brief(self):
+        # A21: morning_summary_job delegates to operator_brief.generate_compact_brief.
+        # reconcile_portfolio is still called — but now through operator_brief's
+        # collect_brief_data() rather than directly in the scheduler.
         import scheduler
         source = inspect.getsource(scheduler.morning_summary_job)
-        assert "reconcile_portfolio" in source
+        assert "generate_compact_brief" in source
 
     def test_morning_brief_does_not_call_get_portfolio_with_prices(self):
         import scheduler
@@ -793,38 +796,19 @@ class TestMorningBriefIntegration:
         assert "get_portfolio_with_prices" not in source
 
     def test_morning_brief_uses_canonical_positions(self, monkeypatch):
+        # A21: morning_summary_job calls generate_compact_brief; the canonical
+        # portfolio path is covered by A21's own integration tests.
+        import operator_brief as _ob
         import scheduler
 
-        reconcile_called = []
-
-        def _mock_reconcile(trigger="manual"):
-            reconcile_called.append(trigger)
-            return {
-                "positions": [
-                    {
-                        "ticker":           "AAPL",
-                        "quantity":         10,
-                        "avg_cost":         100.0,
-                        "market_price":     150.0,
-                        "market_value":     1500.0,
-                        "unrealized_pnl":   500.0,
-                        "unrealized_pnl_pct": 50.0,
-                    }
-                ]
-            }
-
-        monkeypatch.setattr("portfolio_reconciliation.reconcile_portfolio", _mock_reconcile)
-        monkeypatch.setattr("portfolio.get_cash",      lambda: 500.0)
-        monkeypatch.setattr("portfolio.get_tfsa_room", lambda: 10000.0)
-        monkeypatch.setattr("database.get_connection", lambda: _dummy_conn())
-        monkeypatch.setattr("alerts.format_morning_summary",
-                            lambda h, s, cash, room: "BRIEF")
+        brief_called = []
+        monkeypatch.setattr(_ob, "generate_compact_brief",
+                            lambda: brief_called.append(1) or "BRIEF")
         monkeypatch.setattr("alerts.send_sms", lambda msg, bypass_quiet=False: True)
         monkeypatch.setattr("alerts.log_alert", lambda *a, **kw: None)
 
         scheduler.morning_summary_job()
-        assert len(reconcile_called) == 1
-        assert reconcile_called[0] == "morning_brief"
+        assert brief_called, "generate_compact_brief was not called"
 
 
 def _dummy_conn():

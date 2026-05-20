@@ -2496,3 +2496,36 @@ def planner_refresh():
     except Exception:
         log.error("POST /planner/refresh error:\n%s", traceback.format_exc())
         return _err("planner refresh failed")
+
+
+# ── Daily operator brief (Phase A21) ──────────────────────────────────────────
+
+TTL_BRIEF = 60  # seconds
+
+
+@api_bp.route("/brief/daily", methods=["GET"])
+def daily_brief():
+    """
+    Return the daily operator brief.
+    Query param ?mode=compact|detailed|debug  (default: detailed).
+    No auth required.  Cached for TTL_BRIEF seconds per mode.
+    Compact mode returns {"brief": "<text>"}; other modes return the full
+    structured dict.  Never crashes — sparse-safe.
+    """
+    mode = request.args.get("mode", "detailed")
+    if mode not in ("compact", "detailed", "debug"):
+        mode = "detailed"
+
+    def _build():
+        from operator_brief import generate_brief
+        result = generate_brief(mode=mode)
+        if isinstance(result, str):
+            return {"brief": result, "mode": "compact"}
+        return result
+
+    try:
+        payload, cached = _cached(f"brief:{mode}", TTL_BRIEF, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /brief/daily error:\n%s", traceback.format_exc())
+        return _err("failed to generate daily brief")
