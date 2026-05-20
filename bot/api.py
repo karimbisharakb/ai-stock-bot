@@ -2559,3 +2559,220 @@ def eod_brief():
     except Exception:
         log.error("GET /brief/eod error:\n%s", traceback.format_exc())
         return _err("failed to generate EOD brief")
+
+
+# ── Phase A23: Market Research endpoints ─────────────────────────────────────
+
+TTL_MARKET_PULSE  = 60   # seconds
+TTL_STOCK_ANALYSIS = 300
+TTL_ETF_ANALYSIS   = 300
+TTL_MACRO          = 600
+TTL_NEWS           = 120
+TTL_TICKER_NEWS    = 120
+
+
+@api_bp.route("/market/pulse", methods=["GET"])
+def market_pulse():
+    """
+    Return market pulse: 10 market tickers + 11 sector ETFs.
+    Query param ?period=1D|5D|1M|3M|6M|YTD|1Y|3Y|5Y|10Y|Max  (default: 1D).
+    No auth required.  Cached per period.
+    """
+    from market_research import VALID_PERIODS
+    period = request.args.get("period", "1D")
+    if period not in VALID_PERIODS:
+        period = "1D"
+
+    def _build():
+        from market_research import get_market_pulse
+        return get_market_pulse(period)
+
+    try:
+        payload, cached = _cached(f"market_pulse:{period}", TTL_MARKET_PULSE, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /market/pulse error:\n%s", traceback.format_exc())
+        return _err("failed to fetch market pulse")
+
+
+@api_bp.route("/research/sector", methods=["GET"])
+def sector_performance():
+    """
+    Return sector ETF performance sorted by return.
+    Query param ?period=  (default: 1D).
+    """
+    from market_research import VALID_PERIODS
+    period = request.args.get("period", "1D")
+    if period not in VALID_PERIODS:
+        period = "1D"
+
+    def _build():
+        from market_research import get_sector_performance
+        return get_sector_performance(period)
+
+    try:
+        payload, cached = _cached(f"sector_perf:{period}", TTL_MARKET_PULSE, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/sector error:\n%s", traceback.format_exc())
+        return _err("failed to fetch sector performance")
+
+
+@api_bp.route("/research/stock/<ticker>", methods=["GET"])
+def stock_analysis(ticker: str):
+    """
+    Return technical + fundamental analysis for a stock ticker.
+    Query param ?period=  (default: 1Y).
+    No auth required.  Cached per ticker+period.
+    """
+    from market_research import VALID_PERIODS
+    ticker = ticker.upper().strip()
+    period = request.args.get("period", "1Y")
+    if period not in VALID_PERIODS:
+        period = "1Y"
+
+    def _build():
+        from market_research import get_stock_analysis
+        return get_stock_analysis(ticker, period)
+
+    try:
+        payload, cached = _cached(f"stock_analysis:{ticker}:{period}", TTL_STOCK_ANALYSIS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/stock/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to fetch stock analysis")
+
+
+@api_bp.route("/research/etf/<ticker>", methods=["GET"])
+def etf_analysis(ticker: str):
+    """
+    Return ETF analysis: returns table, risk score, holdings, peers.
+    Query param ?period=  (default: 1Y).
+    No auth required.  Cached per ticker+period.
+    """
+    from market_research import VALID_PERIODS
+    ticker = ticker.upper().strip()
+    period = request.args.get("period", "1Y")
+    if period not in VALID_PERIODS:
+        period = "1Y"
+
+    def _build():
+        from market_research import get_etf_analysis
+        return get_etf_analysis(ticker, period)
+
+    try:
+        payload, cached = _cached(f"etf_analysis:{ticker}:{period}", TTL_ETF_ANALYSIS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/etf/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to fetch ETF analysis")
+
+
+@api_bp.route("/research/macro", methods=["GET"])
+def macro_data():
+    """
+    Return macro indicators from FRED.
+    Returns available=false when FRED_API_KEY is not configured or fredapi not installed.
+    No auth required.  Cached TTL_MACRO seconds.
+    """
+    def _build():
+        from market_research import get_macro_data
+        return get_macro_data()
+
+    try:
+        payload, cached = _cached("macro_data", TTL_MACRO, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/macro error:\n%s", traceback.format_exc())
+        return _err("failed to fetch macro data")
+
+
+@api_bp.route("/research/news", methods=["GET"])
+def market_news():
+    """
+    Return recent market news (SPY proxy).
+    No auth required.  Cached TTL_NEWS seconds.
+    """
+    def _build():
+        from market_research import get_market_news
+        return get_market_news()
+
+    try:
+        payload, cached = _cached("market_news", TTL_NEWS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/news error:\n%s", traceback.format_exc())
+        return _err("failed to fetch market news")
+
+
+@api_bp.route("/research/news/<ticker>", methods=["GET"])
+def ticker_news(ticker: str):
+    """
+    Return recent news for a specific ticker.
+    No auth required.  Cached per ticker.
+    """
+    ticker = ticker.upper().strip()
+
+    def _build():
+        from market_research import get_ticker_news
+        return get_ticker_news(ticker)
+
+    try:
+        payload, cached = _cached(f"ticker_news:{ticker}", TTL_TICKER_NEWS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/news/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to fetch ticker news")
+
+
+@api_bp.route("/research/ai/stock/<ticker>", methods=["POST"])
+def ai_stock_analysis(ticker: str):
+    """
+    Generate educational AI commentary for a stock.
+    No auth required.  Not cached (POST).
+    """
+    ticker = ticker.upper().strip()
+    try:
+        body = request.get_json(silent=True) or {}
+        from market_research import get_stock_analysis, generate_stock_analysis_ai
+        analysis_data = body.get("analysis_data") or get_stock_analysis(ticker)
+        result = generate_stock_analysis_ai(ticker, analysis_data)
+        return _ok(result)
+    except Exception:
+        log.error("POST /research/ai/stock/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to generate AI stock analysis")
+
+
+@api_bp.route("/research/ai/etf/<ticker>", methods=["POST"])
+def ai_etf_analysis(ticker: str):
+    """
+    Generate educational AI commentary for an ETF.
+    No auth required.  Not cached (POST).
+    """
+    ticker = ticker.upper().strip()
+    try:
+        body = request.get_json(silent=True) or {}
+        from market_research import get_etf_analysis, generate_etf_analysis_ai
+        analysis_data = body.get("analysis_data") or get_etf_analysis(ticker)
+        result = generate_etf_analysis_ai(ticker, analysis_data)
+        return _ok(result)
+    except Exception:
+        log.error("POST /research/ai/etf/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to generate AI ETF analysis")
+
+
+@api_bp.route("/research/ai/macro", methods=["POST"])
+def ai_macro_analysis():
+    """
+    Generate educational AI commentary for macro conditions.
+    No auth required.  Not cached (POST).
+    """
+    try:
+        body = request.get_json(silent=True) or {}
+        from market_research import get_macro_data, generate_macro_analysis_ai
+        macro = body.get("macro_data") or get_macro_data()
+        result = generate_macro_analysis_ai(macro)
+        return _ok(result)
+    except Exception:
+        log.error("POST /research/ai/macro error:\n%s", traceback.format_exc())
+        return _err("failed to generate AI macro analysis")
