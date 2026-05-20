@@ -17,9 +17,9 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 235.79,
-      "last_price": 222.34,
-      "last_pnl_pct": 9.68,
-      "days_held": 26,
+      "last_price": 224.4,
+      "last_pnl_pct": 10.7,
+      "days_held": 27,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 394.01,
-      "last_pnl_pct": 3.58,
-      "days_held": 26,
+      "last_price": 400.16,
+      "last_pnl_pct": 5.19,
+      "days_held": 27,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 426.36,
-      "last_price": 418.25,
-      "last_pnl_pct": 1.9,
-      "days_held": 14,
+      "last_price": 417.68,
+      "last_pnl_pct": 1.76,
+      "days_held": 15,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 619.82,
-      "last_price": 600.95,
-      "last_pnl_pct": -0.28,
-      "days_held": 8,
+      "last_price": 603.77,
+      "last_pnl_pct": 0.19,
+      "days_held": 9,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "AMZN is pulling back constructively above key moving averages with RSI nearing oversold, offering a favorable entry point into a structurally improving margin story with 22% upside to analyst target. Bull market regime supports full Kelly sizing on this quality growth name trading at a reasonable 26x forward earnings.",
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
-      "trail_high": 258.92,
-      "last_price": 258.92,
-      "last_pnl_pct": 1.07,
-      "days_held": 0,
+      "trail_high": 262.96,
+      "last_price": 262.96,
+      "last_pnl_pct": 2.65,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -1135,6 +1135,10 @@
     {
       "date": "2026-05-19",
       "value": 1011.49
+    },
+    {
+      "date": "2026-05-20",
+      "value": 1014.32
     }
   ],
   "top_picks": [
@@ -1144,9 +1148,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG's strong fundamentals \u2014 38% operating margins, 21.8% revenue growth, and reasonable 26.7x forward P/E \u2014 support a path to analyst target of $421.69 in a bull regime. Fading MACD and stalling near 52-week highs warrant a measured position size, but the AI monetization catalyst and margin expansion story remain intact.",
+      "reasoning": "GOOG is consolidating in a constructive bull-flag pattern well above key moving averages with RSI reset to neutral, offering a favorable risk/reward entry toward the $421.69 analyst consensus target. Fundamentals remain strong with 21.8% revenue growth and 37.9% margins at a reasonable 26.4x forward P/E, while the BULL market regime supports continued participation.",
       "price_target": 421.69,
-      "key_risk": "Bearish MACD divergence near $404 resistance could trigger a consolidation or rollover if AI search revenue cannibalization becomes evident."
+      "key_risk": "Near-term momentum is fading with negative MACD and below-average volume suggesting further consolidation or a deeper pullback toward the 50-DMA before resuming higher."
     },
     {
       "ticker": "AMD",
@@ -1154,9 +1158,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's forward P/E of 32x is defensible against 37.8% revenue growth with a credible AI data center catalyst in the MI300X ramp, and the bull regime justifies entry despite near-term momentum fading. The -7.26% weekly pullback and bearish MACD suggest waiting for stabilization, but the structural uptrend and analyst consensus target near $461 support a medium-term position.",
-      "price_target": 460.0,
-      "key_risk": "NVIDIA's entrenched H100/H200 dominance could limit MI300X enterprise adoption, and the 6.0x D/E ratio amplifies downside if macro conditions tighten or the AI spending cycle pauses."
+      "reasoning": "In a confirmed bull regime, AMD's forward P/E of 34x is reasonable if MI300X adoption accelerates, and the RSI consolidation near 67.7 suggests digestion rather than reversal. The 52-week high at $469.22 is a clear near-term target with room to run if hyperscaler commentary confirms GPU allocation.",
+      "price_target": 469.0,
+      "key_risk": "Bearish MACD and high beta (2.4) mean any disappointment on MI300X order flow from upcoming hyperscaler earnings calls could trigger a sharp, fast selloff from elevated levels."
     },
     {
       "ticker": "MSTR",
@@ -1164,9 +1168,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR trades above its 50-MA with 130% upside to analyst target and a 3.6 beta to Bitcoin, making it a high-asymmetry play if BTC breaks above $100K in the medium term. Bull regime permits entry at this score, but position must respect the 20% crypto proxy cap given extreme leverage and no fundamental earnings floor.",
+      "reasoning": "In a BULL regime, MSTR's 127% upside to analyst target and Bitcoin leverage provide asymmetric upside as BTC consolidates above key support; the stock holding above its 50-MA at $153.90 offers a defined risk level with meaningful recovery potential toward the 200-MA. Position sizing must respect the 20% crypto proxy portfolio cap given the extreme 18x debt-to-equity and 3.6 beta amplification.",
       "price_target": 220.0,
-      "key_risk": "A BTC reversal below $80K could trigger forced-selling panic given MSTR's 18x debt-to-equity, potentially breaching the 50-MA support at $153 and invalidating the entire thesis."
+      "key_risk": "A Bitcoin breakdown toward $75\u201380K would mechanically drive MSTR back toward 52-week lows near $104, with leverage amplifying losses well beyond the underlying crypto move."
     }
   ],
   "regime": "BULL",
@@ -1182,5 +1186,5 @@
     "underperforming": false
   },
   "pnl": 2.7099999999999986,
-  "last_run": "2026-05-19 19:05"
+  "last_run": "2026-05-20 16:43"
 }
