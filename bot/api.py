@@ -2416,3 +2416,83 @@ def strategy_scorecard(strategy: str):
     except Exception:
         log.error("GET /strategies/%s error:\n%s", strategy, traceback.format_exc())
         return _err("failed to compute strategy scorecard")
+
+
+# ── Compounding planner (Phase A20) ───────────────────────────────────────────
+
+TTL_PLANNER = 120  # seconds
+
+
+@api_bp.route("/planner/summary", methods=["GET"])
+def planner_summary():
+    """
+    Return the most recent planner snapshot (allocation, drift, guidance).
+    No auth required.  Cached for TTL_PLANNER seconds.
+    Returns {"snapshot": null} when no snapshot has been generated yet.
+    """
+    def _build():
+        from compounding_planner import get_latest_planner_snapshot
+        snap = get_latest_planner_snapshot()
+        if snap:
+            # Exclude heavy projections JSON from the summary endpoint
+            snap.pop("projections", None)
+        return {"snapshot": snap}
+
+    try:
+        payload, cached = _cached("planner:summary", TTL_PLANNER, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /planner/summary error:\n%s", traceback.format_exc())
+        return _err("failed to fetch planner summary")
+
+
+@api_bp.route("/planner/projections", methods=["GET"])
+def planner_projections():
+    """
+    Return the projections section of the most recent planner snapshot.
+    No auth required.  Cached for TTL_PLANNER seconds.
+    Returns {"projections": null} when no snapshot exists.
+    """
+    def _build():
+        from compounding_planner import get_latest_planner_snapshot
+        snap = get_latest_planner_snapshot()
+        if snap is None:
+            return {"projections": None}
+        return {
+            "projections":        snap.get("projections"),
+            "monthly_contribution": snap.get("monthly_contribution"),
+            "portfolio_value":    snap.get("portfolio_value"),
+            "created_at":         snap.get("created_at"),
+        }
+
+    try:
+        payload, cached = _cached("planner:projections", TTL_PLANNER, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /planner/projections error:\n%s", traceback.format_exc())
+        return _err("failed to fetch planner projections")
+
+
+@api_bp.route("/planner/refresh", methods=["POST"])
+def planner_refresh():
+    """
+    Compute a fresh planner run, persist the snapshot, and return the full output.
+    Auth-protected (Bearer token matching API_SECRET env var).
+    Accepts optional JSON body: {"monthly_contribution": 500.0}
+    Busts planner:summary and planner:projections caches on success.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body = request.get_json(silent=True) or {}
+    monthly_contribution = float(body.get("monthly_contribution", 500.0))
+
+    try:
+        from compounding_planner import run_planner
+        result = run_planner(monthly_contribution=monthly_contribution)
+        _CACHE.pop("planner:summary",     None)
+        _CACHE.pop("planner:projections", None)
+        return _ok({"planner": result})
+    except Exception:
+        log.error("POST /planner/refresh error:\n%s", traceback.format_exc())
+        return _err("planner refresh failed")

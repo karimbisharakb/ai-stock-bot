@@ -1030,6 +1030,35 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_pse_run_id     ON portfolio_stress_events(run_id)",
         ],
     ),
+    Migration(
+        version=22,
+        description="Phase A20: add planner_snapshots table for long-horizon compounding planner",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS planner_snapshots (
+                id                            INTEGER PRIMARY KEY AUTOINCREMENT,
+                snapshot_id                   TEXT    UNIQUE NOT NULL,
+                created_at                    TEXT    NOT NULL,
+                portfolio_value               REAL    NOT NULL DEFAULT 0.0,
+                cash                          REAL    NOT NULL DEFAULT 0.0,
+                regime                        TEXT    NOT NULL DEFAULT 'NEUTRAL',
+                risk_score                    REAL    NOT NULL DEFAULT 50.0,
+                rebalance_urgency             TEXT    NOT NULL DEFAULT 'NONE',
+                current_allocation_json       TEXT    NOT NULL DEFAULT '{}',
+                target_allocation_json        TEXT    NOT NULL DEFAULT '{}',
+                drift_json                    TEXT    NOT NULL DEFAULT '{}',
+                priority_areas_json           TEXT    NOT NULL DEFAULT '[]',
+                cash_deployment_guidance      TEXT    NOT NULL DEFAULT '',
+                contribution_guidance         TEXT    NOT NULL DEFAULT '',
+                risk_reduction_guidance       TEXT    NOT NULL DEFAULT '',
+                strategy_alignment_notes_json TEXT    NOT NULL DEFAULT '[]',
+                projections_json              TEXT    NOT NULL DEFAULT '{}',
+                monthly_contribution          REAL    NOT NULL DEFAULT 0.0
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_planner_created_at ON planner_snapshots(created_at)",
+        ],
+    ),
 ]
 
 
