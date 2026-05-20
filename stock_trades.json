@@ -17,8 +17,8 @@
       "key_risk": "A parabolic RSI at 91.2 combined with below-average volume signals exhaustion risk, and any Blackwell shipment guidance miss at the next earnings print could trigger a violent mean-reversion given beta of 2.33.",
       "earnings_play": false,
       "trail_high": 235.79,
-      "last_price": 224.4,
-      "last_pnl_pct": 10.7,
+      "last_price": 222.58,
+      "last_pnl_pct": 9.8,
       "days_held": 27,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 419.03,
-      "last_price": 400.16,
-      "last_pnl_pct": 5.19,
+      "last_price": 401.93,
+      "last_pnl_pct": 5.66,
       "days_held": 27,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
       "trail_high": 426.36,
-      "last_price": 417.68,
-      "last_pnl_pct": 1.76,
+      "last_price": 420.07,
+      "last_pnl_pct": 2.34,
       "days_held": 15,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 619.82,
-      "last_price": 603.77,
-      "last_pnl_pct": 0.19,
+      "last_price": 603.66,
+      "last_pnl_pct": 0.17,
       "days_held": 9,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "AMZN is pulling back constructively above key moving averages with RSI nearing oversold, offering a favorable entry point into a structurally improving margin story with 22% upside to analyst target. Bull market regime supports full Kelly sizing on this quality growth name trading at a reasonable 26x forward earnings.",
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
-      "trail_high": 262.96,
-      "last_price": 262.96,
-      "last_pnl_pct": 2.65,
+      "trail_high": 264.73,
+      "last_price": 264.73,
+      "last_pnl_pct": 3.34,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -1138,7 +1138,7 @@
     },
     {
       "date": "2026-05-20",
-      "value": 1014.32
+      "value": 1014.86
     }
   ],
   "top_picks": [
@@ -1148,9 +1148,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is consolidating in a constructive bull-flag pattern well above key moving averages with RSI reset to neutral, offering a favorable risk/reward entry toward the $421.69 analyst consensus target. Fundamentals remain strong with 21.8% revenue growth and 37.9% margins at a reasonable 26.4x forward P/E, while the BULL market regime supports continued participation.",
+      "reasoning": "GOOG trades at a compelling 26.5x forward P/E relative to 21.8% revenue growth and fortress-grade margins, with the bull market regime supporting full Kelly deployment on a quality compounder in healthy consolidation. The pullback from recent highs has reset RSI to neutral 51, offering a cleaner entry toward the analyst consensus target of $421.69.",
       "price_target": 421.69,
-      "key_risk": "Near-term momentum is fading with negative MACD and below-average volume suggesting further consolidation or a deeper pullback toward the 50-DMA before resuming higher."
+      "key_risk": "A structural DOJ antitrust remedy \u2014 forced divestiture or default search prohibition \u2014 could violently reprice the stock well below support levels regardless of fundamental strength."
     },
     {
       "ticker": "AMD",
@@ -1158,19 +1158,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a confirmed bull regime, AMD's forward P/E of 34x is reasonable if MI300X adoption accelerates, and the RSI consolidation near 67.7 suggests digestion rather than reversal. The 52-week high at $469.22 is a clear near-term target with room to run if hyperscaler commentary confirms GPU allocation.",
+      "reasoning": "AMD's bull market structure remains intact with massive MA cushion and a credible AI/data center catalyst in MI300X hyperscaler adoption that could break the 52-week high resistance. However, fading momentum, below-average volume, and bearish MACD near resistance warrant a smaller position size with tight risk management.",
       "price_target": 469.0,
-      "key_risk": "Bearish MACD and high beta (2.4) mean any disappointment on MI300X order flow from upcoming hyperscaler earnings calls could trigger a sharp, fast selloff from elevated levels."
+      "key_risk": "Failure to break $469 resistance combined with NVIDIA defending market share could trigger a sharp mean-reversion from extreme valuations toward the 50-MA."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a BULL regime, MSTR's 127% upside to analyst target and Bitcoin leverage provide asymmetric upside as BTC consolidates above key support; the stock holding above its 50-MA at $153.90 offers a defined risk level with meaningful recovery potential toward the 200-MA. Position sizing must respect the 20% crypto proxy portfolio cap given the extreme 18x debt-to-equity and 3.6 beta amplification.",
-      "price_target": 220.0,
-      "key_risk": "A Bitcoin breakdown toward $75\u201380K would mechanically drive MSTR back toward 52-week lows near $104, with leverage amplifying losses well beyond the underlying crypto move."
+      "reasoning": "PLTR's elite fundamentals \u2014 85% revenue growth, 44% margins, and dominant AIP positioning \u2014 support the analyst consensus target of $183 despite near-term technical weakness. Bull market regime and full Kelly sizing justify entry at current levels with the 52-week support at $119 as the structural backstop.",
+      "price_target": 183.73,
+      "key_risk": "U.S. federal budget cuts or DOGE-driven IT spending reductions could directly impair government revenue visibility and break the $119 support, triggering a sharp re-rating."
     }
   ],
   "regime": "BULL",
@@ -1186,5 +1186,5 @@
     "underperforming": false
   },
   "pnl": 2.7099999999999986,
-  "last_run": "2026-05-20 16:43"
+  "last_run": "2026-05-20 19:25"
 }
