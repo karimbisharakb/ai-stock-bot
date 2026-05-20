@@ -37,6 +37,24 @@ def morning_summary_job():
         alerts.log_alert(None, "FYI", msg)
 
 
+def eod_brief_job():
+    """Send an end-of-day review via WhatsApp after market close.
+    Guarded by EOD_BRIEF_ENABLED env var (default false).
+    Never raises — any error is logged and swallowed.
+    """
+    try:
+        from eod_brief import eod_enabled, generate_compact_eod
+        if not eod_enabled():
+            log.info("eod_brief_job: EOD_BRIEF_ENABLED is false — skipping send")
+            return
+        print(f"🌙 EOD brief job @ {datetime.now(EASTERN).strftime('%H:%M')}")
+        msg = generate_compact_eod()
+        if alerts.send_sms(msg, bypass_quiet=True):
+            alerts.log_alert(None, "FYI", msg)
+    except Exception:
+        log.error("eod_brief_job: unexpected error", exc_info=True)
+
+
 def watchlist_check_job():
     """Check price alerts every 15 min during market hours."""
     try:
@@ -489,12 +507,22 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # EOD review brief — 4:15 PM ET, Mon-Fri (after market close)
+    # Guarded by EOD_BRIEF_ENABLED env var; skips send when false.
+    scheduler.add_job(
+        eod_brief_job,
+        CronTrigger(hour=16, minute=15, day_of_week="mon-fri", timezone=EASTERN),
+        id="eod_brief",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
         "scanner every 30 min | predator every 60 min | "
         "watchlist check every 15 min | weekly summary Sundays 9 AM | "
         "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri | "
-        "regime refresh 8:00/12:00/15:30 ET Mon-Fri)"
+        "regime refresh 8:00/12:00/15:30 ET Mon-Fri | "
+        "EOD brief 4:15 PM Mon-Fri [EOD_BRIEF_ENABLED])"
     )
     return scheduler

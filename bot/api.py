@@ -2529,3 +2529,33 @@ def daily_brief():
     except Exception:
         log.error("GET /brief/daily error:\n%s", traceback.format_exc())
         return _err("failed to generate daily brief")
+
+
+TTL_EOD_BRIEF = 60  # seconds
+
+
+@api_bp.route("/brief/eod", methods=["GET"])
+def eod_brief():
+    """
+    Return the end-of-day review brief.
+    Query param ?mode=compact|detailed|debug  (default: detailed).
+    No auth required.  Cached for TTL_EOD_BRIEF seconds per mode.
+    Always responds regardless of EOD_BRIEF_ENABLED flag.
+    """
+    mode = request.args.get("mode", "detailed")
+    if mode not in ("compact", "detailed", "debug"):
+        mode = "detailed"
+
+    def _build():
+        from eod_brief import generate_eod_brief
+        result = generate_eod_brief(mode=mode)
+        if isinstance(result, str):
+            return {"brief": result, "mode": "compact"}
+        return result
+
+    try:
+        payload, cached = _cached(f"eod_brief:{mode}", TTL_EOD_BRIEF, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /brief/eod error:\n%s", traceback.format_exc())
+        return _err("failed to generate EOD brief")
