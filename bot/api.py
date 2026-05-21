@@ -2776,3 +2776,177 @@ def ai_macro_analysis():
     except Exception:
         log.error("POST /research/ai/macro error:\n%s", traceback.format_exc())
         return _err("failed to generate AI macro analysis")
+
+
+# ── Phase A24: Research Watchlist endpoints ────────────────────────────────────
+
+TTL_WATCHLIST     = 30   # seconds — short TTL since writes invalidate state
+TTL_SUGGESTIONS   = 120  # suggestions are heavier to compute
+
+
+@api_bp.route("/research/watchlist", methods=["GET"])
+def research_watchlist():
+    """
+    Return all active watchlist items (excludes ARCHIVED/PAUSED by default).
+    Query params:
+      ?include_archived=1  — include ARCHIVED items
+      ?include_paused=1    — include PAUSED items
+      ?status=             — filter by status
+      ?priority=           — filter by priority
+    No auth required.  Short TTL cache.
+    """
+    include_archived = request.args.get("include_archived", "0") in ("1", "true", "yes")
+    include_paused   = request.args.get("include_paused", "0") in ("1", "true", "yes")
+    status_filter    = request.args.get("status", "")
+    priority_filter  = request.args.get("priority", "")
+
+    cache_key = f"watchlist:{include_archived}:{include_paused}:{status_filter}:{priority_filter}"
+
+    def _build():
+        from research_watchlist import get_watchlist
+        items = get_watchlist(
+            include_archived=include_archived,
+            include_paused=include_paused,
+            status=status_filter or None,
+            priority=priority_filter or None,
+        )
+        return {"items": items, "count": len(items)}
+
+    try:
+        payload, cached = _cached(cache_key, TTL_WATCHLIST, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/watchlist error:\n%s", traceback.format_exc())
+        return _err("failed to fetch watchlist")
+
+
+@api_bp.route("/research/watchlist/suggestions", methods=["GET"])
+def watchlist_suggestions():
+    """
+    Return auto-generated watchlist suggestions from all sources.
+    No auth required.  Cached TTL_SUGGESTIONS seconds.
+    """
+    def _build():
+        from research_watchlist import generate_suggestions
+        return generate_suggestions()
+
+    try:
+        payload, cached = _cached("watchlist_suggestions", TTL_SUGGESTIONS, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/watchlist/suggestions error:\n%s", traceback.format_exc())
+        return _err("failed to generate watchlist suggestions")
+
+
+@api_bp.route("/research/watchlist/<ticker>", methods=["GET"])
+def watchlist_item(ticker: str):
+    """
+    Return a single watchlist item with its recent notes.
+    Returns 404 if ticker not on watchlist.
+    No auth required.
+    """
+    ticker = ticker.upper().strip()
+    try:
+        from research_watchlist import get_item_with_notes
+        item = get_item_with_notes(ticker)
+        if item is None:
+            return _err(f"ticker {ticker!r} not found in watchlist", code=404)
+        return _ok(item)
+    except Exception:
+        log.error("GET /research/watchlist/%s error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to fetch watchlist item")
+
+
+@api_bp.route("/research/watchlist/upsert", methods=["POST"])
+def watchlist_upsert():
+    """
+    Insert or update a watchlist item.
+    Auth-protected (Bearer token matching API_SECRET env var).
+    Body JSON: {ticker, name?, asset_type?, category?, status?, priority?,
+                reason?, linked_alpha_candidate_id?, linked_thesis_id?,
+                next_review_at?}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    body = request.get_json(silent=True) or {}
+    ticker = (body.get("ticker") or "").strip().upper()
+    if not ticker:
+        return _err("ticker is required", code=400)
+
+    try:
+        from research_watchlist import upsert_item
+        item = upsert_item(
+            ticker,
+            name=body.get("name"),
+            asset_type=body.get("asset_type", "STOCK"),
+            category=body.get("category", "LEARNING"),
+            status=body.get("status", "WATCHING"),
+            priority=body.get("priority", "MEDIUM"),
+            reason=body.get("reason", ""),
+            linked_alpha_candidate_id=body.get("linked_alpha_candidate_id"),
+            linked_thesis_id=body.get("linked_thesis_id"),
+            next_review_at=body.get("next_review_at"),
+        )
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /research/watchlist/upsert error:\n%s", traceback.format_exc())
+        return _err("failed to upsert watchlist item")
+
+
+@api_bp.route("/research/watchlist/<ticker>/note", methods=["POST"])
+def watchlist_add_note(ticker: str):
+    """
+    Append a note to a watchlist item (append-only).
+    Auth-protected.
+    Body JSON: {text, note_type?, tags?}
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    ticker = ticker.upper().strip()
+    body   = request.get_json(silent=True) or {}
+    text   = (body.get("text") or "").strip()
+    if not text:
+        return _err("note text is required", code=400)
+
+    try:
+        from research_watchlist import append_note
+        note = append_note(
+            ticker,
+            text,
+            note_type=body.get("note_type", "OTHER"),
+            tags=body.get("tags"),
+        )
+        cache_clear()
+        return _ok(note)
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /research/watchlist/%s/note error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to append note")
+
+
+@api_bp.route("/research/watchlist/<ticker>/archive", methods=["POST"])
+def watchlist_archive(ticker: str):
+    """
+    Archive a watchlist item (no deletes — archive only).
+    Auth-protected.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+
+    ticker = ticker.upper().strip()
+    try:
+        from research_watchlist import archive_item
+        item = archive_item(ticker)
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/watchlist/%s/archive error:\n%s", ticker, traceback.format_exc())
+        return _err("failed to archive watchlist item")

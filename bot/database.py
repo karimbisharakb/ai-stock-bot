@@ -1059,6 +1059,44 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_planner_created_at ON planner_snapshots(created_at)",
         ],
     ),
+    Migration(
+        version=23,
+        description="Phase A24: add research_watchlist and research_watchlist_notes tables",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS research_watchlist (
+                id                          INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker                      TEXT    NOT NULL UNIQUE,
+                name                        TEXT,
+                asset_type                  TEXT    NOT NULL DEFAULT 'STOCK',
+                category                    TEXT    NOT NULL DEFAULT 'LEARNING',
+                status                      TEXT    NOT NULL DEFAULT 'WATCHING',
+                priority                    TEXT    NOT NULL DEFAULT 'MEDIUM',
+                reason                      TEXT    NOT NULL DEFAULT '',
+                linked_alpha_candidate_id   INTEGER,
+                linked_thesis_id            INTEGER,
+                next_review_at              TEXT,
+                created_at                  TEXT    NOT NULL,
+                updated_at                  TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_rwl_status   ON research_watchlist(status)",
+            "CREATE INDEX IF NOT EXISTS idx_rwl_priority ON research_watchlist(priority)",
+            "CREATE INDEX IF NOT EXISTS idx_rwl_review   ON research_watchlist(next_review_at)",
+            """
+            CREATE TABLE IF NOT EXISTS research_watchlist_notes (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker      TEXT    NOT NULL,
+                note_type   TEXT    NOT NULL DEFAULT 'OTHER',
+                text        TEXT    NOT NULL,
+                tags        TEXT    NOT NULL DEFAULT '[]',
+                created_at  TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_rwl_notes_ticker ON research_watchlist_notes(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_rwl_notes_type   ON research_watchlist_notes(note_type)",
+        ],
+    ),
 ]
 
 
