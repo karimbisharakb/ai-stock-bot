@@ -59,6 +59,7 @@ REQUIRED_SECTIONS: List[str] = [
     "cash_tfsa_notes",
     "key_actions",
     "workflow_items",
+    "upcoming_catalysts",
 ]
 
 
@@ -377,6 +378,7 @@ def build_sections(data: dict) -> dict:
         "cash_tfsa_notes":        ca,
         "key_actions":            acts,
         "workflow_items":         workflow,
+        "upcoming_catalysts":     data.get("upcoming_catalysts", []),
     }
 
 
@@ -473,6 +475,14 @@ def format_compact_brief(sections: dict, generated_at: Optional[str] = None) -> 
             ticker  = w.get("ticker") or "—"
             reason  = _safe_truncate(w.get("reason", ""), 60)
             lines.append(f"  • {ticker}: {reason}")
+        lines.append("")
+
+    cats = sections.get("upcoming_catalysts", [])
+    if cats:
+        lines.append("UPCOMING CATALYSTS")
+        for c in cats[:3]:
+            ticker_str = f"{c.get('ticker')} " if c.get("ticker") else ""
+            lines.append(f"  • {ticker_str}{_safe_truncate(c.get('title', ''), 50)} [{c.get('date', '')}]")
         lines.append("")
 
     lines.append("─" * 25)
@@ -666,6 +676,14 @@ def collect_brief_data() -> dict:
     except Exception:
         log.warning("operator_brief: workflow items fetch failed", exc_info=True)
         data["workflow_items"] = []
+
+    # Upcoming catalysts (A27)
+    try:
+        from catalyst_calendar import get_brief_catalysts
+        data["upcoming_catalysts"] = get_brief_catalysts()
+    except Exception:
+        log.warning("operator_brief: catalyst calendar fetch failed", exc_info=True)
+        data["upcoming_catalysts"] = []
 
     return data
 

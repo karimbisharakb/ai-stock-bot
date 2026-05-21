@@ -2,7 +2,7 @@
 Phase A26 — Weekly Review and Accountability Report tests.
 
 Covers:
-- Constants: MODES, GRADES, REQUIRED_SECTIONS (20), BANNED_WORDS
+- Constants: MODES, GRADES, REQUIRED_SECTIONS (21), BANNED_WORDS
 - Week boundary: _parse_week_start and _week_end
 - Weekly grade: A/B/C/D/F thresholds, deterministic, boundary conditions
 - Accountability metrics: derived correctly from data
@@ -91,7 +91,7 @@ class TestConstants(unittest.TestCase):
         self.assertEqual(set(wr.GRADES), {"A", "B", "C", "D", "F"})
 
     def test_required_sections_count(self):
-        self.assertEqual(len(wr.REQUIRED_SECTIONS), 20)
+        self.assertEqual(len(wr.REQUIRED_SECTIONS), 21)
 
     def test_required_sections_contain_all_spec(self):
         for key in [
@@ -511,6 +511,7 @@ class TestFormatCompact(unittest.TestCase):
             "best_decisions":         [{"type": "research_discipline", "ticker": None, "description": "Completed 4 items"}],
             "missed_opportunities":   [],
             "focus_next_week":        ["Maintain current cadence"],
+            "catalyst_summary":       {"active_count": 0, "completed_count": 0, "high_importance_count": 0},
         }
 
     def _metrics(self) -> dict:

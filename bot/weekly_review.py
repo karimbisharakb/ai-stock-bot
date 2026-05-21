@@ -62,6 +62,7 @@ REQUIRED_SECTIONS: List[str] = [
     "best_decisions",
     "missed_opportunities",
     "focus_next_week",
+    "catalyst_summary",
 ]
 
 MAX_MISTAKES          = 5
@@ -786,6 +787,16 @@ def _collect_risk_warnings() -> int:
         return 0
 
 
+def _collect_catalysts_for_week(week_start: str, week_end: str) -> dict:
+    """Return catalyst activity for the given week window."""
+    try:
+        from catalyst_calendar import get_weekly_catalyst_summary
+        return get_weekly_catalyst_summary(week_start, week_end)
+    except Exception as exc:
+        log.debug("_collect_catalysts_for_week: %s", exc)
+        return {}
+
+
 # ── Data collection entry point ────────────────────────────────────────────────
 
 def collect_weekly_data(week_start: str, week_end: str) -> dict:
@@ -812,6 +823,7 @@ def collect_weekly_data(week_start: str, week_end: str) -> dict:
     data["planner"]      = _collect_planner(week_start, week_end)
     data["regime"]       = _collect_regime(week_start, week_end)
     data["risk_warnings_unresolved"] = _collect_risk_warnings()
+    data["catalysts"] = _collect_catalysts_for_week(week_start, week_end)
     return data
 
 
@@ -1093,6 +1105,16 @@ def _section_focus_next_week(data: dict) -> List[str]:
     return focus[:MAX_FOCUS]
 
 
+def _section_catalyst_summary(data: dict) -> dict:
+    """Weekly catalyst calendar summary."""
+    c = data.get("catalysts", {})
+    return {
+        "active_count":          c.get("active_this_week", 0),
+        "completed_count":       c.get("completed_this_week", 0),
+        "high_importance_count": c.get("high_importance_count", 0),
+    }
+
+
 # ── Section assembly ───────────────────────────────────────────────────────────
 
 def build_weekly_sections(data: dict) -> dict:
@@ -1118,6 +1140,7 @@ def build_weekly_sections(data: dict) -> dict:
         "best_decisions":          _section_best_decisions(data),
         "missed_opportunities":    _section_missed_opportunities(data),
         "focus_next_week":         _section_focus_next_week(data),
+        "catalyst_summary":        _section_catalyst_summary(data),
     }
 
 
@@ -1300,6 +1323,18 @@ def format_compact_weekly(
     if stale > 0:
         lines.append(f"  Stale theses: {stale}")
     lines.append("")
+
+    # Catalysts
+    cats = sections.get("catalyst_summary", {})
+    if cats.get("active_count", 0) > 0 or cats.get("completed_count", 0) > 0:
+        lines.append("CATALYSTS")
+        lines.append(
+            f"  Active: {cats.get('active_count', 0)}  |  "
+            f"Completed: {cats.get('completed_count', 0)}"
+        )
+        if cats.get("high_importance_count", 0) > 0:
+            lines.append(f"  High importance: {cats['high_importance_count']}")
+        lines.append("")
 
     # Focus next week
     focus = sections.get("focus_next_week", [])

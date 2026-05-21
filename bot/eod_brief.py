@@ -56,6 +56,7 @@ REQUIRED_SECTIONS: List[str] = [
     "tomorrow_watchlist",
     "unresolved_actions",
     "workflow_summary",
+    "catalyst_changes_today",
 ]
 
 
@@ -348,6 +349,22 @@ def _workflow_summary_section(
     }
 
 
+def _catalyst_changes_section(catalysts: list) -> dict:
+    """Catalyst events completed today."""
+    return {
+        "completed_today": [
+            {
+                "ticker":        c.get("ticker"),
+                "title":         c.get("title", ""),
+                "catalyst_type": c.get("catalyst_type", ""),
+                "importance":    c.get("importance", "MEDIUM"),
+            }
+            for c in catalysts[:5]
+        ],
+        "completed_count": len(catalysts),
+    }
+
+
 # ── Section assembly ───────────────────────────────────────────────────────────
 
 def build_eod_sections(data: dict) -> dict:
@@ -380,6 +397,9 @@ def build_eod_sections(data: dict) -> dict:
         "workflow_summary":          _workflow_summary_section(
             data.get("workflow_completed_today", []),
             data.get("workflow_open_items", []),
+        ),
+        "catalyst_changes_today":    _catalyst_changes_section(
+            data.get("catalysts_completed_today", []),
         ),
     }
 
@@ -483,6 +503,12 @@ def format_compact_eod(sections: dict, generated_at: Optional[str] = None) -> st
             f"RESEARCH WORKFLOW: {wf.get('completed_count', 0)} done  |  "
             f"{wf.get('unresolved_count', 0)} open"
         )
+        lines.append("")
+
+    # Catalyst changes today (A27)
+    cats = sections.get("catalyst_changes_today", {})
+    if cats.get("completed_count", 0) > 0:
+        lines.append(f"CATALYSTS: {cats['completed_count']} completed today")
         lines.append("")
 
     lines.append("─" * 25)
@@ -792,6 +818,14 @@ def collect_eod_data() -> dict:
         log.warning("eod_brief: workflow fetch failed", exc_info=True)
         data["workflow_completed_today"] = []
         data["workflow_open_items"]      = []
+
+    # Catalyst events completed today (A27)
+    try:
+        from catalyst_calendar import get_completed_today as get_catalysts_completed_today
+        data["catalysts_completed_today"] = get_catalysts_completed_today()
+    except Exception:
+        log.warning("eod_brief: catalyst calendar fetch failed", exc_info=True)
+        data["catalysts_completed_today"] = []
 
     return data
 

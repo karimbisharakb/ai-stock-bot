@@ -133,7 +133,7 @@ class TestConstants:
         assert eb.MODES == ["compact", "detailed", "debug"]
 
     def test_required_sections_count(self):
-        assert len(eb.REQUIRED_SECTIONS) == 15
+        assert len(eb.REQUIRED_SECTIONS) == 16
 
     def test_required_sections_contains_all(self):
         for key in [

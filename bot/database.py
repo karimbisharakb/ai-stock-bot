@@ -1154,6 +1154,34 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_wrs_week_start ON weekly_review_sends(week_start)",
         ],
     ),
+    Migration(
+        version=26,
+        description="Phase A27: add catalyst_calendar table for event tracking",
+        sql=[
+            """CREATE TABLE IF NOT EXISTS catalyst_calendar (
+                id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                catalyst_id         TEXT    NOT NULL UNIQUE,
+                ticker              TEXT,
+                title               TEXT    NOT NULL,
+                description         TEXT    NOT NULL DEFAULT '',
+                catalyst_type       TEXT    NOT NULL DEFAULT 'OTHER',
+                date                TEXT    NOT NULL,
+                confidence          TEXT    NOT NULL DEFAULT 'MEDIUM',
+                importance          TEXT    NOT NULL DEFAULT 'MEDIUM',
+                source              TEXT    NOT NULL DEFAULT 'manual',
+                status              TEXT    NOT NULL DEFAULT 'UPCOMING',
+                linked_entity_type  TEXT,
+                linked_entity_id    TEXT,
+                created_at          TEXT    NOT NULL,
+                updated_at          TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_cat_status     ON catalyst_calendar(status)",
+            "CREATE INDEX IF NOT EXISTS idx_cat_date       ON catalyst_calendar(date)",
+            "CREATE INDEX IF NOT EXISTS idx_cat_ticker     ON catalyst_calendar(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_cat_type       ON catalyst_calendar(catalyst_type)",
+            "CREATE INDEX IF NOT EXISTS idx_cat_importance ON catalyst_calendar(importance)",
+        ],
+    ),
 ]
 
 

@@ -3162,3 +3162,143 @@ def _weekly_history_payload() -> dict:
     from weekly_review import get_review_history
     history = get_review_history(limit=52)
     return {"count": len(history), "history": history}
+
+
+# ── A27: Catalyst Calendar endpoints ──────────────────────────────────────────
+
+TTL_CATALYSTS        = 60   # seconds
+TTL_CATALYST_SUMMARY = 120  # heavier to compute
+
+
+@api_bp.route("/catalysts", methods=["GET"])
+def catalysts_list():
+    """
+    Return upcoming/recent catalysts.
+
+    Query params:
+      days       — look-ahead window in days (default 30, max 365)
+      ticker     — filter by ticker (optional)
+      importance — LOW | MEDIUM | HIGH (optional)
+    """
+    days_raw       = request.args.get("days", "30")
+    ticker_filter  = request.args.get("ticker", "").strip().upper() or None
+    importance_flt = request.args.get("importance", "").strip().upper() or None
+    try:
+        days = max(1, min(365, int(days_raw)))
+    except (TypeError, ValueError):
+        days = 30
+    cache_key = f"catalysts:{days}:{ticker_filter}:{importance_flt}"
+    try:
+        def _build() -> dict:
+            from catalyst_calendar import get_upcoming
+            items = get_upcoming(days=days, ticker=ticker_filter, importance=importance_flt)
+            return {"count": len(items), "days": days, "catalysts": items}
+        payload, cached = _cached(cache_key, TTL_CATALYSTS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /catalysts error:\n%s", traceback.format_exc())
+        return _err("failed to fetch catalysts")
+
+
+@api_bp.route("/catalysts/summary", methods=["GET"])
+def catalysts_summary():
+    """Return full catalyst risk summary."""
+    try:
+        payload, cached = _cached(
+            "catalysts_summary",
+            TTL_CATALYST_SUMMARY,
+            lambda: _build_catalyst_summary(),
+        )
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /catalysts/summary error:\n%s", traceback.format_exc())
+        return _err("failed to fetch catalyst summary")
+
+
+def _build_catalyst_summary() -> dict:
+    from catalyst_calendar import get_catalyst_summary
+    return get_catalyst_summary()
+
+
+@api_bp.route("/catalysts/<catalyst_id>", methods=["GET"])
+def catalyst_get(catalyst_id: str):
+    """Return a single catalyst by catalyst_id."""
+    try:
+        from catalyst_calendar import get_catalyst
+        item = get_catalyst(catalyst_id)
+        if item is None:
+            return _err(f"catalyst {catalyst_id!r} not found", code=404)
+        return _ok(item)
+    except Exception:
+        log.error("GET /catalysts/%s error:\n%s", catalyst_id, traceback.format_exc())
+        return _err("failed to fetch catalyst")
+
+
+@api_bp.route("/catalysts/upsert", methods=["POST"])
+def catalyst_upsert():
+    """
+    Create or update a catalyst entry.  Requires Bearer auth.
+
+    Body (JSON):
+      ticker, title, description, catalyst_type, date,
+      confidence, importance, source,
+      linked_entity_type (opt), linked_entity_id (opt)
+    """
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    body = request.get_json(silent=True) or {}
+    try:
+        from catalyst_calendar import upsert_catalyst
+        result = upsert_catalyst(
+            ticker             = body.get("ticker"),
+            title              = body.get("title", ""),
+            description        = body.get("description", ""),
+            catalyst_type      = body.get("catalyst_type", "OTHER"),
+            date               = body.get("date", ""),
+            confidence         = body.get("confidence", "MEDIUM"),
+            importance         = body.get("importance", "MEDIUM"),
+            source             = body.get("source", "manual"),
+            linked_entity_type = body.get("linked_entity_type"),
+            linked_entity_id   = body.get("linked_entity_id"),
+        )
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /catalysts/upsert error:\n%s", traceback.format_exc())
+        return _err("failed to upsert catalyst")
+
+
+@api_bp.route("/catalysts/<catalyst_id>/complete", methods=["POST"])
+def catalyst_complete(catalyst_id: str):
+    """Mark a catalyst as COMPLETED.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from catalyst_calendar import mark_completed
+        result = mark_completed(catalyst_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /catalysts/%s/complete error:\n%s", catalyst_id, traceback.format_exc())
+        return _err("failed to mark catalyst complete")
+
+
+@api_bp.route("/catalysts/<catalyst_id>/archive", methods=["POST"])
+def catalyst_archive(catalyst_id: str):
+    """Archive a catalyst.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from catalyst_calendar import archive_catalyst
+        result = archive_catalyst(catalyst_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /catalysts/%s/archive error:\n%s", catalyst_id, traceback.format_exc())
+        return _err("failed to archive catalyst")
