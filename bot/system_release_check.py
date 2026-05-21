@@ -69,6 +69,8 @@ REQUIRED_ROUTES = [
     "/api/v1/system/release-check",
     "/api/v1/system/routes",
     "/api/v1/system/flags",
+    "/api/v1/backups",
+    "/api/v1/backups/create",
 ]
 
 # Banned words that must never appear in brief output
@@ -370,11 +372,35 @@ def _check_alpha_shadow_log_accessible() -> dict:
         return _warn("alpha_shadow_log", f"Cannot read alpha_shadow_log: {exc}")
 
 
+def _check_backup_age() -> dict:
+    """Warn if no backup exists or if the latest backup is older than 48 hours."""
+    try:
+        from backup_manager import latest_backup_age_hours
+        age = latest_backup_age_hours()
+        if age is None:
+            return _warn(
+                "backup_age",
+                "No backups found in the backup directory",
+                "Run POST /api/v1/backups/create to create an initial backup",
+            )
+        threshold_hours = 48.0
+        if age > threshold_hours:
+            return _warn(
+                "backup_age",
+                f"Latest backup is {age:.1f} hours old (threshold {threshold_hours:.0f} h)",
+                "Run POST /api/v1/backups/create or enable BACKUP_SCHEDULE_ENABLED",
+            )
+        return _pass("backup_age", f"Latest backup is {age:.1f} hours old (within threshold)")
+    except Exception as exc:
+        return _warn("backup_age", f"Could not check backup age: {exc}")
+
+
 def run_data_health_checks() -> list:
     return [
         _check_no_negative_quantities(),
         _check_no_duplicate_active_manual_holdings(),
         _check_alpha_shadow_log_accessible(),
+        _check_backup_age(),
     ]
 
 

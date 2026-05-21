@@ -3783,3 +3783,151 @@ def system_flags():
     except Exception:
         log.error("GET /system/flags error:\n%s", traceback.format_exc())
         return _err("flag summary failed")
+
+
+# ── Backup / Export / Disaster Recovery (Phase A29) ──────────────────────────
+
+TTL_BACKUPS = 30
+
+
+@api_bp.route("/backups", methods=["GET"])
+def backups_list():
+    """
+    List backup manifest entries, most recent first.
+
+    Query params:
+      limit  (int, 1–100, default 20)
+    """
+    try:
+        limit = min(max(int(request.args.get("limit", 20)), 1), 100)
+    except (ValueError, TypeError):
+        limit = 20
+
+    def _build():
+        from backup_manager import list_backups
+        return {"backups": list_backups(limit=limit), "limit": limit}
+
+    try:
+        payload, cached = _cached(f"backups:list:{limit}", TTL_BACKUPS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /backups error:\n%s", traceback.format_exc())
+        return _err("failed to list backups")
+
+
+@api_bp.route("/backups/<backup_id>", methods=["GET"])
+def backup_get(backup_id: str):
+    """Return the manifest entry for a single backup."""
+    try:
+        from backup_manager import get_backup
+        entry = get_backup(backup_id)
+        if entry is None:
+            return _err(f"Backup {backup_id!r} not found", code=404)
+        return _ok(entry)
+    except Exception:
+        log.error("GET /backups/%s error:\n%s", backup_id, traceback.format_exc())
+        return _err("failed to get backup")
+
+
+@api_bp.route("/backups/create", methods=["POST"])
+def backup_create():
+    """
+    Create a new backup.  Auth required.
+
+    JSON body (optional):
+      backup_type  — FULL | PORTFOLIO_ONLY | ALPHA_ONLY | RESEARCH_ONLY |
+                     NOTIFICATIONS_ONLY | SYSTEM_CONFIG_ONLY  (default: FULL)
+      notes        — free-text annotation
+    """
+    if not _check_alpha_auth():
+        return _err("Unauthorized", code=401)
+
+    body = request.get_json(silent=True) or {}
+    backup_type = body.get("backup_type", "FULL")
+    notes = body.get("notes", None)
+
+    try:
+        from backup_manager import create_backup, BACKUP_TYPES
+        if backup_type not in BACKUP_TYPES:
+            return _err(
+                f"Invalid backup_type. Must be one of: {list(BACKUP_TYPES)}", code=400
+            )
+        entry = create_backup(backup_type=backup_type, notes=notes)
+        cache_clear()
+        return _ok(entry)
+    except Exception:
+        log.error("POST /backups/create error:\n%s", traceback.format_exc())
+        return _err("backup creation failed")
+
+
+@api_bp.route("/backups/<backup_id>/verify", methods=["POST"])
+def backup_verify(backup_id: str):
+    """
+    Verify a backup's checksum and structure.  Auth required.
+
+    Returns a per-check breakdown and an updated manifest entry.
+    """
+    if not _check_alpha_auth():
+        return _err("Unauthorized", code=401)
+
+    try:
+        from backup_manager import verify_backup
+        result = verify_backup(backup_id)
+        if not result.get("ok") and "not found" in result.get("error", ""):
+            return _err(result["error"], code=404)
+        return _ok(result)
+    except Exception:
+        log.error("POST /backups/%s/verify error:\n%s", backup_id, traceback.format_exc())
+        return _err("backup verification failed")
+
+
+@api_bp.route("/backups/<backup_id>/download-info", methods=["GET"])
+def backup_download_info(backup_id: str):
+    """
+    Return metadata about a backup file (path, size, checksum).
+
+    Does NOT stream the file — the file lives on a Railway volume.
+    This endpoint is for operators who need to know where to find the file.
+    """
+    try:
+        from backup_manager import get_backup
+        entry = get_backup(backup_id)
+        if entry is None:
+            return _err(f"Backup {backup_id!r} not found", code=404)
+        info = {
+            "backup_id":       entry.get("backup_id"),
+            "backup_type":     entry.get("backup_type"),
+            "created_at":      entry.get("created_at"),
+            "status":          entry.get("status"),
+            "size_bytes":      entry.get("size_bytes"),
+            "checksum_sha256": entry.get("checksum_sha256"),
+            "file_path":       entry.get("file_path"),
+            "row_count":       entry.get("row_count"),
+            "table_count":     entry.get("table_count"),
+        }
+        return _ok(info)
+    except Exception:
+        log.error("GET /backups/%s/download-info error:\n%s", backup_id, traceback.format_exc())
+        return _err("failed to get backup download info")
+
+
+@api_bp.route("/backups/<backup_id>/restore-preview", methods=["POST"])
+def backup_restore_preview(backup_id: str):
+    """
+    Show what a restore would change — read-only, no writes.  Auth required.
+
+    Returns per-table row counts (backup vs live) and a change summary.
+    Includes a prominent warning that no data has been written.
+    """
+    if not _check_alpha_auth():
+        return _err("Unauthorized", code=401)
+
+    try:
+        from backup_manager import restore_preview
+        result = restore_preview(backup_id)
+        if not result.get("ok") and "not found" in result.get("error", ""):
+            return _err(result["error"], code=404)
+        return _ok(result)
+    except Exception:
+        log.error("POST /backups/%s/restore-preview error:\n%s", backup_id, traceback.format_exc())
+        return _err("restore preview failed")
