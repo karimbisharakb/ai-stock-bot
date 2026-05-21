@@ -3716,3 +3716,70 @@ def notifications_digest():
     except Exception:
         log.error("GET /notifications/digest?mode=%s error:\n%s", mode, traceback.format_exc())
         return _err("failed to build digest")
+
+
+# ── System Release Check (Phase A28) ──────────────────────────────────────────
+
+TTL_RELEASE_CHECK = 120
+TTL_ROUTES        = 300
+TTL_FLAGS         = 30
+
+
+@api_bp.route("/system/release-check", methods=["GET"])
+def system_release_check():
+    """
+    Run a full system health and safety check.
+
+    Query params:
+      mode=full (default) | compact (skips brief generation, faster)
+
+    Returns overall_status (HEALTHY/WATCH/DEGRADED/CRITICAL), check counts,
+    warnings, failures, recommended fixes, and an environment summary
+    (no secrets).
+    """
+    mode = request.args.get("mode", "full").lower()
+    if mode not in ("full", "compact"):
+        mode = "full"
+
+    cache_key = f"system:release_check:{mode}"
+
+    def _build():
+        from system_release_check import run_release_check
+        return run_release_check(mode=mode)
+
+    try:
+        payload, cached = _cached(cache_key, TTL_RELEASE_CHECK, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /system/release-check error:\n%s", traceback.format_exc())
+        return _err("release check failed")
+
+
+@api_bp.route("/system/routes", methods=["GET"])
+def system_routes():
+    """Return a structured list of all registered API routes."""
+    def _build():
+        from system_release_check import get_route_list
+        return get_route_list()
+
+    try:
+        payload, cached = _cached("system:routes", TTL_ROUTES, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /system/routes error:\n%s", traceback.format_exc())
+        return _err("route list failed")
+
+
+@api_bp.route("/system/flags", methods=["GET"])
+def system_flags():
+    """Return all feature flags with their current runtime values."""
+    def _build():
+        from system_release_check import get_flag_summary
+        return get_flag_summary()
+
+    try:
+        payload, cached = _cached("system:flags", TTL_FLAGS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /system/flags error:\n%s", traceback.format_exc())
+        return _err("flag summary failed")
