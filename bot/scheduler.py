@@ -412,6 +412,26 @@ def _run_weekly_review():
         log.warning("weekly review job failed (non-fatal)", exc_info=True)
 
 
+def _run_notification_center():
+    """
+    Generate in-app notifications (9:00 AM and 4:35 PM ET weekdays).
+    Guarded by NOTIFICATION_CENTER_ENABLED env var (default True).
+    """
+    try:
+        from notification_center import notification_center_enabled, generate_notifications
+        if not notification_center_enabled():
+            log.info("notification_center: NOTIFICATION_CENTER_ENABLED=false — skipping")
+            return
+        result = generate_notifications()
+        log.info(
+            "notification_center: generation done — %d upserted, %d errors",
+            result.get("generated", 0),
+            result.get("errors", 0),
+        )
+    except Exception:
+        log.warning("notification_center job failed (non-fatal)", exc_info=True)
+
+
 def start_scheduler() -> Optional[BackgroundScheduler]:
     if not _try_claim_lease():
         print("⏭️  Scheduler not started — lease held by another worker on this host")
@@ -556,6 +576,21 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # Notification center generation — 9:00 AM and 4:35 PM ET, Mon–Fri
+    # Guarded by NOTIFICATION_CENTER_ENABLED env var (default True).
+    scheduler.add_job(
+        _run_notification_center,
+        CronTrigger(hour=9, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="notification_center_morning",
+        replace_existing=True,
+    )
+    scheduler.add_job(
+        _run_notification_center,
+        CronTrigger(hour=16, minute=35, day_of_week="mon-fri", timezone=EASTERN),
+        id="notification_center_eod",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
@@ -564,6 +599,7 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri | "
         "regime refresh 8:00/12:00/15:30 ET Mon-Fri | "
         "EOD brief 4:15 PM Mon-Fri [EOD_BRIEF_ENABLED] | "
-        "weekly review Fridays 4:30 PM [WEEKLY_REVIEW_ENABLED])"
+        "weekly review Fridays 4:30 PM [WEEKLY_REVIEW_ENABLED] | "
+        "notification center 9:00 AM + 4:35 PM Mon-Fri [NOTIFICATION_CENTER_ENABLED])"
     )
     return scheduler

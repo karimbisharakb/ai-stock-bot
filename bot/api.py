@@ -3378,3 +3378,192 @@ def catalyst_archive(catalyst_id: str):
     except Exception:
         log.error("POST /catalysts/%s/archive error:\n%s", catalyst_id, traceback.format_exc())
         return _err("failed to archive catalyst")
+
+
+# ── Notification Center (Phase N4) ────────────────────────────────────────────
+
+TTL_NOTIFICATIONS        = 30   # seconds — inbox should feel near-real-time
+TTL_NOTIFICATION_SUMMARY = 60
+
+
+@api_bp.route("/notifications", methods=["GET"])
+def notifications_list():
+    """
+    List notifications with optional filters.
+
+    Query params: status, category, severity, limit (max 200), offset
+    """
+    status_filter   = request.args.get("status")
+    category_filter = request.args.get("category")
+    severity_filter = request.args.get("severity")
+    try:
+        limit  = int(request.args.get("limit", 50))
+        offset = int(request.args.get("offset", 0))
+    except ValueError:
+        return _err("limit and offset must be integers", code=400)
+
+    cache_key = f"notifications:list:{status_filter}:{category_filter}:{severity_filter}:{limit}:{offset}"
+
+    def _build():
+        from notification_center import get_notifications
+        return get_notifications(
+            status   = status_filter,
+            category = category_filter,
+            severity = severity_filter,
+            limit    = limit,
+            offset   = offset,
+        )
+
+    try:
+        payload, cached = _cached(cache_key, TTL_NOTIFICATIONS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /notifications error:\n%s", traceback.format_exc())
+        return _err("failed to fetch notifications")
+
+
+@api_bp.route("/notifications/summary", methods=["GET"])
+def notifications_summary():
+    """Aggregated inbox state — unread count, severity breakdown, top notifications."""
+    def _build():
+        from notification_center import get_summary
+        return get_summary()
+
+    try:
+        payload, cached = _cached("notifications:summary", TTL_NOTIFICATION_SUMMARY, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /notifications/summary error:\n%s", traceback.format_exc())
+        return _err("failed to fetch notification summary")
+
+
+@api_bp.route("/notifications/<notification_id>", methods=["GET"])
+def notification_get(notification_id: str):
+    """Return a single notification by notification_id."""
+    try:
+        from notification_center import get_notification
+        item = get_notification(notification_id)
+        if item is None:
+            return _err(f"notification {notification_id!r} not found", code=404)
+        return _ok(item)
+    except Exception:
+        log.error("GET /notifications/%s error:\n%s", notification_id, traceback.format_exc())
+        return _err("failed to fetch notification")
+
+
+@api_bp.route("/notifications/generate", methods=["POST"])
+def notifications_generate():
+    """
+    Trigger a full notification generation cycle.  Requires Bearer auth.
+
+    Runs all 15 source generators, upserts results into the inbox.
+    Safe to call multiple times — all IDs are deterministic (SHA256[:16]).
+    """
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import generate_notifications
+        result = generate_notifications()
+        cache_clear()
+        return _ok(result)
+    except Exception:
+        log.error("POST /notifications/generate error:\n%s", traceback.format_exc())
+        return _err("failed to generate notifications")
+
+
+@api_bp.route("/notifications/<notification_id>/read", methods=["POST"])
+def notification_mark_read(notification_id: str):
+    """Mark a notification as READ.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import mark_read
+        result = mark_read(notification_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /notifications/%s/read error:\n%s", notification_id, traceback.format_exc())
+        return _err("failed to mark notification read")
+
+
+@api_bp.route("/notifications/<notification_id>/unread", methods=["POST"])
+def notification_mark_unread(notification_id: str):
+    """Mark a notification as UNREAD.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import mark_unread
+        result = mark_unread(notification_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /notifications/%s/unread error:\n%s", notification_id, traceback.format_exc())
+        return _err("failed to mark notification unread")
+
+
+@api_bp.route("/notifications/<notification_id>/dismiss", methods=["POST"])
+def notification_dismiss(notification_id: str):
+    """Dismiss a notification.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import dismiss
+        result = dismiss(notification_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /notifications/%s/dismiss error:\n%s", notification_id, traceback.format_exc())
+        return _err("failed to dismiss notification")
+
+
+@api_bp.route("/notifications/<notification_id>/archive", methods=["POST"])
+def notification_archive(notification_id: str):
+    """Archive a notification.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import archive
+        result = archive(notification_id)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /notifications/%s/archive error:\n%s", notification_id, traceback.format_exc())
+        return _err("failed to archive notification")
+
+
+@api_bp.route("/notifications/mark-all-read", methods=["POST"])
+def notifications_mark_all_read():
+    """Mark all UNREAD notifications as READ.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import mark_all_read
+        count = mark_all_read()
+        cache_clear()
+        return _ok({"marked_read": count})
+    except Exception:
+        log.error("POST /notifications/mark-all-read error:\n%s", traceback.format_exc())
+        return _err("failed to mark all notifications read")
+
+
+@api_bp.route("/notifications/archive-read", methods=["POST"])
+def notifications_archive_read():
+    """Archive all READ notifications.  Requires Bearer auth."""
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    try:
+        from notification_center import archive_read
+        count = archive_read()
+        cache_clear()
+        return _ok({"archived": count})
+    except Exception:
+        log.error("POST /notifications/archive-read error:\n%s", traceback.format_exc())
+        return _err("failed to archive read notifications")

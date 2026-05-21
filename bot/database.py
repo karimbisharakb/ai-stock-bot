@@ -1182,6 +1182,33 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_cat_importance ON catalyst_calendar(importance)",
         ],
     ),
+    Migration(
+        version=27,
+        description="Phase N4: add notification_center table for in-app inbox",
+        sql=[
+            """CREATE TABLE IF NOT EXISTS notification_center (
+                id               INTEGER PRIMARY KEY AUTOINCREMENT,
+                notification_id  TEXT    NOT NULL UNIQUE,
+                category         TEXT    NOT NULL DEFAULT 'SYSTEM',
+                severity         TEXT    NOT NULL DEFAULT 'INFO',
+                title            TEXT    NOT NULL,
+                body             TEXT    NOT NULL DEFAULT '',
+                entity_type      TEXT,
+                entity_id        TEXT,
+                source           TEXT    NOT NULL DEFAULT 'system',
+                status           TEXT    NOT NULL DEFAULT 'UNREAD',
+                action_url       TEXT,
+                metadata_json    TEXT    NOT NULL DEFAULT '{}',
+                created_at       TEXT    NOT NULL,
+                updated_at       TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_nc_status   ON notification_center(status)",
+            "CREATE INDEX IF NOT EXISTS idx_nc_category ON notification_center(category)",
+            "CREATE INDEX IF NOT EXISTS idx_nc_severity ON notification_center(severity)",
+            "CREATE INDEX IF NOT EXISTS idx_nc_created  ON notification_center(created_at)",
+            "CREATE INDEX IF NOT EXISTS idx_nc_entity   ON notification_center(entity_type, entity_id)",
+        ],
+    ),
 ]
 
 
