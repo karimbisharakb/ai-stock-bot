@@ -1,13 +1,16 @@
 """
-Feature flags for the unified notification gateway rollout (Phase N1).
+Feature flags for the unified notification gateway rollout (Phase N1/N3).
 
 All flags read from environment variables at call time (not import time),
 so tests can override them via monkeypatching or os.environ.
 
-Safe-rollout defaults:
-  LEGACY_NOTIFICATIONS_ENABLED   = true   (preserve current behavior)
-  UNIFIED_NOTIFICATIONS_ENABLED  = false  (gateway inactive)
+Safe-rollout defaults (N3 cutover):
+  LEGACY_NOTIFICATIONS_ENABLED   = false  (legacy PRE-EXPLOSION path disabled)
+  UNIFIED_NOTIFICATIONS_ENABLED  = false  (gateway inactive — no automatic sends)
   SHADOW_COMPARE_NOTIFICATIONS   = false  (no comparison logging)
+
+Set LEGACY_NOTIFICATIONS_ENABLED=true in Railway only to restore the old
+score-threshold Predator / scanner send path (emergency rollback only).
 """
 import os
 
@@ -22,8 +25,12 @@ def _env_bool(name: str, default: bool) -> bool:
 
 
 def legacy_notifications_enabled() -> bool:
-    """Legacy score-threshold routing is active (scanner/predator send directly)."""
-    return _env_bool("LEGACY_NOTIFICATIONS_ENABLED", True)
+    """Legacy score-threshold routing (scanner/predator send PRE-EXPLOSION style).
+
+    Default is False after N3 cutover — legacy path disabled in production.
+    Set LEGACY_NOTIFICATIONS_ENABLED=true only for emergency rollback.
+    """
+    return _env_bool("LEGACY_NOTIFICATIONS_ENABLED", False)
 
 
 def unified_notifications_enabled() -> bool:

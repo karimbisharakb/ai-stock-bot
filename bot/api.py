@@ -493,6 +493,82 @@ def fmt_alpha_row(row: dict) -> dict:
     }
 
 
+# ── N3: Notification mode debug endpoint ──────────────────────────────────────
+
+
+@api_bp.route("/notifications/debug", methods=["GET"])
+def notifications_debug():
+    """
+    Notification routing diagnostic — never cached.
+
+    Returns:
+      legacy_notifications_enabled   bool  — LEGACY_NOTIFICATIONS_ENABLED flag
+      unified_notifications_enabled  bool  — UNIFIED_NOTIFICATIONS_ENABLED flag
+      alpha_notifications_enabled    bool  — ALPHA_ALERTS_ENABLED flag
+      alpha_dry_run_only             bool  — shadow active but alerts off
+      active_predator_send_path      str   — "legacy" | "none"
+      active_alpha_send_path         str   — "delivery" | "dry_run" | "none"
+      last_predator_notification_type str|null — tier of most recent predator alert
+      last_legacy_block_reason       str|null — why last legacy send was blocked
+    """
+    try:
+        from feature_flags import (
+            legacy_notifications_enabled as _legacy,
+            unified_notifications_enabled as _unified,
+            alpha_shadow_enabled as _alpha_shadow,
+            alpha_alerts_enabled as _alpha_alerts,
+        )
+        legacy  = _legacy()
+        unified = _unified()
+        alpha_s = _alpha_shadow()
+        alpha_a = _alpha_alerts()
+
+        if alpha_s and alpha_a:
+            active_alpha = "delivery"
+        elif alpha_s:
+            active_alpha = "dry_run"
+        else:
+            active_alpha = "none"
+
+        active_predator = "legacy" if legacy else "none"
+
+        if legacy:
+            block_reason = None
+        else:
+            block_reason = "LEGACY_NOTIFICATIONS_ENABLED=false (N3 default)"
+
+        last_tier = None
+        try:
+            from database import get_connection
+            conn = get_connection()
+            try:
+                row = conn.execute(
+                    "SELECT tier FROM predator_alerts ORDER BY id DESC LIMIT 1"
+                ).fetchone()
+                if row:
+                    last_tier = row["tier"] if hasattr(row, "keys") else row[0]
+            except Exception:
+                pass
+            finally:
+                conn.close()
+        except Exception:
+            pass
+
+        return _ok({
+            "legacy_notifications_enabled":  legacy,
+            "unified_notifications_enabled": unified,
+            "alpha_notifications_enabled":   alpha_a,
+            "alpha_dry_run_only":            alpha_s and not alpha_a,
+            "active_predator_send_path":     active_predator,
+            "active_alpha_send_path":        active_alpha,
+            "last_predator_notification_type": last_tier,
+            "last_legacy_block_reason":      block_reason,
+        })
+    except Exception:
+        log.error("GET /notifications/debug error:\n%s", traceback.format_exc())
+        return _err("failed to fetch notification debug info")
+
+
 # ── Alpha endpoints ───────────────────────────────────────────────────────────
 
 @api_bp.route("/alpha/debug", methods=["GET"])

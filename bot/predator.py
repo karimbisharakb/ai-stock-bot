@@ -28,7 +28,7 @@ from database import get_connection
 from market_data import get_ticker_data, ma200_recent_cross
 from market_regime import get_market_regime, apply_regime_penalty
 from outcome_tracker import insert_pending_outcome
-from feature_flags import alpha_shadow_enabled
+from feature_flags import alpha_shadow_enabled, legacy_notifications_enabled
 import portfolio
 
 log = logging.getLogger(__name__)
@@ -1029,28 +1029,35 @@ def run_predator():
 
             if score >= ALERT_THRESHOLD:
                 if tier in (TIER_ALERT, TIER_CONVICTION):
-                    stop = round(price * 0.91, 2)
-                    msg  = _format_alert(ticker, score, price, signals, stop, position_size, tier)
-                    if send_sms(msg):
-                        alert_time = datetime.now().isoformat()
-                        _record_alert(
-                            ticker, score, signals, price, stop, position_size,
-                            confidence_pct=confidence,
-                            adjusted_score=adjusted_score,
-                            raw_score=result["raw_score"],
-                            tier=tier,
+                    if not legacy_notifications_enabled():
+                        log.info(
+                            "Predator: legacy disabled — suppressing %s alert for %s "
+                            "(score %d, set LEGACY_NOTIFICATIONS_ENABLED=true to restore)",
+                            tier, ticker, score,
                         )
-                        if tier == TIER_CONVICTION:
-                            insert_pending_outcome(
-                                ticker=ticker,
-                                alert_time=alert_time,
-                                entry_price=price,
+                    else:
+                        stop = round(price * 0.91, 2)
+                        msg  = _format_alert(ticker, score, price, signals, stop, position_size, tier)
+                        if send_sms(msg):
+                            alert_time = datetime.now().isoformat()
+                            _record_alert(
+                                ticker, score, signals, price, stop, position_size,
                                 confidence_pct=confidence,
-                                regime=regime.state,
+                                adjusted_score=adjusted_score,
+                                raw_score=result["raw_score"],
                                 tier=tier,
-                                signals=signals,
                             )
-                        log.info("Predator %s alert sent for %s (score %d)", tier, ticker, score)
+                            if tier == TIER_CONVICTION:
+                                insert_pending_outcome(
+                                    ticker=ticker,
+                                    alert_time=alert_time,
+                                    entry_price=price,
+                                    confidence_pct=confidence,
+                                    regime=regime.state,
+                                    tier=tier,
+                                    signals=signals,
+                                )
+                            log.info("Predator %s alert sent for %s (score %d)", tier, ticker, score)
                 else:
                     log.info("Predator WATCH (no alert): %s score=%d conf=%.1f%%",
                              ticker, score, confidence)

@@ -21,6 +21,11 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from database import get_connection
 from alerts import send_sms
 from market_data import get_ticker_data
+from feature_flags import (
+    legacy_notifications_enabled,
+    unified_notifications_enabled,
+    shadow_compare_enabled,
+)
 
 log = logging.getLogger(__name__)
 
@@ -413,11 +418,12 @@ def _scan_news_catalysts() -> list[tuple[str, str]]:
 
 
 # ──────────────────────────────────────────────
-# Alert formatter
+# Alert dispatch
 # ──────────────────────────────────────────────
 
 def _send_alert(ticker: str, score: int, price: float, discovery: str, score_reason: str):
-    prefix  = "🔍 HIDDEN GEM ALERT" if "StockTwits" not in discovery else "📈 OPPORTUNITY"
+    """Legacy alert sender — active when LEGACY_NOTIFICATIONS_ENABLED=true."""
+    prefix = "🔍 HIDDEN GEM ALERT" if "StockTwits" not in discovery else "📈 OPPORTUNITY"
     msg = (
         f"{prefix}: ${ticker} — Score {score}/10\n"
         f"Found via: {discovery}\n"
@@ -427,6 +433,92 @@ def _send_alert(ticker: str, score: int, price: float, discovery: str, score_rea
     if send_sms(msg):
         _record_alert(ticker, score, f"{discovery} | {score_reason}")
         log.info("Alert sent for %s (score %d via %s)", ticker, score, discovery)
+
+
+def _build_scanner_candidate(
+    ticker: str,
+    score: int,
+    price: float,
+    discovery: str,
+    score_reason: str,
+):
+    """Construct a canonical AlertCandidate from scanner scoring output.
+
+    Scanner has no per-signal quality system, so tier and confidence are
+    derived synthetically from the raw score:
+      score 9–10 → CONVICTION, score 7–8 → ALERT, score <7 → WATCH
+      confidence = score × 10  (7→70 %, 10→100 %)
+    """
+    from alert_schema import AlertCandidate
+
+    if score >= 9:
+        tier = "CONVICTION"
+    elif score >= ALERT_THRESHOLD:
+        tier = "ALERT"
+    else:
+        tier = "WATCH"
+
+    confidence    = min(score * 10.0, 100.0)
+    adjusted      = round(score * confidence / 100.0, 2)
+    active_sigs   = [s.strip() for s in score_reason.split(",") if s.strip()]
+
+    return AlertCandidate(
+        source="scanner",
+        ticker=ticker,
+        raw_score=float(score),
+        adjusted_score=adjusted,
+        confidence_pct=confidence,
+        tier=tier,
+        regime=None,
+        active_signals=active_sigs,
+        suppressed_signals=[],
+        urgency=None,
+        entry_price=price,
+        stop_price=None,
+        position_size_cad=None,
+        risk_posture=None,
+        metadata={"discovery": discovery, "score_reason": score_reason},
+    )
+
+
+def _dispatch_scanner_alert(
+    ticker: str,
+    score: int,
+    price: float,
+    discovery: str,
+    score_reason: str,
+):
+    """Feature-flag-aware dispatch point for scanner alerts.
+
+    legacy=True, shadow=False → legacy path only (existing behavior)
+    shadow=True               → legacy path + shadow gateway comparison
+    unified=True, legacy=False → gateway-only path (full migration)
+    """
+    legacy  = legacy_notifications_enabled()
+    unified = unified_notifications_enabled()
+    shadow  = shadow_compare_enabled()
+
+    legacy_sent = False
+    if legacy:
+        _send_alert(ticker, score, price, discovery, score_reason)
+        legacy_sent = True
+
+    if shadow or unified:
+        candidate = _build_scanner_candidate(ticker, score, price, discovery, score_reason)
+        try:
+            from alert_gateway import AlertGateway
+            from notification_policy import NotificationPolicy
+
+            if shadow:
+                policy  = NotificationPolicy.shadow_mode_policy()
+                gateway = AlertGateway(policy, send_fn=send_sms)
+                gateway.compare_shadow(candidate, legacy_would_send=legacy_sent)
+            elif unified:
+                policy  = NotificationPolicy.alert_and_above()
+                gateway = AlertGateway(policy, send_fn=send_sms)
+                gateway.submit(candidate)
+        except Exception:
+            log.exception("Scanner: gateway dispatch failed for %s — alert suppressed", ticker)
 
 
 # ──────────────────────────────────────────────
@@ -480,4 +572,4 @@ def run_scanner():
         log.info("Scanner: %s score=%d source=%r reason=%s", ticker, score, discovery, score_reason)
 
         if score >= ALERT_THRESHOLD:
-            _send_alert(ticker, score, price, discovery, score_reason)
+            _dispatch_scanner_alert(ticker, score, price, discovery, score_reason)
