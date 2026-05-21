@@ -1138,6 +1138,22 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_rwf_notes_item ON research_workflow_notes(item_id)",
         ],
     ),
+    Migration(
+        version=25,
+        description="Phase A26: add weekly_review_sends table for duplicate-send suppression",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS weekly_review_sends (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                week_start  TEXT    NOT NULL UNIQUE,
+                sent_at     TEXT    NOT NULL,
+                grade       TEXT,
+                mode        TEXT
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_wrs_week_start ON weekly_review_sends(week_start)",
+        ],
+    ),
 ]
 
 

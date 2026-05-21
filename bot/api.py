@@ -67,7 +67,9 @@ TTL_PREDATOR   =  60
 TTL_RISK       =  30
 TTL_OPERATIONS = 120
 TTL_PAPER      =  60
-TTL_RESEARCH   = 300
+TTL_RESEARCH        = 300
+TTL_WEEKLY_REVIEW   = 300   # weekly review is expensive — cache 5 min
+TTL_WEEKLY_HISTORY  =  60
 
 # ── Valid research report type identifiers ────────────────────────────────────
 
@@ -3099,3 +3101,64 @@ def workflow_note(item_id: str):
     except Exception:
         log.error("POST /research/workflow/%s/note error:\n%s", item_id, traceback.format_exc())
         return _err("failed to append workflow note")
+
+
+# ── A26: Weekly Review endpoints ──────────────────────────────────────────────
+
+
+@api_bp.route("/review/weekly", methods=["GET"])
+def weekly_review():
+    """
+    Generate (or return cached) weekly accountability review.
+
+    Query params:
+      week_start  — YYYY-MM-DD date in the target week (defaults to current week)
+      mode        — compact | detailed | debug  (default: detailed)
+    """
+    week_start_param = request.args.get("week_start", "")
+    mode_param       = request.args.get("mode", "detailed")
+    cache_key        = f"weekly_review:{week_start_param}:{mode_param}"
+    try:
+        payload, cached = _cached(
+            cache_key,
+            TTL_WEEKLY_REVIEW,
+            lambda: _generate_weekly_review_payload(week_start_param, mode_param),
+        )
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /review/weekly error:\n%s", traceback.format_exc())
+        return _err("failed to generate weekly review")
+
+
+def _generate_weekly_review_payload(week_start_param: str, mode_param: str) -> dict:
+    """Internal factory for the weekly review cache entry."""
+    from weekly_review import generate_weekly_review
+    ws   = week_start_param if week_start_param else None
+    mode = mode_param if mode_param in ("compact", "detailed", "debug") else "detailed"
+    result = generate_weekly_review(mode=mode, week_start_str=ws)
+    # compact returns a string; wrap it so the envelope is always a dict
+    if isinstance(result, str):
+        return {"mode": "compact", "text": result}
+    return result
+
+
+@api_bp.route("/review/weekly/history", methods=["GET"])
+def weekly_review_history():
+    """Return the history of weekly review sends (newest first)."""
+    cache_key = "weekly_review_history"
+    try:
+        payload, cached = _cached(
+            cache_key,
+            TTL_WEEKLY_HISTORY,
+            lambda: _weekly_history_payload(),
+        )
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /review/weekly/history error:\n%s", traceback.format_exc())
+        return _err("failed to fetch weekly review history")
+
+
+def _weekly_history_payload() -> dict:
+    from weekly_review import get_review_history
+    history = get_review_history(limit=52)
+    return {"count": len(history), "history": history}

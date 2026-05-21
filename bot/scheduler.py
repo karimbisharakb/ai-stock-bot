@@ -381,6 +381,37 @@ def _run_alpha_daily_tasks():
         log.warning("Alpha daily report failed (non-fatal)", exc_info=True)
 
 
+def _run_weekly_review():
+    """
+    Friday 4:30 PM ET: send compact weekly review via WhatsApp.
+    Guarded by WEEKLY_REVIEW_ENABLED env var and duplicate-send check.
+    """
+    try:
+        from weekly_review import (
+            weekly_review_enabled, _parse_week_start,
+            _already_sent_this_week, _mark_sent,
+            _compute_review, format_compact_weekly,
+        )
+        if not weekly_review_enabled():
+            log.info("weekly review: WEEKLY_REVIEW_ENABLED is false — skipping send")
+            return
+        week_start = _parse_week_start(None)
+        if _already_sent_this_week(week_start):
+            log.info("weekly review: already sent for week %s — skipping", week_start)
+            return
+        sections, metrics, grade, data, generated_at, ws = _compute_review(None)
+        compact = format_compact_weekly(sections, metrics, grade, ws, generated_at)
+        from alerts import send_sms
+        sent = send_sms(compact)
+        if sent:
+            _mark_sent(ws, grade)
+            log.info("weekly review sent for week %s (grade %s)", ws, grade)
+        else:
+            log.warning("weekly review: send_sms returned False for week %s", ws)
+    except Exception:
+        log.warning("weekly review job failed (non-fatal)", exc_info=True)
+
+
 def start_scheduler() -> Optional[BackgroundScheduler]:
     if not _try_claim_lease():
         print("⏭️  Scheduler not started — lease held by another worker on this host")
@@ -516,6 +547,15 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # Weekly accountability review — Friday 4:30 PM ET (after market close)
+    # Guarded by WEEKLY_REVIEW_ENABLED env var; skips send when false.
+    scheduler.add_job(
+        _run_weekly_review,
+        CronTrigger(hour=16, minute=30, day_of_week="fri", timezone=EASTERN),
+        id="weekly_review",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
@@ -523,6 +563,7 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         "watchlist check every 15 min | weekly summary Sundays 9 AM | "
         "alpha universe scan every 4 h Mon-Fri | alpha daily tasks 9:30 AM Mon-Fri | "
         "regime refresh 8:00/12:00/15:30 ET Mon-Fri | "
-        "EOD brief 4:15 PM Mon-Fri [EOD_BRIEF_ENABLED])"
+        "EOD brief 4:15 PM Mon-Fri [EOD_BRIEF_ENABLED] | "
+        "weekly review Fridays 4:30 PM [WEEKLY_REVIEW_ENABLED])"
     )
     return scheduler
