@@ -661,11 +661,13 @@ class TestApiNotificationsList(unittest.TestCase):
         data = resp.get_json()
         self.assertTrue(data["ok"])
 
-    def test_data_is_list(self):
+    def test_data_has_notifications_key(self):
+        # N5 updated response to wrap notifications in a dict
         with _patch_db(self.conn_fn):
             resp = self.client.get("/api/v1/notifications")
         data = resp.get_json()
-        self.assertIsInstance(data["data"], list)
+        self.assertIn("notifications", data["data"])
+        self.assertIsInstance(data["data"]["notifications"], list)
 
     def test_bad_limit_returns_400(self):
         resp = self.client.get("/api/v1/notifications?limit=abc")

@@ -3391,28 +3391,45 @@ def notifications_list():
     """
     List notifications with optional filters.
 
-    Query params: status, category, severity, limit (max 200), offset
+    Query params: status, category, severity, limit (max 200), offset,
+                  include_filtered (true/false — diagnostic)
+    Respects notification preferences by default.
     """
-    status_filter   = request.args.get("status")
-    category_filter = request.args.get("category")
-    severity_filter = request.args.get("severity")
+    status_filter    = request.args.get("status")
+    category_filter  = request.args.get("category")
+    severity_filter  = request.args.get("severity")
+    include_filtered = request.args.get("include_filtered", "false").lower() in ("1", "true", "yes")
     try:
         limit  = int(request.args.get("limit", 50))
         offset = int(request.args.get("offset", 0))
     except ValueError:
         return _err("limit and offset must be integers", code=400)
 
-    cache_key = f"notifications:list:{status_filter}:{category_filter}:{severity_filter}:{limit}:{offset}"
+    cache_key = (
+        f"notifications:list:{status_filter}:{category_filter}:{severity_filter}"
+        f":{limit}:{offset}:{include_filtered}"
+    )
 
     def _build():
         from notification_center import get_notifications
-        return get_notifications(
+        from notification_preferences import get_preferences, get_category_overrides, apply_notification_preferences
+        raw = get_notifications(
             status   = status_filter,
             category = category_filter,
             severity = severity_filter,
-            limit    = limit,
+            limit    = min(limit * 4, 200),  # over-fetch so filtering doesn't starve the page
             offset   = offset,
         )
+        prefs = get_preferences()
+        overrides = get_category_overrides()
+        result = apply_notification_preferences(raw, prefs, overrides, include_filtered=include_filtered)
+        visible = result["visible"][:limit]
+        return {
+            "notifications":    visible,
+            "suppressed_count": result["suppressed_count"],
+            "filtered":         result["filtered"],
+            "quiet_hours_active": result["quiet_hours_active"],
+        }
 
     try:
         payload, cached = _cached(cache_key, TTL_NOTIFICATIONS, _build)
@@ -3424,10 +3441,25 @@ def notifications_list():
 
 @api_bp.route("/notifications/summary", methods=["GET"])
 def notifications_summary():
-    """Aggregated inbox state — unread count, severity breakdown, top notifications."""
+    """
+    Aggregated inbox state with preference-aware counts.
+
+    Returns N4 summary keys plus:
+      visible_unread_count, filtered_count,
+      suppressed_by_preferences_count, quiet_hours_active
+    """
     def _build():
-        from notification_center import get_summary
-        return get_summary()
+        from notification_center import get_summary, get_notifications
+        from notification_preferences import (
+            get_preferences, get_category_overrides, get_preference_summary_extras,
+        )
+        base = get_summary()
+        all_notifs = get_notifications(limit=200, offset=0)
+        prefs     = get_preferences()
+        overrides = get_category_overrides()
+        extras    = get_preference_summary_extras(all_notifs, prefs, overrides)
+        base.update(extras)
+        return base
 
     try:
         payload, cached = _cached("notifications:summary", TTL_NOTIFICATION_SUMMARY, _build)
@@ -3567,3 +3599,120 @@ def notifications_archive_read():
     except Exception:
         log.error("POST /notifications/archive-read error:\n%s", traceback.format_exc())
         return _err("failed to archive read notifications")
+
+
+# ── Notification Preferences (Phase N5) ───────────────────────────────────────
+
+TTL_PREFS   = 30
+TTL_DIGEST  = 60
+
+
+@api_bp.route("/notifications/preferences", methods=["GET"])
+def notifications_preferences_get():
+    """Return the current notification preferences."""
+    def _build():
+        from notification_preferences import get_preferences
+        return get_preferences()
+
+    try:
+        payload, cached = _cached("notifications:prefs", TTL_PREFS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /notifications/preferences error:\n%s", traceback.format_exc())
+        return _err("failed to fetch preferences")
+
+
+@api_bp.route("/notifications/preferences", methods=["POST"])
+def notifications_preferences_update():
+    """
+    Update notification preferences.  Requires Bearer auth.
+
+    Accepts any subset of preference fields; unknown keys are ignored.
+    """
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    body = request.get_json(silent=True) or {}
+    try:
+        from notification_preferences import update_preferences
+        result = update_preferences(body)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /notifications/preferences error:\n%s", traceback.format_exc())
+        return _err("failed to update preferences")
+
+
+@api_bp.route("/notifications/preferences/categories", methods=["GET"])
+def notifications_preferences_categories_list():
+    """Return all per-category preference overrides."""
+    def _build():
+        from notification_preferences import get_category_overrides
+        return get_category_overrides()
+
+    try:
+        payload, cached = _cached("notifications:prefs:cats", TTL_PREFS, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /notifications/preferences/categories error:\n%s", traceback.format_exc())
+        return _err("failed to fetch category overrides")
+
+
+@api_bp.route("/notifications/preferences/categories/<category>", methods=["POST"])
+def notifications_preferences_category_upsert(category: str):
+    """
+    Create or update a per-category override.  Requires Bearer auth.
+
+    Body fields: enabled, minimum_severity, digest_only, quiet_hours_override
+    """
+    if not _check_alpha_auth():
+        return jsonify({"ok": False, "error": {"code": 401, "message": "unauthorized"}}), 401
+    body = request.get_json(silent=True) or {}
+    try:
+        from notification_preferences import upsert_category_override
+        result = upsert_category_override(category, body)
+        cache_clear()
+        return _ok(result)
+    except ValueError as exc:
+        return _err(str(exc), code=400)
+    except Exception:
+        log.error("POST /notifications/preferences/categories/%s error:\n%s",
+                  category, traceback.format_exc())
+        return _err("failed to update category override")
+
+
+@api_bp.route("/notifications/digest", methods=["GET"])
+def notifications_digest():
+    """
+    Build and return a notification digest.
+
+    Query param: mode = daily | eod | weekly  (default: daily)
+    """
+    mode = request.args.get("mode", "daily").lower()
+    if mode not in ("daily", "eod", "weekly"):
+        return _err("mode must be daily, eod, or weekly", code=400)
+
+    cache_key = f"notifications:digest:{mode}"
+
+    def _build():
+        from notification_center import get_notifications
+        from notification_preferences import (
+            get_preferences, get_category_overrides,
+            build_daily_digest, build_eod_digest, build_weekly_digest,
+        )
+        notifs    = get_notifications(limit=200, offset=0)
+        prefs     = get_preferences()
+        overrides = get_category_overrides()
+        if mode == "eod":
+            return build_eod_digest(notifs, prefs, overrides)
+        if mode == "weekly":
+            return build_weekly_digest(notifs, prefs, overrides)
+        return build_daily_digest(notifs, prefs, overrides)
+
+    try:
+        payload, cached = _cached(cache_key, TTL_DIGEST, _build)
+        return _ok(payload, cached=cached)
+    except Exception:
+        log.error("GET /notifications/digest?mode=%s error:\n%s", mode, traceback.format_exc())
+        return _err("failed to build digest")

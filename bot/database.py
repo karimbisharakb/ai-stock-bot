@@ -1209,6 +1209,36 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_nc_entity   ON notification_center(entity_type, entity_id)",
         ],
     ),
+    Migration(
+        version=28,
+        description="Phase N5: add notification preferences and per-category overrides tables",
+        sql=[
+            """CREATE TABLE IF NOT EXISTS notification_preferences (
+                id                          INTEGER PRIMARY KEY CHECK(id = 1),
+                enabled_categories          TEXT    NOT NULL DEFAULT '[]',
+                minimum_severity            TEXT    NOT NULL DEFAULT 'INFO',
+                quiet_hours_enabled         INTEGER NOT NULL DEFAULT 0,
+                quiet_hours_start           TEXT    NOT NULL DEFAULT '22:00',
+                quiet_hours_end             TEXT    NOT NULL DEFAULT '07:00',
+                timezone                    TEXT    NOT NULL DEFAULT 'America/Toronto',
+                digest_mode                 TEXT    NOT NULL DEFAULT 'OFF',
+                max_notifications_per_digest INTEGER NOT NULL DEFAULT 20,
+                include_read_items          INTEGER NOT NULL DEFAULT 0,
+                auto_archive_after_days     INTEGER NOT NULL DEFAULT 7,
+                updated_at                  TEXT    NOT NULL
+            )""",
+            """CREATE TABLE IF NOT EXISTS notification_preferences_categories (
+                id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                category            TEXT    NOT NULL UNIQUE,
+                enabled             INTEGER NOT NULL DEFAULT 1,
+                minimum_severity    TEXT,
+                digest_only         INTEGER NOT NULL DEFAULT 0,
+                quiet_hours_override INTEGER,
+                updated_at          TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_npc_cat ON notification_preferences_categories(category)",
+        ],
+    ),
 ]
 
 
