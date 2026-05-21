@@ -1097,6 +1097,47 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_rwl_notes_type   ON research_watchlist_notes(note_type)",
         ],
     ),
+    Migration(
+        version=24,
+        description="Phase A25: add research_workflow_items and research_workflow_notes tables",
+        sql=[
+            """
+            CREATE TABLE IF NOT EXISTS research_workflow_items (
+                id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+                item_id             TEXT    NOT NULL UNIQUE,
+                ticker              TEXT,
+                source              TEXT    NOT NULL,
+                priority            TEXT    NOT NULL DEFAULT 'MEDIUM',
+                reason              TEXT    NOT NULL DEFAULT '',
+                due_at              TEXT,
+                status              TEXT    NOT NULL DEFAULT 'OPEN',
+                linked_entity_type  TEXT    NOT NULL DEFAULT 'NONE',
+                linked_entity_id    TEXT,
+                urgency_score       REAL    NOT NULL DEFAULT 0.0,
+                opportunity_score   REAL    NOT NULL DEFAULT 0.0,
+                risk_score          REAL    NOT NULL DEFAULT 0.0,
+                stale_score         REAL    NOT NULL DEFAULT 0.0,
+                priority_score      REAL    NOT NULL DEFAULT 0.0,
+                snoozed_until       TEXT,
+                created_at          TEXT    NOT NULL,
+                updated_at          TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_rwf_status   ON research_workflow_items(status)",
+            "CREATE INDEX IF NOT EXISTS idx_rwf_ticker   ON research_workflow_items(ticker)",
+            "CREATE INDEX IF NOT EXISTS idx_rwf_due_at   ON research_workflow_items(due_at)",
+            "CREATE INDEX IF NOT EXISTS idx_rwf_source   ON research_workflow_items(source)",
+            """
+            CREATE TABLE IF NOT EXISTS research_workflow_notes (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                item_id     TEXT    NOT NULL,
+                text        TEXT    NOT NULL,
+                created_at  TEXT    NOT NULL
+            )
+            """,
+            "CREATE INDEX IF NOT EXISTS idx_rwf_notes_item ON research_workflow_notes(item_id)",
+        ],
+    ),
 ]
 
 

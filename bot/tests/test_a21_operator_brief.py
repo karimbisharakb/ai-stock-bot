@@ -185,7 +185,7 @@ class TestConstants:
         assert ob.MODES == ["compact", "detailed", "debug"]
 
     def test_required_sections_count(self):
-        assert len(ob.REQUIRED_SECTIONS) == 14
+        assert len(ob.REQUIRED_SECTIONS) == 15
 
     def test_required_sections_contains_all(self):
         for key in [

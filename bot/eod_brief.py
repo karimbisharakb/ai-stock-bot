@@ -55,6 +55,7 @@ REQUIRED_SECTIONS: List[str] = [
     "planner_updates_today",
     "tomorrow_watchlist",
     "unresolved_actions",
+    "workflow_summary",
 ]
 
 
@@ -326,6 +327,27 @@ def _unresolved_actions_section(
     return unique[:MAX_UNRESOLVED]
 
 
+def _workflow_summary_section(
+    completed_today: list,
+    open_items: list,
+) -> dict:
+    """Workflow summary for EOD brief: completed today + still-open items."""
+    completed = [
+        {"ticker": w.get("ticker"), "reason": w.get("reason"), "source": w.get("source")}
+        for w in completed_today[:3]
+    ]
+    unresolved = [
+        {"ticker": w.get("ticker"), "reason": w.get("reason"), "priority_score": w.get("priority_score")}
+        for w in open_items[:3]
+    ]
+    return {
+        "completed_count": len(completed_today),
+        "completed":       completed,
+        "unresolved_count": len(open_items),
+        "unresolved":      unresolved,
+    }
+
+
 # ── Section assembly ───────────────────────────────────────────────────────────
 
 def build_eod_sections(data: dict) -> dict:
@@ -354,6 +376,10 @@ def build_eod_sections(data: dict) -> dict:
             data.get("pending_checklists", []),
             data.get("due_reviews", {}),
             data.get("unreviewed_dryruns", []),
+        ),
+        "workflow_summary":          _workflow_summary_section(
+            data.get("workflow_completed_today", []),
+            data.get("workflow_open_items", []),
         ),
     }
 
@@ -448,6 +474,15 @@ def format_compact_eod(sections: dict, generated_at: Optional[str] = None) -> st
         lines.append("UNRESOLVED")
         for act in ur[:MAX_UNRESOLVED]:
             lines.append(f"  → {_safe_truncate(act, 70)}")
+        lines.append("")
+
+    # Workflow summary (A25)
+    wf = sections.get("workflow_summary", {})
+    if wf.get("completed_count", 0) > 0 or wf.get("unresolved_count", 0) > 0:
+        lines.append(
+            f"RESEARCH WORKFLOW: {wf.get('completed_count', 0)} done  |  "
+            f"{wf.get('unresolved_count', 0)} open"
+        )
         lines.append("")
 
     lines.append("─" * 25)
@@ -747,6 +782,16 @@ def collect_eod_data() -> dict:
     except Exception:
         log.warning("eod_brief: unreviewed dryruns fetch failed", exc_info=True)
         data["unreviewed_dryruns"] = []
+
+    # Workflow: completed today and still-open items (A25)
+    try:
+        from research_workflow import get_completed_today, get_brief_items
+        data["workflow_completed_today"] = get_completed_today()
+        data["workflow_open_items"]      = get_brief_items(limit=3)
+    except Exception:
+        log.warning("eod_brief: workflow fetch failed", exc_info=True)
+        data["workflow_completed_today"] = []
+        data["workflow_open_items"]      = []
 
     return data
 

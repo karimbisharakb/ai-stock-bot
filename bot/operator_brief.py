@@ -58,6 +58,7 @@ REQUIRED_SECTIONS: List[str] = [
     "planner_summary",
     "cash_tfsa_notes",
     "key_actions",
+    "workflow_items",
 ]
 
 
@@ -358,6 +359,8 @@ def build_sections(data: dict) -> dict:
     ca    = _cash_tfsa_section(data.get("cash", 0.0), data.get("tfsa_room", 0.0))
     acts  = _key_actions_section(reg, rsk, al, cl, th, pl, sc)
 
+    workflow = data.get("workflow_items", [])
+
     return {
         "portfolio_truth":        pt,
         "overnight_changes":      ov,
@@ -373,6 +376,7 @@ def build_sections(data: dict) -> dict:
         "planner_summary":        pl,
         "cash_tfsa_notes":        ca,
         "key_actions":            acts,
+        "workflow_items":         workflow,
     }
 
 
@@ -460,6 +464,15 @@ def format_compact_brief(sections: dict, generated_at: Optional[str] = None) -> 
         lines.append("TODAY")
         for act in actions[:5]:
             lines.append(f"  → {_safe_truncate(act, 80)}")
+        lines.append("")
+
+    workflow = sections.get("workflow_items", [])
+    if workflow:
+        lines.append("RESEARCH QUEUE")
+        for w in workflow[:3]:
+            ticker  = w.get("ticker") or "—"
+            reason  = _safe_truncate(w.get("reason", ""), 60)
+            lines.append(f"  • {ticker}: {reason}")
         lines.append("")
 
     lines.append("─" * 25)
@@ -645,6 +658,14 @@ def collect_brief_data() -> dict:
     except Exception:
         log.warning("operator_brief: planner snapshot fetch failed", exc_info=True)
         data["planner_snapshot"] = None
+
+    # Top research workflow items (A25)
+    try:
+        from research_workflow import get_brief_items
+        data["workflow_items"] = get_brief_items(limit=3)
+    except Exception:
+        log.warning("operator_brief: workflow items fetch failed", exc_info=True)
+        data["workflow_items"] = []
 
     return data
 

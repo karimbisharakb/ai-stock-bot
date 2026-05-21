@@ -2950,3 +2950,152 @@ def watchlist_archive(ticker: str):
     except Exception:
         log.error("POST /research/watchlist/%s/archive error:\n%s", ticker, traceback.format_exc())
         return _err("failed to archive watchlist item")
+
+
+# ── Phase A25: Research Workflow endpoints ─────────────────────────────────────
+
+TTL_WORKFLOW_QUEUE   = 30   # seconds
+TTL_WORKFLOW_SUMMARY = 60
+
+
+@api_bp.route("/research/workflow/queue", methods=["GET"])
+def workflow_queue():
+    """
+    Return the active review queue (OPEN + IN_PROGRESS, sorted by priority score).
+    Query params:
+      ?include_snoozed=1  — include SNOOZED items
+      ?include_done=1     — include DONE items
+    No auth required.  Short TTL cache.
+    """
+    include_snoozed = request.args.get("include_snoozed", "0") in ("1", "true", "yes")
+    include_done    = request.args.get("include_done", "0") in ("1", "true", "yes")
+    cache_key       = f"workflow_queue:{include_snoozed}:{include_done}"
+
+    def _build():
+        from research_workflow import generate_queue, get_queue
+        generate_queue()
+        items = get_queue(include_snoozed=include_snoozed, include_done=include_done)
+        return {"items": items, "count": len(items)}
+
+    try:
+        payload, cached = _cached(cache_key, TTL_WORKFLOW_QUEUE, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/workflow/queue error:\n%s", traceback.format_exc())
+        return _err("failed to generate workflow queue")
+
+
+@api_bp.route("/research/workflow/summary", methods=["GET"])
+def workflow_summary():
+    """
+    Return the daily workflow summary.
+    No auth required.  Cached TTL_WORKFLOW_SUMMARY seconds.
+    """
+    def _build():
+        from research_workflow import get_summary
+        return get_summary()
+
+    try:
+        payload, cached = _cached("workflow_summary", TTL_WORKFLOW_SUMMARY, _build)
+        return _ok(payload, cached)
+    except Exception:
+        log.error("GET /research/workflow/summary error:\n%s", traceback.format_exc())
+        return _err("failed to generate workflow summary")
+
+
+@api_bp.route("/research/workflow/<item_id>/start", methods=["POST"])
+def workflow_start(item_id: str):
+    """Mark a workflow item as IN_PROGRESS. Auth-protected."""
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from research_workflow import mark_in_progress
+        item = mark_in_progress(item_id)
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/workflow/%s/start error:\n%s", item_id, traceback.format_exc())
+        return _err("failed to start workflow item")
+
+
+@api_bp.route("/research/workflow/<item_id>/done", methods=["POST"])
+def workflow_done(item_id: str):
+    """Mark a workflow item as DONE. Auth-protected."""
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from research_workflow import mark_done
+        item = mark_done(item_id)
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/workflow/%s/done error:\n%s", item_id, traceback.format_exc())
+        return _err("failed to mark workflow item done")
+
+
+@api_bp.route("/research/workflow/<item_id>/snooze", methods=["POST"])
+def workflow_snooze(item_id: str):
+    """
+    Snooze a workflow item.
+    Body JSON: {hours: int}  (default 24).
+    Auth-protected.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    body  = request.get_json(silent=True) or {}
+    hours = int(body.get("hours", 24))
+    try:
+        from research_workflow import snooze_item
+        item = snooze_item(item_id, hours=hours)
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/workflow/%s/snooze error:\n%s", item_id, traceback.format_exc())
+        return _err("failed to snooze workflow item")
+
+
+@api_bp.route("/research/workflow/<item_id>/archive", methods=["POST"])
+def workflow_archive(item_id: str):
+    """Archive a workflow item (no deletes). Auth-protected."""
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    try:
+        from research_workflow import archive_item
+        item = archive_item(item_id)
+        cache_clear()
+        return _ok(item)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/workflow/%s/archive error:\n%s", item_id, traceback.format_exc())
+        return _err("failed to archive workflow item")
+
+
+@api_bp.route("/research/workflow/<item_id>/note", methods=["POST"])
+def workflow_note(item_id: str):
+    """
+    Append a note to a workflow item (append-only).
+    Body JSON: {text: str}
+    Auth-protected.
+    """
+    if not _check_alpha_auth():
+        return _err("unauthorized", code=401)
+    body = request.get_json(silent=True) or {}
+    text = (body.get("text") or "").strip()
+    if not text:
+        return _err("note text is required", code=400)
+    try:
+        from research_workflow import append_note
+        note = append_note(item_id, text)
+        return _ok(note)
+    except ValueError as exc:
+        return _err(str(exc), code=404)
+    except Exception:
+        log.error("POST /research/workflow/%s/note error:\n%s", item_id, traceback.format_exc())
+        return _err("failed to append workflow note")
