@@ -52,11 +52,18 @@ def _make_db():
     return path, _conn
 
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
     database.DB_PATH = tmp.name
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
 
     def _conn():
         c = sqlite3.connect(tmp.name)
@@ -645,7 +652,7 @@ class TestSparseDataSafe(unittest.TestCase):
 
 class TestApiNotificationsList(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -683,7 +690,7 @@ class TestApiNotificationsList(unittest.TestCase):
 
 class TestApiNotificationsSummary(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -710,7 +717,7 @@ class TestApiNotificationsSummary(unittest.TestCase):
 
 class TestApiNotificationGet(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -738,7 +745,7 @@ class TestApiNotificationGet(unittest.TestCase):
 
 class TestApiNotificationsGenerate(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -784,7 +791,7 @@ class TestApiNotificationsGenerate(unittest.TestCase):
 
 class TestApiNotificationRead(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -828,7 +835,7 @@ class TestApiNotificationRead(unittest.TestCase):
 
 class TestApiNotificationUnread(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -864,7 +871,7 @@ class TestApiNotificationUnread(unittest.TestCase):
 
 class TestApiNotificationDismiss(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -904,7 +911,7 @@ class TestApiNotificationDismiss(unittest.TestCase):
 
 class TestApiNotificationArchive(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -936,7 +943,7 @@ class TestApiNotificationArchive(unittest.TestCase):
 
 class TestApiMarkAllRead(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -974,7 +981,7 @@ class TestApiMarkAllRead(unittest.TestCase):
 
 class TestApiArchiveRead(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()

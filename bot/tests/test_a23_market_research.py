@@ -32,18 +32,27 @@ import market_research as mr
 
 # ── Isolated Flask app fixture ────────────────────────────────────────────────
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
+    _orig_get_conn = database.get_connection
     database.DB_PATH = tmp.name
     import sqlite3
-    real_get = database.get_connection
 
     def _conn():
         return sqlite3.connect(tmp.name)
 
     database.get_connection = _conn
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+        database.get_connection = _orig_get_conn
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
+
     with patch.dict(os.environ, {"API_SECRET": ""}):
         import api as api_mod
         importlib.reload(api_mod)
@@ -604,7 +613,7 @@ class TestNoTradingCalls(unittest.TestCase):
 class TestApiMarketPulse(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -650,7 +659,7 @@ class TestApiMarketPulse(unittest.TestCase):
 class TestApiStockAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -709,7 +718,7 @@ class TestApiStockAnalysis(unittest.TestCase):
 class TestApiEtfAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -754,7 +763,7 @@ class TestApiEtfAnalysis(unittest.TestCase):
 class TestApiMacroData(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -778,7 +787,7 @@ class TestApiMacroData(unittest.TestCase):
 class TestApiMarketNews(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -797,7 +806,7 @@ class TestApiMarketNews(unittest.TestCase):
 class TestApiTickerNews(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -821,7 +830,7 @@ class TestApiTickerNews(unittest.TestCase):
 class TestApiAiStockAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -850,7 +859,7 @@ class TestApiAiStockAnalysis(unittest.TestCase):
 class TestApiAiEtfAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -865,7 +874,7 @@ class TestApiAiEtfAnalysis(unittest.TestCase):
 class TestApiAiMacroAnalysis(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 
@@ -890,7 +899,7 @@ class TestApiAiMacroAnalysis(unittest.TestCase):
 class TestApiSectorPerformance(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path = _make_app()
+        self.app, self.api_mod, self.db_path = _make_app(self)
         self.client = self.app.test_client()
         self.api_mod.cache_clear()
 

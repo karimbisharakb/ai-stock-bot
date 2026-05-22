@@ -58,15 +58,13 @@ def _patch_db(conn_fn):
 
 # ── Isolated Flask app fixture ─────────────────────────────────────────────────
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
+    _orig_get_conn = database.get_connection
     database.DB_PATH = tmp.name
-
-    real_conn = sqlite3.connect(tmp.name)
-    real_conn.row_factory = sqlite3.Row
-    real_conn.close()
 
     def _conn():
         c = sqlite3.connect(tmp.name)
@@ -74,6 +72,13 @@ def _make_app():
         return c
 
     database.get_connection = _conn
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+        database.get_connection = _orig_get_conn
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
 
     with patch.dict(os.environ, {"API_SECRET": "test-secret"}):
         import api as api_mod
@@ -810,7 +815,7 @@ BAD_AUTH    = {"Authorization": "Bearer wrong"}
 class TestApiWatchlistRead(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
         self.client = self.app.test_client()
@@ -869,7 +874,7 @@ class TestApiWatchlistRead(unittest.TestCase):
 class TestApiWatchlistWrites(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
         self.client = self.app.test_client()
@@ -955,7 +960,7 @@ class TestApiWatchlistWrites(unittest.TestCase):
 class TestApiWatchlistQueryParams(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
             rw.upsert_item("AAPL", status="WATCHING")

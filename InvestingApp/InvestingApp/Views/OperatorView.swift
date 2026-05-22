@@ -989,7 +989,7 @@ struct OperatorView: View {
                             .foregroundColor(.textSecondary)
                     }
                     .tint(.accent)
-                    .onChange(of: vm.showHistoricalProposals) { _ in
+                    .onChange(of: vm.showHistoricalProposals) {
                         Task { await vm.refreshProposals() }
                     }
 

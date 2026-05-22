@@ -4,6 +4,7 @@ import UserNotifications
 @main
 struct InvestingAppApp: App {
     @StateObject private var notificationManager = NotificationManager.shared
+    @StateObject private var workspaceStore = WorkspaceStore()
 
     init() {
         UITabBar.appearance().backgroundColor = UIColor(red: 0.05, green: 0.08, blue: 0.12, alpha: 1.0)
@@ -14,6 +15,7 @@ struct InvestingAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(workspaceStore)
                 .preferredColorScheme(.dark)
                 .onAppear {
                     notificationManager.requestAuthorization()

@@ -60,10 +60,12 @@ def _patch_db(conn_fn):
 
 # ── Isolated Flask app fixture ─────────────────────────────────────────────────
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
+    _orig_get_conn = database.get_connection
     database.DB_PATH = tmp.name
 
     def _conn():
@@ -72,6 +74,14 @@ def _make_app():
         return c
 
     database.get_connection = _conn
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+        database.get_connection = _orig_get_conn
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
+
     with patch.dict(os.environ, {"API_SECRET": "test-secret"}):
         import api as api_mod
         importlib.reload(api_mod)
@@ -779,7 +789,7 @@ class TestNoTradingCalls(unittest.TestCase):
 class TestApiWorkflowQueue(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
         self.client = self.app.test_client()
@@ -812,7 +822,7 @@ class TestApiWorkflowQueue(unittest.TestCase):
 class TestApiWorkflowSummary(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
         self.client = self.app.test_client()
@@ -840,7 +850,7 @@ class TestApiWorkflowSummary(unittest.TestCase):
 class TestApiWorkflowWrites(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         with _patch_db(self.conn_fn):
             rw._ensure_tables()
         self.client = self.app.test_client()

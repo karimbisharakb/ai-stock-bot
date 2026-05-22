@@ -47,7 +47,13 @@ def db_path(tmp_path):
 @pytest.fixture()
 def wired_db(db_path):
     """Fully initialised + migrated DB in a temp directory."""
-    with patch("database.DB_PATH", db_path):
+    def _conn():
+        c = sqlite3.connect(db_path, timeout=10)
+        c.row_factory = sqlite3.Row
+        return c
+
+    with patch("database.DB_PATH", db_path), \
+         patch("database.get_connection", _conn):
         init_db()
         run_migrations()
     yield db_path

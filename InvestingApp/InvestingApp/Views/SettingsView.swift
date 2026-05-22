@@ -378,7 +378,7 @@ struct SettingsView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
-        .onChange(of: sensitivity) { _ in
+        .onChange(of: sensitivity) {
             HapticManager.selection()
             UserDefaults.standard.set(sensitivity.rawValue, forKey: "signal_sensitivity")
         }
@@ -393,7 +393,7 @@ struct SettingsView: View {
             Spacer()
             Toggle("", isOn: $notificationsEnabled)
                 .tint(Color.accent)
-                .onChange(of: notificationsEnabled) { enabled in
+                .onChange(of: notificationsEnabled) { _, enabled in
                     HapticManager.impact(.light)
                     if enabled {
                         NotificationManager.shared.requestAuthorization()

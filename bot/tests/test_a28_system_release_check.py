@@ -51,11 +51,18 @@ def _patch_db(conn_fn):
     return patch.object(database, "get_connection", conn_fn)
 
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
     database.DB_PATH = tmp.name
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
 
     def _conn():
         c = sqlite3.connect(tmp.name)
@@ -715,7 +722,7 @@ class TestGetFlagSummary(unittest.TestCase):
 
 class TestApiReleaseCheck(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -759,7 +766,7 @@ class TestApiReleaseCheck(unittest.TestCase):
 
 class TestApiSystemRoutes(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()
@@ -781,7 +788,7 @@ class TestApiSystemRoutes(unittest.TestCase):
 
 class TestApiSystemFlags(unittest.TestCase):
     def setUp(self):
-        self.app, self.conn_fn, self.db = _make_app()
+        self.app, self.conn_fn, self.db = _make_app(self)
         self.client = self.app.test_client()
         import api as api_mod
         api_mod.cache_clear()

@@ -13,7 +13,6 @@ from twilio.twiml.messaging_response import MessagingResponse
 import portfolio
 import alerts
 from analyst import analyze_stock
-from database import get_connection
 
 logging.basicConfig(
     level=logging.INFO,

@@ -56,10 +56,12 @@ def _patch_db(conn_fn):
 
 # ── Flask test app fixture ─────────────────────────────────────────────────────
 
-def _make_app():
+def _make_app(test_instance=None):
     import database
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp.close()
+    _orig_db_path = database.DB_PATH
+    _orig_get_conn = database.get_connection
     database.DB_PATH = tmp.name
 
     def _conn():
@@ -68,6 +70,14 @@ def _make_app():
         return c
 
     database.get_connection = _conn
+
+    def _restore():
+        database.DB_PATH = _orig_db_path
+        database.get_connection = _orig_get_conn
+
+    if test_instance is not None:
+        test_instance.addCleanup(_restore)
+
     import api as api_mod
     importlib.reload(api_mod)
     from flask import Flask
@@ -791,7 +801,7 @@ class TestDeterministicOutput(unittest.TestCase):
 class TestApiWeeklyReview(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         self.client = self.app.test_client()
 
     def tearDown(self):
@@ -876,7 +886,7 @@ class TestApiWeeklyReview(unittest.TestCase):
 class TestApiWeeklyHistory(unittest.TestCase):
 
     def setUp(self):
-        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app()
+        self.app, self.api_mod, self.db_path, self.conn_fn = _make_app(self)
         self.client = self.app.test_client()
         # Patch DB so weekly_review uses the test DB
         import database

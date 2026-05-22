@@ -45,7 +45,7 @@ struct ScreenshotImportView: View {
                 }
             }
         }
-        .onChange(of: selectedItem) { item in
+        .onChange(of: selectedItem) { _, item in
             Task {
                 if let data = try? await item?.loadTransferable(type: Data.self),
                    let img = UIImage(data: data) {

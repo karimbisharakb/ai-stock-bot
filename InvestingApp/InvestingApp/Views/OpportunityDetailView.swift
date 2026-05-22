@@ -215,10 +215,26 @@ struct OpportunityDetailView: View {
         defer { confirming = false }
         do {
             let shares = opportunity.suggestedPositionCAD / opportunity.entryPrice
-            _ = try await NetworkManager.shared.confirmTrade(
+            let trade = ParsedTrade(
                 ticker: opportunity.ticker,
                 shares: shares,
                 priceCAD: opportunity.entryPrice,
+                pricePerShareUSD: opportunity.currency == "USD" ? opportunity.entryPrice : nil,
+                pricePerShareCAD: opportunity.currency == "CAD" ? opportunity.entryPrice : nil,
+                currency: opportunity.currency,
+                totalCAD: opportunity.suggestedPositionCAD,
+                exchangeRate: nil,
+                tradeType: "BUY",
+                confidence: opportunity.confidence,
+                notes: opportunity.catalyst
+            )
+
+            try await NetworkManager.shared.confirmTrade(
+                trade: trade,
+                ticker: opportunity.ticker,
+                shares: shares,
+                priceCAD: opportunity.entryPrice,
+                totalCAD: opportunity.suggestedPositionCAD,
                 type: "BUY"
             )
             withAnimation { confirmed = true }

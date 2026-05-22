@@ -31,11 +31,23 @@ struct ContentView: View {
                     }
                     .tag(3)
 
+                WorkspaceView()
+                    .tabItem {
+                        Label("Workspace", systemImage: "rectangle.3.group")
+                    }
+                    .tag(4)
+
+                OperatorView()
+                    .tabItem {
+                        Label("Operator", systemImage: "terminal")
+                    }
+                    .tag(5)
+
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gearshape.fill")
                     }
-                    .tag(4)
+                    .tag(6)
             }
             .accentColor(Color.accent)
 

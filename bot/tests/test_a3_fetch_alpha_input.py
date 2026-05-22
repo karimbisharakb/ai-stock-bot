@@ -154,13 +154,15 @@ class TestInfoUnavailable:
             result = fetch_alpha_input("NVDA")
         assert result is not None
 
-    def test_info_raises_52w_fields_none(self):
+    def test_info_raises_52w_fields_from_history(self):
+        """When info raises, 52w high/low are estimated from history (Phase A3)."""
         tkr = _make_ticker(_make_hist(30), raises_info=True)
         p, m = _patch_mdata()
         with _patch_yf(tkr), p, m:
             result = fetch_alpha_input("NVDA")
-        assert result.price_high_52w is None
-        assert result.price_low_52w  is None
+        # Phase A3: history-based fallback populates these fields from hist High/Low
+        assert result.price_high_52w is not None
+        assert result.price_low_52w  is not None
 
     def test_empty_info_still_returns_input(self):
         tkr = _make_ticker(_make_hist(30), info={})
@@ -296,7 +298,7 @@ CREATE TABLE IF NOT EXISTS alpha_shadow_log (
     scan_time TEXT NOT NULL, alpha_score REAL, alpha_tier TEXT,
     setup_type TEXT, predator_tier TEXT, predator_score REAL,
     tier_match INTEGER NOT NULL DEFAULT 0, filter_reason TEXT,
-    component_scores_json TEXT, explanation TEXT
+    component_scores_json TEXT, explanation TEXT, detail_json TEXT
 )
 """
 
