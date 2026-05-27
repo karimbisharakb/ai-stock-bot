@@ -66,6 +66,9 @@
 		AA00002F000000000000002FA /* AlphaCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00002F000000000000002FB /* AlphaCandidate.swift */; };
 		AA000031000000000000031A /* OperatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000031000000000000031B /* OperatorViewModel.swift */; };
 		AA000032000000000000032A /* OperatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000032000000000000032B /* OperatorView.swift */; };
+		AA000033000000000000033A /* AIResearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000033000000000000033B /* AIResearch.swift */; };
+		AA000034000000000000034A /* ResearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000034000000000000034B /* ResearchViewModel.swift */; };
+		AA000035000000000000035A /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000035000000000000035B /* ResearchView.swift */; };
 		AA0000000000000000A1000AA /* BackupModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000A1000AB /* BackupModels.swift */; };
 		AA00BEEF000000000000002A /* BackupOperatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00BEEF000000000000002B /* BackupOperatorView.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +86,9 @@
 		AA0000000000000000A10008B /* BriefModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefModels.swift; sourceTree = "<group>"; };
 		AA0000000000000000A10009B /* StrategyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyModels.swift; sourceTree = "<group>"; };
 		AA0000000000000000A1000AB /* BackupModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupModels.swift; sourceTree = "<group>"; };
+		AA000033000000000000033B /* AIResearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResearch.swift; sourceTree = "<group>"; };
+		AA000034000000000000034B /* ResearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchViewModel.swift; sourceTree = "<group>"; };
+		AA000035000000000000035B /* ResearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
 		AA00BEEF000000000000002B /* BackupOperatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupOperatorView.swift; sourceTree = "<group>"; };
 		AA000001000000000000001B /* InvestingAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestingAppApp.swift; sourceTree = "<group>"; };
 		AA000002000000000000002B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 				AA0000000000000000A10008B /* BriefModels.swift */,
 				AA0000000000000000A10009B /* StrategyModels.swift */,
 				AA0000000000000000A1000AB /* BackupModels.swift */,
+				AA000033000000000000033B /* AIResearch.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 				AA000028000000000000028B /* WatchlistViewModel.swift */,
 				AA000029000000000000029B /* PaycheckPlannerViewModel.swift */,
 				AA000031000000000000031B /* OperatorViewModel.swift */,
+				AA000034000000000000034B /* ResearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -238,6 +246,7 @@
 				AA000013000000000000013B /* TradeConfirmSheet.swift */,
 				AA00002A000000000000002AB /* WatchlistView.swift */,
 				AA000032000000000000032B /* OperatorView.swift */,
+				AA000035000000000000035B /* ResearchView.swift */,
 				AA00BEEF000000000000010B /* Operator */,
 			);
 			path = Views;
@@ -433,6 +442,9 @@
 				AA00BEEF000000000000001A /* SharedOperatorComponents.swift in Sources */,
 				AA0000000000000000A1000AA /* BackupModels.swift in Sources */,
 				AA00BEEF000000000000002A /* BackupOperatorView.swift in Sources */,
+				AA000033000000000000033A /* AIResearch.swift in Sources */,
+				AA000034000000000000034A /* ResearchViewModel.swift in Sources */,
+				AA000035000000000000035A /* ResearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

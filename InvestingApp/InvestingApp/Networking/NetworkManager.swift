@@ -1067,6 +1067,65 @@ final class NetworkManager {
         if case NetworkError.serverError(let code, _) = error { return code == 408 || code == 429 || code >= 500 }
         return false
     }
+
+    // MARK: - AI Research Suite
+
+    func fetchPersonas() async throws -> PersonasResponse {
+        return try await get(url: APIEndpoints.researchPersonas)
+    }
+
+    func fetchChatHistory(sessionId: String, persona: String, limit: Int) async throws -> ChatHistoryResponse {
+        return try await get(url: APIEndpoints.researchChatHistory(sessionId: sessionId, persona: persona, limit: limit))
+    }
+
+    func researchChat(message: String, persona: String, sessionId: String, ticker: String? = nil) async throws -> ChatResponse {
+        var body: [String: Any] = [
+            "message": message,
+            "persona": persona,
+            "session_id": sessionId,
+        ]
+        if let ticker { body["ticker"] = ticker }
+        return try await postAny(url: APIEndpoints.researchChat, body: body)
+    }
+
+    func compareTickers(tickers: [String], perspective: String = "ALL") async throws -> CompareResult {
+        let body: [String: Any] = ["tickers": tickers, "perspective": perspective]
+        return try await postAny(url: APIEndpoints.researchCompare, body: body)
+    }
+
+    func fetchTrendingSocial() async throws -> SocialTrendingResponse {
+        return try await get(url: APIEndpoints.researchTrendingSocial)
+    }
+
+    func fetchNewsImpact(limit: Int = 20) async throws -> NewsImpactListResponse {
+        return try await get(url: APIEndpoints.researchNewsImpact(limit: limit))
+    }
+
+    func fetchMarketBrief() async throws -> MarketBriefData {
+        return try await get(url: APIEndpoints.researchMarketBrief)
+    }
+
+    func fetchSectors() async throws -> SectorHeatmapResponse {
+        return try await get(url: APIEndpoints.researchSectors)
+    }
+
+    func fetchSavedResearch(limit: Int = 50) async throws -> SavedResearchListResponse {
+        return try await get(url: "\(APIEndpoints.researchSaved)?limit=\(limit)")
+    }
+
+    func saveResearch(title: String, content: String, tickers: [String], persona: String) async throws {
+        struct SaveResp: Decodable { let success: Bool; let id: Int? }
+        let body: [String: Any] = ["title": title, "content": content, "tickers": tickers, "persona": persona]
+        let _: SaveResp = try await postAny(url: APIEndpoints.researchSave, body: body)
+    }
+
+    func deleteSavedResearch(id: Int) async throws {
+        guard let url = URL(string: APIEndpoints.researchSavedDelete(id)) else { throw NetworkError.invalidURL }
+        var req = URLRequest(url: url)
+        req.httpMethod = "DELETE"
+        req.setValue("application/json", forHTTPHeaderField: "Accept")
+        let _: [String: Bool] = try await perform(request: req)
+    }
 }
 
 struct APIEnvelope<T: Decodable>: Decodable {

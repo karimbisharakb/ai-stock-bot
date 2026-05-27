@@ -177,6 +177,23 @@ enum APIEndpoints {
     static func backupDownloadInfo(_ id: String) -> String { "\(base)/api/v1/backups/\(encodedPath(id))/download-info" }
     static func backupRestorePreview(_ id: String) -> String { "\(base)/api/v1/backups/\(encodedPath(id))/restore-preview" }
 
+    // MARK: - AI Research Suite (/api/research)
+
+    static let researchPersonas      = "\(base)/api/research/personas"
+    static let researchChat          = "\(base)/api/research/chat"
+    static func researchChatHistory(sessionId: String, persona: String, limit: Int) -> String {
+        "\(base)/api/research/chat-history?session_id=\(encodedQuery(sessionId))&persona=\(encodedQuery(persona))&limit=\(limit)"
+    }
+    static let researchCompare       = "\(base)/api/research/compare"
+    static let researchTrendingSocial = "\(base)/api/research/trending-social"
+    static func researchNewsImpact(limit: Int) -> String { "\(base)/api/research/news-impact?limit=\(limit)" }
+    static let researchNewsImpactPost = "\(base)/api/research/news-impact"
+    static let researchMarketBrief   = "\(base)/api/research/market-brief"
+    static let researchSectors       = "\(base)/api/research/sectors"
+    static let researchSave          = "\(base)/api/research/save"
+    static let researchSaved         = "\(base)/api/research/saved"
+    static func researchSavedDelete(_ id: Int) -> String { "\(base)/api/research/saved/\(id)" }
+
     private static func encodedPath(_ value: String) -> String {
         value.trimmingCharacters(in: .whitespacesAndNewlines)
             .addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? value

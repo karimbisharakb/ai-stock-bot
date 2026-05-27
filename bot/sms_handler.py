@@ -26,10 +26,12 @@ app = Flask(__name__)
 from ios_api import ios as ios_blueprint
 from ios_api_predator import predator_bp
 from ios_api_planner import planner_bp
+from ios_api_research import research_bp
 from api import api_bp
 app.register_blueprint(ios_blueprint)
 app.register_blueprint(predator_bp)
 app.register_blueprint(planner_bp)
+app.register_blueprint(research_bp)
 app.register_blueprint(api_bp)
 
 MY_WHATSAPP = "whatsapp:+12899718200"

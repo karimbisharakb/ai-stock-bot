@@ -1239,6 +1239,58 @@ MIGRATIONS: list = [
             "CREATE INDEX IF NOT EXISTS idx_npc_cat ON notification_preferences_categories(category)",
         ],
     ),
+    Migration(
+        version=29,
+        description="add research suite tables: chat_history, news_impact_log, saved_research, social_trending_log, market_briefs",
+        sql=[
+            """CREATE TABLE IF NOT EXISTS chat_history (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id  TEXT    NOT NULL DEFAULT 'default',
+                persona     TEXT    NOT NULL DEFAULT 'VALUE',
+                role        TEXT    NOT NULL,
+                content     TEXT    NOT NULL,
+                ticker      TEXT,
+                timestamp   TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_chat_session ON chat_history(session_id, persona, timestamp)",
+            """CREATE TABLE IF NOT EXISTS news_impact_log (
+                id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+                headline             TEXT    NOT NULL,
+                source               TEXT    NOT NULL DEFAULT 'auto',
+                affected_tickers_json TEXT   NOT NULL DEFAULT '[]',
+                impact_analysis      TEXT,
+                timestamp            TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_news_impact_ts ON news_impact_log(timestamp)",
+            """CREATE TABLE IF NOT EXISTS saved_research (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                title       TEXT    NOT NULL,
+                content     TEXT    NOT NULL,
+                tickers_json TEXT   NOT NULL DEFAULT '[]',
+                persona     TEXT    NOT NULL DEFAULT 'VALUE',
+                created_at  TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_saved_research_ts ON saved_research(created_at)",
+            """CREATE TABLE IF NOT EXISTS social_trending_log (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                ticker          TEXT    NOT NULL,
+                mention_count   INTEGER NOT NULL DEFAULT 0,
+                sentiment_score REAL    NOT NULL DEFAULT 0,
+                sentiment_label TEXT    NOT NULL DEFAULT 'neutral',
+                sample_post_url TEXT,
+                subreddit       TEXT,
+                scanned_at      TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_social_trending_ts ON social_trending_log(scanned_at)",
+            """CREATE TABLE IF NOT EXISTS market_briefs (
+                id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                brief_text      TEXT    NOT NULL,
+                key_metrics_json TEXT   NOT NULL DEFAULT '{}',
+                generated_at    TEXT    NOT NULL
+            )""",
+            "CREATE INDEX IF NOT EXISTS idx_market_briefs_ts ON market_briefs(generated_at)",
+        ],
+    ),
 ]
 
 

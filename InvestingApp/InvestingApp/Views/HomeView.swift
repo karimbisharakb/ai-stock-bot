@@ -3,8 +3,10 @@ import SwiftUI
 struct HomeView: View {
     @StateObject private var vm = PortfolioViewModel()
     @StateObject private var healthVM = PortfolioHealthViewModel()
+    @StateObject private var researchVM = ResearchViewModel()
     @State private var showValue = true
     @State private var healthExpanded = false
+    @State private var sectorsExpanded = false
 
     var body: some View {
         NavigationView {
@@ -34,6 +36,8 @@ struct HomeView: View {
                 await vm.refresh()
             }
             await healthVM.load()
+            await researchVM.loadMarketBrief()
+            await researchVM.loadSectors()
         }
         .onReceive(NotificationCenter.default.publisher(for: .tradeConfirmed)) { _ in
             Task { await vm.refresh() }
@@ -138,6 +142,24 @@ struct HomeView: View {
                 }
             }
 
+            // Market Brief card
+            if researchVM.isBriefLoading {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.surface)
+                    .frame(height: 88)
+                    .shimmer(isActive: true)
+                    .padding(.horizontal, 20)
+            } else if let brief = researchVM.marketBrief {
+                marketBriefCard(brief)
+                    .padding(.horizontal, 20)
+            }
+
+            // Sector Heatmap (collapsible)
+            if !researchVM.sectors.isEmpty {
+                sectorHeatmapSection
+                    .padding(.horizontal, 20)
+            }
+
             if let updated = vm.lastUpdated {
                 Text("Updated \(AppDateFormatter.relative(from: ISO8601DateFormatter().string(from: updated)))")
                     .font(.system(size: 11))
@@ -145,6 +167,93 @@ struct HomeView: View {
                     .padding(.bottom, 100)
             } else {
                 Spacer().frame(height: 100)
+            }
+        }
+    }
+
+    // MARK: - Market Brief Card
+
+    func marketBriefCard(_ brief: MarketBriefData) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Label("Market Brief", systemImage: "globe.americas.fill")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.textPrimary)
+                Spacer()
+                Text(brief.fromCache ? "cached" : "live")
+                    .font(.system(size: 10))
+                    .foregroundColor(.textSecondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Color.surfaceSecondary)
+                    .clipShape(Capsule())
+            }
+
+            if !brief.keyMetrics.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(brief.keyMetrics.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                            VStack(spacing: 2) {
+                                Text(key).font(.system(size: 10)).foregroundColor(.textSecondary)
+                                Text(value).font(.system(size: 12, weight: .bold)).foregroundColor(.textPrimary)
+                            }
+                        }
+                    }
+                }
+            }
+
+            Text(brief.briefText)
+                .font(.system(size: 13))
+                .foregroundColor(.textSecondary)
+                .lineLimit(4)
+        }
+        .padding(14)
+        .background(Color.surfacePrimary)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+
+    // MARK: - Sector Heatmap Section
+
+    var sectorHeatmapSection: some View {
+        VStack(spacing: 0) {
+            Button {
+                HapticManager.selection()
+                withAnimation(.spring(response: 0.3)) { sectorsExpanded.toggle() }
+            } label: {
+                HStack {
+                    Label("Sectors", systemImage: "chart.bar.fill")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.textPrimary)
+                    Spacer()
+                    Image(systemName: sectorsExpanded ? "chevron.up" : "chevron.down")
+                        .font(.caption.bold())
+                        .foregroundColor(.textSecondary)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+                .background(Color.surfacePrimary)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+
+            if sectorsExpanded {
+                VStack(spacing: 1) {
+                    ForEach(researchVM.sectors) { sector in
+                        HStack {
+                            Text(sector.sectorName)
+                                .font(.system(size: 13))
+                                .foregroundColor(.textPrimary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(String(format: "%+.2f%%", sector.changePct))
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(sector.changePct >= 0 ? .positive : .negative)
+                        }
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 10)
+                        .background(Color.surfacePrimary)
+                    }
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
         }
     }

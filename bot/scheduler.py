@@ -432,6 +432,181 @@ def _run_notification_center():
         log.warning("notification_center job failed (non-fatal)", exc_info=True)
 
 
+# ─────────────────────────────────────────────────────────────
+# Research suite jobs
+# ─────────────────────────────────────────────────────────────
+
+def _run_social_trending_scan():
+    """Scan Reddit for trending tickers and persist to social_trending_log."""
+    try:
+        from research_engine import scan_social_trending
+        import json
+
+        results = scan_social_trending(20)
+        if not results:
+            log.info("social_trending_scan: no results")
+            return
+
+        now = datetime.now(EASTERN).isoformat()
+        conn = get_connection()
+        for item in results:
+            conn.execute(
+                "INSERT INTO social_trending_log "
+                "(ticker, mention_count, sentiment_score, sentiment_label, "
+                "sample_post_url, subreddit, scanned_at) VALUES (?,?,?,?,?,?,?)",
+                (
+                    item["ticker"], item["mention_count"],
+                    item["sentiment_score"], item["sentiment_label"],
+                    item.get("sample_url", ""), item.get("subreddit", ""),
+                    now,
+                ),
+            )
+        conn.commit()
+        conn.close()
+        log.info("social_trending_scan: saved %d trending tickers", len(results))
+
+        # Alert if a holding appears in top 5 with high mentions
+        try:
+            import portfolio as port
+            holdings = [h["ticker"] for h in port.get_holdings()]
+            top5 = [r["ticker"] for r in results[:5]]
+            for ticker in top5:
+                if ticker in holdings:
+                    item = next(r for r in results[:5] if r["ticker"] == ticker)
+                    sentiment_word = item["sentiment_label"]
+                    msg = (
+                        f"📱 Social Buzz: {ticker} is trending on Reddit\n"
+                        f"Mentions: {item['mention_count']} | Sentiment: {sentiment_word}\n"
+                        f'"{item.get("sample_title", "")[:80]}"'
+                    )
+                    alerts.send_sms(msg)
+                    alerts.log_alert(ticker, "FYI", msg)
+        except Exception as e:
+            log.warning("social_trending_scan alert error: %s", e)
+
+    except Exception:
+        log.warning("social_trending_scan job failed (non-fatal)", exc_info=True)
+
+
+def _run_news_impact_log():
+    """Fetch top market news and auto-analyze impact on user's holdings."""
+    try:
+        import json
+        import portfolio as port
+        from market_research import get_market_news
+        from research_engine import analyze_news_impact
+
+        holdings_raw = port.get_holdings()
+        if not holdings_raw:
+            return
+        tickers = [h["ticker"] for h in holdings_raw]
+
+        news = get_market_news(max_items=5)
+        items = news.get("items", []) if isinstance(news, dict) else []
+
+        now = datetime.now(EASTERN).isoformat()
+        conn = get_connection()
+
+        for article in items:
+            headline = (article.get("title") or "").strip()
+            if not headline or len(headline) < 10:
+                continue
+
+            # Skip if already analyzed today
+            today = datetime.now(EASTERN).strftime("%Y-%m-%d")
+            exists = conn.execute(
+                "SELECT 1 FROM news_impact_log WHERE headline = ? AND timestamp LIKE ?",
+                (headline, today + "%"),
+            ).fetchone()
+            if exists:
+                continue
+
+            result = analyze_news_impact(headline, tickers)
+            affected = result.get("affected", [])
+
+            conn.execute(
+                "INSERT INTO news_impact_log "
+                "(headline, source, affected_tickers_json, impact_analysis, timestamp) "
+                "VALUES (?,?,?,?,?)",
+                (
+                    headline,
+                    article.get("publisher", "auto"),
+                    json.dumps(affected),
+                    result.get("summary", ""),
+                    now,
+                ),
+            )
+
+            # WhatsApp alert if a user holding is negatively affected with HIGH confidence
+            for aff in affected:
+                if (aff.get("ticker") in tickers
+                        and aff.get("direction") == "NEGATIVE"
+                        and aff.get("confidence") == "HIGH"):
+                    msg = (
+                        f"⚠️ News Impact: {aff['ticker']}\n"
+                        f"📰 {headline[:100]}\n"
+                        f"Impact: {aff.get('reason', '')}"
+                    )
+                    alerts.send_sms(msg)
+                    alerts.log_alert(aff["ticker"], "WARNING", msg)
+                    break
+
+        conn.commit()
+        conn.close()
+        log.info("news_impact_log: processed %d articles", len(items))
+    except Exception:
+        log.warning("news_impact_log job failed (non-fatal)", exc_info=True)
+
+
+def _run_market_brief_job():
+    """Generate and persist daily market brief at 6:30 AM ET."""
+    try:
+        import json
+        from research_engine import generate_market_brief
+
+        result = generate_market_brief()
+        conn = get_connection()
+        conn.execute(
+            "INSERT INTO market_briefs (brief_text, key_metrics_json, generated_at) VALUES (?,?,?)",
+            (result["brief_text"], json.dumps(result.get("key_metrics", {})),
+             result["generated_at"]),
+        )
+        conn.commit()
+        conn.close()
+        log.info("market_brief_job: brief generated and saved (%d chars)", len(result["brief_text"]))
+    except Exception:
+        log.warning("market_brief_job failed (non-fatal)", exc_info=True)
+
+
+def _run_eod_research_summary():
+    """5 PM ET weekdays: send a brief end-of-day research summary via WhatsApp."""
+    try:
+        from research_engine import get_sector_heatmap, _safe_change_pct
+
+        sectors = get_sector_heatmap()
+        spy_chg = _safe_change_pct("^GSPC")
+        qqq_chg = _safe_change_pct("^IXIC")
+        tsx_chg = _safe_change_pct("^GSPTSE")
+
+        top_sector = sectors[0] if sectors else {}
+        bot_sector = sectors[-1] if sectors else {}
+
+        msg = (
+            f"📊 EOD Market Snapshot\n\n"
+            f"S&P 500: {spy_chg:+.2f}% | NASDAQ: {qqq_chg:+.2f}% | TSX: {tsx_chg:+.2f}%\n\n"
+            f"🏆 Top sector: {top_sector.get('sector_name', '—')} "
+            f"{top_sector.get('change_pct', 0):+.2f}%\n"
+            f"📉 Worst sector: {bot_sector.get('sector_name', '—')} "
+            f"{bot_sector.get('change_pct', 0):+.2f}%"
+        )
+
+        alerts.send_sms(msg)
+        alerts.log_alert(None, "FYI", msg)
+        log.info("eod_research_summary: sent")
+    except Exception:
+        log.warning("eod_research_summary job failed (non-fatal)", exc_info=True)
+
+
 def start_scheduler() -> Optional[BackgroundScheduler]:
     if not _try_claim_lease():
         print("⏭️  Scheduler not started — lease held by another worker on this host")
@@ -591,6 +766,40 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         replace_existing=True,
     )
 
+    # ── Research suite jobs ──────────────────────────────────────────────────
+
+    # Social trending scan — every 30 min, Mon–Fri 7:00–20:00
+    scheduler.add_job(
+        _run_social_trending_scan,
+        CronTrigger(minute="*/30", hour="7-20", day_of_week="mon-fri", timezone=EASTERN),
+        id="social_trending_scan",
+        replace_existing=True,
+    )
+
+    # News impact log — every 60 min on the hour, Mon–Fri 7:00–20:00
+    scheduler.add_job(
+        _run_news_impact_log,
+        CronTrigger(minute="0", hour="7-20", day_of_week="mon-fri", timezone=EASTERN),
+        id="news_impact_log",
+        replace_existing=True,
+    )
+
+    # Market brief — 6:30 AM ET, Mon–Fri
+    scheduler.add_job(
+        _run_market_brief_job,
+        CronTrigger(hour=6, minute=30, day_of_week="mon-fri", timezone=EASTERN),
+        id="market_brief",
+        replace_existing=True,
+    )
+
+    # EOD research summary — 5:00 PM ET, Mon–Fri
+    scheduler.add_job(
+        _run_eod_research_summary,
+        CronTrigger(hour=17, minute=0, day_of_week="mon-fri", timezone=EASTERN),
+        id="eod_research_summary",
+        replace_existing=True,
+    )
+
     scheduler.start()
     print(
         "✅ Scheduler started (morning summary 8:45 ET | sell monitor every 15 min | "
@@ -600,6 +809,10 @@ def start_scheduler() -> Optional[BackgroundScheduler]:
         "regime refresh 8:00/12:00/15:30 ET Mon-Fri | "
         "EOD brief 4:15 PM Mon-Fri [EOD_BRIEF_ENABLED] | "
         "weekly review Fridays 4:30 PM [WEEKLY_REVIEW_ENABLED] | "
-        "notification center 9:00 AM + 4:35 PM Mon-Fri [NOTIFICATION_CENTER_ENABLED])"
+        "notification center 9:00 AM + 4:35 PM Mon-Fri [NOTIFICATION_CENTER_ENABLED] | "
+        "social trending scan every 30 min Mon-Fri 7-20 | "
+        "news impact log every 60 min Mon-Fri 7-20 | "
+        "market brief 6:30 AM Mon-Fri | "
+        "EOD research summary 5:00 PM Mon-Fri)"
     )
     return scheduler

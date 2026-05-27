@@ -13,41 +13,47 @@ struct ContentView: View {
                     }
                     .tag(0)
 
+                ResearchView()
+                    .tabItem {
+                        Label("Research", systemImage: "magnifyingglass.circle.fill")
+                    }
+                    .tag(1)
+
                 OpportunitiesView()
                     .tabItem {
                         Label("Opportunities", systemImage: "star.fill")
                     }
-                    .tag(1)
+                    .tag(2)
 
                 AnalyzeView()
                     .tabItem {
-                        Label("Analyze", systemImage: "magnifyingglass")
+                        Label("Analyze", systemImage: "chart.bar.xaxis")
                     }
-                    .tag(2)
+                    .tag(3)
 
                 FeedView()
                     .tabItem {
                         Label("Feed", systemImage: "waveform")
                     }
-                    .tag(3)
+                    .tag(4)
 
                 WorkspaceView()
                     .tabItem {
                         Label("Workspace", systemImage: "rectangle.3.group")
                     }
-                    .tag(4)
+                    .tag(5)
 
                 OperatorView()
                     .tabItem {
                         Label("Operator", systemImage: "terminal")
                     }
-                    .tag(5)
+                    .tag(6)
 
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gearshape.fill")
                     }
-                    .tag(6)
+                    .tag(7)
             }
             .accentColor(Color.accent)
 
@@ -73,10 +79,10 @@ struct ContentView: View {
             ScreenshotImportView()
         }
         .onReceive(NotificationCenter.default.publisher(for: .openOpportunitiesTab)) { _ in
-            selectedTab = 1
+            selectedTab = 2
         }
         .onReceive(NotificationCenter.default.publisher(for: .analyzeTickerRequested)) { _ in
-            selectedTab = 2
+            selectedTab = 3
         }
     }
 }
