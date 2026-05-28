@@ -3,6 +3,8 @@ import SwiftUI
 extension Color {
     static let background = Color(hex: "#080c12")
     static let surface = Color(hex: "#0d1520")
+    static let surfacePrimary = Color(hex: "#0d1520")
+    static let surfaceSecondary = Color(hex: "#1a2332")
     static let surfaceElevated = Color(hex: "#111d2e")
     static let accent = Color(hex: "#00d4ff")
     static let positive = Color(hex: "#00e676")
