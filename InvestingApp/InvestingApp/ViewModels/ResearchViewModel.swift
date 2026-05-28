@@ -280,18 +280,4 @@ extension PersonaInfo {
     ]
 }
 
-// MARK: - ChatMessage memberwise init (for local creation)
-
-extension ChatMessage {
-    init(dbId: Int?, role: String, content: String, persona: String?,
-         personaName: String?, personaEmoji: String?, ticker: String?, timestamp: String?) {
-        self.dbId = dbId
-        self.role = role
-        self.content = content
-        self.persona = persona
-        self.personaName = personaName
-        self.personaEmoji = personaEmoji
-        self.ticker = ticker
-        self.timestamp = timestamp
-    }
-}
+// ChatMessage uses Swift's auto-synthesized memberwise init — no manual init needed.
