@@ -17,9 +17,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 423.07,
-      "last_price": 423.07,
-      "last_pnl_pct": 11.21,
-      "days_held": 35,
+      "last_price": 420.09,
+      "last_pnl_pct": 10.43,
+      "days_held": 36,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "MSFT trades at a rare discount \u2014 24x forward on 18%+ revenue growth and 39% margins \u2014 with a 36% analyst upside target and exceptional business quality in an AI-driven cloud cycle. The $390\u2013$395 accumulation zone provides a favorable risk/reward entry as Azure re-acceleration remains a high-impact catalyst for violent re-rating.",
       "key_risk": "Trading 12% below the 200-MA with bearish MACD and fading bounce momentum means the stock could consolidate lower toward the $375\u2013$390 range before any meaningful trend recovery.",
       "earnings_play": false,
-      "trail_high": 426.57,
-      "last_price": 426.57,
-      "last_pnl_pct": 3.92,
-      "days_held": 23,
+      "trail_high": 443.98,
+      "last_price": 443.98,
+      "last_pnl_pct": 8.16,
+      "days_held": 24,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 634.5,
-      "last_pnl_pct": 5.29,
-      "days_held": 17,
+      "last_price": 624.21,
+      "last_pnl_pct": 3.58,
+      "days_held": 18,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 274.1,
-      "last_pnl_pct": 7.0,
-      "days_held": 9,
+      "last_price": 271.1,
+      "last_pnl_pct": 5.83,
+      "days_held": 10,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "NVDA trades at a deeply discounted 17x forward P/E against 85% revenue growth and 63% operating margins, with strong structural support above the 50MA and 200MA providing a favorable risk/reward entry during this consolidation phase. Analyst consensus targets $278 with a strong buy rating, and the BULL market regime supports full Kelly sizing into this high-quality compounding setup.",
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
-      "trail_high": 215.91,
-      "last_price": 214.01,
-      "last_pnl_pct": -0.88,
-      "days_held": 6,
+      "trail_high": 216.38,
+      "last_price": 216.38,
+      "last_pnl_pct": 0.22,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     }
@@ -1231,38 +1231,42 @@
     {
       "date": "2026-05-28",
       "value": 1023.32
+    },
+    {
+      "date": "2026-05-29",
+      "value": 1023.73
     }
   ],
   "top_picks": [
+    {
+      "ticker": "TQQQ",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TQQQ is in a strong bull momentum structure with RSI at 66.5 (not yet overbought) and MACD confirming trend, with a clean break above the $85.70 52-week high opening significant upside. Bull market regime justifies full Kelly sizing despite the below-average volume ratio, which warrants a disciplined stop to guard against a momentum shakeout near highs.",
+      "price_target": 102.0,
+      "key_risk": "A hawkish Fed surprise or hot CPI print could trigger a sharp Nasdaq-100 selloff that gets amplified 3x in TQQQ, rapidly turning a strong trend into a catastrophic drawdown."
+    },
     {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a reasonable 26.8x forward P/E with 21.8% revenue growth and near-40% operating margins, offering genuine value for a dominant AI-infrastructure compounder sitting well above key moving averages. The short-term RSI pullback to 43 and softening momentum represent a constructive entry opportunity within a confirmed bull trend, with analyst consensus targeting ~$418.",
+      "reasoning": "GOOG is pulling back to near-oversold RSI (35.5) within a structural bull trend riding well above MA50 and MA200, offering a favorable entry into a best-in-class franchise trading at a growth-adjusted discount with 10.2% upside to analyst target. The consolidation appears technical rather than fundamental, with AI monetization and cloud re-acceleration serving as upcoming catalysts to resume the primary trend.",
       "price_target": 417.74,
-      "key_risk": "A DOJ antitrust structural remedy \u2014 particularly a forced divestiture or default-search prohibition \u2014 represents a binary negative catalyst that could materially reprice the stock regardless of fundamentals."
+      "key_risk": "Accelerating MACD deterioration or a miss on AI/cloud metrics at the next earnings print could extend the pullback meaningfully below the $350 support zone."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is recovering constructively above MA50 with bullish MACD and strong AI/defense growth fundamentals supporting the analyst target of $183.73, while the BULL regime permits full Kelly sizing at this score. The 85% revenue growth and 44% margins justify premium valuation if government contract flow accelerates, offering a compelling risk/reward from current levels.",
-      "price_target": 183.73,
-      "key_risk": "Federal budget uncertainty and DOGE-related defense spending cuts could trigger a retest of $118 support, while the MA200 at $161.93 represents significant overhead resistance that could stall the recovery trade."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR is approaching deeply oversold conditions near the lower third of its 52-week range with RSI at 32.7, offering an asymmetric entry point for a leveraged Bitcoin proxy trading at a 27% discount to its 200-MA. The 150%+ analyst upside target and strong_buy consensus reflect BTC's structural bull case, and a partial position here captures potential mean-reversion while managing downside via the $125 stop near prior support.",
-      "price_target": 220.0,
-      "key_risk": "A Bitcoin breakdown toward $70\u201375K would pressure MSTR to its 52-week low of $104 and potentially trigger forced selling given its 18x debt-to-equity leverage."
+      "reasoning": "AMD's AI accelerator narrative remains intact with 37.8% revenue growth and a credible forward P/E compression to 39x driven by MI300X data center ramp; BULL regime and clear momentum above key MAs justify a position despite the analyst target being below current price. Low relative volume and late-stage acceleration signal the need for a disciplined stop to manage the risk of a sharp reversal at these elevated multiples.",
+      "price_target": 580.0,
+      "key_risk": "Any guidance cut or evidence that MI300X adoption is tracking below hyperscaler forecasts could trigger a violent de-rating from the 39x forward multiple, potentially erasing 20-30% quickly given the 6.0x debt-to-equity and thin 13.4% net margins."
     }
   ],
   "regime": "BULL",
@@ -1278,5 +1282,5 @@
     "underperforming": false
   },
   "pnl": 5.969999999999999,
-  "last_run": "2026-05-28 19:41"
+  "last_run": "2026-05-29 17:05"
 }
