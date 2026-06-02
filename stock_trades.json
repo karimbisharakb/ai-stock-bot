@@ -16,10 +16,10 @@
       "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
-      "trail_high": 440.83,
-      "last_price": 435.63,
-      "last_pnl_pct": 14.52,
-      "days_held": 39,
+      "trail_high": 443.48,
+      "last_price": 443.48,
+      "last_pnl_pct": 16.58,
+      "days_held": 40,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 600.47,
-      "last_pnl_pct": -0.36,
-      "days_held": 21,
+      "last_price": 606.0,
+      "last_pnl_pct": 0.56,
+      "days_held": 22,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 261.26,
-      "last_pnl_pct": 1.99,
-      "days_held": 13,
+      "last_price": 258.24,
+      "last_pnl_pct": 0.81,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 224.36,
-      "last_pnl_pct": 3.91,
-      "days_held": 10,
+      "last_price": 222.74,
+      "last_pnl_pct": 3.16,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
       "earnings_play": false,
       "trail_high": 461.82,
-      "last_price": 460.52,
-      "last_pnl_pct": -0.28,
-      "days_held": 0,
+      "last_price": 444.0,
+      "last_pnl_pct": -3.86,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -1315,18 +1315,22 @@
     {
       "date": "2026-06-01",
       "value": 1026.4
+    },
+    {
+      "date": "2026-06-02",
+      "value": 1025.66
     }
   ],
   "top_picks": [
     {
       "ticker": "GOOG",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG offers a rare GARP setup in mega-cap tech with 21.8% revenue growth, 37.9% margins, and ~11% upside to consensus target while trading near oversold RSI levels above strong long-term moving averages. Bull regime allows entry at current score; the near-term technical weakness is a feature for accumulation, not a reason to avoid a fundamentally superior compounder.",
-      "price_target": 414.74,
-      "key_risk": "DOJ antitrust structural remedy forcing Search default agreement divestiture could deliver an unquantifiable fundamental shock that overwhelms the valuation case entirely."
+      "reasoning": "GOOG is pulling back sharply to MA50 support with RSI near oversold at 34.9 and elevated volume suggesting capitulation within an intact bull structure \u2014 fundamentals remain compelling at 25x forward earnings with 21.8% revenue growth and a $409 analyst consensus target. The BULL market regime supports full Kelly sizing on this high-quality re-entry.",
+      "price_target": 409.0,
+      "key_risk": "AI competition eroding Search market share or macro deterioration breaking MA50 support could extend the correction toward MA200 at $301."
     },
     {
       "ticker": "PLTR",
@@ -1334,9 +1338,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "BULL regime with real earnings inflection (85% revenue growth, 44% margins) and AI/defense platform moat supports analyst target of $183.73 despite near-term overbought conditions. Entry near MA200 resistance is suboptimal, but full Kelly positioning in BULL regime justifies a measured position with a stop anchored to prior support.",
-      "price_target": 185.0,
-      "key_risk": "Rejection at MA200 ($161.67) combined with any DoD budget disruption or contract delays could send price back to $141-145, invalidating the re-rating thesis."
+      "reasoning": "PLTR's elite AI/data infrastructure fundamentals, 85% revenue growth, and 44% margins support the analyst's $183.73 target in a confirmed bull regime with positive MACD and RSI momentum. The key technical trigger is reclaiming the $161-162 200-MA zone, which would confirm trend resumption and catalyze the next leg higher.",
+      "price_target": 183.73,
+      "key_risk": "Failure to reclaim the $161-162 200-MA resistance could stall momentum and reverse the bounce, while stretched 74x forward P/E leaves no room for execution misses."
     },
     {
       "ticker": "MSTR",
@@ -1344,9 +1348,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 21.6 is deeply oversold with 151% analyst upside and a BULL regime enabling full Kelly sizing, creating an asymmetric entry for a leveraged BTC recovery play. A confirmed BTC momentum reversal from current levels would trigger a reflexive squeeze given MSTR's 3.6 beta and high short interest.",
+      "reasoning": "RSI at 21.3 represents extreme oversold conditions in a BULL regime with 175% analyst upside, creating an asymmetric risk/reward entry for a leveraged BTC proxy at a significant discount to intrinsic optionality value. A BTC recovery toward $100K+ would reprice MSTR explosively given its 3.6 beta, and current capitulation-level technicals suggest a mean-reversion setup is maturing.",
       "price_target": 220.0,
-      "key_risk": "Continued BTC weakness toward $75K could trigger margin call fears on Saylor's leveraged position, accelerating a breakdown toward the $104 52-week low."
+      "key_risk": "Bitcoin breakdown toward $70K could stress MSTR's 18.1x D/E convertible debt structure, forcing dilutive equity raises and potentially invalidating the entire bull thesis."
     }
   ],
   "regime": "BULL",
@@ -1362,5 +1366,5 @@
     "underperforming": false
   },
   "pnl": 12.219999999999999,
-  "last_run": "2026-06-01 21:00"
+  "last_run": "2026-06-02 18:00"
 }
