@@ -17,8 +17,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 446.64,
-      "last_price": 439.95,
-      "last_pnl_pct": 15.65,
+      "last_price": 437.11,
+      "last_pnl_pct": 14.9,
       "days_held": 41,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 621.12,
-      "last_pnl_pct": 3.07,
+      "last_price": 622.98,
+      "last_pnl_pct": 3.38,
       "days_held": 23,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 248.76,
-      "last_pnl_pct": -2.89,
+      "last_price": 250.02,
+      "last_pnl_pct": -2.4,
       "days_held": 15,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 215.26,
-      "last_pnl_pct": -0.3,
+      "last_price": 214.75,
+      "last_pnl_pct": -0.54,
       "days_held": 12,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
       "earnings_play": false,
       "trail_high": 461.82,
-      "last_price": 427.0,
-      "last_pnl_pct": -7.54,
+      "last_price": 427.34,
+      "last_pnl_pct": -7.47,
       "days_held": 2,
       "status": "OPEN",
       "live": false
@@ -1322,19 +1322,19 @@
     },
     {
       "date": "2026-06-03",
-      "value": 1020.58
+      "value": 1020.39
     }
   ],
   "top_picks": [
     {
       "ticker": "GOOG",
-      "score": 8,
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 12.0 signals extreme oversold conditions in a structurally intact bull trend trading well above MA50 and MA200, creating a high-quality mean-reversion entry in a fundamentally cheap mega-cap. At 24.6x forward P/E with 21.8% revenue growth and 38% margins, GOOG offers rare value with a $409 analyst consensus providing ~15% upside.",
+      "reasoning": "RSI at 11.9 is an extraordinary oversold extreme that historically precedes violent mean-reversion bounces, and with price still above both MA50 and MA200 the broader bull structure remains intact. At 24.5x forward P/E with 21.8% revenue growth and a $409 analyst target, the risk/reward skews meaningfully to the upside once the technical flush exhausts itself.",
       "price_target": 409.0,
-      "key_risk": "MACD bearish divergence and elevated distribution volume (1.46x) suggest continued near-term selling pressure before stabilization, and a break below MA50 ($348.73) would invalidate the thesis."
+      "key_risk": "Continued distribution pressure from AI competitive threats to Search market share could validate the selloff and push price through the MA50 support before any meaningful bounce materializes."
     },
     {
       "ticker": "PLTR",
@@ -1342,19 +1342,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is recovering off a trough with bullish MACD, positive RSI momentum, and a 29% gap to analyst consensus supported by elite margins and accelerating AIP commercial adoption in a confirmed bull regime. The 50-MA reclaim with above-average volume provides a tactically valid entry despite the stock remaining below its 200-MA.",
+      "reasoning": "Elite 84.7% revenue growth with expanding margins justifies accumulation near 50-MA support in a bull regime, with analyst consensus pointing to ~29% upside. Counter-trend bounce risk is real but BULL regime full-Kelly rules permit entry at score 7 with defined downside below recent structure.",
       "price_target": 183.73,
-      "key_risk": "Federal budget cuts or contract delays could crater sentiment given ~55% government revenue exposure, and the 162x trailing P/E leaves zero margin for execution misses."
+      "key_risk": "U.S. defense/DoD budget cuts or continuing resolution uncertainty could directly impair PLTR's highest-conviction revenue line and compress an already perfection-priced multiple with no margin of safety."
     },
     {
-      "ticker": "RIOT",
+      "ticker": "SNOW",
       "score": 7,
       "action": "BUY",
-      "strategy": "SWING",
+      "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RIOT's confirmed uptrend with accelerating 3M/6M momentum and 3.7x BTC beta positions it for outsized gains if Bitcoin breaks above $100K resistance. Bull regime allows full Kelly sizing, but position must respect the 20% crypto proxy cap given pure BTC derivative exposure with no fundamental floor.",
-      "price_target": 32.5,
-      "key_risk": "Fading volume near the $28.94 all-time high combined with any BTC risk-off event could trigger a sharp mean reversion given -133% margins and no fundamental support below."
+      "reasoning": "BULL regime with strong institutional volume confirmation, analyst strong-buy consensus, and 16.6% upside to target support a medium-term position despite overbought RSI. Entry risk is real given the parabolic move, so position sizing should be conservative with a defined stop below the 200MA.",
+      "price_target": 275.0,
+      "key_risk": "Any earnings deceleration or margin miss could trigger violent multiple compression from 92x forward P/E, with no fundamental floor to cushion the downside."
     }
   ],
   "regime": "BULL",
@@ -1370,5 +1370,5 @@
     "underperforming": false
   },
   "pnl": 12.219999999999999,
-  "last_run": "2026-06-03 18:15"
+  "last_run": "2026-06-03 20:21"
 }
