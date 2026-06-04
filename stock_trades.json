@@ -17,9 +17,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 446.64,
-      "last_price": 437.11,
-      "last_pnl_pct": 14.9,
-      "days_held": 41,
+      "last_price": 445.11,
+      "last_pnl_pct": 17.01,
+      "days_held": 42,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 622.98,
-      "last_pnl_pct": 3.38,
-      "days_held": 23,
+      "last_price": 632.75,
+      "last_pnl_pct": 5.0,
+      "days_held": 24,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 250.02,
-      "last_pnl_pct": -2.4,
-      "days_held": 15,
+      "last_price": 253.77,
+      "last_pnl_pct": -0.94,
+      "days_held": 16,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 214.75,
-      "last_pnl_pct": -0.54,
-      "days_held": 12,
+      "last_price": 217.55,
+      "last_pnl_pct": 0.76,
+      "days_held": 13,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
       "earnings_play": false,
       "trail_high": 461.82,
-      "last_price": 427.34,
-      "last_pnl_pct": -7.47,
-      "days_held": 2,
+      "last_price": 427.78,
+      "last_pnl_pct": -7.37,
+      "days_held": 3,
       "status": "OPEN",
       "live": false
     }
@@ -1323,6 +1323,10 @@
     {
       "date": "2026-06-03",
       "value": 1020.39
+    },
+    {
+      "date": "2026-06-04",
+      "value": 1024.95
     }
   ],
   "top_picks": [
@@ -1332,9 +1336,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 11.9 is an extraordinary oversold extreme that historically precedes violent mean-reversion bounces, and with price still above both MA50 and MA200 the broader bull structure remains intact. At 24.5x forward P/E with 21.8% revenue growth and a $409 analyst target, the risk/reward skews meaningfully to the upside once the technical flush exhausts itself.",
+      "reasoning": "GOOG is deeply oversold at RSI 28.7 with price well above both MA50 and MA200, presenting a classic high-quality dip-buy within an intact bull structure. At 25.5x forward P/E with 21.8% revenue growth and 37.9% margins, valuation is compelling with strong institutional support at a $409 consensus target.",
       "price_target": 409.0,
-      "key_risk": "Continued distribution pressure from AI competitive threats to Search market share could validate the selloff and push price through the MA50 support before any meaningful bounce materializes."
+      "key_risk": "AI Overviews compressing ad click-through rates could structurally impair revenue growth and invalidate the bull thesis."
+    },
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AMD's AI/data center re-rating via MI300X demand supports continued multiple expansion toward 52-week high breakout above $546, with BULL regime and constructive MACD/RSI justifying a medium-term position. Forward P/E of 40x is defensible if hyperscaler GPU adoption accelerates, offering asymmetric upside on a decisive $546 breakout.",
+      "price_target": 570.0,
+      "key_risk": "NVIDIA's CUDA ecosystem moat could compress AMD's hyperscaler TAM faster than consensus expects, triggering sharp multiple contraction from elevated 175x trailing P/E."
     },
     {
       "ticker": "PLTR",
@@ -1342,19 +1356,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Elite 84.7% revenue growth with expanding margins justifies accumulation near 50-MA support in a bull regime, with analyst consensus pointing to ~29% upside. Counter-trend bounce risk is real but BULL regime full-Kelly rules permit entry at score 7 with defined downside below recent structure.",
+      "reasoning": "PLTR is coiling at 50-MA support with bullish MACD and elevated accumulation volume in a confirmed bull regime, offering a credible path to analyst targets if the 200-MA at $161 is reclaimed. Elite 44% margins and 85% revenue growth justify a premium multiple and support the medium-term growth thesis.",
       "price_target": 183.73,
-      "key_risk": "U.S. defense/DoD budget cuts or continuing resolution uncertainty could directly impair PLTR's highest-conviction revenue line and compress an already perfection-priced multiple with no margin of safety."
-    },
-    {
-      "ticker": "SNOW",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "BULL regime with strong institutional volume confirmation, analyst strong-buy consensus, and 16.6% upside to target support a medium-term position despite overbought RSI. Entry risk is real given the parabolic move, so position sizing should be conservative with a defined stop below the 200MA.",
-      "price_target": 275.0,
-      "key_risk": "Any earnings deceleration or margin miss could trigger violent multiple compression from 92x forward P/E, with no fundamental floor to cushion the downside."
+      "key_risk": "Failure to reclaim the 200-MA (~$161) on volume would signal institutional distribution and expose the stock to a sharp re-test of the $118\u2013$125 support shelf, representing ~17% downside from current levels."
     }
   ],
   "regime": "BULL",
@@ -1370,5 +1374,5 @@
     "underperforming": false
   },
   "pnl": 12.219999999999999,
-  "last_run": "2026-06-03 20:21"
+  "last_run": "2026-06-04 16:40"
 }
