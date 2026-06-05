@@ -17,8 +17,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 446.64,
-      "last_price": 423.26,
-      "last_pnl_pct": 11.26,
+      "last_price": 416.79,
+      "last_pnl_pct": 9.56,
       "days_held": 43,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 610.76,
-      "last_pnl_pct": 1.35,
+      "last_price": 594.14,
+      "last_pnl_pct": -1.41,
       "days_held": 25,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 252.85,
-      "last_pnl_pct": -1.3,
+      "last_price": 248.29,
+      "last_pnl_pct": -3.08,
       "days_held": 17,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 208.57,
-      "last_pnl_pct": -3.4,
+      "last_price": 205.52,
+      "last_pnl_pct": -4.81,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
       "trail_high": 420.11,
-      "last_price": 420.11,
-      "last_pnl_pct": 0.0,
+      "last_price": 417.08,
+      "last_pnl_pct": -0.72,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -1406,19 +1406,29 @@
     },
     {
       "date": "2026-06-05",
-      "value": 1013.89
+      "value": 1008.12
     }
   ],
   "top_picks": [
     {
       "ticker": "GOOG",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is deeply oversold at RSI 30.5 within a confirmed bull trend trading above both MA50 and MA200, offering a high-quality entry into a fundamentally cheap compounder at 25x forward earnings with 22% revenue growth. The analyst consensus strong buy with $409 target provides a credible fundamental anchor while current weakness appears to be momentum mean-reversion rather than structural breakdown.",
+      "reasoning": "GOOG is a high-quality compounder trading at an oversold RSI of 29.5 in a bull market, well above both its 50MA and 200MA, representing a classic dip-buy setup with strong institutional support. At 25.2x forward earnings with 21.8% revenue growth and a strong_buy analyst consensus targeting $409, the risk/reward strongly favors a medium-term entry here.",
       "price_target": 409.0,
-      "key_risk": "DOJ antitrust structural remedy forcing divestiture of Chrome or Android could permanently impair the Search advertising flywheel and compress the valuation multiple significantly."
+      "key_risk": "Elevated distribution volume on the selloff could signal institutional exit rather than capitulation, and failure to reclaim $375\u2013380 would invalidate the bull-market dip thesis."
+    },
+    {
+      "ticker": "SOXL",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SOXL is in a structurally intact bull trend with RSI at 55 and bullish MACD, sitting well above both key moving averages with the recent -15% pullback representing a healthy leveraged-ETF consolidation rather than trend reversal. The AI/semiconductor capex cycle remains in early-to-mid upcycle with major tailwinds from NVDA, AVGO, and AMD intact, making this a compelling re-entry with defined risk just below current price.",
+      "price_target": 220.0,
+      "key_risk": "A hawkish Fed surprise or macro growth scare triggering risk-off rotation could amplify a 10% SOX decline into a 25-30% SOXL drawdown due to 3x leverage decay."
     },
     {
       "ticker": "AMD",
@@ -1426,19 +1436,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 150% 3-month momentum and AI/MI300X data center tailwinds remain structurally intact despite the short-term -6.6% pullback, which looks like a healthy flag consolidation within a dominant uptrend. The forward P/E of 37x is defensible if the AI GPU ramp executes, making this a buyable dip toward the $546 prior high reclaim.",
-      "price_target": 546.0,
-      "key_risk": "A MI300X revenue disappointment or guide-down at the next earnings print could collapse the AI premium and trigger a sharp re-rating given the 162x trailing P/E."
-    },
-    {
-      "ticker": "PLTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "Elite revenue growth of 84.7% YoY with 43.7% margins supports a recovery thesis toward analyst consensus in a bull regime, and RSI/MACD stabilization hints at a short-term floor forming near current levels. However, position sizing must reflect the structural downtrend and government spending headwinds that cap near-term upside.",
-      "price_target": 183.73,
-      "key_risk": "DOGE-driven federal budget cuts could directly impair PLTR's core government contract pipeline, collapsing the valuation multiple that underpins the entire bull thesis."
+      "reasoning": "AMD's AI/data center GPU ramp via MI300X positions it as the primary NVIDIA alternative in a multi-year supercycle, with a justifiable 36x forward P/E given 37.8% revenue growth and strong institutional support above $400 structural support. The current -9.28% weekly pullback with RSI at 59 and below-average volume is a healthy consolidation offering a favorable risk/reward entry ahead of potential hyperscaler allocation disclosures.",
+      "price_target": 510.0,
+      "key_risk": "High D/E of 6x on a beta-2.5 name creates severe downside convexity if credit conditions tighten or MI300X adoption disappoints versus NVIDIA."
     }
   ],
   "regime": "BULL",
@@ -1447,12 +1447,12 @@
     "rolling_win_rate": 53.3,
     "avg_return": 2.42,
     "sharpe": 0.23,
-    "max_drawdown": 1.22,
+    "max_drawdown": 1.78,
     "total_trades": 15,
     "wins": 8,
     "losses": 7,
     "underperforming": false
   },
   "pnl": 7.699999999999999,
-  "last_run": "2026-06-05 16:21"
+  "last_run": "2026-06-05 19:04"
 }
