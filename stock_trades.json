@@ -1,5 +1,5 @@
 {
-  "cash": 686.2700000000001,
+  "cash": 671.32,
   "positions": [
     {
       "time": "2026-04-23 18:09",
@@ -17,9 +17,9 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 446.64,
-      "last_price": 446.37,
-      "last_pnl_pct": 17.34,
-      "days_held": 42,
+      "last_price": 423.26,
+      "last_pnl_pct": 11.26,
+      "days_held": 43,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 626.59,
-      "last_pnl_pct": 3.97,
-      "days_held": 24,
+      "last_price": 610.76,
+      "last_pnl_pct": 1.35,
+      "days_held": 25,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 254.0,
-      "last_pnl_pct": -0.85,
-      "days_held": 16,
+      "last_price": 252.85,
+      "last_pnl_pct": -1.3,
+      "days_held": 17,
       "status": "OPEN",
       "live": false
     },
@@ -83,31 +83,31 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 220.76,
-      "last_pnl_pct": 2.25,
-      "days_held": 13,
+      "last_price": 208.57,
+      "last_pnl_pct": -3.4,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
     {
-      "time": "2026-06-01 19:07",
+      "time": "2026-06-05 16:13",
       "ticker": "MSFT",
       "action": "BUY",
       "strategy": "MEDIUM",
-      "shares": 0.1083,
-      "price": 461.82,
-      "cost": 50.02,
-      "target": 520.0,
-      "stop_loss": 430.0,
+      "shares": 0.1439,
+      "price": 420.11,
+      "cost": 60.45,
+      "target": 490.0,
+      "stop_loss": 395.0,
       "score": 7,
       "conviction": "medium",
-      "reasoning": "MSFT's strong fundamentals \u2014 18.3% revenue growth, 39%+ operating margins, and a ~21% discount to analyst consensus \u2014 justify a medium-term position in a confirmed bull regime with institutional volume support. RSI at 77.2 signals near-term overbought conditions, so position sizing should be measured with a potential pullback entry improving risk/reward.",
-      "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
+      "reasoning": "MSFT trades at a compelling 21.7x forward earnings with 18.3% revenue growth and 39% margins, offering genuine value at a 33.5% discount to analyst consensus in a bull market regime. Azure AI monetization via Copilot remains a high-conviction re-rating catalyst that could close the gap to the 200-MA at $454 and beyond within the medium-term horizon.",
+      "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
-      "trail_high": 461.82,
-      "last_price": 428.23,
-      "last_pnl_pct": -7.27,
-      "days_held": 3,
+      "trail_high": 420.11,
+      "last_price": 420.11,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -852,6 +852,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-06-01 19:07",
+      "ticker": "MSFT",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.1083,
+      "price": 461.82,
+      "cost": 50.02,
+      "target": 520.0,
+      "stop_loss": 430.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's strong fundamentals \u2014 18.3% revenue growth, 39%+ operating margins, and a ~21% discount to analyst consensus \u2014 justify a medium-term position in a confirmed bull regime with institutional volume support. RSI at 77.2 signals near-term overbought conditions, so position sizing should be measured with a potential pullback entry improving risk/reward.",
+      "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
+      "earnings_play": false,
+      "trail_high": 461.82,
+      "last_price": 420.11,
+      "last_pnl_pct": -9.03,
+      "days_held": 4,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 420.11,
+      "sell_time": "2026-06-05 16:12",
+      "pnl_dollar": -4.52,
+      "pnl_pct": -9.03,
+      "sell_reason": "Stop loss -9.0% (limit -8%)"
+    },
+    {
+      "time": "2026-06-05 16:13",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1439,
+      "price": 420.11,
+      "cost": 60.45,
+      "target": 490.0,
+      "stop_loss": 395.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT trades at a compelling 21.7x forward earnings with 18.3% revenue growth and 39% margins, offering genuine value at a 33.5% discount to analyst consensus in a bull market regime. Azure AI monetization via Copilot remains a high-conviction re-rating catalyst that could close the gap to the 200-MA at $454 and beyond within the medium-term horizon.",
+      "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
+      "earnings_play": false,
+      "trail_high": 420.11,
+      "last_price": 420.11,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -1213,6 +1262,33 @@
       "pnl_dollar": 6.25,
       "pnl_pct": 12.51,
       "sell_reason": "AI thesis break: SELL \u2014 RSI at 77.2 signals overbought conditions after a 12.5% gain in 27 days, making a partial trim prudent to lock in profits near technical resistance before potential mean reversion."
+    },
+    {
+      "time": "2026-06-01 19:07",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1083,
+      "price": 461.82,
+      "cost": 50.02,
+      "target": 520.0,
+      "stop_loss": 430.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's strong fundamentals \u2014 18.3% revenue growth, 39%+ operating margins, and a ~21% discount to analyst consensus \u2014 justify a medium-term position in a confirmed bull regime with institutional volume support. RSI at 77.2 signals near-term overbought conditions, so position sizing should be measured with a potential pullback entry improving risk/reward.",
+      "key_risk": "A deceleration in Azure cloud growth or failure of Copilot AI monetization to materially inflect revenue could trigger a sharp de-rating, especially given the extended short-term price move of 10-13% over recent weeks.",
+      "earnings_play": false,
+      "trail_high": 461.82,
+      "last_price": 420.11,
+      "last_pnl_pct": -9.03,
+      "days_held": 4,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 420.11,
+      "sell_time": "2026-06-05 16:12",
+      "pnl_dollar": -4.52,
+      "pnl_pct": -9.03,
+      "sell_reason": "Stop loss -9.0% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -1327,18 +1403,22 @@
     {
       "date": "2026-06-04",
       "value": 1025.59
+    },
+    {
+      "date": "2026-06-05",
+      "value": 1013.89
     }
   ],
   "top_picks": [
     {
       "ticker": "GOOG",
-      "score": 8,
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is deeply oversold at RSI 28.3 with capitulatory volume, trading at a compelling 25.4x forward earnings while delivering 21.8% revenue growth and 38% margins well above its 50-DMA and 200-DMA. The ~9% pullback from recent highs within a confirmed bull regime offers a high-probability mean-reversion entry toward the $409 analyst consensus target.",
+      "reasoning": "GOOG is deeply oversold at RSI 30.5 within a confirmed bull trend trading above both MA50 and MA200, offering a high-quality entry into a fundamentally cheap compounder at 25x forward earnings with 22% revenue growth. The analyst consensus strong buy with $409 target provides a credible fundamental anchor while current weakness appears to be momentum mean-reversion rather than structural breakdown.",
       "price_target": 409.0,
-      "key_risk": "AI monetization disappointment or broader macro-driven multiple compression could extend the near-term drawdown below the 50-DMA support at $350."
+      "key_risk": "DOJ antitrust structural remedy forcing divestiture of Chrome or Android could permanently impair the Search advertising flywheel and compress the valuation multiple significantly."
     },
     {
       "ticker": "AMD",
@@ -1346,9 +1426,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's MI300X positions it as the primary NVIDIA alternative in AI accelerator demand, and the forward P/E of 40x against 37.8% revenue growth remains justifiable in a bull regime with positive MACD and RSI not yet in exhaustion territory. The stock is pressing ATH resistance at $546 \u2014 a confirmed breakout on volume would validate the next leg higher toward $580.",
-      "price_target": 580.0,
-      "key_risk": "Decelerating momentum at 0.83x average volume near ATH resistance, combined with analyst consensus target of $482 implying -7.9% downside, suggests institutional conviction may be fading and a catalyst miss could trigger a sharp reversal."
+      "reasoning": "AMD's 150% 3-month momentum and AI/MI300X data center tailwinds remain structurally intact despite the short-term -6.6% pullback, which looks like a healthy flag consolidation within a dominant uptrend. The forward P/E of 37x is defensible if the AI GPU ramp executes, making this a buyable dip toward the $546 prior high reclaim.",
+      "price_target": 546.0,
+      "key_risk": "A MI300X revenue disappointment or guide-down at the next earnings print could collapse the AI premium and trigger a sharp re-rating given the 162x trailing P/E."
     },
     {
       "ticker": "PLTR",
@@ -1356,23 +1436,23 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Elite revenue growth of 84.7% with 43.7% margins justifies a position in a bull regime, with the stock holding above MA50 and MACD constructive. Bull regime allows full Kelly sizing, and analyst consensus target of $183.73 offers meaningful upside if MA200 reclaim catalyzes momentum buyers.",
+      "reasoning": "Elite revenue growth of 84.7% YoY with 43.7% margins supports a recovery thesis toward analyst consensus in a bull regime, and RSI/MACD stabilization hints at a short-term floor forming near current levels. However, position sizing must reflect the structural downtrend and government spending headwinds that cap near-term upside.",
       "price_target": 183.73,
-      "key_risk": "Failure to reclaim MA200 at $161 amid macro hawkishness or defense budget cuts could trigger rapid multiple compression back toward $118 support."
+      "key_risk": "DOGE-driven federal budget cuts could directly impair PLTR's core government contract pipeline, collapsing the valuation multiple that underpins the entire bull thesis."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 57.1,
-    "rolling_win_rate": 57.1,
-    "avg_return": 3.24,
-    "sharpe": 0.31,
-    "max_drawdown": 1.01,
-    "total_trades": 14,
+    "win_rate": 53.3,
+    "rolling_win_rate": 53.3,
+    "avg_return": 2.42,
+    "sharpe": 0.23,
+    "max_drawdown": 1.22,
+    "total_trades": 15,
     "wins": 8,
-    "losses": 6,
+    "losses": 7,
     "underperforming": false
   },
-  "pnl": 12.219999999999999,
-  "last_run": "2026-06-04 19:24"
+  "pnl": 7.699999999999999,
+  "last_run": "2026-06-05 16:21"
 }
