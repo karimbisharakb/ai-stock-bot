@@ -17,8 +17,8 @@
       "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
       "earnings_play": false,
       "trail_high": 446.64,
-      "last_price": 429.9,
-      "last_pnl_pct": 13.01,
+      "last_price": 426.99,
+      "last_pnl_pct": 12.24,
       "days_held": 46,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 587.05,
-      "last_pnl_pct": -2.59,
+      "last_price": 585.46,
+      "last_pnl_pct": -2.85,
       "days_held": 28,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 245.79,
-      "last_pnl_pct": -4.05,
+      "last_price": 244.28,
+      "last_pnl_pct": -4.64,
       "days_held": 20,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 208.65,
-      "last_pnl_pct": -3.36,
+      "last_price": 207.88,
+      "last_pnl_pct": -3.72,
       "days_held": 17,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
       "trail_high": 420.11,
-      "last_price": 409.83,
-      "last_pnl_pct": -2.45,
+      "last_price": 411.99,
+      "last_pnl_pct": -1.93,
       "days_held": 3,
       "status": "OPEN",
       "live": false
@@ -1410,19 +1410,29 @@
     },
     {
       "date": "2026-06-08",
-      "value": 1009.25
+      "value": 1008.22
     }
   ],
   "top_picks": [
     {
       "ticker": "GOOG",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is deeply oversold (RSI 27.4) while holding above both MA50 and MA200, suggesting capitulation-style selling within an intact uptrend \u2014 a high-probability mean reversion setup. Strong fundamentals (21.8% revenue growth, 37.9% margins, 24.9x forward P/E) and a ~13% gap to analyst consensus of $407 support a compelling risk/reward entry at current levels.",
+      "reasoning": "GOOG is deeply oversold at RSI 27.7 while trading above both MA50 and MA200, representing a textbook pullback-within-uptrend at a 13% discount to analyst consensus targets. Best-in-class fundamentals \u2014 21.8% revenue growth, 38% margins, 24.9x forward P/E \u2014 combined with AI monetization catalysts make this mispricing compelling in a bull regime.",
       "price_target": 407.0,
-      "key_risk": "An adverse DOJ antitrust ruling mandating structural remedies or divestiture could materially reprice GOOG's core search earnings power and invalidate the bull thesis."
+      "key_risk": "Negative MACD has not yet curled upward, meaning further near-term downside is possible before the floor is confirmed, and any evidence of AI Overviews materially eroding Search CPC pricing could reprice the growth multiple lower."
+    },
+    {
+      "ticker": "SOXL",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SOXL is in a confirmed bull structure with price far above both MAs, and the current -7.17% weekly pullback with cooling RSI represents a healthy mean-reversion entry point within a 3-month +295% uptrend driven by the AI semiconductor capex cycle. MACD bearishness is short-term noise against a structurally intact bull regime, making this a high-reward reload zone before the next leg higher.",
+      "price_target": 260.0,
+      "key_risk": "A leveraged 3x unwind triggered by macro shock or negative NVDA/AMD guidance could destroy 40-50% of NAV rapidly, requiring strict adherence to the $185 stop-loss."
     },
     {
       "ticker": "AMD",
@@ -1430,19 +1440,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's AI/data center GPU thesis remains structurally intact with forward P/E of 37.6x and 37.8% revenue growth justifying a premium valuation despite near-term MACD weakness and short-term consolidation. The MI300X ramp and hyperscaler diversification away from NVIDIA provides a credible catalyst for the next leg higher over the medium term.",
-      "price_target": 580.0,
-      "key_risk": "A guidance miss or inventory digestion commentary on the next earnings call could trigger a swift 15-20% drawdown from current elevated levels."
-    },
-    {
-      "ticker": "CRWD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CRWD is in a confirmed structural uptrend with price well above both MA50 and MA200, and the -16.27% weekly flush represents a higher-risk pullback entry within a bull market regime offering a reasonable risk/reward toward the analyst target. Despite stretched valuation and rolling MACD momentum, the bull regime permits full Kelly sizing and the stock's cybersecurity leadership warrants a measured position.",
-      "price_target": 707.47,
-      "key_risk": "Elevated D/E of 17.6x and near-zero margins leave the stock highly vulnerable to any growth deceleration or competitive displacement narrative from Microsoft or Palo Alto, which could extend the current drawdown well below the stop."
+      "reasoning": "AMD's MI300X data center GPU ramp and 37.8% revenue growth justify the forward 37x multiple in a BULL regime, making the current pullback a reasonable entry point for medium-term accumulation. While MACD is bearish and short-term momentum is fading, the structural uptrend remains intact with price well above key moving averages, offering a risk-managed entry ahead of the next catalyst cycle.",
+      "price_target": 546.0,
+      "key_risk": "Any deceleration in MI300X adoption, margin compression, or NVDA competitive wins in data center could rapidly reprice AMD's premium multiple and invalidate the growth thesis."
     }
   ],
   "regime": "BULL",
@@ -1458,5 +1458,5 @@
     "underperforming": false
   },
   "pnl": 7.699999999999999,
-  "last_run": "2026-06-08 17:04"
+  "last_run": "2026-06-08 19:25"
 }
