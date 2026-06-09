@@ -1,28 +1,6 @@
 {
-  "cash": 671.32,
+  "cash": 700.73,
   "positions": [
-    {
-      "time": "2026-04-23 18:09",
-      "ticker": "TSM",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.194,
-      "price": 380.41,
-      "cost": 73.8,
-      "target": 463.0,
-      "stop_loss": 352.0,
-      "score": 8,
-      "conviction": "medium",
-      "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
-      "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
-      "earnings_play": false,
-      "trail_high": 446.64,
-      "last_price": 426.99,
-      "last_pnl_pct": 12.24,
-      "days_held": 46,
-      "status": "OPEN",
-      "live": false
-    },
     {
       "time": "2026-05-11 16:17",
       "ticker": "META",
@@ -39,9 +17,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 585.46,
-      "last_pnl_pct": -2.85,
-      "days_held": 28,
+      "last_price": 585.35,
+      "last_pnl_pct": -2.87,
+      "days_held": 29,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +39,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 244.28,
-      "last_pnl_pct": -4.64,
-      "days_held": 20,
+      "last_price": 243.02,
+      "last_pnl_pct": -5.13,
+      "days_held": 21,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +61,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 207.88,
-      "last_pnl_pct": -3.72,
-      "days_held": 17,
+      "last_price": 200.74,
+      "last_pnl_pct": -7.03,
+      "days_held": 18,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
       "trail_high": 420.11,
-      "last_price": 411.99,
-      "last_pnl_pct": -1.93,
-      "days_held": 3,
+      "last_price": 401.46,
+      "last_pnl_pct": -4.44,
+      "days_held": 4,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-06-09 16:18",
+      "ticker": "AAPL",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.172,
+      "price": 290.77,
+      "cost": 50.01,
+      "target": 310.51,
+      "stop_loss": 275.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AAPL is in a healthy pullback within a confirmed bull trend, holding above both MA50 and MA200 with RSI at oversold-leaning 42.7, offering a constructive entry toward analyst consensus of $310.50. Services-driven margin expansion and strong cash generation justify the premium multiple if macro headwinds remain contained.",
+      "key_risk": "Tariff escalation targeting China iPhone demand or raising BOM costs could compress both earnings estimates and the 30x forward multiple simultaneously, opening a retest of the $265 MA200.",
+      "earnings_play": false,
+      "trail_high": 290.77,
+      "last_price": 290.77,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -901,6 +901,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-04-23 18:09",
+      "ticker": "TSM",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.194,
+      "price": 380.41,
+      "cost": 73.8,
+      "target": 463.0,
+      "stop_loss": 352.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
+      "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
+      "earnings_play": false,
+      "trail_high": 446.64,
+      "last_price": 409.36,
+      "last_pnl_pct": 7.61,
+      "days_held": 47,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 409.36,
+      "sell_time": "2026-06-09 16:18",
+      "pnl_dollar": 5.62,
+      "pnl_pct": 7.61,
+      "sell_reason": "Trailing stop $410.91 hit (peak +17.4% from $380.41)"
+    },
+    {
+      "time": "2026-06-09 16:18",
+      "ticker": "AAPL",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.172,
+      "price": 290.77,
+      "cost": 50.01,
+      "target": 310.51,
+      "stop_loss": 275.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AAPL is in a healthy pullback within a confirmed bull trend, holding above both MA50 and MA200 with RSI at oversold-leaning 42.7, offering a constructive entry toward analyst consensus of $310.50. Services-driven margin expansion and strong cash generation justify the premium multiple if macro headwinds remain contained.",
+      "key_risk": "Tariff escalation targeting China iPhone demand or raising BOM costs could compress both earnings estimates and the 30x forward multiple simultaneously, opening a retest of the $265 MA200.",
+      "earnings_play": false,
+      "trail_high": 290.77,
+      "last_price": 290.77,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -1289,6 +1338,33 @@
       "pnl_dollar": -4.52,
       "pnl_pct": -9.03,
       "sell_reason": "Stop loss -9.0% (limit -8%)"
+    },
+    {
+      "time": "2026-04-23 18:09",
+      "ticker": "TSM",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.194,
+      "price": 380.41,
+      "cost": 73.8,
+      "target": 463.0,
+      "stop_loss": 352.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "TSM offers a rare combination of monopoly-grade AI infrastructure exposure, 35% revenue growth, and 46.5% margins at a sub-20x forward P/E \u2014 fundamentally cheap for the asset quality. Bull regime with bullish MACD and analyst strong-buy consensus supports a medium-term position, with a breakout above $390 acting as confirmation of the next leg higher.",
+      "key_risk": "A sudden escalation in U.S.-Taiwan geopolitical tensions or cross-strait rhetoric could gap the stock 15-20% lower overnight, rendering technicals and fundamentals temporarily irrelevant.",
+      "earnings_play": false,
+      "trail_high": 446.64,
+      "last_price": 409.36,
+      "last_pnl_pct": 7.61,
+      "days_held": 47,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 409.36,
+      "sell_time": "2026-06-09 16:18",
+      "pnl_dollar": 5.62,
+      "pnl_pct": 7.61,
+      "sell_reason": "Trailing stop $410.91 hit (peak +17.4% from $380.41)"
     }
   ],
   "portfolio_history": [
@@ -1411,28 +1487,32 @@
     {
       "date": "2026-06-08",
       "value": 1008.22
+    },
+    {
+      "date": "2026-06-09",
+      "value": 1000.62
     }
   ],
   "top_picks": [
     {
-      "ticker": "GOOG",
+      "ticker": "TSM",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is deeply oversold at RSI 27.7 while trading above both MA50 and MA200, representing a textbook pullback-within-uptrend at a 13% discount to analyst consensus targets. Best-in-class fundamentals \u2014 21.8% revenue growth, 38% margins, 24.9x forward P/E \u2014 combined with AI monetization catalysts make this mispricing compelling in a bull regime.",
-      "price_target": 407.0,
-      "key_risk": "Negative MACD has not yet curled upward, meaning further near-term downside is possible before the floor is confirmed, and any evidence of AI Overviews materially eroding Search CPC pricing could reprice the growth multiple lower."
+      "reasoning": "TSM's elite 46.5% operating margins, 35% revenue growth, and monopolistic position on leading-edge nodes (3nm/2nm) support a compelling risk/reward against the $467 analyst target with 14.3% upside. The 8.36% pullback is a healthy post-breakout consolidation within a confirmed bull structure above both MA50 and MA200, offering a tactical entry point.",
+      "price_target": 467.84,
+      "key_risk": "Softening AI accelerator order guidance from NVIDIA or Apple could trigger a deeper 10-15% correction from current levels given elevated valuations."
     },
     {
-      "ticker": "SOXL",
-      "score": 8,
+      "ticker": "GOOG",
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SOXL is in a confirmed bull structure with price far above both MAs, and the current -7.17% weekly pullback with cooling RSI represents a healthy mean-reversion entry point within a 3-month +295% uptrend driven by the AI semiconductor capex cycle. MACD bearishness is short-term noise against a structurally intact bull regime, making this a high-reward reload zone before the next leg higher.",
-      "price_target": 260.0,
-      "key_risk": "A leveraged 3x unwind triggered by macro shock or negative NVDA/AMD guidance could destroy 40-50% of NAV rapidly, requiring strict adherence to the $185 stop-loss."
+      "reasoning": "GOOG is deeply oversold at RSI 29.8 with price holding above MA50 in a bull regime, offering a 14% discount to analyst consensus with strong fundamentals including 21.8% revenue growth and 38% margins. The sharp -10% monthly correction appears to be institutional absorption rather than distribution, making this an asymmetric entry within an intact structural uptrend.",
+      "price_target": 407.0,
+      "key_risk": "DOJ antitrust remedies in the search monopoly case could trigger a forced divestiture ruling that invalidates the bull thesis and causes a sharp de-rating well below current levels."
     },
     {
       "ticker": "AMD",
@@ -1440,23 +1520,23 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's MI300X data center GPU ramp and 37.8% revenue growth justify the forward 37x multiple in a BULL regime, making the current pullback a reasonable entry point for medium-term accumulation. While MACD is bearish and short-term momentum is fading, the structural uptrend remains intact with price well above key moving averages, offering a risk-managed entry ahead of the next catalyst cycle.",
-      "price_target": 546.0,
-      "key_risk": "Any deceleration in MI300X adoption, margin compression, or NVDA competitive wins in data center could rapidly reprice AMD's premium multiple and invalidate the growth thesis."
+      "reasoning": "AMD's bull structure remains intact with 37.8% revenue growth and a defensible 34x forward P/E anchored to AI/datacenter expansion, making the current -14% pullback a reasonable entry point within the broader uptrend. The strong_buy analyst consensus and $482 price target provide a near-term valuation anchor, though the fading MACD and distribution phase warrant a measured position size.",
+      "price_target": 482.0,
+      "key_risk": "A demand air pocket or inventory correction in the AI accelerator build-out could erase the growth premium and drive a retest of $380, representing ~15% downside from current levels."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 53.3,
-    "rolling_win_rate": 53.3,
-    "avg_return": 2.42,
-    "sharpe": 0.23,
-    "max_drawdown": 1.78,
-    "total_trades": 15,
-    "wins": 8,
+    "win_rate": 56.2,
+    "rolling_win_rate": 56.2,
+    "avg_return": 2.74,
+    "sharpe": 0.27,
+    "max_drawdown": 2.51,
+    "total_trades": 16,
+    "wins": 9,
     "losses": 7,
     "underperforming": false
   },
-  "pnl": 7.699999999999999,
-  "last_run": "2026-06-08 19:25"
+  "pnl": 13.32,
+  "last_run": "2026-06-09 16:26"
 }
