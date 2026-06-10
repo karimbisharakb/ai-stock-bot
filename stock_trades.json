@@ -17,9 +17,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 590.92,
-      "last_pnl_pct": -1.94,
-      "days_held": 29,
+      "last_price": 576.61,
+      "last_pnl_pct": -4.32,
+      "days_held": 30,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 245.5,
-      "last_pnl_pct": -4.17,
-      "days_held": 21,
+      "last_price": 238.75,
+      "last_pnl_pct": -6.8,
+      "days_held": 22,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 206.63,
-      "last_pnl_pct": -4.3,
-      "days_held": 18,
+      "last_price": 202.65,
+      "last_pnl_pct": -6.14,
+      "days_held": 19,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
       "trail_high": 420.11,
-      "last_price": 403.93,
-      "last_pnl_pct": -3.85,
-      "days_held": 4,
+      "last_price": 402.87,
+      "last_pnl_pct": -4.1,
+      "days_held": 5,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "AAPL is in a healthy pullback within a confirmed bull trend, holding above both MA50 and MA200 with RSI at oversold-leaning 42.7, offering a constructive entry toward analyst consensus of $310.50. Services-driven margin expansion and strong cash generation justify the premium multiple if macro headwinds remain contained.",
       "key_risk": "Tariff escalation targeting China iPhone demand or raising BOM costs could compress both earnings estimates and the 30x forward multiple simultaneously, opening a retest of the $265 MA200.",
       "earnings_play": false,
-      "trail_high": 291.45,
-      "last_price": 291.45,
-      "last_pnl_pct": 0.23,
-      "days_held": 0,
+      "trail_high": 292.54,
+      "last_price": 292.54,
+      "last_pnl_pct": 0.61,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -1491,18 +1491,32 @@
     {
       "date": "2026-06-09",
       "value": 1004.29
+    },
+    {
+      "date": "2026-06-10",
+      "value": 999.78
     }
   ],
   "top_picks": [
     {
-      "ticker": "GOOG",
+      "ticker": "SHOP.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is pulling back to oversold RSI territory (34.7) while trading above both key moving averages with elevated volume suggesting institutional accumulation \u2014 a classic trend continuation setup with a compelling entry. At 25.2x forward P/E with 21.8% revenue growth and 37.9% margins, the stock is undervalued for its quality tier with ~12% upside to consensus target requiring minimal multiple expansion.",
-      "price_target": 407.0,
-      "key_risk": "AI Overviews compressing Search query volume or CPCs could trigger a sharp re-rating lower before Q1 earnings provide a fundamental clearing event."
+      "reasoning": "In a confirmed bull regime, Shopify's 34% revenue growth, forward P/E compression to ~47x, and 22% upside to analyst target justify a medium-term position despite the technical overhang below key moving averages. The mildly positive RSI and bullish MACD suggest short-term momentum is supportive for entry at current levels.",
+      "price_target": 185.0,
+      "key_risk": "Any deceleration in revenue growth below 30% or deterioration in merchant GMV guidance at the next earnings print would invalidate the growth re-rating thesis and compress multiples sharply given the elevated 107x trailing P/E."
+    },
+    {
+      "ticker": "GOOG",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "GOOG is in classic mid-trend pullback territory with RSI at 29.7 signaling oversold conditions, while strong fundamentals (37.9% margins, 21.8% revenue growth) at 24.6x forward P/E offer genuine value against a $409 analyst consensus target. The BULL market regime supports full Kelly sizing, and the 200-day MA at $305.65 provides a deep structural floor well above the stop.",
+      "price_target": 409.0,
+      "key_risk": "Bearish MACD with no confirmed reversal means the oversold condition could extend further if AI search monetization clarity disappoints or macro risk-off accelerates the drawdown."
     },
     {
       "ticker": "AMD",
@@ -1510,19 +1524,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD remains in a structural bull trend with strong AI accelerator tailwinds and a reasonable forward P/E of 35.7x against 37.8% revenue growth, making the current -10% flush a buyable pullback within a high-base consolidation. BULL regime allows full Kelly deployment at score 7, with the $420\u2013$440 support zone providing a defined risk floor and MI300X demand trajectory as the primary re-acceleration catalyst.",
-      "price_target": 510.0,
-      "key_risk": "Elevated D/E of 6x and razor-thin 13.4% margins leave no buffer for an MI300X demand miss or hyperscaler capex slowdown, which could trigger a sharp multiple compression from current perfection-priced levels."
-    },
-    {
-      "ticker": "TSM",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "TSM's world-class 46.5% margins, 35% YoY revenue growth, and significant forward P/E compression to 21.9x justify accumulation on this pullback, with AI accelerator demand from NVIDIA/AMD providing a durable multi-quarter catalyst. The -4.39% weekly digestion near range highs offers a reasonable entry for a medium-term position targeting the analyst consensus of $467.84.",
-      "price_target": 467.84,
-      "key_risk": "Near-term distribution signals and tight breakout room below the $450 52-week high could extend the current consolidation, while any softening in AI accelerator order guidance from NVIDIA or AMD would materially pressure the thesis."
+      "reasoning": "AMD trades in a strong long-term uptrend with 37.8% revenue growth and a credible MI300X GPU catalyst, and the BULL regime supports entry even amid near-term technical weakness. The analyst consensus strong buy with a $482 target provides a defined risk/reward, and the pullback from highs offers a better entry than chasing momentum.",
+      "price_target": 482.69,
+      "key_risk": "A bearish MACD, absent volume confirmation, and speculative 151x trailing P/E leave AMD highly vulnerable to any softening in hyperscaler AI capex guidance or GPU demand disappointment."
     }
   ],
   "regime": "BULL",
@@ -1531,12 +1535,12 @@
     "rolling_win_rate": 56.2,
     "avg_return": 2.74,
     "sharpe": 0.27,
-    "max_drawdown": 2.15,
+    "max_drawdown": 2.59,
     "total_trades": 16,
     "wins": 9,
     "losses": 7,
     "underperforming": false
   },
   "pnl": 13.32,
-  "last_run": "2026-06-09 19:19"
+  "last_run": "2026-06-10 16:55"
 }
