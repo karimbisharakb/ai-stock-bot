@@ -17,8 +17,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 576.61,
-      "last_pnl_pct": -4.32,
+      "last_price": 571.03,
+      "last_pnl_pct": -5.25,
       "days_held": 30,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 238.75,
-      "last_pnl_pct": -6.8,
+      "last_price": 237.56,
+      "last_pnl_pct": -7.26,
       "days_held": 22,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 202.65,
-      "last_pnl_pct": -6.14,
+      "last_price": 200.23,
+      "last_pnl_pct": -7.26,
       "days_held": 19,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Azure cloud growth decelerating below 25% in the next quarterly print would confirm institutional avoidance and risk a breakdown below the 50-MA support at $407.",
       "earnings_play": false,
       "trail_high": 420.11,
-      "last_price": 402.87,
-      "last_pnl_pct": -4.1,
+      "last_price": 398.22,
+      "last_pnl_pct": -5.21,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Tariff escalation targeting China iPhone demand or raising BOM costs could compress both earnings estimates and the 30x forward multiple simultaneously, opening a retest of the $265 MA200.",
       "earnings_play": false,
       "trail_high": 292.54,
-      "last_price": 292.54,
-      "last_pnl_pct": 0.61,
+      "last_price": 291.96,
+      "last_pnl_pct": 0.41,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -1494,29 +1494,19 @@
     },
     {
       "date": "2026-06-10",
-      "value": 999.78
+      "value": 997.24
     }
   ],
   "top_picks": [
-    {
-      "ticker": "SHOP.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "In a confirmed bull regime, Shopify's 34% revenue growth, forward P/E compression to ~47x, and 22% upside to analyst target justify a medium-term position despite the technical overhang below key moving averages. The mildly positive RSI and bullish MACD suggest short-term momentum is supportive for entry at current levels.",
-      "price_target": 185.0,
-      "key_risk": "Any deceleration in revenue growth below 30% or deterioration in merchant GMV guidance at the next earnings print would invalidate the growth re-rating thesis and compress multiples sharply given the elevated 107x trailing P/E."
-    },
     {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is in classic mid-trend pullback territory with RSI at 29.7 signaling oversold conditions, while strong fundamentals (37.9% margins, 21.8% revenue growth) at 24.6x forward P/E offer genuine value against a $409 analyst consensus target. The BULL market regime supports full Kelly sizing, and the 200-day MA at $305.65 provides a deep structural floor well above the stop.",
+      "reasoning": "GOOG trades at a 34% discount to its 52-week high with RSI at 29.3 \u2014 deeply oversold on a fundamentally sound business with 21.8% revenue growth and 37.9% margins, creating asymmetric risk/reward toward the $409 analyst consensus. BULL regime permits full Kelly deployment and the GARP valuation at 24.5x forward P/E is compelling, though position sizing should be moderate given MACD bearish confirmation and unresolved DOJ antitrust overhang.",
       "price_target": 409.0,
-      "key_risk": "Bearish MACD with no confirmed reversal means the oversold condition could extend further if AI search monetization clarity disappoints or macro risk-off accelerates the drawdown."
+      "key_risk": "DOJ antitrust remedies in the search monopoly case could force structural divestitures, triggering regime-level multiple compression well below current prices."
     },
     {
       "ticker": "AMD",
@@ -1524,9 +1514,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD trades in a strong long-term uptrend with 37.8% revenue growth and a credible MI300X GPU catalyst, and the BULL regime supports entry even amid near-term technical weakness. The analyst consensus strong buy with a $482 target provides a defined risk/reward, and the pullback from highs offers a better entry than chasing momentum.",
+      "reasoning": "In a confirmed BULL regime, AMD's -17% weekly flush to RSI 50.5 is a high-beta mean-reversion event in an otherwise intact bull structure, with analyst consensus at $482.69 and strong_buy rating supporting a recovery thesis anchored to MI300X datacenter momentum. The 50-DMA at $375 provides a clear structural stop, limiting downside to ~17% while offering asymmetric upside if AI accelerator order flow reaccelerates.",
       "price_target": 482.69,
-      "key_risk": "A bearish MACD, absent volume confirmation, and speculative 151x trailing P/E leave AMD highly vulnerable to any softening in hyperscaler AI capex guidance or GPU demand disappointment."
+      "key_risk": "Hyperscaler MI300X order delays or negative guidance revisions could break the $375 50-DMA support, triggering a structural trend reversal and invalidating the bull-market dip thesis."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR's 84.7% revenue growth and 43.7% margins justify a substantial premium despite the current technical breakdown, and the 41% gap to analyst consensus in a bull market creates a compelling asymmetric entry near 52-week lows. The sustained selling has compressed valuation enough to warrant a medium-term accumulation position with a defined stop just below structural support.",
+      "price_target": 175.0,
+      "key_risk": "A macro-driven AI/defense multiple de-rating or Fed hawkishness could accelerate the breakdown below $122 support, invalidating the thesis entirely given PLTR's elevated beta and still-stretched 62x forward P/E."
     }
   ],
   "regime": "BULL",
@@ -1535,12 +1535,12 @@
     "rolling_win_rate": 56.2,
     "avg_return": 2.74,
     "sharpe": 0.27,
-    "max_drawdown": 2.59,
+    "max_drawdown": 2.84,
     "total_trades": 16,
     "wins": 9,
     "losses": 7,
     "underperforming": false
   },
   "pnl": 13.32,
-  "last_run": "2026-06-10 16:55"
+  "last_run": "2026-06-10 19:39"
 }
