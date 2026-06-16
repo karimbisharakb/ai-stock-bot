@@ -17,8 +17,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 597.1,
-      "last_pnl_pct": -0.92,
+      "last_price": 600.21,
+      "last_pnl_pct": -0.4,
       "days_held": 36,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 246.2,
-      "last_pnl_pct": -3.89,
+      "last_price": 246.0,
+      "last_pnl_pct": -3.97,
       "days_held": 28,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 209.5,
-      "last_pnl_pct": -2.97,
+      "last_price": 207.41,
+      "last_pnl_pct": -3.94,
       "days_held": 25,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Azure growth disappoints at the next earnings print, validating the re-rating and sending price toward the $356 52-week low.",
       "earnings_play": false,
       "trail_high": 399.76,
-      "last_price": 391.54,
-      "last_pnl_pct": 1.62,
+      "last_price": 393.83,
+      "last_pnl_pct": 2.22,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "AAPL is in a confirmed bull regime pullback with RSI near oversold at 34.5 while price holds above both MA50 and MA200, offering a constructive entry for mean reversion toward the $312 analyst target. Distribution volume is unremarkable rather than panic-driven, supporting a base-building scenario before trend resumption.",
       "key_risk": "U.S.-China tariff escalation poses the primary threat, as any new trade policy shock could compress margins and disrupt supply chain continuity, invalidating the bull case rapidly.",
       "earnings_play": false,
-      "trail_high": 299.02,
-      "last_price": 299.02,
-      "last_pnl_pct": 2.51,
+      "trail_high": 299.24,
+      "last_price": 299.24,
+      "last_pnl_pct": 2.59,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -1662,7 +1662,7 @@
     },
     {
       "date": "2026-06-16",
-      "value": 1005.81
+      "value": 1005.86
     }
   ],
   "top_picks": [
@@ -1672,9 +1672,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is a high-quality compounder trading at an undemanding 25.6x forward P/E with 21.8% revenue growth, well above key moving averages in a bull regime with analyst consensus pointing to ~10% upside. The current RSI/MACD weakness represents mid-trend consolidation with below-average volume, not structural breakdown, offering an attractive entry before the next leg higher.",
+      "reasoning": "GOOG is pulling back constructively above key moving averages (MA50 $362, MA200 $309) with RSI nearing oversold, offering an attractive entry into a fundamentally cheap, high-quality compounder at 25.6x forward earnings with 21.8% revenue growth. The ~10% gap to analyst consensus reflects genuine fundamental upside in a BULL regime where full Kelly sizing applies.",
       "price_target": 409.0,
-      "key_risk": "AI search disruption \u2014 evidence of AI Overviews cannibalizing ad click-through rates or accelerating search share loss to OpenAI/Perplexity could compress the multiple sharply."
+      "key_risk": "A DOJ antitrust ruling mandating structural breakup or forced divestiture of Chrome/Android would be a significant re-rating event to the downside that no earnings beat could offset."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "In a confirmed bull market, PLTR's elite 85% revenue growth and 44% margins justify accumulation at a 27% discount to analyst consensus despite near-term technical weakness. The 37% upside to analyst target and structural AI/defense tailwinds support a medium-term recovery thesis from current oversold levels.",
+      "price_target": 175.0,
+      "key_risk": "Federal defense/intelligence budget cuts or AI spending narrative reset could accelerate the existing downtrend and break the 52-week low, invalidating the growth premium entirely."
     },
     {
       "ticker": "TSM",
@@ -1682,19 +1692,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's forward P/E of 21.97x against 35%+ revenue growth and best-in-class margins makes it genuinely undervalued, with analyst consensus at $467.84 providing a clear re-rating catalyst in a bull regime. The high-base consolidation near all-time highs with neutral RSI offers a reasonable entry ahead of the next leg higher, though weakening MACD warrants a measured position size.",
+      "reasoning": "TSM's dominant positioning in AI/advanced node demand, exceptional 35% revenue growth, and 46.5% operating margins justify accumulation during this short-term consolidation phase with a compelling forward P/E of 21.7x. Bull regime permits entry at score 7, and the stock's structural uptrend with MA50/MA200 support well below current price provides a favorable risk/reward setup toward analyst target.",
       "price_target": 467.84,
-      "key_risk": "U.S.-China geopolitical escalation or Taiwan Strait deterioration could violently compress the multiple given the stock's proximity to 52-week highs and 1.25 beta."
-    },
-    {
-      "ticker": "CRWD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CRWD remains in a strong bull structure trading well above both key moving averages, and mid-trend consolidation with cooling RSI and below-average volume is a typical healthy pause before continuation. The cybersecurity platform dominance and 25.6% revenue growth justify holding a position despite the stretched 108x forward multiple in a confirmed bull regime.",
-      "price_target": 712.0,
-      "key_risk": "Any ARR deceleration or guidance cut at the next earnings print could violently compress the 108x multiple with analysts offering only 4.7% upside cushion from current levels."
+      "key_risk": "U.S.-Taiwan geopolitical escalation or semiconductor export control policy shifts could rapidly reprice the geopolitical risk premium embedded in TSM at 97% of its 52-week high."
     }
   ],
   "regime": "BULL",
@@ -1710,5 +1710,5 @@
     "underperforming": false
   },
   "pnl": 8.47,
-  "last_run": "2026-06-16 18:23"
+  "last_run": "2026-06-16 20:19"
 }
