@@ -17,8 +17,8 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 578.29,
-      "last_pnl_pct": -4.04,
+      "last_price": 571.01,
+      "last_pnl_pct": -5.25,
       "days_held": 37,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 239.78,
-      "last_pnl_pct": -6.4,
+      "last_price": 238.02,
+      "last_pnl_pct": -7.09,
       "days_held": 29,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 207.22,
-      "last_pnl_pct": -4.02,
+      "last_price": 205.19,
+      "last_pnl_pct": -4.97,
       "days_held": 26,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Azure growth disappoints at the next earnings print, validating the re-rating and sending price toward the $356 52-week low.",
       "earnings_play": false,
       "trail_high": 399.76,
-      "last_price": 384.73,
-      "last_pnl_pct": -0.15,
+      "last_price": 380.5,
+      "last_pnl_pct": -1.24,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "U.S.-China tariff escalation poses the primary threat, as any new trade policy shock could compress margins and disrupt supply chain continuity, invalidating the bull case rapidly.",
       "earnings_play": false,
       "trail_high": 299.24,
-      "last_price": 298.3,
-      "last_pnl_pct": 2.27,
+      "last_price": 295.1,
+      "last_pnl_pct": 1.17,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -1666,39 +1666,39 @@
     },
     {
       "date": "2026-06-17",
-      "value": 1000.12
+      "value": 996.92
     }
   ],
   "top_picks": [
+    {
+      "ticker": "TSM",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM trades at a compelling 22.2x fwd P/E against 35% revenue growth and near-monopoly positioning in advanced AI/HPC nodes, with the bull regime and strong_buy consensus providing institutional support for the next leg to $473. RSI reset to 53.8 within an intact uptrend above both key moving averages offers a favorable risk/reward entry during consolidation.",
+      "price_target": 473.0,
+      "key_risk": "Geopolitical escalation in the Taiwan Strait or expanded U.S. export restrictions on advanced packaging could rapidly reprice the geopolitical risk premium and overwhelm the fundamental upside."
+    },
     {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a compelling discount to intrinsic value \u2014 25x forward P/E for a near-40% margin business with 21.8% revenue growth is genuinely mispriced, and RSI near 37 with price well above MA200 suggests a buyable dip rather than a structural breakdown. The $426 analyst target with strong-buy consensus provides a clear fundamental anchor for mean reversion as the corrective phase exhausts near oversold levels.",
-      "price_target": 426.61,
-      "key_risk": "AI Overviews cannibalization of Search ad revenue could trigger a structural re-rating that fundamentals and technicals alone cannot defend against."
+      "reasoning": "GOOG trades at a genuine discount to fair value with 24.9x forward P/E despite 21.8% revenue growth and 37.9% operating margins, creating a compelling risk/reward as RSI nears oversold levels. The pullback is a correction within a broader uptrend, and AI/cloud monetization catalysts remain intact for a re-rate toward the $426 consensus target.",
+      "price_target": 426.62,
+      "key_risk": "Continued deceleration in Google Cloud growth or search ad market share erosion from AI competitors could invalidate the valuation re-rate thesis and extend the drawdown below key support."
     },
     {
-      "ticker": "AMD",
+      "ticker": "MSTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's AI/data center GPU ramp via MI300X supports a dramatic earnings acceleration that justifies forward multiples, and the bull market regime warrants participation despite current technical consolidation. The 37.8% revenue growth trajectory and expanding data center TAM provide fundamental support for a trend-continuation entry at neutral RSI.",
-      "price_target": 620.0,
-      "key_risk": "Nvidia competitive pressure on H100/H200 could erode MI300X market share faster than expected, collapsing the forward earnings narrative that underpins the elevated valuation."
-    },
-    {
-      "ticker": "TSM",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "TSM trades at a compelling 22x forward P/E with 35% revenue growth and monopoly-grade AI/HPC foundry positioning, offering a clear path to analyst target with strong structural support well above both moving averages. Despite fading momentum and bearish MACD near the 52-week high, the bull market regime and fundamental quality justify entry with disciplined risk management.",
-      "price_target": 473.39,
-      "key_risk": "Geopolitical escalation in the Taiwan Strait or a downside surprise on advanced node utilization rates could rapidly unwind the near-52-week-high valuation with momentum already deteriorating."
+      "reasoning": "MSTR trades near oversold RSI territory with 191% upside to analyst consensus, offering asymmetric exposure to a BTC recovery within the crypto proxy allocation cap. The leveraged Bitcoin structure amplifies any reversal from current depressed levels, and position sizing discipline at the 20% cap manages the tail risk.",
+      "price_target": 210.0,
+      "key_risk": "A sustained Bitcoin breakdown below $80K would compress MSTR's NAV premium, stress its 18x leveraged balance sheet, and potentially trigger forced selling that overwhelms any technical bounce."
     }
   ],
   "regime": "BULL",
@@ -1714,5 +1714,5 @@
     "underperforming": false
   },
   "pnl": 8.47,
-  "last_run": "2026-06-17 16:54"
+  "last_run": "2026-06-17 19:28"
 }
