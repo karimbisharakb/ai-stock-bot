@@ -17,9 +17,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 573.64,
-      "last_pnl_pct": -4.81,
-      "days_held": 38,
+      "last_price": NaN,
+      "last_pnl_pct": NaN,
+      "days_held": 39,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "AWS growth deceleration or broader macro deterioration could break the $238-240 support shelf and invalidate the bullish thesis.",
       "earnings_play": false,
       "trail_high": 274.1,
-      "last_price": 242.91,
-      "last_pnl_pct": -5.18,
-      "days_held": 30,
+      "last_price": 244.39,
+      "last_pnl_pct": -4.6,
+      "days_held": 31,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 209.99,
-      "last_pnl_pct": -2.74,
-      "days_held": 27,
+      "last_price": 210.69,
+      "last_pnl_pct": -2.42,
+      "days_held": 28,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "Azure growth disappoints at the next earnings print, validating the re-rating and sending price toward the $356 52-week low.",
       "earnings_play": false,
       "trail_high": 399.76,
-      "last_price": 377.79,
-      "last_pnl_pct": -1.95,
-      "days_held": 7,
+      "last_price": 379.4,
+      "last_pnl_pct": -1.53,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "U.S.-China tariff escalation poses the primary threat, as any new trade policy shock could compress margins and disrupt supply chain continuity, invalidating the bull case rapidly.",
       "earnings_play": false,
       "trail_high": 299.24,
-      "last_price": 297.19,
-      "last_pnl_pct": 1.89,
-      "days_held": 6,
+      "last_price": 298.01,
+      "last_pnl_pct": 2.17,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     }
@@ -1671,6 +1671,10 @@
     {
       "date": "2026-06-18",
       "value": 999.82
+    },
+    {
+      "date": "2026-06-19",
+      "value": NaN
     }
   ],
   "top_picks": [
@@ -1680,9 +1684,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's forward P/E compression to 23.5x against 35% revenue growth and 46.5% margins represents genuine value in the world's most irreplaceable semiconductor manufacturer, with AI inference demand acting as a structural re-rating catalyst toward $500. Bull regime with bullish MACD, RSI at 61.5 (room to run), and steep multi-timeframe momentum support a medium-term continuation trade despite near-term consolidation risk at the 52-week high.",
-      "price_target": 500.0,
-      "key_risk": "Geopolitical escalation in the Taiwan Strait or a softening in Nvidia/Apple CoWoS order visibility could trigger a 15-20% drawdown, amplified by institutional volume not fully confirming the current breakout attempt."
+      "reasoning": "TSM trades at a compelling 23.5x forward P/E against 35%+ revenue growth with RSI at 61.5 in an ideal momentum continuation zone, pressing against the 52-week high of $465.22 where a breakout opens minimal overhead resistance. Bull regime with strong fundamental support, margin expansion, and irreplaceable semiconductor moat justifies entry here despite modest near-term analyst upside.",
+      "price_target": 485.0,
+      "key_risk": "Taiwan Strait geopolitical escalation remains an asymmetric tail risk that could trigger sharp non-fundamental selling regardless of business performance."
+    },
+    {
+      "ticker": "VFV.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "VFV sits just under all-time highs with a clean bullish MA structure (price > MA50 > MA200), RSI at 54.9 providing meaningful headroom, and a confirming MACD histogram \u2014 the setup favors continuation into a breakout. Bull market regime permits full Kelly sizing, and the S&P 500's AI-driven earnings momentum remains the dominant macro tailwind supporting sustained multiple expansion.",
+      "price_target": 220.0,
+      "key_risk": "A hotter-than-expected US inflation print reversing Fed rate-cut expectations could trigger institutional selling at all-time highs, amplified by below-average volume and USD/CAD FX headwinds for Canadian investors."
     },
     {
       "ticker": "GOOG",
@@ -1690,19 +1704,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a compelling 25.2x forward P/E with 21.8% revenue growth and 38% margins, offering a 16.8% gap to analyst consensus that undervalues its AI monetization optionality. The near-term pullback with RSI at 43.3 and price hovering just above MA50 support provides a favorable entry within a broader bull trend.",
-      "price_target": 426.62,
-      "key_risk": "Structural search ad revenue erosion from AI query deflection could compress the multiple re-rating thesis and invalidate the upside case entirely."
-    },
-    {
-      "ticker": "PLTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "PLTR is deeply oversold at RSI 23.5 with 43% upside to analyst consensus, and its elite AI/government business fundamentals remain intact despite the technical breakdown. The BULL market regime supports initiating a position near 52-week lows with distribution appearing largely complete.",
-      "price_target": 182.75,
-      "key_risk": "Federal budget sequestration or contract delays could invalidate the government-segment re-rating thesis and push price below the $122.68 52-week low with no meaningful support beneath."
+      "reasoning": "GOOG trades at a discount to quality peers at 25x forward with 21.8% revenue growth and ~40% margins, while the 16% gap to analyst consensus implies meaningful upside as cloud and Search FCF compound. The stock is above both key moving averages in a bull regime, and near-term weakness from RSI consolidation and negative MACD creates a favorable entry rather than a red flag.",
+      "price_target": 426.61,
+      "key_risk": "A structural DOJ antitrust remedy \u2014 forced divestiture or default search agreement restrictions \u2014 could materially reprice the core Search business and invalidate the bull case."
     }
   ],
   "regime": "BULL",
@@ -1718,5 +1722,5 @@
     "underperforming": false
   },
   "pnl": 8.47,
-  "last_run": "2026-06-18 19:30"
+  "last_run": "2026-06-19 16:25"
 }
