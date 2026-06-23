@@ -17,9 +17,9 @@
       "key_risk": "If Q1 guidance reveals core ad revenue growth decelerating below 25% or Reality Labs losses accelerate, the bearish structural downtrend reasserts and the valuation re-rating lower continues despite oversold conditions.",
       "earnings_play": false,
       "trail_high": 634.5,
-      "last_price": 563.65,
-      "last_pnl_pct": -6.47,
-      "days_held": 42,
+      "last_price": 563.58,
+      "last_pnl_pct": -6.48,
+      "days_held": 43,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "U.S. export control tightening on AI chips to China could violently compress near-term revenue estimates given NVDA's 2.24 beta and direct H20 exposure.",
       "earnings_play": false,
       "trail_high": 224.59,
-      "last_price": 208.52,
-      "last_pnl_pct": -3.42,
-      "days_held": 31,
+      "last_price": 202.22,
+      "last_pnl_pct": -6.34,
+      "days_held": 32,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "U.S.-China tariff escalation poses the primary threat, as any new trade policy shock could compress margins and disrupt supply chain continuity, invalidating the bull case rapidly.",
       "earnings_play": false,
       "trail_high": 299.24,
-      "last_price": 296.94,
-      "last_pnl_pct": 1.8,
-      "days_held": 10,
+      "last_price": 298.42,
+      "last_pnl_pct": 2.31,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
-      "trail_high": 369.93,
-      "last_price": 367.29,
-      "last_pnl_pct": -0.71,
-      "days_held": 0,
+      "trail_high": 372.72,
+      "last_price": 372.72,
+      "last_pnl_pct": 0.75,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "AMZN is testing oversold RSI levels near MA200 support with a compelling 34% analyst upside driven by AWS re-acceleration and expanding margins at a reasonable 23.7x forward P/E. Bull regime allows entry at score 7 with a technically defined floor near $232 MA200 providing downside reference.",
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
-      "trail_high": 234.04,
-      "last_price": 232.92,
-      "last_pnl_pct": -0.48,
-      "days_held": 0,
+      "trail_high": 234.61,
+      "last_price": 234.61,
+      "last_pnl_pct": 0.24,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -1831,28 +1831,22 @@
     {
       "date": "2026-06-22",
       "value": 993.98
+    },
+    {
+      "date": "2026-06-23",
+      "value": 993.9
     }
   ],
   "top_picks": [
     {
-      "ticker": "SNOW",
+      "ticker": "TSM",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 16.9 is a capitulation extreme within a structurally intact uptrend (price above both MA50 and MA200), making a mean-reversion bounce highly probable; analyst consensus 29% above current price with a strong_buy rating provides fundamental support for the move. Bull regime allows full Kelly sizing on this oversold setup with a clear stop just below MA200.",
-      "price_target": 275.0,
-      "key_risk": "High D/E of 142.9 and an 84x Fwd P/E mean any earnings guidance cut or margin miss will trigger a violent unwind of the entire recovery trade."
-    },
-    {
-      "ticker": "CNQ.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CNQ is deeply oversold at RSI 28.8 with capitulation volume, trading at ~12x forward earnings well above MA200 support, offering a high-quality energy name at a significant discount to analyst consensus of $71.20. The corrective pullback within a broader uptrend, combined with a fortress balance sheet and 20%+ upside, presents an asymmetric risk/reward entry in a BULL regime.",
-      "price_target": 71.2,
-      "key_risk": "A sustained WTI crude break below $65/bbl would compress realized pricing and undermine the valuation case, potentially dragging CNQ toward the $53\u201355 structural support zone."
+      "reasoning": "TSM's forward P/E of 22.5x with 35% revenue growth and elite 46.5% margins represents compelling value at a 5% discount to consensus, while RSI at 49.2 signals healthy consolidation rather than exhaustion in a confirmed bull uptrend. MACD confirmation and the stock's position well above both key moving averages support a resumption toward the $476 52-week high.",
+      "price_target": 473.0,
+      "key_risk": "U.S.-China geopolitical escalation or Taiwan Strait tensions could trigger a sharp 15-20% drawdown independent of fundamentals given TSM's concentrated geographic exposure."
     },
     {
       "ticker": "GOOG",
@@ -1860,9 +1854,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a genuine discount to intrinsic value with 24x forward P/E, 21.8% revenue growth, and 37.9% margins \u2014 the selloff reflects macro anxiety rather than fundamental deterioration. RSI near oversold at 38.1 within a long-term uptrend above MA200 offers a cautious accumulation entry ahead of a likely mean-reversion toward the $426 analyst consensus.",
+      "reasoning": "GOOG is trading in a strategic accumulation zone ($330\u2013$345) at a compelling 23.7x forward P/E with 21.8% revenue growth and 38% margins, offering an $83 gap to analyst consensus in a bull regime. Technical weakness is short-term distributive rather than structural, with institutional selling notably absent on sub-average volume.",
       "price_target": 426.61,
-      "key_risk": "Structural search TAM compression from AI competitors (OpenAI/Perplexity) could invalidate the multiple re-rating thesis and breach MA200 support near $310."
+      "key_risk": "DOJ antitrust remedies on Search monetization could structurally impair margins and invalidate the re-rating thesis regardless of earnings quality."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "RSI at 17 signals extreme oversold conditions with 53.6% upside to analyst consensus, and elite fundamentals (84.7% revenue growth, 43.7% margins) suggest the selloff is sentiment-driven rather than business-driven. BULL regime allows entry at current depressed levels with a wide stop below the $100\u2013$110 price discovery zone.",
+      "price_target": 165.0,
+      "key_risk": "Federal IT/defense budget cuts or DOGE-related contract cancellations could break the $117.94 floor and trigger momentum fund liquidation into the $100\u2013$110 zone."
     }
   ],
   "regime": "BULL",
@@ -1871,12 +1875,12 @@
     "rolling_win_rate": 50.0,
     "avg_return": 1.16,
     "sharpe": 0.12,
-    "max_drawdown": 3.16,
+    "max_drawdown": 3.17,
     "total_trades": 20,
     "wins": 10,
     "losses": 10,
     "underperforming": false
   },
   "pnl": 1.4600000000000009,
-  "last_run": "2026-06-22 20:08"
+  "last_run": "2026-06-23 16:18"
 }
