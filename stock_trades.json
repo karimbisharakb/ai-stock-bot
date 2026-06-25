@@ -17,8 +17,8 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 373.65,
-      "last_price": 355.26,
-      "last_pnl_pct": -3.97,
+      "last_price": 354.48,
+      "last_pnl_pct": -4.18,
       "days_held": 3,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 241.16,
-      "last_price": 229.87,
-      "last_pnl_pct": -1.78,
+      "last_price": 228.71,
+      "last_pnl_pct": -2.28,
       "days_held": 3,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 198.61,
-      "last_price": 195.85,
-      "last_pnl_pct": -1.39,
+      "last_price": 194.37,
+      "last_pnl_pct": -2.13,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -82,9 +82,9 @@
       "reasoning": "RSI at 23.9 signals deeply oversold conditions within a bull market corrective flush, with MA200 support at $268.84 providing a structural floor and analyst consensus at $315 offering meaningful upside. The corrective pullback from $317 improves risk/reward materially, and the bull regime allows entry at current score thresholds.",
       "key_risk": "Escalating US-China tariff policy on hardware manufacturing could compress Apple margins and invalidate the recovery thesis before technical reversal confirms.",
       "earnings_play": false,
-      "trail_high": 277.99,
-      "last_price": 277.99,
-      "last_pnl_pct": 0.0,
+      "trail_high": 279.09,
+      "last_price": 279.09,
+      "last_pnl_pct": 0.4,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Tariff-driven macro deterioration forces SMB and e-commerce advertisers to slash budgets, collapsing forward estimates and validating the compressed multiple as a value trap rather than an opportunity.",
       "earnings_play": false,
       "trail_high": 549.52,
-      "last_price": 549.52,
-      "last_pnl_pct": 0.0,
+      "last_price": 545.81,
+      "last_pnl_pct": -0.68,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -2070,29 +2070,19 @@
     },
     {
       "date": "2026-06-25",
-      "value": 981.11
+      "value": 980.05
     }
   ],
   "top_picks": [
-    {
-      "ticker": "TSM",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "TSM trades at a compelling 22x forward P/E against 35% revenue growth and 46.5% margins, with AI/HPC-driven CoWoS and N3/N2 node ramp providing clear near-term catalysts. Bullish market regime, healthy non-overbought RSI at 49.1, and strong analyst consensus support a medium-term position targeting the analyst price objective.",
-      "price_target": 473.0,
-      "key_risk": "Geopolitical escalation around Taiwan or a demand deceleration signal from key customers like NVIDIA or Apple could trigger a sharp de-rating from current levels."
-    },
     {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG is deeply oversold at RSI 31.7 with a 25% gap to analyst consensus, trading well above MA200 in a bull regime \u2014 this is a high-quality pullback entry in one of the strongest-margin mega-cap compounders. The 23x forward P/E with 21.8% revenue growth and net cash balance sheet provides a substantial fundamental floor for patient capital.",
-      "price_target": 426.61,
-      "key_risk": "AI search disruption from ChatGPT or Perplexity eroding core ad revenue could invalidate the growth thesis before technical stabilization occurs."
+      "reasoning": "GOOG is deeply oversold (RSI 31.2) in a bull regime while trading above MA200 support, offering a high-quality AI platform at a discount to fair value with 25%+ analyst upside. The pullback-within-uptrend structure and strong fundamentals (21.8% revenue growth, 37.9% margins) justify a medium-term entry here.",
+      "price_target": 420.0,
+      "key_risk": "DOJ antitrust structural remedy forcing search divestiture or default agreement restrictions could trigger a fundamental repricing event that invalidates the thesis."
     },
     {
       "ticker": "PLTR",
@@ -2100,9 +2090,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "At the 52-week floor with RSI 16.4 and 71% analyst upside, PLTR's rare combination of 84.7% revenue growth and 43.7% margins justifies a speculative mean-reversion entry in a bull regime. Position sizing must remain small given intensifying downside momentum and no confirmed technical stabilization.",
+      "reasoning": "PLTR is trading at RSI 16.7 near 52-week lows with 84.7% revenue growth and 43.7% margins at a compressed 51x forward P/E, offering asymmetric upside toward analyst consensus of $182 in a confirmed bull regime. Position sizing must be disciplined given active institutional distribution and no technical reversal signal yet, treating this as a staged entry into a fundamentally intact compounder.",
       "price_target": 155.0,
-      "key_risk": "Any deceleration in U.S. commercial revenue at the next earnings print could invalidate the growth premium and trigger a sustained re-rating below the $95 stop."
+      "key_risk": "Macro-driven multiple compression and continued institutional distribution could push price through $100 psychological support before any stabilization, invalidating the technical entry timing."
+    },
+    {
+      "ticker": "TSM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM offers a rare combination of near-monopoly pricing power in leading-edge fabrication at a reasonable 21.9x forward P/E against 35% revenue growth, with strong structural support well above both key moving averages. Near-term MACD weakness and mid-range RSI suggest a healthy consolidation base rather than distribution, making this an attractive medium-term entry ahead of the next leg toward analyst targets.",
+      "price_target": 478.95,
+      "key_risk": "A Taiwan Strait geopolitical escalation or surprise U.S. export control tightening could trigger a sharp repricing regardless of fundamentals."
     }
   ],
   "regime": "BULL",
@@ -2111,12 +2111,12 @@
     "rolling_win_rate": 40.0,
     "avg_return": 0.08,
     "sharpe": 0.01,
-    "max_drawdown": 4.41,
+    "max_drawdown": 4.52,
     "total_trades": 23,
     "wins": 10,
     "losses": 13,
     "underperforming": false
   },
   "pnl": -13.489999999999998,
-  "last_run": "2026-06-25 16:09"
+  "last_run": "2026-06-25 19:11"
 }
