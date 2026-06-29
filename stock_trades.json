@@ -17,8 +17,8 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 373.65,
-      "last_price": 367.35,
-      "last_pnl_pct": -0.7,
+      "last_price": 368.28,
+      "last_pnl_pct": -0.45,
       "days_held": 7,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "AMZN is testing oversold RSI levels near MA200 support with a compelling 34% analyst upside driven by AWS re-acceleration and expanding margins at a reasonable 23.7x forward P/E. Bull regime allows entry at score 7 with a technically defined floor near $232 MA200 providing downside reference.",
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
-      "trail_high": 241.16,
-      "last_price": 239.89,
-      "last_pnl_pct": 2.5,
+      "trail_high": 241.2,
+      "last_price": 241.2,
+      "last_pnl_pct": 3.06,
       "days_held": 7,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 198.61,
-      "last_price": 193.09,
-      "last_pnl_pct": -2.78,
+      "last_price": 193.98,
+      "last_pnl_pct": -2.33,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -82,9 +82,9 @@
       "reasoning": "RSI at 23.9 signals deeply oversold conditions within a bull market corrective flush, with MA200 support at $268.84 providing a structural floor and analyst consensus at $315 offering meaningful upside. The corrective pullback from $317 improves risk/reward materially, and the bull regime allows entry at current score thresholds.",
       "key_risk": "Escalating US-China tariff policy on hardware manufacturing could compress Apple margins and invalidate the recovery thesis before technical reversal confirms.",
       "earnings_play": false,
-      "trail_high": 280.14,
-      "last_price": 280.14,
-      "last_pnl_pct": 0.77,
+      "trail_high": 282.04,
+      "last_price": 282.04,
+      "last_pnl_pct": 1.46,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "META is deeply oversold at RSI 26.4 with slowing distribution volume near the $520\u2013$540 support cluster, suggesting capitulation exhaustion at a material fundamental mispricing of 15x forward earnings for a 33% growth compounder. Bull regime permits full Kelly deployment and the 50% analyst upside provides a wide margin of safety even under conservative mean-reversion assumptions.",
       "key_risk": "Tariff-driven macro deterioration forces SMB and e-commerce advertisers to slash budgets, collapsing forward estimates and validating the compressed multiple as a value trap rather than an opportunity.",
       "earnings_play": false,
-      "trail_high": 564.34,
-      "last_price": 564.34,
-      "last_pnl_pct": 2.7,
+      "trail_high": 565.62,
+      "last_price": 565.62,
+      "last_pnl_pct": 2.93,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -2078,7 +2078,7 @@
     },
     {
       "date": "2026-06-29",
-      "value": 988.13
+      "value": 989.45
     }
   ],
   "top_picks": [
@@ -2088,9 +2088,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG's 22% upside to analyst targets is supported by strong fundamentals \u2014 21.8% revenue growth, 37.9% margins, and a 24x forward P/E that is cheap for this quality \u2014 while the current -9.5% pullback and RSI at 43.3 offer a technically oversold entry within a confirmed bull regime. The DOJ antitrust overhang is the key uncertainty, but a lighter remedy outcome remains the base case and would act as a powerful re-rating catalyst over the next 1-3 months.",
-      "price_target": 415.0,
-      "key_risk": "A structural DOJ breakup order or forced unwinding of default search agreements would trigger a severe downside re-rating that could break the 200-DMA support at $313."
+      "reasoning": "GOOG offers exceptional fundamental value at 24x forward earnings with 21.8% revenue growth and 38% margins, while the analyst consensus target of $426 implies ~22% upside that the market is underpricing relative to AI monetization optionality in Search and Cloud. The near-term technical weakness is a buying opportunity rather than a structural breakdown given the stock remains well above its 200-day MA and the pullback lacks extreme volume capitulation.",
+      "price_target": 426.0,
+      "key_risk": "Search revenue cannibalization from AI Overviews or an advertiser pullback at Q2 earnings could accelerate the technical breakdown toward the $320\u2013330 support zone."
     },
     {
       "ticker": "PLTR",
@@ -2098,9 +2098,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 29.2 signals deeply oversold conditions with 59% upside to analyst targets, and 85% YoY revenue growth with 44% margins justifies accumulation near 52-week lows in a bull regime. The risk/reward skews favorably for patient capital with a defined floor near $106.",
+      "reasoning": "RSI at 31.4 in a bull regime with 57% upside to analyst consensus presents a tactical mean-reversion entry for aggressive growth; 85% revenue growth and 44% margins justify accumulation near 52-week support. Position sizing must be reduced given bearish technicals and government contract headline risk.",
       "price_target": 165.0,
-      "key_risk": "DOGE-driven federal contract cuts could break the $106 support floor and invalidate the bull thesis entirely, given PLTR's existential dependence on government revenue."
+      "key_risk": "DOGE/federal budget cuts targeting defense and intelligence contracts could reprice PLTR violently given ~55% government revenue exposure and already-fractured technical structure above the $106 52-week low."
     },
     {
       "ticker": "TSM",
@@ -2108,9 +2108,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades at a reasonable 22.4x forward P/E despite 35% revenue growth and near-monopoly positioning in advanced node fabrication, offering a favorable risk/reward into the analyst consensus target. The BULL regime allows full Kelly deployment, and the MA50 near $413 provides a well-defined structural support floor for position sizing.",
+      "reasoning": "TSM's forward P/E compression to 22.5x against 35% revenue growth and 46.5% margins offers a compelling risk/reward in a confirmed bull regime, with analyst target at $478.95 just above the 52-week high. Short-term MACD weakness and consolidation present a reasonable entry ahead of a potential breakout continuation driven by AI/HPC foundry demand.",
       "price_target": 478.95,
-      "key_risk": "U.S.-Taiwan geopolitical escalation or an unexpected pullback in AI capex commitments could rapidly compress the multiple and invalidate the near-term bull thesis."
+      "key_risk": "Taiwan Strait geopolitical escalation or U.S. export control tightening could instantly reprice TSM's geographic concentration risk, overwhelming any fundamental upside."
     }
   ],
   "regime": "BULL",
@@ -2126,5 +2126,5 @@
     "underperforming": false
   },
   "pnl": -13.489999999999998,
-  "last_run": "2026-06-29 16:53"
+  "last_run": "2026-06-29 19:08"
 }
