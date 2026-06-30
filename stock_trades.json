@@ -17,9 +17,9 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 373.65,
-      "last_price": 368.28,
-      "last_pnl_pct": -0.45,
-      "days_held": 7,
+      "last_price": 371.3,
+      "last_pnl_pct": 0.37,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 241.2,
-      "last_price": 241.2,
-      "last_pnl_pct": 3.06,
-      "days_held": 7,
+      "last_price": 239.76,
+      "last_pnl_pct": 2.44,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 198.61,
-      "last_price": 193.98,
-      "last_pnl_pct": -2.33,
-      "days_held": 5,
+      "last_price": 198.13,
+      "last_pnl_pct": -0.24,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "RSI at 23.9 signals deeply oversold conditions within a bull market corrective flush, with MA200 support at $268.84 providing a structural floor and analyst consensus at $315 offering meaningful upside. The corrective pullback from $317 improves risk/reward materially, and the bull regime allows entry at current score thresholds.",
       "key_risk": "Escalating US-China tariff policy on hardware manufacturing could compress Apple margins and invalidate the recovery thesis before technical reversal confirms.",
       "earnings_play": false,
-      "trail_high": 282.04,
-      "last_price": 282.04,
-      "last_pnl_pct": 1.46,
-      "days_held": 4,
+      "trail_high": 289.15,
+      "last_price": 289.15,
+      "last_pnl_pct": 4.01,
+      "days_held": 5,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "Tariff-driven macro deterioration forces SMB and e-commerce advertisers to slash budgets, collapsing forward estimates and validating the compressed multiple as a value trap rather than an opportunity.",
       "earnings_play": false,
       "trail_high": 565.62,
-      "last_price": 565.62,
-      "last_pnl_pct": 2.93,
-      "days_held": 4,
+      "last_price": 557.31,
+      "last_pnl_pct": 1.42,
+      "days_held": 5,
       "status": "OPEN",
       "live": false
     }
@@ -2079,6 +2079,10 @@
     {
       "date": "2026-06-29",
       "value": 989.45
+    },
+    {
+      "date": "2026-06-30",
+      "value": 991.28
     }
   ],
   "top_picks": [
@@ -2088,19 +2092,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG offers exceptional fundamental value at 24x forward earnings with 21.8% revenue growth and 38% margins, while the analyst consensus target of $426 implies ~22% upside that the market is underpricing relative to AI monetization optionality in Search and Cloud. The near-term technical weakness is a buying opportunity rather than a structural breakdown given the stock remains well above its 200-day MA and the pullback lacks extreme volume capitulation.",
-      "price_target": 426.0,
-      "key_risk": "Search revenue cannibalization from AI Overviews or an advertiser pullback at Q2 earnings could accelerate the technical breakdown toward the $320\u2013330 support zone."
-    },
-    {
-      "ticker": "PLTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 31.4 in a bull regime with 57% upside to analyst consensus presents a tactical mean-reversion entry for aggressive growth; 85% revenue growth and 44% margins justify accumulation near 52-week support. Position sizing must be reduced given bearish technicals and government contract headline risk.",
-      "price_target": 165.0,
-      "key_risk": "DOGE/federal budget cuts targeting defense and intelligence contracts could reprice PLTR violently given ~55% government revenue exposure and already-fractured technical structure above the $106 52-week low."
+      "reasoning": "GOOG trades at a compelling 24x forward P/E with 21.8% revenue growth and 38% operating margins, offering meaningful upside to analyst targets while the pullback from highs creates an attractive entry point within a broader bull trend. The stock is above MA200 with stabilizing near-term price action, making this a high-quality growth name at a reasonable discount driven by AI uncertainty rather than fundamental deterioration.",
+      "price_target": 426.62,
+      "key_risk": "AI search monetization headwinds \u2014 evidence of Gemini cannibalizing ad CPCs or measurable query share loss to OpenAI/Perplexity could extend the drawdown well below current levels."
     },
     {
       "ticker": "TSM",
@@ -2108,9 +2102,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's forward P/E compression to 22.5x against 35% revenue growth and 46.5% margins offers a compelling risk/reward in a confirmed bull regime, with analyst target at $478.95 just above the 52-week high. Short-term MACD weakness and consolidation present a reasonable entry ahead of a potential breakout continuation driven by AI/HPC foundry demand.",
-      "price_target": 478.95,
-      "key_risk": "Taiwan Strait geopolitical escalation or U.S. export control tightening could instantly reprice TSM's geographic concentration risk, overwhelming any fundamental upside."
+      "reasoning": "TSM offers a rare combination of best-in-class AI/advanced node exposure at a reasonable 23.3x forward P/E with strong momentum and intact MACD trend pressing into 52-week high breakout territory. The N2/CoWoS catalyst cycle and hyperscaler demand backdrop justify continued premium re-rating with meaningful upside to analyst targets.",
+      "price_target": 510.0,
+      "key_risk": "Below-average volume (0.93x) signals weak institutional conviction at resistance near $476.79, and a failure to break the 52-week high on low volume could trigger a sharp reversal given the extended 37.6% move above the 200-DMA."
+    },
+    {
+      "ticker": "SNOW",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SNOW's bullish structure with price well above both key MAs and strong analyst consensus at $292 supports a medium-term long, while the BULL regime permits entry at score 7. Fading momentum and proximity to 52-week high resistance warrant a measured position with a defined stop below recent consolidation.",
+      "price_target": 284.0,
+      "key_risk": "Any consumption revenue deceleration or guidance cut from this 94x forward P/E valuation could trigger a 15-25% drawdown instantly."
     }
   ],
   "regime": "BULL",
@@ -2126,5 +2130,5 @@
     "underperforming": false
   },
   "pnl": -13.489999999999998,
-  "last_run": "2026-06-29 19:08"
+  "last_run": "2026-06-30 16:12"
 }
