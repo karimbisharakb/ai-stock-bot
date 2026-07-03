@@ -2099,24 +2099,14 @@
   ],
   "top_picks": [
     {
-      "ticker": "SHOP.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SHOP has reclaimed the 50-MA with strong short-term momentum and 34% revenue growth supporting a legitimate earnings inflection toward the analyst target near the 200-MA at $188. Bull market regime supports full Kelly sizing, and the fundamental growth quality justifies premium valuation as margins expand.",
-      "price_target": 189.25,
-      "key_risk": "The 200-MA at $188 is a major resistance ceiling where institutional sellers may reassert distribution, sending the stock back toward the $150s."
-    },
-    {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG trades at a discount to intrinsic value with 21.8% revenue growth and expanding margins at just 24.5x forward earnings, offering a genuine ~$70 gap to consensus target. Consolidation below the 50-day MA is a mid-cycle pause, not a trend break, with the 200-day MA providing strong structural support near $315.",
+      "reasoning": "GOOG offers a compelling risk/reward with 19.8% upside to analyst consensus, exceptional 37.9% margins, and 21.8% revenue growth at a reasonable 24.5x forward P/E. The 200-DMA at $315 provides a strong structural floor while AI monetization catalysts in Search and Cloud could drive a re-rate above the 50-DMA.",
       "price_target": 426.61,
-      "key_risk": "Failure to reclaim the $368 50-day MA or evidence of Search query share erosion to AI competitors could accelerate a breakdown through near-term support."
+      "key_risk": "Evidence of Gemini integration eroding Search query volume or click-through rates could trigger multiple compression and negate the fundamental bull case."
     },
     {
       "ticker": "AMD",
@@ -2124,9 +2114,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's PEG near 1.0 against 37.8% revenue growth in a confirmed bull regime makes the current consolidation an attractive entry point with the AI/data center secular tailwind intact. Quiet low-volume cooling rather than aggressive distribution supports a base-building thesis above the $460\u2013480 support zone.",
-      "price_target": 590.0,
-      "key_risk": "NVIDIA competitive pressure or any softening in AI capex guidance could rapidly compress AMD's forward multiple and break the $480 support floor."
+      "reasoning": "AMD's bullish structure above key MAs and aggressive AI/data center GPU ramp via MI300X support a medium-term re-rating toward $600 as forward earnings inflect; BULL regime allows entry despite fading near-term momentum and bearish MACD given the structural growth thesis remains intact. Analyst target is stale relative to the AI growth narrative, and the 39x forward P/E is defensible if hyperscaler design wins convert to revenue at scale.",
+      "price_target": 600.0,
+      "key_risk": "MI300X revenue recognition disappoints versus NVIDIA in Q1 2024 earnings, triggering a violent de-rating given AMD's 2.47 beta and elevated 39x forward multiple."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR's elite revenue growth of 84.7% and 43.7% margins justify a premium multiple, and the 41% analyst upside with a bull regime backdrop supports a medium-term recovery trade toward prior resistance. Entry here at $129.3 offers asymmetric risk/reward if price reclaims the 50-MA at $134.58, which would confirm the short-squeeze is transitioning into a genuine trend reversal.",
+      "price_target": 165.0,
+      "key_risk": "Price remains structurally below both key moving averages and the broader downtrend from the $207 high could reassert, invalidating the recovery thesis and triggering the stop."
     }
   ],
   "regime": "BULL",
@@ -2142,5 +2142,5 @@
     "underperforming": false
   },
   "pnl": -13.489999999999998,
-  "last_run": "2026-07-03 15:41"
+  "last_run": "2026-07-03 18:16"
 }
