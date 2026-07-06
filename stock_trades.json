@@ -17,9 +17,9 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 390.6,
-      "last_price": 390.49,
-      "last_pnl_pct": 5.56,
-      "days_held": 11,
+      "last_price": 384.68,
+      "last_pnl_pct": 3.99,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 245.78,
-      "last_price": 242.67,
-      "last_pnl_pct": 3.69,
-      "days_held": 11,
+      "last_price": 244.68,
+      "last_pnl_pct": 4.55,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 198.61,
-      "last_price": 194.83,
-      "last_pnl_pct": -1.9,
-      "days_held": 9,
+      "last_price": 196.74,
+      "last_pnl_pct": -0.94,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "RSI at 23.9 signals deeply oversold conditions within a bull market corrective flush, with MA200 support at $268.84 providing a structural floor and analyst consensus at $315 offering meaningful upside. The corrective pullback from $317 improves risk/reward materially, and the bull regime allows entry at current score thresholds.",
       "key_risk": "Escalating US-China tariff policy on hardware manufacturing could compress Apple margins and invalidate the recovery thesis before technical reversal confirms.",
       "earnings_play": false,
-      "trail_high": 308.63,
-      "last_price": 308.63,
-      "last_pnl_pct": 11.02,
-      "days_held": 8,
+      "trail_high": 311.96,
+      "last_price": 311.96,
+      "last_pnl_pct": 12.22,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "Tariff-driven macro deterioration forces SMB and e-commerce advertisers to slash budgets, collapsing forward estimates and validating the compressed multiple as a value trap rather than an opportunity.",
       "earnings_play": false,
       "trail_high": 620.17,
-      "last_price": 582.9,
-      "last_pnl_pct": 6.07,
-      "days_held": 8,
+      "last_price": 592.51,
+      "last_pnl_pct": 7.82,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     }
@@ -2095,28 +2095,32 @@
     {
       "date": "2026-07-03",
       "value": 1002.16
+    },
+    {
+      "date": "2026-07-06",
+      "value": 1003.45
     }
   ],
   "top_picks": [
+    {
+      "ticker": "CNQ.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "CNQ is deeply oversold at RSI 23.4 with exhausting seller volume, trading at distressed-cycle multiples (P/E 11.7x) despite a strong balance sheet and 25% margins \u2014 a classic mean-reversion setup within a confirmed longer-term uptrend. The 200-day MA at $53.34 provides nearby technical support while analyst consensus of $70.75 implies 25%+ upside as WTI sentiment recovers.",
+      "price_target": 70.75,
+      "key_risk": "A sustained WTI crude decline below $70/bbl on demand deterioration or OPEC+ supply surprise could invalidate the mean-reversion thesis and breach the 200-day MA stop zone."
+    },
     {
       "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG offers a compelling risk/reward with 19.8% upside to analyst consensus, exceptional 37.9% margins, and 21.8% revenue growth at a reasonable 24.5x forward P/E. The 200-DMA at $315 provides a strong structural floor while AI monetization catalysts in Search and Cloud could drive a re-rate above the 50-DMA.",
-      "price_target": 426.61,
-      "key_risk": "Evidence of Gemini integration eroding Search query volume or click-through rates could trigger multiple compression and negate the fundamental bull case."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AMD's bullish structure above key MAs and aggressive AI/data center GPU ramp via MI300X support a medium-term re-rating toward $600 as forward earnings inflect; BULL regime allows entry despite fading near-term momentum and bearish MACD given the structural growth thesis remains intact. Analyst target is stale relative to the AI growth narrative, and the 39x forward P/E is defensible if hyperscaler design wins convert to revenue at scale.",
-      "price_target": 600.0,
-      "key_risk": "MI300X revenue recognition disappoints versus NVIDIA in Q1 2024 earnings, triggering a violent de-rating given AMD's 2.47 beta and elevated 39x forward multiple."
+      "reasoning": "GOOG offers compelling quality-per-dollar value at 24.8x forward P/E with 21.8% revenue growth and an 18% discount to analyst consensus, supported by a bullish macro regime and strong Cloud/AI monetization tailwinds. Price must reclaim MA50 at $368-370 to confirm trend resumption, but the risk/reward remains asymmetric given the $315 MA200 floor and strong fundamental underpinning.",
+      "price_target": 426.62,
+      "key_risk": "Failure to reclaim MA50 resistance and weak AI monetization signals in Search/Cloud could extend the corrective phase and invalidate the re-rating thesis."
     },
     {
       "ticker": "PLTR",
@@ -2124,9 +2128,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's elite revenue growth of 84.7% and 43.7% margins justify a premium multiple, and the 41% analyst upside with a bull regime backdrop supports a medium-term recovery trade toward prior resistance. Entry here at $129.3 offers asymmetric risk/reward if price reclaims the 50-MA at $134.58, which would confirm the short-squeeze is transitioning into a genuine trend reversal.",
-      "price_target": 165.0,
-      "key_risk": "Price remains structurally below both key moving averages and the broader downtrend from the $207 high could reassert, invalidating the recovery thesis and triggering the stop."
+      "reasoning": "BULL regime with 37% upside to analyst consensus, elite 85% revenue growth and 44% margins justify accumulation at current levels despite the chart trading below key moving averages. RSI at 54 with bullish MACD provides tactical entry room before the next leg higher contingent on continued AIP contract momentum.",
+      "price_target": 183.0,
+      "key_risk": "DOGE-driven federal budget cuts or procurement delays in AI/defense spending could trigger violent multiple compression given the stock is entirely hostage to U.S. government AIP contract wins."
     }
   ],
   "regime": "BULL",
@@ -2142,5 +2146,5 @@
     "underperforming": false
   },
   "pnl": -13.489999999999998,
-  "last_run": "2026-07-03 18:16"
+  "last_run": "2026-07-06 16:44"
 }
