@@ -17,8 +17,8 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 393.88,
-      "last_price": 390.44,
-      "last_pnl_pct": 5.54,
+      "last_price": 392.87,
+      "last_pnl_pct": 6.2,
       "days_held": 35,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 246.67,
-      "last_price": 231.94,
-      "last_pnl_pct": -0.9,
+      "last_price": 231.77,
+      "last_pnl_pct": -0.97,
       "days_held": 35,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 197.37,
-      "last_pnl_pct": -0.62,
+      "last_price": 196.46,
+      "last_pnl_pct": -1.08,
       "days_held": 33,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 328.55,
-      "last_price": 328.55,
-      "last_pnl_pct": 0.0,
+      "last_price": 325.95,
+      "last_pnl_pct": -0.79,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -2270,19 +2270,19 @@
     },
     {
       "date": "2026-07-27",
-      "value": 1006.89
+      "value": 1006.64
     }
   ],
   "top_picks": [
     {
       "ticker": "TSM",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's RSI at 25.6 signals deeply oversold conditions with a 36.6% analyst upside and best-in-class fundamentals including 36% revenue growth and ~50% margins making the risk/reward compelling at current levels. Bull regime allows entry at score 7, with MA200 at $353 providing structural support and the forward P/E compression to 18.2x offering a fundamental floor.",
+      "reasoning": "TSM is deeply oversold at RSI 30.1 within a confirmed bull regime, offering a textbook mean-reversion entry with 37% analyst upside and elite fundamentals including 49.9% operating margins and 36% revenue growth at just 18.2x forward P/E. The -9.88% one-month pullback is decelerating in conviction above strong 200-DMA support at $353.98, making this an asymmetric risk/reward setup for a snapback toward analyst targets.",
       "price_target": 490.0,
-      "key_risk": "U.S.-China geopolitical escalation over Taiwan Strait or export control tightening could trigger a sharp repricing of geopolitical risk premium, potentially breaching the MA200 stop zone."
+      "key_risk": "Taiwan Strait geopolitical escalation or incremental U.S. export control tightening could instantly invalidate technical support and drive a sharp breakdown below the 200-DMA."
     },
     {
       "ticker": "CRWD",
@@ -2290,19 +2290,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "CRWD's pullback to RSI 40 on below-average volume preserves the long-term bullish structure above both key moving averages, offering a reasonable entry into a cybersecurity leader with 25%+ revenue growth in a bull regime. The low-volume distribution and proximity to 50-DMA support suggest a consolidation base rather than structural breakdown, making the risk/reward acceptable for an aggressive growth portfolio.",
-      "price_target": 210.0,
-      "key_risk": "Elevated 117x forward earnings multiple leaves zero margin for error on the next earnings print, where any guidance miss or delayed margin expansion could trigger a sharp 15-25% drawdown from current levels."
+      "reasoning": "CRWD is pulling back constructively within a strong bull structure, trading above both MA50 and MA200 with low-volume distribution suggesting this is a healthy correction rather than a breakdown, with RSI approaching oversold levels near a potential re-entry zone. Bull regime unlocks full Kelly sizing, and the analyst buy rating with 6.2% near-term upside supports a position with room to extend toward $200 on momentum resumption.",
+      "price_target": 200.0,
+      "key_risk": "Elevated valuation at 116x Fwd P/E leaves CRWD acutely vulnerable to multiple compression if cybersecurity peer commentary signals enterprise IT budget softening."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "SMCI",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW is consolidating healthy gains well above key moving averages with strong analyst consensus and a clear path to $298 target as AI/data workload adoption drives continued revenue growth. Bull regime allows entry here despite fading near-term momentum, with the structural data cloud moat and 33.5% revenue growth justifying a medium-term position.",
-      "price_target": 298.0,
-      "key_risk": "At 100x forward earnings with negative operating margins, any NRR deceleration or guidance miss will trigger a violent multiple compression and rapidly invalidate the thesis."
+      "reasoning": "Fwd P/E of 8.7x on 122% revenue growth offers rare value compression that could rapidly unwind on audit resolution, providing asymmetric upside to analyst target of $37.81. Bull market regime and RSI with remaining headroom justify a medium-conviction entry with tight risk management below recent support.",
+      "price_target": 37.81,
+      "key_risk": "Unresolved auditor/compliance overhang and delayed filings could trigger another leg down to $19 lows if any negative accounting development emerges."
     }
   ],
   "regime": "BULL",
@@ -2318,5 +2318,5 @@
     "underperforming": false
   },
   "pnl": 2.910000000000001,
-  "last_run": "2026-07-27 16:07"
+  "last_run": "2026-07-27 18:27"
 }
