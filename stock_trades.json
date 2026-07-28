@@ -16,10 +16,10 @@
       "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
-      "trail_high": 393.88,
-      "last_price": 392.87,
-      "last_pnl_pct": 6.2,
-      "days_held": 35,
+      "trail_high": 399.07,
+      "last_price": 399.07,
+      "last_pnl_pct": 7.88,
+      "days_held": 36,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 246.67,
-      "last_price": 231.77,
-      "last_pnl_pct": -0.97,
-      "days_held": 35,
+      "last_price": 230.27,
+      "last_pnl_pct": -1.61,
+      "days_held": 36,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 196.46,
-      "last_pnl_pct": -1.08,
-      "days_held": 33,
+      "last_price": 197.34,
+      "last_pnl_pct": -0.64,
+      "days_held": 34,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
-      "trail_high": 328.55,
-      "last_price": 325.95,
-      "last_pnl_pct": -0.79,
-      "days_held": 0,
+      "trail_high": 332.77,
+      "last_price": 332.77,
+      "last_pnl_pct": 1.28,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "Any MI300X adoption slowdown or guidance cut would rapidly reprice analyst targets and trigger aggressive selling given the still-elevated forward multiple.",
       "earnings_play": false,
       "trail_high": 482.09,
-      "last_price": 482.09,
-      "last_pnl_pct": 0.0,
-      "days_held": 0,
+      "last_price": 458.88,
+      "last_pnl_pct": -4.81,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -2271,18 +2271,32 @@
     {
       "date": "2026-07-27",
       "value": 1006.64
+    },
+    {
+      "date": "2026-07-28",
+      "value": 1006.94
     }
   ],
   "top_picks": [
     {
-      "ticker": "TSM",
-      "score": 8,
+      "ticker": "META",
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM is deeply oversold at RSI 30.1 within a confirmed bull regime, offering a textbook mean-reversion entry with 37% analyst upside and elite fundamentals including 49.9% operating margins and 36% revenue growth at just 18.2x forward P/E. The -9.88% one-month pullback is decelerating in conviction above strong 200-DMA support at $353.98, making this an asymmetric risk/reward setup for a snapback toward analyst targets.",
-      "price_target": 490.0,
-      "key_risk": "Taiwan Strait geopolitical escalation or incremental U.S. export control tightening could instantly invalidate technical support and drive a sharp breakdown below the 200-DMA."
+      "reasoning": "META's 16x forward P/E on 33% revenue growth and 33% operating margins represents elite fundamental value at a meaningful discount, with the $825 analyst consensus implying substantial upside once technicals stabilize post-earnings. Bull market regime allows this medium-conviction entry, but size is halved given the binary earnings event within 7 days.",
+      "price_target": 720.0,
+      "key_risk": "An earnings guidance miss on ad revenue or macro softness could accelerate the technical breakdown toward $520 with no meaningful support in between."
+    },
+    {
+      "ticker": "TSM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM is the world's premier semiconductor franchise trading at deeply oversold RSI 26.6 with 37% upside to analyst target and a compelling 18x forward P/E against 36% revenue growth. BULL regime permits full Kelly sizing; 200-DMA at $354 provides a structural floor for stop placement.",
+      "price_target": 537.0,
+      "key_risk": "Taiwan Strait geopolitical escalation or incremental U.S. export restriction tightening could sharply reprice the geopolitical risk premium and invalidate the technical floor."
     },
     {
       "ticker": "CRWD",
@@ -2290,19 +2304,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "CRWD is pulling back constructively within a strong bull structure, trading above both MA50 and MA200 with low-volume distribution suggesting this is a healthy correction rather than a breakdown, with RSI approaching oversold levels near a potential re-entry zone. Bull regime unlocks full Kelly sizing, and the analyst buy rating with 6.2% near-term upside supports a position with room to extend toward $200 on momentum resumption.",
-      "price_target": 200.0,
-      "key_risk": "Elevated valuation at 116x Fwd P/E leaves CRWD acutely vulnerable to multiple compression if cybersecurity peer commentary signals enterprise IT budget softening."
-    },
-    {
-      "ticker": "SMCI",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "Fwd P/E of 8.7x on 122% revenue growth offers rare value compression that could rapidly unwind on audit resolution, providing asymmetric upside to analyst target of $37.81. Bull market regime and RSI with remaining headroom justify a medium-conviction entry with tight risk management below recent support.",
-      "price_target": 37.81,
-      "key_risk": "Unresolved auditor/compliance overhang and delayed filings could trigger another leg down to $19 lows if any negative accounting development emerges."
+      "reasoning": "CRWD is pulling back to a technically constructive zone above both key moving averages with RSI near oversold levels within a bull trend, offering a re-entry opportunity ahead of the next earnings catalyst. Despite rich valuation, the 59% 3-month run demonstrates institutional conviction in the platform consolidation thesis, and any ARR reacceleration or margin commentary will drive a sharp re-rating toward prior highs.",
+      "price_target": 210.0,
+      "key_risk": "At 116x forward earnings with negative margins and elevated leverage, any guidance miss or macro risk-off rotation could trigger a rapid 15-20% drawdown given the stock remains 17% below its 52-week high."
     }
   ],
   "regime": "BULL",
@@ -2318,5 +2322,5 @@
     "underperforming": false
   },
   "pnl": 2.910000000000001,
-  "last_run": "2026-07-27 18:27"
+  "last_run": "2026-07-28 15:49"
 }
