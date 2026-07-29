@@ -1,5 +1,5 @@
 {
-  "cash": 677.33,
+  "cash": 653.3800000000001,
   "positions": [
     {
       "time": "2026-06-22 18:04",
@@ -17,9 +17,9 @@
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
       "trail_high": 399.07,
-      "last_price": 397.54,
-      "last_pnl_pct": 7.46,
-      "days_held": 36,
+      "last_price": 394.62,
+      "last_pnl_pct": 6.67,
+      "days_held": 37,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 246.67,
-      "last_price": 231.12,
-      "last_pnl_pct": -1.25,
-      "days_held": 36,
+      "last_price": 228.07,
+      "last_pnl_pct": -2.55,
+      "days_held": 37,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 196.89,
-      "last_pnl_pct": -0.87,
-      "days_held": 34,
+      "last_price": 192.47,
+      "last_pnl_pct": -3.09,
+      "days_held": 35,
       "status": "OPEN",
       "live": false
     },
@@ -83,31 +83,31 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 333.97,
-      "last_price": 333.97,
-      "last_pnl_pct": 1.65,
-      "days_held": 1,
+      "last_price": 332.85,
+      "last_pnl_pct": 1.31,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     },
     {
-      "time": "2026-07-27 16:00",
-      "ticker": "AMD",
+      "time": "2026-07-29 15:31",
+      "ticker": "TSM",
       "action": "BUY",
       "strategy": "MEDIUM",
-      "shares": 0.1037,
-      "price": 482.09,
-      "cost": 49.99,
-      "target": 555.0,
-      "stop_loss": 445.0,
+      "shares": 0.1817,
+      "price": 377.39,
+      "cost": 68.57,
+      "target": 480.0,
+      "stop_loss": 350.0,
       "score": 7,
       "conviction": "medium",
-      "reasoning": "AMD's RSI at 38.1 signals near-oversold conditions with 19% upside to analyst consensus in a confirmed BULL regime, offering a mean-reversion entry for patient capital. The 37.8% revenue growth and strong AI GPU narrative provide fundamental support while technicals digest the pullback from highs.",
-      "key_risk": "Any MI300X adoption slowdown or guidance cut would rapidly reprice analyst targets and trigger aggressive selling given the still-elevated forward multiple.",
+      "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
+      "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 482.09,
-      "last_price": 457.11,
-      "last_pnl_pct": -5.18,
-      "days_held": 1,
+      "trail_high": 377.39,
+      "last_price": 377.39,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1391,6 +1391,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-07-27 16:00",
+      "ticker": "AMD",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.1037,
+      "price": 482.09,
+      "cost": 49.99,
+      "target": 555.0,
+      "stop_loss": 445.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AMD's RSI at 38.1 signals near-oversold conditions with 19% upside to analyst consensus in a confirmed BULL regime, offering a mean-reversion entry for patient capital. The 37.8% revenue growth and strong AI GPU narrative provide fundamental support while technicals digest the pullback from highs.",
+      "key_risk": "Any MI300X adoption slowdown or guidance cut would rapidly reprice analyst targets and trigger aggressive selling given the still-elevated forward multiple.",
+      "earnings_play": false,
+      "trail_high": 482.09,
+      "last_price": 430.32,
+      "last_pnl_pct": -10.74,
+      "days_held": 2,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 430.32,
+      "sell_time": "2026-07-29 15:29",
+      "pnl_dollar": -5.37,
+      "pnl_pct": -10.74,
+      "sell_reason": "Stop loss -10.7% (limit -8%)"
+    },
+    {
+      "time": "2026-07-29 15:31",
+      "ticker": "TSM",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1817,
+      "price": 377.39,
+      "cost": 68.57,
+      "target": 480.0,
+      "stop_loss": 350.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
+      "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
+      "earnings_play": false,
+      "trail_high": 377.39,
+      "last_price": 377.39,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2049,6 +2098,33 @@
       "pnl_dollar": 5.29,
       "pnl_pct": 9.43,
       "sell_reason": "Trailing stop $618.18 hit (peak +22.3% from $549.52)"
+    },
+    {
+      "time": "2026-07-27 16:00",
+      "ticker": "AMD",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1037,
+      "price": 482.09,
+      "cost": 49.99,
+      "target": 555.0,
+      "stop_loss": 445.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "AMD's RSI at 38.1 signals near-oversold conditions with 19% upside to analyst consensus in a confirmed BULL regime, offering a mean-reversion entry for patient capital. The 37.8% revenue growth and strong AI GPU narrative provide fundamental support while technicals digest the pullback from highs.",
+      "key_risk": "Any MI300X adoption slowdown or guidance cut would rapidly reprice analyst targets and trigger aggressive selling given the still-elevated forward multiple.",
+      "earnings_play": false,
+      "trail_high": 482.09,
+      "last_price": 430.32,
+      "last_pnl_pct": -10.74,
+      "days_held": 2,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 430.32,
+      "sell_time": "2026-07-29 15:29",
+      "pnl_dollar": -5.37,
+      "pnl_pct": -10.74,
+      "sell_reason": "Stop loss -10.7% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -2275,18 +2351,22 @@
     {
       "date": "2026-07-28",
       "value": 1006.78
+    },
+    {
+      "date": "2026-07-29",
+      "value": 1001.06
     }
   ],
   "top_picks": [
     {
-      "ticker": "TSM",
-      "score": 8,
+      "ticker": "AMD",
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM is in a historically rare oversold compression at RSI 26.4 with structural support at MA200 near $354, offering a high-quality entry into the world's most irreplaceable semiconductor foundry at a discount forward P/E of 18.1x against 36% revenue growth. The 6M uptrend remains intact, seller exhaustion is evident in below-average volume, and AI capex tailwinds from key customers provide a clear catalyst toward the $537 consensus target.",
-      "price_target": 537.42,
-      "key_risk": "U.S.-Taiwan geopolitical escalation or new export control restrictions could override all technical and fundamental support and gap the stock sharply lower regardless of valuation."
+      "reasoning": "AMD is approaching oversold levels with RSI near 35.9 after a brutal -21% week, offering a compelling asymmetric entry 26% off highs with a $575 analyst target and intact AI/data center growth thesis at 31x forward earnings. Position is halved due to earnings within 7 days given medium conviction, balancing the beat-and-raise squeeze potential against execution risk.",
+      "price_target": 520.0,
+      "key_risk": "Earnings miss or soft data center GPU guidance could accelerate the institutional unwind and break the $400 support level, invalidating the medium-term thesis."
     },
     {
       "ticker": "CRWD",
@@ -2294,33 +2374,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "CRWD is in a healthy low-volume pullback within a structurally intact bull trend, trading above both MA50 and MA200 with strong 3-6 month momentum supporting the platform consolidation thesis. Bull regime warrants entry at current RSI 45 levels with MA50 as key support, targeting a resumption of the primary uptrend.",
-      "price_target": 210.0,
-      "key_risk": "Extreme valuation at 117x forward earnings leaves no margin for execution miss, and an expanding negative MACD histogram could accelerate selling pressure toward MA50 support at $179."
+      "reasoning": "CRWD is holding its MA50 in a bull regime with strong long-term structure intact and analyst consensus providing a clear near-term target; RSI near 42 offers a reasonable entry with limited immediate downside if the $179 level holds. The cybersecurity platform dominance and 25.6% revenue growth justify a measured position despite stretched valuation and fading near-term momentum.",
+      "price_target": 193.0,
+      "key_risk": "Falcon outage reputational fallout causing enterprise churn or legal disclosure could compress the 114x forward multiple rapidly with no valuation floor to catch it."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "SMCI",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW trades in a confirmed bull trend with strong institutional analyst support and a clear path to the $298 consensus target, supported by 33.5% revenue growth in a BULL market regime. However, MACD bearish divergence and low volume near 52-week highs demand a tight stop at the $255 support level to protect against rejection and multiple compression.",
-      "price_target": 298.0,
-      "key_risk": "Any revenue deceleration or consumption guidance miss near the 52-week high could trigger a violent 15-20% selloff given the extreme 101x forward earnings valuation with no fundamental floor."
+      "reasoning": "SMCI trades at a deeply discounted Fwd P/E of 8x against 122% revenue growth, offering asymmetric upside if audit/regulatory overhang resolves and Nasdaq compliance is maintained. Bull market regime supports accepting this binary-catalyst risk with a defined stop below recent lows.",
+      "price_target": 37.81,
+      "key_risk": "Failure to resolve delayed filings and auditor issues could trigger Nasdaq delisting, rendering the cheap valuation a value trap with catastrophic downside."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 48.0,
+    "win_rate": 46.2,
     "rolling_win_rate": 45.0,
-    "avg_return": 1.29,
-    "sharpe": 0.13,
+    "avg_return": 0.83,
+    "sharpe": 0.08,
     "max_drawdown": 4.52,
-    "total_trades": 25,
+    "total_trades": 26,
     "wins": 12,
-    "losses": 13,
+    "losses": 14,
     "underperforming": false
   },
-  "pnl": 2.910000000000001,
-  "last_run": "2026-07-28 18:16"
+  "pnl": -2.459999999999999,
+  "last_run": "2026-07-29 15:37"
 }
