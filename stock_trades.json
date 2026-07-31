@@ -16,9 +16,9 @@
       "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
-      "trail_high": 457.1,
-      "last_price": 457.1,
-      "last_pnl_pct": 23.56,
+      "trail_high": 462.14,
+      "last_price": 462.14,
+      "last_pnl_pct": 24.93,
       "days_held": 39,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "AMZN is testing oversold RSI levels near MA200 support with a compelling 34% analyst upside driven by AWS re-acceleration and expanding margins at a reasonable 23.7x forward P/E. Bull regime allows entry at score 7 with a technically defined floor near $232 MA200 providing downside reference.",
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
-      "trail_high": 266.69,
-      "last_price": 266.69,
-      "last_pnl_pct": 13.95,
+      "trail_high": 271.37,
+      "last_price": 271.37,
+      "last_pnl_pct": 15.95,
       "days_held": 39,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 196.12,
-      "last_pnl_pct": -1.25,
+      "last_price": 199.01,
+      "last_pnl_pct": 0.2,
       "days_held": 37,
       "status": "OPEN",
       "live": false
@@ -82,9 +82,9 @@
       "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
-      "trail_high": 349.19,
-      "last_price": 349.19,
-      "last_pnl_pct": 6.28,
+      "trail_high": 355.29,
+      "last_price": 355.29,
+      "last_pnl_pct": 8.14,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 406.33,
-      "last_price": 406.33,
-      "last_pnl_pct": 7.67,
+      "last_price": 405.62,
+      "last_pnl_pct": 7.48,
       "days_held": 2,
       "status": "OPEN",
       "live": false
@@ -2362,39 +2362,39 @@
     },
     {
       "date": "2026-07-31",
-      "value": 1036.79
+      "value": 1041.24
     }
   ],
   "top_picks": [
     {
       "ticker": "META",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a historically cheap 15.3x forward P/E with 28% revenue growth and best-in-class margins, creating a fundamental disconnect that the market is likely pricing on macro fear rather than business impairment. RSI at 17.4 is extreme panic-selling territory rarely sustained, and the upcoming AI monetization narrative could serve as a violent re-rating catalyst toward the $778 analyst target.",
+      "reasoning": "RSI at 19.8 signals extreme capitulation exhaustion in a fundamentally cheap mega-cap trading at 15.5x forward with 28% revenue growth and 42% analyst upside \u2014 a rare dislocation in quality. Bull regime allows full Kelly sizing, though confirmation candle on reversal is warranted before aggressive entry given sustained 25%+ drawdown.",
       "price_target": 778.68,
-      "key_risk": "Continued macro risk-off or failure to quantify AI capex ROI in the next earnings cycle could push META toward the $520 technical floor with no structural support below."
+      "key_risk": "Ad spend contraction from tariff-driven economic uncertainty could compress forward estimates, invalidating the cheap multiple thesis before price recovery materializes."
     },
     {
-      "ticker": "CRWD",
+      "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a confirmed BULL regime, CRWD's consolidation above MA50 support after a 69% run represents a coiling setup with strong structural trend intact and analyst targets providing a near-term floor. The valuation is stretched but cybersecurity secular tailwinds and 25.6% revenue growth justify accumulation at current levels with defined risk below MA50.",
-      "price_target": 210.0,
-      "key_risk": "A macro-driven risk-off rotation or Microsoft security suite displacement could unwind crowded long positioning rapidly given 120x Fwd P/E leaves no margin for error."
+      "reasoning": "AAPL's -9.35% weekly pullback in a confirmed bull regime represents a mean-reversion dip within a structurally intact longer-term uptrend, with analyst consensus providing a defined $321.66 target and MA200 at $277 offering a logical hard stop. Despite near-term technical weakness, fundamental quality at 16.4% revenue growth and 27.6% margins justifies accumulation at current levels ahead of tariff policy clarity.",
+      "price_target": 321.66,
+      "key_risk": "Tariff and supply chain policy deterioration could compress margins and extend the technical breakdown toward MA200 support, invalidating the bull case."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR offers asymmetric upside as a leveraged Bitcoin proxy with analyst consensus near $300 and a BULL market regime supporting speculative risk-taking at conviction-floor sizing. RSI neutrality and positive MACD suggest stabilization with room to re-rate if BTC reclaims $100K.",
-      "price_target": 150.0,
-      "key_risk": "Leveraged BTC unwind risk is severe \u2014 a BTC drop to $70K could trigger debt distress and a structural equity wipeout given D/E of 14.9."
+      "reasoning": "AMD's 18.4% upside to analyst target is underpinned by real AI/data center revenue acceleration at 37.8% growth, and the bull market regime supports entry despite short-term technical weakness. Position is halved due to imminent earnings binary risk, with the $440 gap zone serving as a logical stop below the current breakdown.",
+      "price_target": 576.55,
+      "key_risk": "An earnings miss or weak MI300X guidance could trigger a rapid flush to the $420\u2013440 gap zone given elevated beta and deteriorating near-term technicals."
     }
   ],
   "regime": "BULL",
@@ -2410,5 +2410,5 @@
     "underperforming": false
   },
   "pnl": -2.459999999999999,
-  "last_run": "2026-07-31 15:45"
+  "last_run": "2026-07-31 18:24"
 }
