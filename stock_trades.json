@@ -16,10 +16,10 @@
       "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
       "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
       "earnings_play": false,
-      "trail_high": 456.89,
-      "last_price": 456.89,
-      "last_pnl_pct": 23.51,
-      "days_held": 38,
+      "trail_high": 457.1,
+      "last_price": 457.1,
+      "last_pnl_pct": 23.56,
+      "days_held": 39,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "AMZN is testing oversold RSI levels near MA200 support with a compelling 34% analyst upside driven by AWS re-acceleration and expanding margins at a reasonable 23.7x forward P/E. Bull regime allows entry at score 7 with a technically defined floor near $232 MA200 providing downside reference.",
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
-      "trail_high": 246.67,
-      "last_price": 237.12,
-      "last_pnl_pct": 1.32,
-      "days_held": 38,
+      "trail_high": 266.69,
+      "last_price": 266.69,
+      "last_pnl_pct": 13.95,
+      "days_held": 39,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 193.84,
-      "last_pnl_pct": -2.4,
-      "days_held": 36,
+      "last_price": 196.12,
+      "last_pnl_pct": -1.25,
+      "days_held": 37,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
-      "trail_high": 339.27,
-      "last_price": 332.77,
-      "last_pnl_pct": 1.28,
-      "days_held": 3,
+      "trail_high": 349.19,
+      "last_price": 349.19,
+      "last_pnl_pct": 6.28,
+      "days_held": 4,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 403.09,
-      "last_price": 403.09,
-      "last_pnl_pct": 6.81,
-      "days_held": 1,
+      "trail_high": 406.33,
+      "last_price": 406.33,
+      "last_pnl_pct": 7.67,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     }
@@ -2359,6 +2359,10 @@
     {
       "date": "2026-07-30",
       "value": 1023.51
+    },
+    {
+      "date": "2026-07-31",
+      "value": 1036.79
     }
   ],
   "top_picks": [
@@ -2368,9 +2372,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI of 13.2 represents capitulation-level oversold conditions historically preceding violent reversals, while 14.5x forward P/E on 33% revenue growth with $824 analyst consensus represents a genuine generational discount to intrinsic value. Bull regime permits entry here despite broken technicals, with the extreme valuation gap providing asymmetric risk/reward if macro headwinds stabilize.",
-      "price_target": 624.0,
-      "key_risk": "Tariff-driven SMB and e-commerce ad spend contraction could force material downward revisions to forward earnings estimates, removing the valuation floor and accelerating the structural breakdown below $500."
+      "reasoning": "META trades at a historically cheap 15.3x forward P/E with 28% revenue growth and best-in-class margins, creating a fundamental disconnect that the market is likely pricing on macro fear rather than business impairment. RSI at 17.4 is extreme panic-selling territory rarely sustained, and the upcoming AI monetization narrative could serve as a violent re-rating catalyst toward the $778 analyst target.",
+      "price_target": 778.68,
+      "key_risk": "Continued macro risk-off or failure to quantify AI capex ROI in the next earnings cycle could push META toward the $520 technical floor with no structural support below."
     },
     {
       "ticker": "CRWD",
@@ -2378,19 +2382,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "CRWD remains in a confirmed long-term uptrend with price above both MA50 and MA200, and the current consolidation at 47 RSI represents a mid-trend pause with potential for resumption given durable 25.6% revenue growth and expanding cybersecurity TAM. Bull regime supports entry at this digestion zone with a measured target near prior resistance, though thin analyst upside and extreme valuation cap conviction.",
-      "price_target": 200.0,
-      "key_risk": "Fading short-term momentum in a high-beta, 117x forward earnings name could accelerate sharply lower if macro sentiment shifts or next earnings guidance disappoints."
+      "reasoning": "In a confirmed BULL regime, CRWD's consolidation above MA50 support after a 69% run represents a coiling setup with strong structural trend intact and analyst targets providing a near-term floor. The valuation is stretched but cybersecurity secular tailwinds and 25.6% revenue growth justify accumulation at current levels with defined risk below MA50.",
+      "price_target": 210.0,
+      "key_risk": "A macro-driven risk-off rotation or Microsoft security suite displacement could unwind crowded long positioning rapidly given 120x Fwd P/E leaves no margin for error."
     },
     {
-      "ticker": "CLSK",
+      "ticker": "MSTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Strong bull regime with 59% analyst upside and Bitcoin tailwinds support a medium-term position, while consolidation between MAs provides a reasonable entry with defined risk to the $12 support floor. Size is halved due to earnings within 7 days on this high-leverage, high-beta crypto proxy.",
-      "price_target": 19.5,
-      "key_risk": "Earnings catalyst is binary \u2014 margin compression or balance sheet deterioration on a 181% debt-to-equity could trigger a rapid collapse toward the $8 range floor."
+      "reasoning": "MSTR offers asymmetric upside as a leveraged Bitcoin proxy with analyst consensus near $300 and a BULL market regime supporting speculative risk-taking at conviction-floor sizing. RSI neutrality and positive MACD suggest stabilization with room to re-rate if BTC reclaims $100K.",
+      "price_target": 150.0,
+      "key_risk": "Leveraged BTC unwind risk is severe \u2014 a BTC drop to $70K could trigger debt distress and a structural equity wipeout given D/E of 14.9."
     }
   ],
   "regime": "BULL",
@@ -2406,5 +2410,5 @@
     "underperforming": false
   },
   "pnl": -2.459999999999999,
-  "last_run": "2026-07-30 18:19"
+  "last_run": "2026-07-31 15:45"
 }
