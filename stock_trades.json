@@ -1,28 +1,6 @@
 {
-  "cash": 653.3800000000001,
+  "cash": 712.2900000000002,
   "positions": [
-    {
-      "time": "2026-06-22 18:04",
-      "ticker": "MSFT",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.2379,
-      "price": 369.93,
-      "cost": 88.01,
-      "target": 480.0,
-      "stop_loss": 350.0,
-      "score": 8,
-      "conviction": "medium",
-      "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
-      "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
-      "earnings_play": false,
-      "trail_high": 462.14,
-      "last_price": 462.14,
-      "last_pnl_pct": 24.93,
-      "days_held": 39,
-      "status": "OPEN",
-      "live": false
-    },
     {
       "time": "2026-06-22 18:04",
       "ticker": "AMZN",
@@ -38,10 +16,10 @@
       "reasoning": "AMZN is testing oversold RSI levels near MA200 support with a compelling 34% analyst upside driven by AWS re-acceleration and expanding margins at a reasonable 23.7x forward P/E. Bull regime allows entry at score 7 with a technically defined floor near $232 MA200 providing downside reference.",
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
-      "trail_high": 271.37,
-      "last_price": 271.37,
-      "last_pnl_pct": 15.95,
-      "days_held": 39,
+      "trail_high": 285.03,
+      "last_price": 285.03,
+      "last_pnl_pct": 21.79,
+      "days_held": 42,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +39,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 210.32,
-      "last_price": 199.01,
-      "last_pnl_pct": 0.2,
-      "days_held": 37,
+      "last_price": 206.76,
+      "last_pnl_pct": 4.1,
+      "days_held": 40,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +60,10 @@
       "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
-      "trail_high": 355.29,
-      "last_price": 355.29,
-      "last_pnl_pct": 8.14,
-      "days_held": 4,
+      "trail_high": 374.17,
+      "last_price": 374.17,
+      "last_pnl_pct": 13.89,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 406.33,
-      "last_price": 405.62,
-      "last_pnl_pct": 7.48,
-      "days_held": 2,
+      "last_price": 403.4,
+      "last_pnl_pct": 6.89,
+      "days_held": 5,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-08-03 16:02",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1168,
+      "price": 486.41,
+      "cost": 56.81,
+      "target": 563.05,
+      "stop_loss": 455.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
+      "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
+      "earnings_play": false,
+      "trail_high": 486.41,
+      "last_price": 486.41,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1440,6 +1440,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-06-22 18:04",
+      "ticker": "MSFT",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.2379,
+      "price": 369.93,
+      "cost": 88.01,
+      "target": 480.0,
+      "stop_loss": 350.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
+      "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
+      "earnings_play": false,
+      "trail_high": 486.41,
+      "last_price": 486.41,
+      "last_pnl_pct": 31.49,
+      "days_held": 42,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 486.41,
+      "sell_time": "2026-08-03 16:02",
+      "pnl_dollar": 27.71,
+      "pnl_pct": 31.49,
+      "sell_reason": "Take profit +31.5% (target 25%)"
+    },
+    {
+      "time": "2026-08-03 16:02",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1168,
+      "price": 486.41,
+      "cost": 56.81,
+      "target": 563.05,
+      "stop_loss": 455.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
+      "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
+      "earnings_play": false,
+      "trail_high": 486.41,
+      "last_price": 486.41,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2125,6 +2174,33 @@
       "pnl_dollar": -5.37,
       "pnl_pct": -10.74,
       "sell_reason": "Stop loss -10.7% (limit -8%)"
+    },
+    {
+      "time": "2026-06-22 18:04",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2379,
+      "price": 369.93,
+      "cost": 88.01,
+      "target": 480.0,
+      "stop_loss": 350.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "MSFT at RSI 9.5 represents historic capitulation exhaustion in a fundamentally elite business trading at a steep discount to its 200-MA and analyst consensus, creating a compelling asymmetric entry for patient accumulation. At 19x forward earnings with 18% revenue growth and 39% operating margins, the valuation disconnect from the $561 analyst target is too wide to ignore near 52-week lows in a bull regime.",
+      "key_risk": "Azure cloud growth disappointment from competitive hyperscaler data could validate multiple compression and drive shares toward the $356 support floor before any stabilization.",
+      "earnings_play": false,
+      "trail_high": 486.41,
+      "last_price": 486.41,
+      "last_pnl_pct": 31.49,
+      "days_held": 42,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 486.41,
+      "sell_time": "2026-08-03 16:02",
+      "pnl_dollar": 27.71,
+      "pnl_pct": 31.49,
+      "sell_reason": "Take profit +31.5% (target 25%)"
     }
   ],
   "portfolio_history": [
@@ -2363,28 +2439,22 @@
     {
       "date": "2026-07-31",
       "value": 1041.24
+    },
+    {
+      "date": "2026-08-03",
+      "value": 1056.54
     }
   ],
   "top_picks": [
     {
       "ticker": "META",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 19.8 signals extreme capitulation exhaustion in a fundamentally cheap mega-cap trading at 15.5x forward with 28% revenue growth and 42% analyst upside \u2014 a rare dislocation in quality. Bull regime allows full Kelly sizing, though confirmation candle on reversal is warranted before aggressive entry given sustained 25%+ drawdown.",
-      "price_target": 778.68,
-      "key_risk": "Ad spend contraction from tariff-driven economic uncertainty could compress forward estimates, invalidating the cheap multiple thesis before price recovery materializes."
-    },
-    {
-      "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL's -9.35% weekly pullback in a confirmed bull regime represents a mean-reversion dip within a structurally intact longer-term uptrend, with analyst consensus providing a defined $321.66 target and MA200 at $277 offering a logical hard stop. Despite near-term technical weakness, fundamental quality at 16.4% revenue growth and 27.6% margins justifies accumulation at current levels ahead of tariff policy clarity.",
-      "price_target": 321.66,
-      "key_risk": "Tariff and supply chain policy deterioration could compress margins and extend the technical breakdown toward MA200 support, invalidating the bull case."
+      "reasoning": "META's technical weakness is sentiment-driven, not fundamental \u2014 16.8x forward P/E with 28% revenue growth and 30% margins is deeply mispriced, and RSI near 34 signals approaching capitulation with a 30%+ analyst-consensus upside to fair value. Bull regime warrants entry here with disciplined stop below recent support structure near $540.",
+      "price_target": 768.58,
+      "key_risk": "A guidance cut at Q1 earnings on AI capex escalation or macro-driven ad spend weakness could confirm the breakdown and accelerate a flush toward $520."
     },
     {
       "ticker": "AMD",
@@ -2392,23 +2462,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 18.4% upside to analyst target is underpinned by real AI/data center revenue acceleration at 37.8% growth, and the bull market regime supports entry despite short-term technical weakness. Position is halved due to imminent earnings binary risk, with the $440 gap zone serving as a logical stop below the current breakdown.",
-      "price_target": 576.55,
-      "key_risk": "An earnings miss or weak MI300X guidance could trigger a rapid flush to the $420\u2013440 gap zone given elevated beta and deteriorating near-term technicals."
+      "reasoning": "AMD's 20% upside to analyst target and strong 37.8% revenue growth driven by MI300X AI/data center ramp support a medium-term recovery thesis once earnings-driven volatility clears. Position is halved given earnings within 7 days and medium conviction, with RSI near oversold at 38.9 offering a reasonable entry risk/reward.",
+      "price_target": 579.0,
+      "key_risk": "A miss or weak guidance on MI300X GPU ramp during the imminent earnings print could accelerate the technical breakdown below key support and invalidate the growth multiple re-rating thesis."
+    },
+    {
+      "ticker": "CRWD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "CRWD is pulling back to near-oversold RSI levels while remaining structurally intact well above key moving averages, offering a tactical entry in a bull regime before the next leg higher in a secular cybersecurity growth story. The corrective phase appears to be a digestion of prior 73-79% gains rather than a trend reversal, with a defined risk level at the 50-DMA around $182.",
+      "price_target": 215.0,
+      "key_risk": "Post-Falcon outage ARR deceleration at the next earnings print could violently reprice a 126x forward P/E name with no margin buffer, and the analyst consensus target already sitting below current price limits the upside conviction."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 46.2,
-    "rolling_win_rate": 45.0,
-    "avg_return": 0.83,
-    "sharpe": 0.08,
+    "win_rate": 48.1,
+    "rolling_win_rate": 50.0,
+    "avg_return": 1.97,
+    "sharpe": 0.17,
     "max_drawdown": 4.52,
-    "total_trades": 26,
-    "wins": 12,
+    "total_trades": 27,
+    "wins": 13,
     "losses": 14,
     "underperforming": false
   },
-  "pnl": -2.459999999999999,
-  "last_run": "2026-07-31 18:24"
+  "pnl": 25.25,
+  "last_run": "2026-08-03 16:10"
 }
