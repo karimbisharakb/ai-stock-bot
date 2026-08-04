@@ -17,9 +17,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 283.75,
-      "last_pnl_pct": 21.24,
-      "days_held": 42,
+      "last_price": 277.4,
+      "last_pnl_pct": 18.53,
+      "days_held": 43,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "Forward P/E of 15.6x on 85%+ revenue growth with 63% margins is genuinely cheap for a mega-cap AI infrastructure leader, and RSI at 38.2 approaching oversold near 200-DMA support at $190 creates an asymmetric risk/reward in a bull regime. Full Kelly conditions apply, and the compelling growth-adjusted valuation justifies initiating a partial position here with room to add on a confirmed $190 hold.",
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
-      "trail_high": 210.32,
-      "last_price": 208.05,
-      "last_pnl_pct": 4.75,
-      "days_held": 40,
+      "trail_high": 210.74,
+      "last_price": 210.74,
+      "last_pnl_pct": 6.11,
+      "days_held": 41,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 374.17,
-      "last_price": 374.05,
-      "last_pnl_pct": 13.85,
-      "days_held": 7,
+      "last_price": 373.14,
+      "last_pnl_pct": 13.57,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 406.33,
-      "last_price": 405.9,
-      "last_pnl_pct": 7.55,
-      "days_held": 5,
+      "trail_high": 415.88,
+      "last_price": 415.88,
+      "last_pnl_pct": 10.2,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
       "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
       "earnings_play": false,
-      "trail_high": 490.9,
-      "last_price": 490.9,
-      "last_pnl_pct": 0.92,
-      "days_held": 0,
+      "trail_high": 497.05,
+      "last_price": 497.05,
+      "last_pnl_pct": 2.19,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -2443,38 +2443,42 @@
     {
       "date": "2026-08-03",
       "value": 1057.45
+    },
+    {
+      "date": "2026-08-04",
+      "value": 1058.62
     }
   ],
   "top_picks": [
+    {
+      "ticker": "AAPL",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AAPL is experiencing a pullback-within-uptrend with RSI nearing oversold at 36.5 and MA200 support at $278 providing a structural floor, making this a tactically attractive entry for a mean-reversion toward analyst targets. Bull regime permits full Kelly deployment and the quality fundamentals with 16.4% revenue growth justify accumulation near current levels despite near-term technical weakness.",
+      "price_target": 324.01,
+      "key_risk": "Tariff escalation targeting China-based iPhone manufacturing could directly compress margins and force earnings estimate cuts, invalidating the valuation thesis."
+    },
     {
       "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 17x forward P/E with 28% revenue growth and ~30% margins, offering genuine fundamental value at current levels with 29% upside to analyst consensus. RSI at 34.4 is approaching oversold territory in a BULL regime, creating an asymmetric entry for patient capital ahead of AI monetization catalysts.",
-      "price_target": 768.58,
-      "key_risk": "Technical breakdown below $555 prior support would signal institutional distribution is accelerating, targeting the $520 prior low and invalidating the fundamental re-rating thesis."
+      "reasoning": "META is genuinely cheap at 16.7x forward P/E with 28% revenue growth and RSI at 25.6 indicating deeply oversold capitulation conditions, creating an asymmetric risk/reward at current levels. Fundamental value is intact \u2014 the selloff reflects macro and regulatory fear, not business deterioration, and any AI monetization signal will catalyze a violent re-rating toward $650\u2013$700.",
+      "price_target": 700.0,
+      "key_risk": "Momentum remains in a confirmed downtrend below both the 50-MA and 200-MA, and if Q1 AI capex guidance disappoints without revenue visibility, the $520 support level gets tested with significant further downside."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's 3.5x Bitcoin beta and 176% analyst upside create asymmetric reward in a BULL regime if BTC reclaims $100K, justifying a speculative position sized within the 20% crypto proxy cap. MACD turning constructive and momentum deceleration near deeply oversold levels suggest the risk/reward favors entry here despite the broken technical structure.",
-      "price_target": 160.0,
-      "key_risk": "Extreme 14.9x leverage means a BTC drawdown to $75K could trigger solvency fears and a catastrophic gap below stop-loss with limited liquidity support."
-    },
-    {
-      "ticker": "CLSK",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CLSK offers a compelling risk/reward in a bull regime with a 63.8% analyst upside, building multi-timeframe momentum, and Bitcoin tailwinds supporting the thesis; position is halved pre-earnings due to binary risk from high leverage and negative margins. Price remains between MA50 and MA200, so the trade is a trend-ride contingent on Bitcoin holding up and a post-earnings resolution to the upside.",
-      "price_target": 21.0,
-      "key_risk": "Earnings miss or weak guidance combined with a Bitcoin pullback could trigger a 20-30% drawdown given 3.89 beta, extreme leverage (D/E 181x), and negative margins."
+      "reasoning": "PLTR's bullish structure with price reclaiming the 200MA as support, institutional volume, and 84.7% revenue growth justify a position despite stretched near-term momentum. Bull regime with analyst consensus target and AIP commercial acceleration provides a credible path to $185+ over the medium term.",
+      "price_target": 185.68,
+      "key_risk": "The 28.46% weekly spike and RSI near overbought territory signal high mean-reversion risk, and any deceleration in U.S. commercial AIP deal velocity will trigger severe multiple compression from 73x forward P/E."
     }
   ],
   "regime": "BULL",
@@ -2490,5 +2494,5 @@
     "underperforming": false
   },
   "pnl": 25.25,
-  "last_run": "2026-08-03 18:53"
+  "last_run": "2026-08-04 16:02"
 }
