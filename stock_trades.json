@@ -17,9 +17,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 278.05,
-      "last_pnl_pct": 18.8,
-      "days_held": 43,
+      "last_price": 274.95,
+      "last_pnl_pct": 17.48,
+      "days_held": 44,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "Forward P/E of 15.6x on 85%+ revenue growth with 63% margins is genuinely cheap for a mega-cap AI infrastructure leader, and RSI at 38.2 approaching oversold near 200-DMA support at $190 creates an asymmetric risk/reward in a bull regime. Full Kelly conditions apply, and the compelling growth-adjusted valuation justifies initiating a partial position here with room to add on a confirmed $190 hold.",
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
-      "trail_high": 212.07,
-      "last_price": 212.07,
-      "last_pnl_pct": 6.78,
-      "days_held": 41,
+      "trail_high": 220.16,
+      "last_price": 220.16,
+      "last_pnl_pct": 10.85,
+      "days_held": 42,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 377.0,
-      "last_pnl_pct": 14.75,
-      "days_held": 8,
+      "last_price": 375.9,
+      "last_pnl_pct": 14.41,
+      "days_held": 9,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 419.33,
-      "last_price": 419.33,
-      "last_pnl_pct": 11.11,
-      "days_held": 6,
+      "last_price": 417.08,
+      "last_pnl_pct": 10.52,
+      "days_held": 7,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
       "earnings_play": false,
       "trail_high": 497.32,
-      "last_price": 497.32,
-      "last_pnl_pct": 2.24,
-      "days_held": 1,
+      "last_price": 489.92,
+      "last_pnl_pct": 0.72,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     }
@@ -2447,6 +2447,10 @@
     {
       "date": "2026-08-04",
       "value": 1060.62
+    },
+    {
+      "date": "2026-08-05",
+      "value": 1060.24
     }
   ],
   "top_picks": [
@@ -2456,9 +2460,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's elite revenue growth of 92.8% with ~49% margins justifies premium valuation in a bull regime, with analyst consensus at $185.68 and institutional volume confirmation supporting continued momentum. Despite overbought RSI concerns, the structural bull trend above both MA50 and MA200 with forward P/E compression to 74x on genuine AI/defense contract acceleration warrants a medium-term position.",
-      "price_target": 185.68,
-      "key_risk": "A sentiment shift in AI or defense spending narratives could trigger rapid multiple compression given PLTR's near-total dependence on narrative momentum at 183x trailing P/E."
+      "reasoning": "PLTR is in a structurally sound bull trend with institutional volume confirmation, trading above both key moving averages and showing early-to-mid momentum expansion rather than exhaustion. The AI/defense contract pipeline and elite margin profile justify a premium multiple, with the analyst target and prior $207 high as near-term magnets.",
+      "price_target": 207.0,
+      "key_risk": "A federal budget freeze or contract delay would brutally reprice the 76x forward multiple with no earnings cushion, and the 30% weekly surge creates short-term mean-reversion vulnerability."
     },
     {
       "ticker": "VFV.TO",
@@ -2466,9 +2470,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "VFV is coiled just beneath its 52-week high with strong MA separation, healthy RSI, and a compounding momentum curve that has not yet shown exhaustion signals. A confirmed breakout above $193.52 on volume would unlock the next leg higher with clean index beta in a confirmed bull regime.",
+      "reasoning": "VFV is in a clean bullish structure trading above both key moving averages and pressing against its 52-week high, with a breakout above $194.21 opening fresh air and no overhead resistance. Bull market regime with solid 3M/6M momentum and RSI at 58.3 leaves meaningful upside without overbought risk.",
       "price_target": 220.0,
-      "key_risk": "A hotter-than-expected U.S. CPI print or Fed hawkish pivot could trigger an 8\u201312% macro-driven flush in the high-multiple S&P 500 names that dominate VFV's holdings."
+      "key_risk": "Unhedged USD exposure means CAD strengthening from oil price moves or Bank of Canada policy shifts could silently erode NAV returns even if U.S. equities continue to rally."
     },
     {
       "ticker": "META",
@@ -2476,9 +2480,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a deeply oversold RSI of 26.3 with a 29% gap to analyst consensus, while 17x forward P/E severely underprices 28% revenue growth and 30% margins \u2014 a compelling value dislocation in a bull regime. Technicals remain bearish with no reversal signal yet, so entry is sized for the asymmetric upside rather than momentum confirmation.",
+      "reasoning": "META trades at a deeply discounted 16.7x forward P/E for 28% revenue growth with 30% margins, and RSI at 28.3 signals extreme oversold conditions historically preceding sharp reversals in mega-cap tech. The 30%+ analyst upside target is credible if macro or ad-spend data stabilizes, making the risk/reward asymmetric at current levels.",
       "price_target": 759.4,
-      "key_risk": "Continued institutional distribution accelerates below $545 support if Zuckerberg signals further AI capex escalation on next earnings, invalidating the margin recovery thesis."
+      "key_risk": "Continued institutional distribution pressure and deteriorating Q2 ad-spend guidance from Google or Snap could drive META toward the $520 support level, invalidating the setup."
     }
   ],
   "regime": "BULL",
@@ -2494,5 +2498,5 @@
     "underperforming": false
   },
   "pnl": 25.25,
-  "last_run": "2026-08-04 18:33"
+  "last_run": "2026-08-05 15:46"
 }
