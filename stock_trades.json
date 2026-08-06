@@ -17,9 +17,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 271.84,
-      "last_pnl_pct": 16.15,
-      "days_held": 44,
+      "last_price": 273.7,
+      "last_pnl_pct": 16.95,
+      "days_held": 45,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 221.21,
-      "last_price": 221.21,
-      "last_pnl_pct": 11.38,
-      "days_held": 42,
+      "last_price": 217.74,
+      "last_pnl_pct": 9.63,
+      "days_held": 43,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 361.76,
-      "last_pnl_pct": 10.11,
-      "days_held": 9,
+      "last_price": 358.23,
+      "last_pnl_pct": 9.03,
+      "days_held": 10,
       "status": "OPEN",
       "live": false
     },
@@ -82,10 +82,10 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 419.33,
-      "last_price": 416.27,
-      "last_pnl_pct": 10.3,
-      "days_held": 7,
+      "trail_high": 422.45,
+      "last_price": 422.45,
+      "last_pnl_pct": 11.94,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
       "earnings_play": false,
       "trail_high": 497.32,
-      "last_price": 489.83,
-      "last_pnl_pct": 0.7,
-      "days_held": 2,
+      "last_price": 496.14,
+      "last_pnl_pct": 2.0,
+      "days_held": 3,
       "status": "OPEN",
       "live": false
     }
@@ -2451,28 +2451,22 @@
     {
       "date": "2026-08-05",
       "value": 1056.45
+    },
+    {
+      "date": "2026-08-06",
+      "value": 1057.23
     }
   ],
   "top_picks": [
     {
-      "ticker": "PLTR",
-      "score": 8,
+      "ticker": "AAPL",
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's elite 93% revenue growth and 49% margins justify premium valuation in a bull regime, with institutional volume confirmation and a clean technical structure above both key MAs supporting continued upside toward analyst consensus. Near-term blowoff risk is real at RSI 67 after a +30% weekly surge, so position sizing must respect the elevated beta and potential macro-driven multiple compression.",
-      "price_target": 185.0,
-      "key_risk": "At 70x forward P/E with beta of 1.56, any hawkish macro repricing or risk-off rotation could trigger a sharp 15-20% drawdown before the intermediate trend resumes."
-    },
-    {
-      "ticker": "VFV.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "VFV is in a clean bull structure with price above both key MAs, accelerating intermediate momentum confirmed by above-average volume, and RSI at 57.9 leaving room before overbought conditions \u2014 a breakout above the $194.21 52-week high opens air pocket to the upside. Bull market regime supports full Kelly sizing with a favorable risk/reward given the defined stop at $185.",
-      "price_target": 220.0,
-      "key_risk": "A hawkish Fed pivot or hot CPI print could sharply reprice rate expectations, compress mega-cap tech multiples, and trigger a reversal precisely at this all-time high resistance level."
+      "reasoning": "AAPL is in a trend-intact pullback with RSI near oversold territory at 34.9 while holding above both the 50-DMA and 200-DMA, offering a tactical entry in a confirmed bull regime. Analyst consensus target at $324 provides a defined near-term upside with structural support intact.",
+      "price_target": 324.01,
+      "key_risk": "Tariff escalation targeting Chinese manufacturing could compress gross margins and accelerate the selloff toward the $295 support level."
     },
     {
       "ticker": "META",
@@ -2480,9 +2474,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META is deeply oversold at RSI 27.9 with decelerating selling pressure, trading at a compelling 16.6x forward P/E for a 28% revenue grower with 30%+ margins \u2014 the risk/reward from this technical exhaustion point is asymmetric. Analyst consensus at $759 with strong-buy ratings provides institutional conviction backstop as the stock approaches a potential capitulation reversal.",
-      "price_target": 759.0,
-      "key_risk": "Capex blowout on AI infrastructure in upcoming Q2 earnings re-ignites the selloff and breaks the $550 technical support level, invalidating the bottoming thesis."
+      "reasoning": "META trades at a compelling 16.7x forward P/E with 28% revenue growth and ~29% upside to analyst consensus, offering asymmetric risk/reward on a 6-month horizon despite near-term technical weakness. RSI compression near 30 in a bull regime supports initiating a conservative position ahead of potential mean-reversion toward reclaiming the 50-MA at $600.",
+      "price_target": 759.41,
+      "key_risk": "Tariff-driven ad budget pullbacks from CPG and retail advertisers could accelerate the technical breakdown toward the $520 support floor and invalidate the fundamental thesis near-term."
+    },
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "In a BULL regime, AMD's 17.7% upside to analyst target and strong AI GPU growth thesis via MI300X justify entry at this corrective pullback despite weak near-term momentum. The forward P/E compression to 32x on 50% revenue growth provides a credible fundamental floor for patient accumulation.",
+      "price_target": 579.0,
+      "key_risk": "Any hyperscaler concentration toward NVIDIA or gross margin miss on AMD's thin 15.6% margins could trigger a sharp multiple de-rating and accelerate the current technical breakdown below the 50-day MA."
     }
   ],
   "regime": "BULL",
@@ -2498,5 +2502,5 @@
     "underperforming": false
   },
   "pnl": 25.25,
-  "last_run": "2026-08-05 18:24"
+  "last_run": "2026-08-06 15:49"
 }
