@@ -1,5 +1,5 @@
 {
-  "cash": 712.2900000000002,
+  "cash": 722.0700000000002,
   "positions": [
     {
       "time": "2026-06-22 18:04",
@@ -17,9 +17,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 274.23,
-      "last_pnl_pct": 17.17,
-      "days_held": 46,
+      "last_price": 277.91,
+      "last_pnl_pct": 18.74,
+      "days_held": 49,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 223.15,
-      "last_price": 222.29,
-      "last_pnl_pct": 11.92,
-      "days_held": 44,
+      "last_price": 220.46,
+      "last_pnl_pct": 11.0,
+      "days_held": 47,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 353.95,
-      "last_pnl_pct": 7.73,
-      "days_held": 11,
+      "last_price": 354.82,
+      "last_pnl_pct": 8.0,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -82,32 +82,32 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 422.45,
-      "last_price": 420.09,
-      "last_pnl_pct": 11.31,
-      "days_held": 9,
+      "trail_high": 423.75,
+      "last_price": 423.75,
+      "last_pnl_pct": 12.28,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     },
     {
-      "time": "2026-08-03 16:02",
+      "time": "2026-08-10 14:36",
       "ticker": "MSFT",
       "action": "BUY",
       "strategy": "MEDIUM",
-      "shares": 0.1168,
-      "price": 486.41,
-      "cost": 56.81,
-      "target": 563.05,
-      "stop_loss": 455.0,
+      "shares": 0.0977,
+      "price": 511.95,
+      "cost": 50.02,
+      "target": 563.0,
+      "stop_loss": 475.0,
       "score": 7,
       "conviction": "medium",
-      "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
-      "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
+      "reasoning": "MSFT's elite fundamentals \u2014 40%+ margins, 17.7% revenue growth, and a reasonable 21.8x forward P/E \u2014 support the analyst consensus target of $563 with strong_buy backing, making a staged entry justified despite overbought conditions. RSI at 85.1 and below-average volume warrant a small initial position with room to add on any pullback toward $470\u2013$480.",
+      "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
-      "trail_high": 503.64,
-      "last_price": 499.46,
-      "last_pnl_pct": 2.68,
-      "days_held": 4,
+      "trail_high": 511.95,
+      "last_price": 511.95,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1489,6 +1489,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-08-03 16:02",
+      "ticker": "MSFT",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.1168,
+      "price": 486.41,
+      "cost": 56.81,
+      "target": 563.05,
+      "stop_loss": 455.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
+      "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
+      "earnings_play": false,
+      "trail_high": 511.95,
+      "last_price": 511.95,
+      "last_pnl_pct": 5.25,
+      "days_held": 7,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 511.95,
+      "sell_time": "2026-08-10 14:36",
+      "pnl_dollar": 2.98,
+      "pnl_pct": 5.25,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI has climbed further to 85.1 after a 33% 1-month surge, amplifying the mean-reversion risk flagged at entry, and locking in the 5.3% gain before any Azure deceleration catalyst triggers a sharp reversal."
+    },
+    {
+      "time": "2026-08-10 14:36",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.0977,
+      "price": 511.95,
+      "cost": 50.02,
+      "target": 563.0,
+      "stop_loss": 475.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's elite fundamentals \u2014 40%+ margins, 17.7% revenue growth, and a reasonable 21.8x forward P/E \u2014 support the analyst consensus target of $563 with strong_buy backing, making a staged entry justified despite overbought conditions. RSI at 85.1 and below-average volume warrant a small initial position with room to add on any pullback toward $470\u2013$480.",
+      "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
+      "earnings_play": false,
+      "trail_high": 511.95,
+      "last_price": 511.95,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2201,6 +2250,33 @@
       "pnl_dollar": 27.71,
       "pnl_pct": 31.49,
       "sell_reason": "Take profit +31.5% (target 25%)"
+    },
+    {
+      "time": "2026-08-03 16:02",
+      "ticker": "MSFT",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1168,
+      "price": 486.41,
+      "cost": 56.81,
+      "target": 563.05,
+      "stop_loss": 455.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "MSFT's AI/Azure monetization thesis remains intact with strong fundamental quality at 20.7x forward P/E and 17.7% revenue growth supporting the $563 analyst target. Bull regime enables entry despite RSI 81 overbought conditions, though position sizing should be trimmed given the late-stage surge pattern and vulnerability to any Azure deceleration surprise.",
+      "key_risk": "RSI at 81.1 combined with a compressed 25% single-week surge creates significant mean-reversion risk if next earnings reveal any Azure growth deceleration.",
+      "earnings_play": false,
+      "trail_high": 511.95,
+      "last_price": 511.95,
+      "last_pnl_pct": 5.25,
+      "days_held": 7,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 511.95,
+      "sell_time": "2026-08-10 14:36",
+      "pnl_dollar": 2.98,
+      "pnl_pct": 5.25,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI has climbed further to 85.1 after a 33% 1-month surge, amplifying the mean-reversion risk flagged at entry, and locking in the 5.3% gain before any Azure deceleration catalyst triggers a sharp reversal."
     }
   ],
   "portfolio_history": [
@@ -2459,6 +2535,10 @@
     {
       "date": "2026-08-07",
       "value": 1057.58
+    },
+    {
+      "date": "2026-08-10",
+      "value": 1060.5
     }
   ],
   "top_picks": [
@@ -2468,19 +2548,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's confirmed bullish structure with institutional volume, expanding MACD, and AI/government contract momentum supports continued upside toward analyst targets and beyond in a BULL regime. The 1W momentum spike elevates near-term mean-reversion risk, but the fundamental AI infrastructure thesis and 49% margins justify holding through volatility with disciplined stop placement below MA200.",
+      "reasoning": "PLTR's elite 49% margins, 93% revenue growth, and confirmed institutional accumulation at 1.68x average volume support the bull thesis, with the forward P/E compressing to 77x signaling earnings acceleration already being priced by smart money. Bull regime unlocks full Kelly deployment despite the overbought RSI, though position sizing should account for the 10-20% digestion phase risk given the front-loaded 41% move.",
       "price_target": 220.0,
-      "key_risk": "A federal defense/AI budget repricing or broad AI sentiment reversal could trigger a sharp correction from extended valuation levels at 74x forward P/E."
-    },
-    {
-      "ticker": "QQQ",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "QQQ shows a textbook bull continuation structure with price above both key moving averages, RSI at 59 with room to run, and a sharp 1W momentum reawakening after a brief consolidation dip. The 52-week high at $748.65 is the clear near-term target with the MA50 at $714 providing solid downside support.",
-      "price_target": 748.65,
-      "key_risk": "A hawkish Fed surprise or hot CPI print could reprice rates higher, compress tech multiples, and break the $714 MA50 support rapidly."
+      "key_risk": "Any hyperscaler commentary signaling slower enterprise AI budget cycles will trigger a violent repricing of PLTR's pure-play AI premium from current levels."
     },
     {
       "ticker": "VFV.TO",
@@ -2488,23 +2558,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Price is within $0.48 of 52-week highs with a clean bullish MA stack, positive MACD, and RSI at 63.7 leaving room before overbought \u2014 a high-probability breakout setup in a confirmed bull regime. The maturing trend and low-volume push warrant a medium position rather than full conviction, but the technical structure strongly favors continuation toward all-time highs.",
-      "price_target": 220.0,
-      "key_risk": "CAD strengthening against USD driven by BoC/Fed policy divergence or commodity rallies could directly compress NAV gains, turning a winning equity trade into a flat or losing position for Canadian investors."
+      "reasoning": "VFV sits in confirmed bull structure above both key moving averages with positive MACD, and in a BULL regime an score-8 qualifies for full Kelly deployment. However, proximity to all-time highs at 98% of 52-week peak with light volume warrants a conservative target and tight stop near the 50-MA.",
+      "price_target": 210.0,
+      "key_risk": "A hotter-than-expected U.S. inflation print forcing Fed rate-cut repricing could rapidly compress the index's ~27x blended P/E and trigger a swift pullback to the 50-MA support at $186.88."
+    },
+    {
+      "ticker": "META",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "META trades at a compelling 17.2x forward P/E with 28% revenue growth and ~30% margins, offering 25% upside to analyst consensus while RSI near 38 suggests the bulk of near-term selling pressure is largely absorbed. Bull market regime permits full Kelly allocation, and fundamental quality justifies accumulation despite weak near-term technicals.",
+      "price_target": 720.0,
+      "key_risk": "A break below the 50-MA (~$599) on elevated volume could trigger a swift flush to $560\u2013$570, particularly if Q1 ad revenue guidance signals tariff-driven demand destruction from Chinese e-commerce advertisers."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 48.1,
+    "win_rate": 50.0,
     "rolling_win_rate": 50.0,
-    "avg_return": 1.97,
-    "sharpe": 0.17,
+    "avg_return": 2.08,
+    "sharpe": 0.18,
     "max_drawdown": 4.52,
-    "total_trades": 27,
-    "wins": 13,
+    "total_trades": 28,
+    "wins": 14,
     "losses": 14,
     "underperforming": false
   },
-  "pnl": 25.25,
-  "last_run": "2026-08-07 17:51"
+  "pnl": 28.23,
+  "last_run": "2026-08-10 14:44"
 }
