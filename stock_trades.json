@@ -17,8 +17,8 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 274.26,
-      "last_pnl_pct": 17.19,
+      "last_price": 272.66,
+      "last_pnl_pct": 16.5,
       "days_held": 50,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 223.15,
-      "last_price": 219.35,
-      "last_pnl_pct": 10.44,
+      "last_price": 217.7,
+      "last_pnl_pct": 9.61,
       "days_held": 48,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 350.48,
-      "last_pnl_pct": 6.67,
+      "last_price": 346.26,
+      "last_pnl_pct": 5.39,
       "days_held": 15,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 423.75,
-      "last_price": 423.32,
-      "last_pnl_pct": 12.17,
+      "last_price": 421.88,
+      "last_pnl_pct": 11.79,
       "days_held": 13,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 501.43,
-      "last_pnl_pct": -2.05,
+      "last_price": 503.05,
+      "last_pnl_pct": -1.74,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -2542,39 +2542,39 @@
     },
     {
       "date": "2026-08-11",
-      "value": 1057.14
+      "value": 1055.26
     }
   ],
   "top_picks": [
+    {
+      "ticker": "MSTR",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "In a BULL regime, MSTR's leveraged Bitcoin exposure and 139% upside to analyst targets justify a medium-term position as BTC consolidates above $90K, with MACD turning bullish and a tentative base forming after a 51% drawdown. The 3.55 beta to BTC provides asymmetric upside if Bitcoin reclaims $100K, making the risk/reward compelling within the 20% crypto proxy cap.",
+      "price_target": 220.0,
+      "key_risk": "BTC breakdown below $75K could stress-test MSTR's 14.9x debt-to-equity structure and trigger forced deleveraging, causing catastrophic downside well beyond the stop."
+    },
     {
       "ticker": "SHOP.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Shopify trades in a clean bullish structure with strong institutional participation, 33.7% revenue growth, and expanding margins confirming the forward P/E compression thesis. Bull regime allows full Kelly deployment at score 8, with the 200MA providing a substantial $30+ cushion as trend support.",
+      "reasoning": "Shopify trades in a confirmed bull structure with strong institutional volume, positive MACD, and 33.7% revenue growth supporting a 62.6x forward P/E in a bull market regime. Analyst consensus targets $231.83 with a buy rating, and RSI at 66.6 leaves technical headroom before exhaustion.",
       "price_target": 231.0,
-      "key_risk": "Momentum is plateauing rather than accelerating at elevated valuation (103x trailing P/E), and any GMV or merchant solutions disappointment in the upcoming earnings print could trigger a sharp de-rating."
+      "key_risk": "High beta of 2.59 combined with D/E of 1.4x makes SHOP disproportionately vulnerable to any macro rate re-acceleration or risk-off rotation."
     },
     {
-      "ticker": "META",
+      "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 17.3x forward P/E with 28% revenue growth and AI-driven ad monetization providing durable upside to analyst targets near $754; current weakness below the 200-MA offers a discounted entry with 50-MA support at $598 limiting near-term downside. BULL regime permits full Kelly sizing on this score, and the fundamental discount to intrinsic value outweighs the technical caution in a growth portfolio context.",
-      "price_target": 754.14,
-      "key_risk": "Q1 earnings capex guidance above $60B without a corresponding revenue beat could break $598 support and drive a test of $560, invalidating the recovery thesis."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AMD is approaching oversold RSI territory (35.7) after a -12.4% monthly flush, creating a technical mean-reversion setup within a confirmed bull regime with 31% upside to analyst targets driven by AI/data center MI300X adoption. The distribution phase appears to be flushing weak hands rather than reflecting fundamental deterioration, and strong buy consensus with 50% revenue growth supports re-entry at current discounted levels.",
-      "price_target": 613.33,
-      "key_risk": "A disappointing MI300X adoption print or weak data center GPU guidance could trigger violent re-rating toward $380-400 given AMD's beta of 2.5 and zero margin for error at trailing P/E of 120x."
+      "reasoning": "AAPL is approaching oversold RSI levels near 37 with strong 200-DMA support at $279 providing a clear risk floor, and the bull market regime justifies entry at this pullback with analyst consensus targeting $322. Fundamental quality remains intact with 16.4% revenue growth and 27.6% margins, making this a tactical dip-buy against a deteriorating but not broken technical setup.",
+      "price_target": 322.28,
+      "key_risk": "China iPhone demand weakness or Services growth deceleration at next earnings could trigger a swift re-rate toward $280\u2013285, wiping out the 6-month gain."
     }
   ],
   "regime": "BULL",
@@ -2590,5 +2590,5 @@
     "underperforming": false
   },
   "pnl": 28.23,
-  "last_run": "2026-08-11 14:43"
+  "last_run": "2026-08-11 18:00"
 }
