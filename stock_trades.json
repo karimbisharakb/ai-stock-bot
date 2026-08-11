@@ -17,9 +17,9 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 276.92,
-      "last_pnl_pct": 18.32,
-      "days_held": 49,
+      "last_price": 274.26,
+      "last_pnl_pct": 17.19,
+      "days_held": 50,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 223.15,
-      "last_price": 218.2,
-      "last_pnl_pct": 9.86,
-      "days_held": 47,
+      "last_price": 219.35,
+      "last_pnl_pct": 10.44,
+      "days_held": 48,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 352.76,
-      "last_pnl_pct": 7.37,
-      "days_held": 14,
+      "last_price": 350.48,
+      "last_pnl_pct": 6.67,
+      "days_held": 15,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 423.75,
-      "last_price": 421.3,
-      "last_pnl_pct": 11.64,
-      "days_held": 12,
+      "last_price": 423.32,
+      "last_pnl_pct": 12.17,
+      "days_held": 13,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 507.14,
-      "last_pnl_pct": -0.94,
-      "days_held": 0,
+      "last_price": 501.43,
+      "last_pnl_pct": -2.05,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -2539,18 +2539,22 @@
     {
       "date": "2026-08-10",
       "value": 1058.3
+    },
+    {
+      "date": "2026-08-11",
+      "value": 1057.14
     }
   ],
   "top_picks": [
     {
-      "ticker": "VFV.TO",
+      "ticker": "SHOP.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "VFV is trading in a strong bull trend with price extended above both key moving averages, positive MACD, and RSI at 63.6 suggesting room before overbought conditions \u2014 a breakout above the $194.21 52-week high would open clear air to the upside. The broader S&P 500 bull market regime supports continued accumulation at current levels with MA50 at $186.87 providing a logical stop zone.",
-      "price_target": 220.0,
-      "key_risk": "Below-average volume on the approach to all-time highs combined with hawkish Fed repricing or weak macro data could stall the breakout and force a retest of the $186\u2013187 MA50 support."
+      "reasoning": "Shopify trades in a clean bullish structure with strong institutional participation, 33.7% revenue growth, and expanding margins confirming the forward P/E compression thesis. Bull regime allows full Kelly deployment at score 8, with the 200MA providing a substantial $30+ cushion as trend support.",
+      "price_target": 231.0,
+      "key_risk": "Momentum is plateauing rather than accelerating at elevated valuation (103x trailing P/E), and any GMV or merchant solutions disappointment in the upcoming earnings print could trigger a sharp de-rating."
     },
     {
       "ticker": "META",
@@ -2558,9 +2562,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 16.9x forward P/E despite 28% revenue growth and best-in-class AI monetization runway, making the current technical weakness a fundamental opportunity on a 3-6 month horizon. RSI approaching oversold at 34.8 combined with a 27.5% gap to analyst consensus target justifies a measured entry in a bull regime.",
-      "price_target": 756.95,
-      "key_risk": "Grinding distribution pattern without capitulation exhaustion could push price toward the $520 floor before a base forms, requiring patience and discipline on the stop."
+      "reasoning": "META trades at a compelling 17.3x forward P/E with 28% revenue growth and AI-driven ad monetization providing durable upside to analyst targets near $754; current weakness below the 200-MA offers a discounted entry with 50-MA support at $598 limiting near-term downside. BULL regime permits full Kelly sizing on this score, and the fundamental discount to intrinsic value outweighs the technical caution in a growth portfolio context.",
+      "price_target": 754.14,
+      "key_risk": "Q1 earnings capex guidance above $60B without a corresponding revenue beat could break $598 support and drive a test of $560, invalidating the recovery thesis."
     },
     {
       "ticker": "AMD",
@@ -2568,9 +2572,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's forward P/E of 30.7x is reasonable given 50% revenue growth and credible AI accelerator market share gains via MI300X, making the current -14.9% pullback a potential accumulation zone near key $440-$450 support. Bull market regime justifies entry at RSI 38.2 approaching oversold, with analyst consensus price target implying 29% upside as the fundamental inflection plays out.",
+      "reasoning": "AMD is approaching oversold RSI territory (35.7) after a -12.4% monthly flush, creating a technical mean-reversion setup within a confirmed bull regime with 31% upside to analyst targets driven by AI/data center MI300X adoption. The distribution phase appears to be flushing weak hands rather than reflecting fundamental deterioration, and strong buy consensus with 50% revenue growth supports re-entry at current discounted levels.",
       "price_target": 613.33,
-      "key_risk": "Continued distribution from profitable 6-month longs could accelerate the breakdown below $440 support, invalidating the mean-reversion thesis and exposing further downside if MI300X ramp disappoints."
+      "key_risk": "A disappointing MI300X adoption print or weak data center GPU guidance could trigger violent re-rating toward $380-400 given AMD's beta of 2.5 and zero margin for error at trailing P/E of 120x."
     }
   ],
   "regime": "BULL",
@@ -2586,5 +2590,5 @@
     "underperforming": false
   },
   "pnl": 28.23,
-  "last_run": "2026-08-10 17:53"
+  "last_run": "2026-08-11 14:43"
 }
