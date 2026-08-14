@@ -17,8 +17,8 @@
       "key_risk": "Tariff escalation on third-party sellers and consumer discretionary softness could compress GMV growth and delay margin expansion, invalidating the fundamental thesis before technical stabilization occurs.",
       "earnings_play": false,
       "trail_high": 285.03,
-      "last_price": 264.42,
-      "last_pnl_pct": 12.98,
+      "last_price": 263.23,
+      "last_pnl_pct": 12.47,
       "days_held": 53,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 226.1,
-      "last_price": 225.12,
-      "last_pnl_pct": 13.35,
+      "last_price": 225.54,
+      "last_pnl_pct": 13.56,
       "days_held": 51,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 343.95,
-      "last_pnl_pct": 4.69,
+      "last_price": 342.35,
+      "last_pnl_pct": 4.2,
       "days_held": 18,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 425.99,
-      "last_pnl_pct": 12.88,
+      "last_price": 425.68,
+      "last_pnl_pct": 12.8,
       "days_held": 16,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 498.82,
-      "last_pnl_pct": -2.56,
+      "last_price": 495.85,
+      "last_pnl_pct": -3.14,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -2554,39 +2554,39 @@
     },
     {
       "date": "2026-08-14",
-      "value": 1054.58
+      "value": 1053.65
     }
   ],
   "top_picks": [
-    {
-      "ticker": "PLTR",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "PLTR's elite 49% margins, 93% revenue growth, and dominant positioning in government/enterprise AI justify continued multiple expansion in a BULL regime with bullish MACD confirming structural trend intact. RSI overbought and below-average volume warrant a wider stop but not avoidance given full Kelly conditions apply.",
-      "price_target": 220.0,
-      "key_risk": "Below-average volume divergence and overbought RSI at 75.5 increase the probability of mean-reversion to $155\u2013$165 if defense contract newsflow disappoints or macro sentiment shifts."
-    },
-    {
-      "ticker": "AAPL",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 25.2 signals deep oversold exhaustion within a confirmed bull regime, with low-volume selling indicating capitulation rather than distribution and a clear mean-reversion path toward analyst consensus of $322. The corrective pullback against a still-intact long-term uptrend and strong fundamentals support a tactical long entry at current levels.",
-      "price_target": 322.28,
-      "key_risk": "A macro-driven tech multiple compression from Fed hawkishness or risk-off sentiment could rapidly close the gap to analyst consensus given AAPL's stretched 34.6x trailing P/E and absence of a near-term earnings catalyst."
-    },
     {
       "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META's 28% revenue growth and ~30% margins at 17x forward P/E represent genuine fundamental value with a $130+ gap to analyst consensus, providing a compelling risk/reward entry in a BULL regime. While the chart structure is damaged with price below both MA50 and MA200, the RSI stabilization and bullish MACD suggest a base-building phase that fundamental buyers should begin accumulating on weakness.",
-      "price_target": 680.0,
-      "key_risk": "A Q2 earnings miss driven by Reality Labs cost acceleration or ad revenue deceleration could break the $570 technical floor and trigger a rapid flush to $520 with no structural support."
+      "reasoning": "META's 16.9x forward P/E on 28% revenue growth and 30% net margins represents a genuine fundamental mispricing with $163 of analyst-consensus upside, and BULL market regime warrants position entry even amid technical weakness. A partial position is justified now with intent to add on reclaim of the $597\u2013$627 MA cluster with volume confirmation.",
+      "price_target": 720.0,
+      "key_risk": "Continued trading below both the 50-MA and 200-MA with low institutional volume raises the probability of a flush to $520 support if AI capex narrative deteriorates at next earnings."
+    },
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AMD trades at 32.5x forward earnings against 50% revenue growth, offering genuine value if MI300X GPU adoption accelerates with hyperscalers \u2014 the bull market regime justifies entry here despite near-term momentum exhaustion. A reclaim of the $510 50-DMA would confirm the next leg toward the $584 prior high and analyst target of $613.",
+      "price_target": 584.0,
+      "key_risk": "MI300X adoption narrative fails to materialize at scale, triggering a swift breakdown to $450 with no meaningful technical support until the 200-DMA at $324."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR's 49% margins, 93% revenue growth, and rapidly compressing forward P/E support a premium multiple with room to expand toward $210 as earnings leverage materializes over the next two quarters. Bull regime permits entry despite overbought RSI, but position sizing should reflect near-term consolidation risk given thinning volume and decelerating weekly momentum.",
+      "price_target": 210.0,
+      "key_risk": "Government budget scrutiny or DOGE-style defense/AI spending cuts could trigger an immediate 15-20% repricing given how much future contract growth is embedded in current valuation."
     }
   ],
   "regime": "BULL",
@@ -2602,5 +2602,5 @@
     "underperforming": false
   },
   "pnl": 28.23,
-  "last_run": "2026-08-14 14:40"
+  "last_run": "2026-08-14 17:56"
 }
