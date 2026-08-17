@@ -17,8 +17,8 @@
       "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
       "earnings_play": false,
       "trail_high": 226.2,
-      "last_price": 226.2,
-      "last_pnl_pct": 13.89,
+      "last_price": 226.07,
+      "last_pnl_pct": 13.83,
       "days_held": 54,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 341.81,
-      "last_pnl_pct": 4.04,
+      "last_price": 341.25,
+      "last_pnl_pct": 3.87,
       "days_held": 21,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 427.98,
-      "last_pnl_pct": 13.41,
+      "last_price": 431.38,
+      "last_pnl_pct": 14.31,
       "days_held": 19,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 484.62,
-      "last_pnl_pct": -5.34,
+      "last_price": 479.57,
+      "last_pnl_pct": -6.32,
       "days_held": 7,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Lack of institutional accumulation volume and negative MACD mean the bottom may not be in yet, risking a further flush toward MA200 support near $280 before any recovery.",
       "earnings_play": false,
       "trail_high": 305.35,
-      "last_price": 305.35,
-      "last_pnl_pct": 0.0,
+      "last_price": 304.22,
+      "last_pnl_pct": -0.37,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -2634,19 +2634,29 @@
     },
     {
       "date": "2026-08-17",
-      "value": 1052.42
+      "value": 1052.21
     }
   ],
   "top_picks": [
+    {
+      "ticker": "SHOP.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "Shopify is in a clean bullish trend with price well above both key moving averages, RSI in momentum-not-exhaustion territory, and a 1W pullback on low volume signaling healthy consolidation rather than distribution. Analyst consensus at $230.89 and 33.7% revenue growth support continued upside toward the $220 target with manageable near-term risk.",
+      "price_target": 220.0,
+      "key_risk": "High beta of 2.59 means any macro risk-off event or guidance disappointment at the next earnings print could rapidly erase the $206\u2013$220 gap and test the 200MA stop."
+    },
     {
       "ticker": "AMZN",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMZN trades in a clean bullish structure above key moving averages with 25% upside to analyst consensus, supported by 19.6% revenue growth and strong AWS AI tailwinds that justify a medium-term position. Near-term MACD weakness and low volume suggest entering on pullbacks toward $248 support rather than chasing current levels.",
+      "reasoning": "AMZN trades at a historically cheap 20.8x P/E with 19.6% revenue growth and high-margin AWS/advertising tailwinds supporting the $327 analyst target, while bullish structure above MA50/MA200 remains intact. Near-term consolidation and fading momentum are digestible in a BULL regime, making this an attractive entry with defined risk at the MA200 level.",
       "price_target": 310.0,
-      "key_risk": "AWS reacceleration disappointment at next earnings could rapidly unwind the 6-month gain given AMZN's 1.45 beta and elevated forward P/E of 25x."
+      "key_risk": "AWS enterprise IT budget cuts driven by macro deterioration would directly compress the highest-margin segment and invalidate the bull thesis."
     },
     {
       "ticker": "META",
@@ -2654,19 +2664,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META's 16.6x forward P/E with 28% revenue growth and ~30% margins represents genuine mispricing driven by macro rotation rather than fundamental deterioration, and the BULL regime permits entry at current score levels despite weak near-term technical structure. The $754 consensus target offers asymmetric upside with $520 as a well-defined structural support floor limiting downside risk.",
-      "price_target": 754.0,
-      "key_risk": "If Q1 earnings show another capex raise without a corresponding ad revenue guide-up, the stock re-rates sharply lower toward $520 and the fundamental thesis loses its near-term catalyst."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AMD's forward P/E compression to 33x alongside 50% revenue growth and MI300X data center GPU ramp provides a credible re-rating catalyst toward the $612 analyst target in a confirmed bull regime. Price hugging MA50 with MA200 far below confirms structural uptrend integrity, and the strong_buy rating with ~20% upside justifies a medium-term position despite low-conviction volume.",
-      "price_target": 612.84,
-      "key_risk": "Thin 0.62x volume and decelerating 1M momentum signal potential consolidation, and any disappointing MI300X adoption data or hyperscaler order softness could rapidly compress the AI-premium multiple."
+      "reasoning": "META trades at a genuine fundamental discount with 16x forward P/E against 28% revenue growth and 30% margins, making tactical accumulation compelling while the stock sits ~10% above the $520 structural support floor. The bull market regime supports initiating a partial position here, with the thesis contingent on AI-driven ad revenue confirmation at Q1 earnings acting as the re-rating catalyst.",
+      "price_target": 650.0,
+      "key_risk": "Technical breakdown continuation toward $520 on macro-driven ad spend deterioration or tariff-related consumer demand destruction before fundamentals can reassert."
     }
   ],
   "regime": "BULL",
@@ -2682,5 +2682,5 @@
     "underperforming": false
   },
   "pnl": 36.12,
-  "last_run": "2026-08-17 14:10"
+  "last_run": "2026-08-17 17:28"
 }
