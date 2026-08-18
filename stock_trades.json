@@ -1,28 +1,6 @@
 {
-  "cash": 748.0300000000002,
+  "cash": 723.1400000000002,
   "positions": [
-    {
-      "time": "2026-06-24 18:30",
-      "ticker": "NVDA",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.2517,
-      "price": 198.61,
-      "cost": 49.99,
-      "target": 220.0,
-      "stop_loss": 185.0,
-      "score": 7,
-      "conviction": "medium",
-      "reasoning": "Forward P/E of 15.6x on 85%+ revenue growth with 63% margins is genuinely cheap for a mega-cap AI infrastructure leader, and RSI at 38.2 approaching oversold near 200-DMA support at $190 creates an asymmetric risk/reward in a bull regime. Full Kelly conditions apply, and the compelling growth-adjusted valuation justifies initiating a partial position here with room to add on a confirmed $190 hold.",
-      "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
-      "earnings_play": false,
-      "trail_high": 226.2,
-      "last_price": 220.4,
-      "last_pnl_pct": 10.97,
-      "days_held": 55,
-      "status": "OPEN",
-      "live": false
-    },
     {
       "time": "2026-07-27 16:00",
       "ticker": "GOOG",
@@ -39,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 340.15,
-      "last_pnl_pct": 3.53,
+      "last_price": 340.81,
+      "last_pnl_pct": 3.73,
       "days_held": 22,
       "status": "OPEN",
       "live": false
@@ -61,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 415.81,
-      "last_pnl_pct": 10.18,
+      "last_price": 412.77,
+      "last_pnl_pct": 9.37,
       "days_held": 20,
       "status": "OPEN",
       "live": false
@@ -83,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 481.32,
-      "last_pnl_pct": -5.98,
+      "last_price": 481.75,
+      "last_pnl_pct": -5.9,
       "days_held": 8,
       "status": "OPEN",
       "live": false
@@ -104,10 +82,32 @@
       "reasoning": "RSI at 22 in a confirmed bull regime signals extreme oversold conditions with high probability of mean-reversion bounce toward analyst consensus target, while the stock holding well above MA200 confirms the broader uptrend remains intact. Full Kelly sizing is justified by the bull regime, with entry here offering asymmetric risk relative to the deeply washed-out sentiment.",
       "key_risk": "Lack of institutional accumulation volume and negative MACD mean the bottom may not be in yet, risking a further flush toward MA200 support near $280 before any recovery.",
       "earnings_play": false,
-      "trail_high": 309.16,
-      "last_price": 309.16,
-      "last_pnl_pct": 1.25,
+      "trail_high": 310.66,
+      "last_price": 310.66,
+      "last_pnl_pct": 1.74,
       "days_held": 1,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-08-18 17:21",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3648,
+      "price": 220.04,
+      "cost": 80.27,
+      "target": 285.0,
+      "stop_loss": 200.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA's forward P/E of 17.1x against 85% revenue growth and 63% margins represents a compelling fundamental mispricing relative to peers, with analyst consensus targeting $302 and the BULL regime supporting full Kelly deployment. Near-term overbought RSI at 77.8 warrants a scaled entry rather than full position, with Blackwell ramp execution as the key medium-term catalyst.",
+      "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
+      "earnings_play": false,
+      "trail_high": 220.04,
+      "last_price": 220.04,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1587,6 +1587,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-06-24 18:30",
+      "ticker": "NVDA",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.2517,
+      "price": 198.61,
+      "cost": 49.99,
+      "target": 220.0,
+      "stop_loss": 185.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "Forward P/E of 15.6x on 85%+ revenue growth with 63% margins is genuinely cheap for a mega-cap AI infrastructure leader, and RSI at 38.2 approaching oversold near 200-DMA support at $190 creates an asymmetric risk/reward in a bull regime. Full Kelly conditions apply, and the compelling growth-adjusted valuation justifies initiating a partial position here with room to add on a confirmed $190 hold.",
+      "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
+      "earnings_play": false,
+      "trail_high": 226.2,
+      "last_price": 220.04,
+      "last_pnl_pct": 10.79,
+      "days_held": 55,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 220.04,
+      "sell_time": "2026-08-18 17:20",
+      "pnl_dollar": 5.39,
+      "pnl_pct": 10.79,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI at 77.8 is significantly overbought, the 3M return being negative suggests this recent 1M surge may be exhausting momentum, and at +10.8% gain the position has achieved solid medium-strategy returns while the original asymmetric entry thesis near oversold 200-DMA support no longer applies."
+    },
+    {
+      "time": "2026-08-18 17:21",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3648,
+      "price": 220.04,
+      "cost": 80.27,
+      "target": 285.0,
+      "stop_loss": 200.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA's forward P/E of 17.1x against 85% revenue growth and 63% margins represents a compelling fundamental mispricing relative to peers, with analyst consensus targeting $302 and the BULL regime supporting full Kelly deployment. Near-term overbought RSI at 77.8 warrants a scaled entry rather than full position, with Blackwell ramp execution as the key medium-term catalyst.",
+      "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
+      "earnings_play": false,
+      "trail_high": 220.04,
+      "last_price": 220.04,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2353,6 +2402,33 @@
       "pnl_dollar": 7.89,
       "pnl_pct": 11.6,
       "sell_reason": "Trailing stop $262.23 hit (peak +21.8% from $234.04)"
+    },
+    {
+      "time": "2026-06-24 18:30",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2517,
+      "price": 198.61,
+      "cost": 49.99,
+      "target": 220.0,
+      "stop_loss": 185.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "Forward P/E of 15.6x on 85%+ revenue growth with 63% margins is genuinely cheap for a mega-cap AI infrastructure leader, and RSI at 38.2 approaching oversold near 200-DMA support at $190 creates an asymmetric risk/reward in a bull regime. Full Kelly conditions apply, and the compelling growth-adjusted valuation justifies initiating a partial position here with room to add on a confirmed $190 hold.",
+      "key_risk": "Hyperscaler capex guidance cuts in upcoming earnings calls could invalidate the Blackwell demand thesis and break 200-DMA support with conviction.",
+      "earnings_play": false,
+      "trail_high": 226.2,
+      "last_price": 220.04,
+      "last_pnl_pct": 10.79,
+      "days_held": 55,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 220.04,
+      "sell_time": "2026-08-18 17:20",
+      "pnl_dollar": 5.39,
+      "pnl_pct": 10.79,
+      "sell_reason": "AI thesis break: SELL \u2014 RSI at 77.8 is significantly overbought, the 3M return being negative suggests this recent 1M surge may be exhausting momentum, and at +10.8% gain the position has achieved solid medium-strategy returns while the original asymmetric entry thesis near oversold 200-DMA support no longer applies."
     }
   ],
   "portfolio_history": [
@@ -2638,7 +2714,7 @@
     },
     {
       "date": "2026-08-18",
-      "value": 1048.7
+      "value": 1048.48
     }
   ],
   "top_picks": [
@@ -2648,9 +2724,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMZN trades cheaply at 20.9x P/E relative to 19.6% revenue growth with AWS and advertising as high-margin compounders, while the current pullback (-6.9% 1W on light 0.54x volume) represents a healthy consolidation above both MA50 and MA200 within a confirmed bull trend. The $327 analyst target with strong buy consensus provides a compelling risk/reward entry ahead of AWS re-acceleration catalysts.",
+      "reasoning": "AMZN's bullish structure above both key moving averages, 19.6% revenue growth, and AWS/advertising compounding support a 24.9% upside path toward analyst targets despite near-term overbought RSI and bearish MACD signaling a brief consolidation phase. Bull regime unlocks full Kelly sizing and the fundamental quality \u2014 operating leverage, margin expansion, and cloud re-acceleration optionality \u2014 justifies a medium-term entry with the 200-DMA providing a natural structural stop.",
       "price_target": 310.0,
-      "key_risk": "Bearish MACD and fading momentum could extend the consolidation toward MA50 ($248), and any enterprise cloud spending deceleration at the next earnings print would undermine the core thesis."
+      "key_risk": "AWS growth deceleration below 20% YoY or conservative AI infrastructure guidance could trigger an 8\u201312% drawdown and invalidate the near-term bull thesis."
     },
     {
       "ticker": "META",
@@ -2658,9 +2734,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META's 15.7x forward P/E on 28% revenue growth with 30% margins represents genuine mega-cap value mispricing relative to the $754 analyst consensus, warranting a medium-term accumulation despite the technical breakdown. BULL regime unlocks full Kelly sizing, and the $520 support floor provides a defined risk level with asymmetric upside toward $620\u2013$650 on any macro stabilization.",
+      "reasoning": "META is fundamentally cheap at 15.8x forward earnings with 28% revenue growth and 30% operating margins, offering asymmetric upside if Q1 earnings and AI monetization catalysts beat expectations. The 37% analyst upside target and bull market regime justify a starter position despite near-term technical weakness, with a stop below the 52-week low at $520.",
       "price_target": 650.0,
-      "key_risk": "Continued macro deterioration and SMB ad-spend pullback could trigger analyst estimate cuts, invalidating the forward multiple thesis and pushing price toward the $520 52-week low."
+      "key_risk": "Technical breakdown continues into earnings with capex guidance disappointment triggering a flush below $520 support, invalidating the fundamental thesis near-term."
     },
     {
       "ticker": "AMD",
@@ -2668,23 +2744,23 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's forward P/E of 31x on 50% revenue growth is defensible in a BULL regime with a strong analyst target of $612 and constructive 3-month momentum, making current consolidation below the 50-DMA an attractive entry point for patient growth buyers. MI300X adoption cycle remains the key re-rating catalyst that could compress the gap to fair value quickly.",
+      "reasoning": "Bull regime with 28% upside to analyst target, strong AI/data center growth narrative, and forward P/E compression to 31x provides fundamental credibility for a medium-term position. Entry below MA50 offers asymmetric setup if AMD reclaims $510 on volume, though position sizing must respect the beta-2.49 risk profile.",
       "price_target": 612.0,
-      "key_risk": "A demand disappointment in MI300X hyperscaler adoption or NVIDIA competitive pressure could drive AMD back toward $420, representing a ~13% drawdown from current levels."
+      "key_risk": "Any MI300X demand miss, hyperscaler capex pullback, or Nvidia competitive pricing move could violently compress the forward multiple given AMD's 2.49 beta and current distribution-phase volume."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 51.7,
+    "win_rate": 53.3,
     "rolling_win_rate": 50.0,
-    "avg_return": 2.41,
-    "sharpe": 0.21,
+    "avg_return": 2.69,
+    "sharpe": 0.24,
     "max_drawdown": 4.52,
-    "total_trades": 29,
-    "wins": 15,
+    "total_trades": 30,
+    "wins": 16,
     "losses": 14,
     "underperforming": false
   },
-  "pnl": 36.12,
-  "last_run": "2026-08-18 14:14"
+  "pnl": 41.51,
+  "last_run": "2026-08-18 17:29"
 }
