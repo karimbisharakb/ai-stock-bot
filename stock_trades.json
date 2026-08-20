@@ -1,5 +1,5 @@
 {
-  "cash": 723.1400000000002,
+  "cash": 690.4700000000003,
   "positions": [
     {
       "time": "2026-07-27 16:00",
@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 341.15,
-      "last_pnl_pct": 3.84,
-      "days_held": 23,
+      "last_price": 339.07,
+      "last_pnl_pct": 3.2,
+      "days_held": 24,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 412.24,
-      "last_pnl_pct": 9.23,
-      "days_held": 21,
+      "last_price": 415.2,
+      "last_pnl_pct": 10.02,
+      "days_held": 22,
       "status": "OPEN",
       "live": false
     },
@@ -61,31 +61,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 483.23,
-      "last_pnl_pct": -5.61,
-      "days_held": 9,
-      "status": "OPEN",
-      "live": false
-    },
-    {
-      "time": "2026-08-17 14:02",
-      "ticker": "AAPL",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.1637,
-      "price": 305.35,
-      "cost": 49.99,
-      "target": 322.0,
-      "stop_loss": 291.0,
-      "score": 7,
-      "conviction": "medium",
-      "reasoning": "RSI at 22 in a confirmed bull regime signals extreme oversold conditions with high probability of mean-reversion bounce toward analyst consensus target, while the stock holding well above MA200 confirms the broader uptrend remains intact. Full Kelly sizing is justified by the bull regime, with entry here offering asymmetric risk relative to the deeply washed-out sentiment.",
-      "key_risk": "Lack of institutional accumulation volume and negative MACD mean the bottom may not be in yet, risking a further flush toward MA200 support near $280 before any recovery.",
-      "earnings_play": false,
-      "trail_high": 316.93,
-      "last_price": 314.9,
-      "last_pnl_pct": 3.13,
-      "days_held": 2,
+      "last_price": 481.95,
+      "last_pnl_pct": -5.86,
+      "days_held": 10,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 220.04,
-      "last_price": 218.89,
-      "last_pnl_pct": -0.52,
-      "days_held": 1,
+      "last_price": 217.8,
+      "last_pnl_pct": -1.02,
+      "days_held": 2,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-08-20 14:09",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3228,
+      "price": 261.82,
+      "cost": 84.52,
+      "target": 326.0,
+      "stop_loss": 245.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "AMZN is in a healthy mid-uptrend pullback with RSI at 41.7 and weak seller volume, offering an attractive entry well above key MAs while the 6M trend (+27.8%) and strong analyst consensus ($326 target) confirm underlying bullish momentum. AWS AI-driven acceleration and margin expansion in advertising provide credible catalysts for the next 1-3 months.",
+      "key_risk": "AWS growth disappoints or macro deterioration breaks the $249 MA50 support, invalidating the consolidation thesis and triggering deeper downside.",
+      "earnings_play": false,
+      "trail_high": 261.82,
+      "last_price": 261.82,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1636,6 +1636,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-08-17 14:02",
+      "ticker": "AAPL",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.1637,
+      "price": 305.35,
+      "cost": 49.99,
+      "target": 322.0,
+      "stop_loss": 291.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "RSI at 22 in a confirmed bull regime signals extreme oversold conditions with high probability of mean-reversion bounce toward analyst consensus target, while the stock holding well above MA200 confirms the broader uptrend remains intact. Full Kelly sizing is justified by the bull regime, with entry here offering asymmetric risk relative to the deeply washed-out sentiment.",
+      "key_risk": "Lack of institutional accumulation volume and negative MACD mean the bottom may not be in yet, risking a further flush toward MA200 support near $280 before any recovery.",
+      "earnings_play": false,
+      "trail_high": 316.93,
+      "last_price": 316.72,
+      "last_pnl_pct": 3.72,
+      "days_held": 3,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 316.72,
+      "sell_time": "2026-08-20 14:08",
+      "pnl_dollar": 1.86,
+      "pnl_pct": 3.72,
+      "sell_reason": "AI thesis break: SELL \u2013 RSI has mean-reverted from oversold (22) to neutral (59.7), capturing the thesis-driven bounce at +3.7%, while MACD remains bearish and the original edge is fully exhausted."
+    },
+    {
+      "time": "2026-08-20 14:09",
+      "ticker": "AMZN",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3228,
+      "price": 261.82,
+      "cost": 84.52,
+      "target": 326.0,
+      "stop_loss": 245.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "AMZN is in a healthy mid-uptrend pullback with RSI at 41.7 and weak seller volume, offering an attractive entry well above key MAs while the 6M trend (+27.8%) and strong analyst consensus ($326 target) confirm underlying bullish momentum. AWS AI-driven acceleration and margin expansion in advertising provide credible catalysts for the next 1-3 months.",
+      "key_risk": "AWS growth disappoints or macro deterioration breaks the $249 MA50 support, invalidating the consolidation thesis and triggering deeper downside.",
+      "earnings_play": false,
+      "trail_high": 261.82,
+      "last_price": 261.82,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2429,6 +2478,33 @@
       "pnl_dollar": 5.39,
       "pnl_pct": 10.79,
       "sell_reason": "AI thesis break: SELL \u2014 RSI at 77.8 is significantly overbought, the 3M return being negative suggests this recent 1M surge may be exhausting momentum, and at +10.8% gain the position has achieved solid medium-strategy returns while the original asymmetric entry thesis near oversold 200-DMA support no longer applies."
+    },
+    {
+      "time": "2026-08-17 14:02",
+      "ticker": "AAPL",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1637,
+      "price": 305.35,
+      "cost": 49.99,
+      "target": 322.0,
+      "stop_loss": 291.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "RSI at 22 in a confirmed bull regime signals extreme oversold conditions with high probability of mean-reversion bounce toward analyst consensus target, while the stock holding well above MA200 confirms the broader uptrend remains intact. Full Kelly sizing is justified by the bull regime, with entry here offering asymmetric risk relative to the deeply washed-out sentiment.",
+      "key_risk": "Lack of institutional accumulation volume and negative MACD mean the bottom may not be in yet, risking a further flush toward MA200 support near $280 before any recovery.",
+      "earnings_play": false,
+      "trail_high": 316.93,
+      "last_price": 316.72,
+      "last_pnl_pct": 3.72,
+      "days_held": 3,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 316.72,
+      "sell_time": "2026-08-20 14:08",
+      "pnl_dollar": 1.86,
+      "pnl_pct": 3.72,
+      "sell_reason": "AI thesis break: SELL \u2013 RSI has mean-reverted from oversold (22) to neutral (59.7), capturing the thesis-driven bounce at +3.7%, while MACD remains bearish and the original edge is fully exhausted."
     }
   ],
   "portfolio_history": [
@@ -2719,28 +2795,22 @@
     {
       "date": "2026-08-19",
       "value": 1048.88
+    },
+    {
+      "date": "2026-08-20",
+      "value": 1048.75
     }
   ],
   "top_picks": [
-    {
-      "ticker": "AMZN",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AMZN trades at a reasonable PEG with 24% upside to analyst consensus driven by AWS re-acceleration and margin expansion, while its bullish structure above both key moving averages supports a medium-term entry during this consolidation phase. Bull regime allows full Kelly deployment despite fading near-term momentum, with the 200-DMA providing a credible stop floor.",
-      "price_target": 327.0,
-      "key_risk": "MACD bearish divergence and below-average volume suggest buyer exhaustion that could extend the consolidation toward the 50-DMA before any resumption of the uptrend."
-    },
     {
       "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 15.8x forward P/E with 28% revenue growth and ~37% upside to analyst consensus, offering asymmetric value in a BULL regime where cheap quality names eventually re-rate. Technical weakness is real but the fundamental discount is large enough to justify a medium-term position sized conservatively given bearish price structure.",
-      "price_target": 700.0,
-      "key_risk": "Continued technical deterioration toward the 52-week low of $520 could trigger stop-loss before fundamentals have time to reassert, particularly if broader market sentiment shifts or AI capex concerns resurface."
+      "reasoning": "META trades at a significant discount to fundamentals \u2014 15.7x forward P/E with 28% revenue growth and 30% margins represents a high-quality compounder priced for cyclical distress, with a $209 gap to analyst consensus providing asymmetric upside. Bull market regime allows entry despite bearish short-term technicals, as the strategic value case outweighs tactical weakness with support near $520 limiting downside.",
+      "price_target": 650.0,
+      "key_risk": "Tariff-driven ad-spend contraction could compress revenue guidance and re-rate the forward P/E higher, invalidating the value thesis before a technical reversal materializes."
     },
     {
       "ticker": "AMD",
@@ -2748,23 +2818,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 31.5% upside to analyst target and forward P/E compression to 30x reflects credible AI/data center revenue acceleration, while the pullback to 9% below the 50-DMA offers a reasonable re-entry within a confirmed long-term uptrend. BULL regime allows full Kelly sizing despite intermediate-term momentum headwinds and thin near-term technical conviction.",
-      "price_target": 580.0,
-      "key_risk": "Failure to demonstrate MI300X hyperscaler penetration gains against NVIDIA's CUDA ecosystem would collapse the forward P/E re-rating thesis and accelerate downside toward the 200-DMA."
+      "reasoning": "In a confirmed BULL regime, AMD's 30x forward P/E with 50% revenue growth and a 30.8% analyst upside to $612 justifies accumulation despite near-term technical weakness. The pullback to 8% below the 50-DMA offers a constructive entry point for patient medium-term holders targeting AI accelerator demand re-rating.",
+      "price_target": 612.84,
+      "key_risk": "Any softening in hyperscaler MI300X adoption guidance or broader AI capex cycle deceleration could collapse the multiple and send shares toward the $400 level."
+    },
+    {
+      "ticker": "SMCI",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SMCI's forward P/E of 6.9x against 93% revenue growth is a rare value-growth combination in AI infrastructure, with price trading well above both major MAs confirming bullish structure. The post-breakout consolidation and below-average volume suggest a healthier entry opportunity than chasing the recent 20%+ surge, with the analyst target of $42.38 providing a credible near-term catalyst.",
+      "price_target": 42.0,
+      "key_risk": "Audit credibility and financial restatement history remain an existential overhang \u2014 any regulatory filing delay or auditor disclosure could collapse the stock to $25-28 regardless of AI fundamentals."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 53.3,
-    "rolling_win_rate": 50.0,
-    "avg_return": 2.69,
+    "win_rate": 54.8,
+    "rolling_win_rate": 55.0,
+    "avg_return": 2.72,
     "sharpe": 0.24,
     "max_drawdown": 4.52,
-    "total_trades": 30,
-    "wins": 16,
+    "total_trades": 31,
+    "wins": 17,
     "losses": 14,
     "underperforming": false
   },
-  "pnl": 41.51,
-  "last_run": "2026-08-19 17:29"
+  "pnl": 43.37,
+  "last_run": "2026-08-20 14:16"
 }
