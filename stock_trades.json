@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 339.07,
-      "last_pnl_pct": 3.2,
+      "last_price": 338.68,
+      "last_pnl_pct": 3.08,
       "days_held": 24,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 415.2,
-      "last_pnl_pct": 10.02,
+      "last_price": 415.11,
+      "last_pnl_pct": 9.99,
       "days_held": 22,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 481.95,
-      "last_pnl_pct": -5.86,
+      "last_price": 482.24,
+      "last_pnl_pct": -5.8,
       "days_held": 10,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 220.04,
-      "last_price": 217.8,
-      "last_pnl_pct": -1.02,
+      "last_price": 216.39,
+      "last_pnl_pct": -1.66,
       "days_held": 2,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS growth disappoints or macro deterioration breaks the $249 MA50 support, invalidating the consolidation thesis and triggering deeper downside.",
       "earnings_play": false,
       "trail_high": 261.82,
-      "last_price": 261.82,
-      "last_pnl_pct": 0.0,
+      "last_price": 261.79,
+      "last_pnl_pct": -0.01,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -2798,39 +2798,39 @@
     },
     {
       "date": "2026-08-20",
-      "value": 1048.75
+      "value": 1048.15
     }
   ],
   "top_picks": [
+    {
+      "ticker": "AAPL",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AAPL holds a clean bullish structure above both key moving averages in a confirmed bull regime, with strong 6-month momentum and analyst consensus supporting a path toward the 52-week high. Near-term consolidation and MACD rollover suggest a patient entry with a defined stop below the 50-DMA, targeting a retest of prior highs as tariff clarity emerges.",
+      "price_target": 340.0,
+      "key_risk": "A deterioration in U.S.-China trade relations or disappointing guidance could rapidly reprice AAPL's premium multiple, given zero margin for error at 33x forward earnings."
+    },
     {
       "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a significant discount to fundamentals \u2014 15.7x forward P/E with 28% revenue growth and 30% margins represents a high-quality compounder priced for cyclical distress, with a $209 gap to analyst consensus providing asymmetric upside. Bull market regime allows entry despite bearish short-term technicals, as the strategic value case outweighs tactical weakness with support near $520 limiting downside.",
+      "reasoning": "META trades at a compelling 15.6x forward P/E with 28% revenue growth and ~39% upside to analyst targets, making it fundamentally mispriced even accounting for macro headwinds. In a confirmed bull regime, the grinding distribution selloff with RSI at 44.9 (not yet oversold) presents a staged entry opportunity above the $520 52-week support floor.",
       "price_target": 650.0,
-      "key_risk": "Tariff-driven ad-spend contraction could compress revenue guidance and re-rate the forward P/E higher, invalidating the value thesis before a technical reversal materializes."
+      "key_risk": "Tariff-driven digital ad spend contraction in Q2 could break the revenue growth narrative, causing forward P/E to re-rate higher on lower earnings and invalidating the value thesis entirely."
     },
     {
-      "ticker": "AMD",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a confirmed BULL regime, AMD's 30x forward P/E with 50% revenue growth and a 30.8% analyst upside to $612 justifies accumulation despite near-term technical weakness. The pullback to 8% below the 50-DMA offers a constructive entry point for patient medium-term holders targeting AI accelerator demand re-rating.",
-      "price_target": 612.84,
-      "key_risk": "Any softening in hyperscaler MI300X adoption guidance or broader AI capex cycle deceleration could collapse the multiple and send shares toward the $400 level."
-    },
-    {
-      "ticker": "SMCI",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SMCI's forward P/E of 6.9x against 93% revenue growth is a rare value-growth combination in AI infrastructure, with price trading well above both major MAs confirming bullish structure. The post-breakout consolidation and below-average volume suggest a healthier entry opportunity than chasing the recent 20%+ surge, with the analyst target of $42.38 providing a credible near-term catalyst.",
-      "price_target": 42.0,
-      "key_risk": "Audit credibility and financial restatement history remain an existential overhang \u2014 any regulatory filing delay or auditor disclosure could collapse the stock to $25-28 regardless of AI fundamentals."
+      "reasoning": "PLTR remains a best-in-class AI infrastructure compounder with 49% margins and accelerating AIP contract flow, and the bull regime with bullish MACD justifies holding a position despite the overbought RSI. Near-term consolidation toward the $155\u2013$165 range is possible, but the fundamental growth trajectory and analyst consensus at $191+ support a medium-term hold toward $210.",
+      "price_target": 210.0,
+      "key_risk": "A miss or guidance cut on U.S. commercial revenue growth at the upcoming Q1 earnings report would trigger severe multiple compression on a stock priced for perfection at 75x forward earnings."
     }
   ],
   "regime": "BULL",
@@ -2846,5 +2846,5 @@
     "underperforming": false
   },
   "pnl": 43.37,
-  "last_run": "2026-08-20 14:16"
+  "last_run": "2026-08-20 17:30"
 }
