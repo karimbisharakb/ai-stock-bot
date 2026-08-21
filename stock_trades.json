@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 339.7,
-      "last_pnl_pct": 3.39,
+      "last_price": 342.42,
+      "last_pnl_pct": 4.22,
       "days_held": 25,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 419.98,
-      "last_pnl_pct": 11.29,
+      "last_price": 417.89,
+      "last_pnl_pct": 10.73,
       "days_held": 23,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 483.04,
-      "last_pnl_pct": -5.65,
+      "last_price": 484.3,
+      "last_pnl_pct": -5.4,
       "days_held": 11,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 220.04,
-      "last_price": 216.29,
-      "last_pnl_pct": -1.7,
+      "last_price": 215.05,
+      "last_pnl_pct": -2.27,
       "days_held": 3,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 259.27,
-      "last_price": 259.27,
-      "last_pnl_pct": 0.0,
+      "last_price": 259.1,
+      "last_pnl_pct": -0.07,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -2878,39 +2878,39 @@
     },
     {
       "date": "2026-08-21",
-      "value": 1048.48
+      "value": 1048.3
     }
   ],
   "top_picks": [
+    {
+      "ticker": "COIN",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "COIN is the highest-beta pure-play on a Bitcoin breakout above $75K, and the bull market regime justifies holding this high-volatility crypto proxy through the $200 resistance test. The violent 1W surge with elevated volume and bullish MACD confirms momentum, and a BTC-driven sentiment loop could push COIN to $220 if macro crypto conditions hold.",
+      "price_target": 220.0,
+      "key_risk": "Failure to break the MA200/$200 resistance cluster could trigger a sharp reversal given overbought RSI at 75 and weak underlying fundamentals that offer no valuation floor."
+    },
+    {
+      "ticker": "AAPL",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AAPL holds bullish structure above both key moving averages with analyst consensus supporting upside to $326, and the BULL regime permits full Kelly sizing even at this score. Near-term consolidation is digestible given strong 6M momentum and the Services/Apple Intelligence catalyst runway over the next quarter.",
+      "price_target": 326.34,
+      "key_risk": "A disappointing Apple Intelligence upgrade cycle or multiple compression on the 32.7x forward P/E could accelerate a breakdown toward the $295 support level."
+    },
     {
       "ticker": "META",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META at 15.9x forward P/E with 28% revenue growth and 37% upside to analyst consensus represents a compelling valuation disconnect for a best-in-class FCF compounder; oversold RSI near multi-year support at $520 offers an asymmetric entry for patient capital. Bull market regime allows full Kelly deployment despite near-term technical weakness.",
+      "reasoning": "META is fundamentally mispriced at 15.9x forward earnings with 28% revenue growth and 30% margins, offering a rare value entry in a high-quality compounder; RSI at 33.3 approaches oversold territory and the 36% analyst upside provides a strong risk/reward skew in a bull regime. Technicals remain headwinds with price below both key MAs and no reversal signal yet, warranting a measured position sizing rather than full conviction.",
       "price_target": 680.0,
-      "key_risk": "Macro-driven ad-spend contraction from tariff uncertainty or U.S. recession could force downward revenue revisions, invalidating the forward P/E re-rating thesis and driving a breakdown below $520 support."
-    },
-    {
-      "ticker": "SMCI",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SMCI trades at a steep discount to intrinsic value with 7x forward P/E against 93% revenue growth, offering asymmetric upside if the audit/Nasdaq compliance overhang resolves favorably. Bull regime supports full Kelly sizing despite RSI overbought and weak volume signals suggesting a near-term consolidation entry rather than immediate continuation.",
-      "price_target": 42.38,
-      "key_risk": "Any audit delay, negative accounting finding, or Nasdaq non-compliance ruling could reprice the stock rapidly toward $25, rendering the valuation thesis irrelevant."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR offers leveraged Bitcoin upside optionality in a bull regime with 91.7% analyst upside and strong short-term momentum off a confirmed MA50 reclaim on elevated volume. The crypto proxy play is valid in a BULL regime where full Kelly sizing applies, with Bitcoin trajectory as the primary driver toward the $229 analyst target.",
-      "price_target": 185.0,
-      "key_risk": "MA200 at $143.96 represents hard overhead supply and a BTC breakdown below $80K could trigger a margin/liquidity crisis given MSTR's extreme 14.9x debt-to-equity leverage."
+      "key_risk": "Continued capex blowout narrative around AI infrastructure spend drives sentiment deterioration and breaks the $520 support level before a fundamental catalyst arrives."
     }
   ],
   "regime": "BULL",
@@ -2926,5 +2926,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-08-21 14:14"
+  "last_run": "2026-08-21 17:29"
 }
