@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 342.42,
-      "last_pnl_pct": 4.22,
-      "days_held": 25,
+      "last_price": 344.66,
+      "last_pnl_pct": 4.9,
+      "days_held": 28,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 417.89,
-      "last_pnl_pct": 10.73,
-      "days_held": 23,
+      "last_price": 406.26,
+      "last_pnl_pct": 7.65,
+      "days_held": 26,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 484.3,
-      "last_pnl_pct": -5.4,
-      "days_held": 11,
+      "last_price": 485.26,
+      "last_pnl_pct": -5.21,
+      "days_held": 14,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 220.04,
-      "last_price": 215.05,
-      "last_pnl_pct": -2.27,
-      "days_held": 3,
+      "last_price": 209.24,
+      "last_pnl_pct": -4.91,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "AMZN is deeply oversold at RSI 24.8 while trading above both MA50 and MA200, signaling a high-probability mean-reversion setup within an intact bull structure. At 20.8x P/E with 19.6% revenue growth and AWS re-acceleration, the 26% upside to consensus target is well-supported fundamentally.",
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
-      "trail_high": 259.27,
-      "last_price": 259.1,
-      "last_pnl_pct": -0.07,
-      "days_held": 0,
+      "trail_high": 260.69,
+      "last_price": 260.69,
+      "last_pnl_pct": 0.55,
+      "days_held": 3,
       "status": "OPEN",
       "live": false
     }
@@ -2879,18 +2879,22 @@
     {
       "date": "2026-08-21",
       "value": 1048.3
+    },
+    {
+      "date": "2026-08-24",
+      "value": 1045.12
     }
   ],
   "top_picks": [
     {
-      "ticker": "COIN",
+      "ticker": "PLTR",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "COIN is the highest-beta pure-play on a Bitcoin breakout above $75K, and the bull market regime justifies holding this high-volatility crypto proxy through the $200 resistance test. The violent 1W surge with elevated volume and bullish MACD confirms momentum, and a BTC-driven sentiment loop could push COIN to $220 if macro crypto conditions hold.",
-      "price_target": 220.0,
-      "key_risk": "Failure to break the MA200/$200 resistance cluster could trigger a sharp reversal given overbought RSI at 75 and weak underlying fundamentals that offer no valuation floor."
+      "reasoning": "PLTR trades in a clean bullish structure with RSI at 59.2 and positive MACD, well above both key moving averages, with 93% revenue growth and 50% margins justifying premium valuation in a BULL regime. Low-volume consolidation at current levels presents a favorable risk/reward entry ahead of the next catalyst-driven leg toward the $191\u2013$207 resistance zone.",
+      "price_target": 210.0,
+      "key_risk": "Federal spending freeze or continuing resolution delay could sharply compress multiples given how much forward AI/defense contract growth is already priced in at $174."
     },
     {
       "ticker": "AAPL",
@@ -2898,9 +2902,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL holds bullish structure above both key moving averages with analyst consensus supporting upside to $326, and the BULL regime permits full Kelly sizing even at this score. Near-term consolidation is digestible given strong 6M momentum and the Services/Apple Intelligence catalyst runway over the next quarter.",
-      "price_target": 326.34,
-      "key_risk": "A disappointing Apple Intelligence upgrade cycle or multiple compression on the 32.7x forward P/E could accelerate a breakdown toward the $295 support level."
+      "reasoning": "AAPL holds above both key moving averages in a bull regime with solid fundamentals and analyst consensus pointing to modest upside, making a measured position appropriate despite fading short-term momentum. The 4% analyst target and consolidation above MA50 support a medium-term entry with disciplined risk management below the $310 support zone.",
+      "price_target": 324.45,
+      "key_risk": "US-China tariff escalation could compress margins and trigger a sharp re-rating given AAPL's heavy manufacturing concentration in China."
     },
     {
       "ticker": "META",
@@ -2908,9 +2912,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META is fundamentally mispriced at 15.9x forward earnings with 28% revenue growth and 30% margins, offering a rare value entry in a high-quality compounder; RSI at 33.3 approaches oversold territory and the 36% analyst upside provides a strong risk/reward skew in a bull regime. Technicals remain headwinds with price below both key MAs and no reversal signal yet, warranting a measured position sizing rather than full conviction.",
+      "reasoning": "META trades at 15.9x forward earnings with 28% revenue growth and 30% margins \u2014 an objectively cheap setup for a dominant ad platform with AI-driven monetization tailwinds that justify the 37% discount to analyst consensus targets. Bull regime allows full Kelly deployment and the RSI approaching oversold near structural support at $520 sets up a favorable risk/reward entry despite the near-term technical weakness.",
       "price_target": 680.0,
-      "key_risk": "Continued capex blowout narrative around AI infrastructure spend drives sentiment deterioration and breaks the $520 support level before a fundamental catalyst arrives."
+      "key_risk": "Ad spend deceleration driven by tariff-related macro softness could push Q2 guidance below expectations, breaking the $520 support level and invalidating the valuation thesis near-term."
     }
   ],
   "regime": "BULL",
@@ -2926,5 +2930,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-08-21 17:29"
+  "last_run": "2026-08-24 14:19"
 }
