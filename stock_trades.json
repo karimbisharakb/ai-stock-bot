@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 344.59,
-      "last_pnl_pct": 4.88,
+      "last_price": 343.5,
+      "last_pnl_pct": 4.55,
       "days_held": 29,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 417.52,
-      "last_pnl_pct": 10.63,
+      "last_price": 415.14,
+      "last_pnl_pct": 10.0,
       "days_held": 27,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 511.95,
-      "last_price": 487.32,
-      "last_pnl_pct": -4.81,
+      "last_price": 490.22,
+      "last_pnl_pct": -4.24,
       "days_held": 15,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 220.04,
-      "last_price": 213.62,
-      "last_pnl_pct": -2.92,
+      "last_price": 212.33,
+      "last_pnl_pct": -3.5,
       "days_held": 7,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 262.09,
-      "last_price": 261.12,
-      "last_pnl_pct": 0.71,
+      "last_price": 260.32,
+      "last_pnl_pct": 0.4,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -2886,7 +2886,7 @@
     },
     {
       "date": "2026-08-25",
-      "value": 1049.08
+      "value": 1047.99
     }
   ],
   "top_picks": [
@@ -2896,9 +2896,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a historically cheap 16x forward P/E on 28% revenue growth with a 33.8% upside to analyst consensus, offering a rare fundamental entry in a bull regime. RSI near oversold at 39.5 with a strong $520 support floor positions this as a asymmetric mean-reversion setup toward the $620\u2013650 resistance zone on any AI monetization catalyst.",
-      "price_target": 650.0,
-      "key_risk": "Continued aggressive AI capex guidance without near-term monetization signals keeps institutional buyers sidelined and accelerates the technical breakdown toward the $520 critical support level."
+      "reasoning": "META trades at a compelling 16.3x forward P/E with 28% revenue growth and ~30% margins, offering 33% upside to the $754 analyst consensus \u2014 fundamentals justify accumulation at current levels in a bull regime. Technicals remain weak with no confirmed floor, so position sizing should be conservative with a defined stop below $520 key support.",
+      "price_target": 680.0,
+      "key_risk": "Failure to demonstrate AI-driven ad revenue acceleration at the next earnings print could trigger a break below $520, compounded by widening Reality Labs losses."
     },
     {
       "ticker": "AMD",
@@ -2906,9 +2906,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a BULL regime, AMD's 29% upside to analyst target and strong AI/data center fundamentals with forward P/E compression to 30.7x justify accumulation despite near-term technical weakness. The drift toward $440\u2013$450 support may offer a better entry but current levels remain viable for a medium-term position given the explosive earnings growth trajectory.",
+      "reasoning": "In a BULL regime, AMD's 28.5% upside to analyst target and 50% revenue growth justify accumulation at current levels despite near-term technical weakness, as the pullback to 43% above MA200 offers a favorable risk/reward entry. The MI300X data center GPU ramp remains intact as a structural catalyst, and forward P/E of 30.8x is reasonable for the growth profile.",
       "price_target": 613.0,
-      "key_risk": "MI300X data center GPU revenue disappointing versus the $4B+ quarterly run-rate expectation would collapse the forward earnings thesis and expose the stock to significant multiple compression."
+      "key_risk": "Failure to reclaim the $508-510 MA50 zone on volume could signal deeper institutional distribution, with hyperscaler MI300X order slowdown as the fundamental trigger for a re-rating."
     },
     {
       "ticker": "PLTR",
@@ -2916,9 +2916,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's bullish structure with RSI at 65.5, strong MACD confirmation, and elite AI/defense fundamentals support continued upside toward analyst targets in a bull regime. Low volume on recent surge is a caution flag, so position sizing should reflect consolidation risk near the $207 resistance ceiling.",
+      "reasoning": "PLTR remains structurally bullish above both key MAs with elite fundamentals (93% revenue growth, 49% margins) and analyst consensus pointing to ~10% upside, making the current consolidation phase a reasonable entry in a bull regime. MACD headwind and premium valuation limit conviction, but the AIP/defense pipeline provides a credible catalyst for the next leg higher.",
       "price_target": 191.68,
-      "key_risk": "Federal budget cuts or DOGE-driven contract delays could trigger a sharp 15-20% derating with no valuation floor support at 149x trailing P/E."
+      "key_risk": "U.S. government budget uncertainty or DOGE-driven contract delays could violently reprice a stock trading at 75x forward earnings with zero margin for execution error."
     }
   ],
   "regime": "BULL",
@@ -2934,5 +2934,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-08-25 14:21"
+  "last_run": "2026-08-25 17:33"
 }
