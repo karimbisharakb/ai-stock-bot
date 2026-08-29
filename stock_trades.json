@@ -19,7 +19,7 @@
       "trail_high": 377.0,
       "last_price": 342.88,
       "last_pnl_pct": 4.36,
-      "days_held": 32,
+      "days_held": 33,
       "status": "OPEN",
       "live": false
     },
@@ -41,7 +41,7 @@
       "trail_high": 435.74,
       "last_price": 417.52,
       "last_pnl_pct": 10.63,
-      "days_held": 30,
+      "days_held": 31,
       "status": "OPEN",
       "live": false
     },
@@ -63,7 +63,7 @@
       "trail_high": 513.53,
       "last_price": 513.53,
       "last_pnl_pct": 0.31,
-      "days_held": 18,
+      "days_held": 19,
       "status": "OPEN",
       "live": false
     },
@@ -85,7 +85,7 @@
       "trail_high": 227.98,
       "last_price": 217.55,
       "last_pnl_pct": -1.13,
-      "days_held": 10,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -107,7 +107,7 @@
       "trail_high": 266.43,
       "last_price": 266.43,
       "last_pnl_pct": 2.76,
-      "days_held": 7,
+      "days_held": 8,
       "status": "OPEN",
       "live": false
     }
@@ -2899,6 +2899,10 @@
     {
       "date": "2026-08-28",
       "value": 1054.35
+    },
+    {
+      "date": "2026-08-29",
+      "value": 1054.35
     }
   ],
   "top_picks": [
@@ -2908,9 +2912,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL is in a confirmed bull structure trading above both key moving averages with RSI at 64.3 and bullish MACD, suggesting the recent pullback has stabilized and momentum is reaccelerating. The BULL regime permits full Kelly deployment, and while the 1.5% analyst target is modest, the technical setup and Apple Intelligence catalyst potential support a hold into the broader upgrade cycle.",
-      "price_target": 340.0,
-      "key_risk": "Thin volume conviction and only 1.5% to consensus analyst target means any macro headwind or iPhone demand disappointment could quickly invalidate the setup and trigger a retest of the 50-DMA near $311."
+      "reasoning": "AAPL holds clean bullish structure above both key moving averages with RSI not yet overbought and positive MACD in a confirmed bull regime, supporting a modest continuation trade. However, thin volume, negative 1-month momentum, and only 1.5% street upside cap conviction to medium, warranting reduced position sizing.",
+      "price_target": 334.0,
+      "key_risk": "A negative tariff or China supply chain headline could trigger a sharp reversal given thin volume and the stock sitting 7% below its 52-week high."
     },
     {
       "ticker": "META",
@@ -2918,19 +2922,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 16.6x forward P/E with 28% revenue growth and 30% margins, offering ~30% upside to analyst consensus in a bull regime where valuation support is strong. Despite near-term technical weakness below both MAs, the fundamental cheapness and earnings power justify accumulation at current levels.",
-      "price_target": 680.0,
-      "key_risk": "Persistent institutional distribution and macro-driven SMB ad spend deterioration could extend the 3M/6M downtrend, invalidating the valuation thesis before a reversion occurs."
+      "reasoning": "META offers a rare combination of mega-cap quality and value compression \u2014 16.5x forward P/E on 28% revenue growth with 30% margins is a mispricing the market typically corrects once macro noise clears. Technical structure remains compromised below both MAs, but the fundamental discount and strong analyst consensus provide a compelling asymmetric entry for patient capital.",
+      "price_target": 690.0,
+      "key_risk": "Failure to reclaim the $592 50-MA could confirm the intermediate downtrend and accelerate selling toward the $540 support zone."
     },
     {
-      "ticker": "AMD",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 31.8% upside to analyst target and 30x forward P/E compression driven by MI300X AI datacenter ramp justify accumulation at current levels within a confirmed bull regime. Near-term technical weakness offers a better entry point, though position sizing should be modest pending a volume-backed reclaim of the $506 50-DMA.",
-      "price_target": 580.0,
-      "key_risk": "MI300X sell-through disappoints or hyperscaler AI capex softens, triggering a breakdown toward the $420\u2013$440 demand zone and invalidating the earnings inflection thesis."
+      "reasoning": "PLTR's 92.8% revenue growth, 49% margins, and clean technical uptrend above both major MAs support continued accumulation in a confirmed bull regime. Low-volume consolidation near resistance warrants a medium position sizing rather than full deployment given the compressed 1-month spike and DOGE-related contract overhang.",
+      "price_target": 210.0,
+      "key_risk": "Government contract scrutiny or DOGE-related spending cuts could rapidly reprice a stock trading at 159x earnings with 2.14 D/E leverage."
     }
   ],
   "regime": "BULL",
@@ -2946,5 +2950,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-08-28 23:16"
+  "last_run": "2026-08-29 00:57"
 }
