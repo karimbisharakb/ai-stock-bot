@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 335.29,
-      "last_pnl_pct": 2.05,
+      "last_price": 336.02,
+      "last_pnl_pct": 2.27,
       "days_held": 39,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 435.74,
-      "last_price": 428.26,
-      "last_pnl_pct": 13.48,
+      "last_price": 426.95,
+      "last_pnl_pct": 13.13,
       "days_held": 37,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 500.7,
-      "last_pnl_pct": -2.2,
+      "last_price": 500.4,
+      "last_pnl_pct": -2.26,
       "days_held": 25,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 231.31,
-      "last_pnl_pct": 5.12,
+      "last_price": 230.01,
+      "last_pnl_pct": 4.53,
       "days_held": 17,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 257.23,
-      "last_pnl_pct": -0.79,
+      "last_price": 258.16,
+      "last_pnl_pct": -0.43,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -2922,39 +2922,39 @@
     },
     {
       "date": "2026-09-04",
-      "value": 1055.63
+      "value": 1055.33
     }
   ],
   "top_picks": [
+    {
+      "ticker": "CRWD",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "CRWD is consolidating constructively above both key moving averages with RSI at a healthy 49.6 and bullish MACD, offering a low-exhaustion entry with clear runway toward the analyst target of $230.32. The 26.92% 3-month gain with only a -2.51% weekly pullback confirms trend integrity and quiet accumulation within a bull regime.",
+      "price_target": 230.0,
+      "key_risk": "Extreme valuation (forward P/E 133x) combined with a D/E of 15.96 and near-zero net margins leaves no margin for error on execution, and any guidance miss or macro risk-off rotation could trigger a sharp de-rating."
+    },
+    {
+      "ticker": "MSTR",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "MSTR has reclaimed the 200MA in a bull regime with accelerating momentum and a 56% analyst upside target, making it a compelling leveraged BTC play as Bitcoin pushes toward and above $100K. RSI at 71.8 and below-average volume suggest near-term consolidation risk, but the structural trend resumption and bull regime justify a position within the 20% crypto proxy cap.",
+      "price_target": 220.0,
+      "key_risk": "A 20%+ BTC drawdown would violently compress MSTR's NAV premium given 14.9x leverage and 3.55 beta, potentially breaking back below the 200MA and triggering the stop."
+    },
     {
       "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL trades in a confirmed uptrend with price well above both key moving averages and MACD expanding positively, supporting trend-following entry in a BULL regime. The Apple Intelligence monetization catalyst offers asymmetric upside beyond the street's conservative $324 target if AI-driven upgrade cycle signals emerge in the next 1-2 quarters.",
-      "price_target": 344.57,
-      "key_risk": "Decelerating near-term momentum, volume running below average, and a 36.8x trailing P/E with only 1% analyst-implied upside leave limited margin of safety if macro conditions soften or AI upgrade cycle disappoints."
-    },
-    {
-      "ticker": "META",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "META trades at a compelling 17.5x forward P/E with 28% revenue growth and genuine AI monetization optionality, offering ~23% upside to analyst targets that are arithmetically supported by earnings trajectory. Bull regime permits full Kelly sizing, and the MA50 support base with bullish MACD provides a reasonable technical entry ahead of a potential MA200 reclaim at $621.",
-      "price_target": 754.77,
-      "key_risk": "Rejection at the MA200 resistance near $621 on weak volume conviction could trigger a swift retest of the $580-595 support zone, cutting the position before the fundamental thesis plays out."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "AMD is pulling back to near-oversold RSI levels (39.5) while trading well above its 200-DMA with a 29% analyst upside target and reasonable 31x forward P/E given 50%+ revenue growth \u2014 the MI300X ramp and AI data center narrative provide a credible re-rating catalyst. Bull market regime permits full Kelly sizing, and the risk/reward is asymmetric with a reclaim of $499 acting as the technical confirmation trigger.",
-      "price_target": 613.0,
-      "key_risk": "Failure to demonstrate credible GPU market share gains against NVIDIA in the next earnings cycle could collapse the AI premium multiple, accelerating the momentum rollover into a deeper correction."
+      "reasoning": "AAPL trades in a confirmed uptrend above both key moving averages with bullish MACD and a bull market regime supporting full Kelly sizing, justifying a measured entry despite decelerating momentum. The near-zero analyst upside and rich 36.9x P/E cap conviction, but macro clarity on tariffs could serve as a re-rating catalyst.",
+      "price_target": 338.0,
+      "key_risk": "Tariff escalation targeting Chinese manufacturing could directly compress margins and trigger a multiple contraction from already-elevated valuations."
     }
   ],
   "regime": "BULL",
@@ -2970,5 +2970,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-04 17:05"
+  "last_run": "2026-09-04 19:24"
 }
