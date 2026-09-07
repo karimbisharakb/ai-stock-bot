@@ -2936,9 +2936,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL maintains a clean uptrend above both key moving averages with RSI at 63.6 and bullish MACD confirming trend continuation toward the 52-week high resistance at $344. Bull regime warrants full Kelly deployment despite modest near-term upside, as the technical structure supports further gains absent a macro shock.",
-      "price_target": 344.0,
-      "key_risk": "Multiple compression from a hawkish Fed pivot or tariff escalation targeting hardware imports could reprice the stock sharply given the stretched 33x forward P/E with minimal analyst upside buffer."
+      "reasoning": "AAPL is in a confirmed bull uptrend with price above both key MAs, a non-overbought RSI of 63.6, and bullish MACD supporting a mid-trend continuation toward the 52-week high. The BULL regime permits full Kelly sizing, and technicals outweigh the modest 1.2% analyst target given the broader trend structure.",
+      "price_target": 344.57,
+      "key_risk": "U.S.-China trade policy escalation could trigger a 10-15% repricing given AAPL's heavy iPhone manufacturing and revenue exposure to China."
     },
     {
       "ticker": "META",
@@ -2946,9 +2946,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 17.6x forward P/E for a 28%-revenue-growth business with 30% margins, and analyst consensus at $754 reflects credible AI monetization upside via Advantage+ and Llama. The 200-MA reclaim at $621.61 is the near-term trigger that would unlock momentum fund inflows and confirm the bull thesis.",
+      "reasoning": "META trades at a compelling growth-adjusted discount with 28% revenue growth and 30% margins at only 17.6x forward earnings, while AI monetization tailwinds remain in early innings supporting the $754 analyst consensus. The critical near-term catalyst is reclaiming the 200-MA at $621.61, which would trigger momentum fund re-entry and validate the recovery as a confirmed breakout.",
       "price_target": 754.77,
-      "key_risk": "Rejection at the 200-MA ($621.61) on near-overbought RSI could trigger a rollback toward $560 support, invalidating the breakout thesis."
+      "key_risk": "Failure to close and hold above the 200-MA resistance at $621.61 would invalidate the technical setup and expose price to a retest of $580\u2013590 support."
     },
     {
       "ticker": "AMD",
@@ -2956,9 +2956,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 28.5% analyst upside to $613.84 and strong AI/data center growth narrative with 50% revenue expansion justify a medium-term entry near RSI 40 oversold levels in a bull regime. The pullback to 4.5% below MA50 offers a reasonable risk-adjusted entry point with full Kelly applicable given the bull market regime.",
-      "price_target": 613.84,
-      "key_risk": "Any sign of hyperscaler AI capex consolidation around NVIDIA or a guidance cut in the next earnings report could trigger a sharp selloff toward the $380\u2013$400 support zone."
+      "reasoning": "RSI near oversold at 40.1 with bullish MACD divergence sets up a mean-reversion entry with 28.5% upside to analyst consensus, supported by 50% revenue growth and strong AI accelerator positioning. Bull regime permits full Kelly sizing here, and the $420\u2013440 structural support zone provides a defined risk floor.",
+      "price_target": 613.0,
+      "key_risk": "Failure to demonstrate credible MI300X market share gains against NVIDIA could trigger multiple compression and a breakdown below the $420 support zone."
     }
   ],
   "regime": "BULL",
@@ -2974,5 +2974,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-07 18:28"
+  "last_run": "2026-09-07 20:27"
 }
