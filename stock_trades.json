@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 337.94,
-      "last_pnl_pct": 2.86,
+      "last_price": 335.87,
+      "last_pnl_pct": 2.23,
       "days_held": 46,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 441.01,
-      "last_price": 433.01,
-      "last_pnl_pct": 14.74,
+      "last_price": 432.19,
+      "last_pnl_pct": 14.52,
       "days_held": 44,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 494.87,
-      "last_pnl_pct": -3.34,
+      "last_price": 496.76,
+      "last_pnl_pct": -2.97,
       "days_held": 32,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 219.08,
-      "last_pnl_pct": -0.44,
+      "last_price": 218.95,
+      "last_pnl_pct": -0.5,
       "days_held": 24,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 255.91,
-      "last_pnl_pct": -1.3,
+      "last_price": 257.19,
+      "last_pnl_pct": -0.8,
       "days_held": 21,
       "status": "OPEN",
       "live": false
@@ -2942,7 +2942,7 @@
     },
     {
       "date": "2026-09-11",
-      "value": 1051.61
+      "value": 1051.56
     }
   ],
   "top_picks": [
@@ -2952,9 +2952,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's clean uptrend with price above both key moving averages, RSI at 62 with room to run, and bullish MACD confirm healthy momentum while the forward P/E of 32.8x versus 50% revenue growth makes the valuation compelling despite optically high trailing multiples. MI300X AI accelerator ramp and hyperscaler adoption provide a credible near-term catalyst to close the gap to the analyst target of $615.",
-      "price_target": 615.38,
-      "key_risk": "Margin expansion failure on MI300X scaling or a hyperscaler procurement slowdown would invalidate the forward earnings inflection thesis and compress the multiple sharply."
+      "reasoning": "AMD is in a confirmed bull trend with re-accelerating short-term momentum, trading above both key moving averages with RSI at 62.6 leaving room to run toward the $615 analyst target. The MI300X AI accelerator ramp supports a compelling forward P/E of 33x with 50%+ revenue growth, making the 19% upside to consensus target achievable within the medium-term horizon.",
+      "price_target": 615.07,
+      "key_risk": "An Nvidia supply unlock or hyperscaler capex guidance cut could rapidly reprice AI accelerator demand assumptions and compress AMD's premium multiple."
     },
     {
       "ticker": "META",
@@ -2962,9 +2962,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a genuinely cheap 18.5x forward P/E for 28% revenue growth, with a credible $757 analyst target supported by Reels monetization and AI-driven ad efficiency tailwinds. RSI at 84 warrants reduced sizing and patience for a 3-5% pullback toward the $620-$630 MA200 confluence before adding aggressively.",
+      "reasoning": "META's compelling fundamentals \u2014 18.6x forward P/E, 28% revenue growth, and ~30% margins \u2014 justify a medium-term position despite the overbought RSI, as the AI monetization catalyst provides a credible path to analyst targets near $757. Bull regime allows entry here, though the RSI at 84.2 and 6M return of only 2.1% suggest sizing conservatively and tolerating near-term consolidation.",
       "price_target": 757.0,
-      "key_risk": "AI capex guidance surprise at next earnings could immediately compress the multiple if Zuckerberg signals unbounded infrastructure spending beyond current consensus estimates."
+      "key_risk": "A momentum reversal from deeply overbought RSI levels could trigger a sharp pullback to the MA50 near $600 before fundamentals reassert, particularly if AI ad efficiency gains disappoint in the next earnings print."
     },
     {
       "ticker": "PLTR",
@@ -2972,9 +2972,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's corrective pullback to RSI 40 within a bull structure, while trading well above MA50/MA200, offers a favorable risk-adjusted entry for a high-quality AI/government data platform with 93% revenue growth and a credible $195 analyst target. Bull regime permits full Kelly sizing despite short-term momentum weakness, as the fundamental moat and forward P/E compression justify accumulation on this dip.",
-      "price_target": 195.0,
-      "key_risk": "U.S. federal budget uncertainty or DOGE-driven contract delays could accelerate the technical breakdown toward the $153\u2013$155 MA confluence, invalidating the near-term setup."
+      "reasoning": "PLTR remains structurally sound above key moving averages with exceptional 93% revenue growth and 49% margins justifying premium valuation in a confirmed bull regime. The current RSI 41 pullback offers a better entry toward the analyst consensus target with the $153\u2013155 MA cluster providing a clear risk anchor.",
+      "price_target": 196.0,
+      "key_risk": "Macro-driven multiple compression or Fed hawkishness could accelerate the rollover below the $153 support cluster, invalidating the bull thesis quickly given PLTR's 1.62 beta and AI-premium sensitivity."
     }
   ],
   "regime": "BULL",
@@ -2990,5 +2990,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-11 17:12"
+  "last_run": "2026-09-11 19:31"
 }
