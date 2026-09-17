@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 341.66,
-      "last_pnl_pct": 3.99,
+      "last_price": 343.67,
+      "last_pnl_pct": 4.6,
       "days_held": 52,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 441.01,
-      "last_price": 428.79,
-      "last_pnl_pct": 13.62,
+      "last_price": 429.68,
+      "last_pnl_pct": 13.86,
       "days_held": 50,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 495.44,
-      "last_pnl_pct": -3.22,
+      "last_price": 498.2,
+      "last_pnl_pct": -2.69,
       "days_held": 38,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 219.3,
-      "last_pnl_pct": -0.34,
+      "last_price": 219.43,
+      "last_pnl_pct": -0.28,
       "days_held": 30,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 251.09,
-      "last_pnl_pct": -3.16,
+      "last_price": 251.42,
+      "last_pnl_pct": -3.03,
       "days_held": 27,
       "status": "OPEN",
       "live": false
@@ -2958,19 +2958,19 @@
     },
     {
       "date": "2026-09-17",
-      "value": 1050.29
+      "value": 1051.29
     }
   ],
   "top_picks": [
     {
-      "ticker": "AMD",
+      "ticker": "SHOP.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD offers a compelling growth-at-reasonable-price setup with 50%+ revenue growth, forward P/E of 35x, and a clear technical uptrend above both key moving averages with RSI not yet overbought. A breakout above the 52-week high of $584.73 opens air-pocket territory toward analyst targets near $616, with MI300X adoption serving as the near-term catalyst.",
-      "price_target": 616.51,
-      "key_risk": "Failure to secure meaningful hyperscaler volume commitments for the MI300X GPU could stall the breakout above $584.73 and trigger a technical pullback toward the MA50 at $495."
+      "reasoning": "SHOP is in a capitulation flush with RSI at 26.1 well into oversold territory during a confirmed bull market regime, making this a high-probability mean-reversion setup with 30% analyst upside to consensus target. The 3M return of +17.83% confirms the underlying trend is intact and the -11.76% 1M drawdown represents a shakeout rather than structural breakdown.",
+      "price_target": 220.0,
+      "key_risk": "Beta of 2.6x means any macro risk-off event or consumer spending data disappointment could accelerate the breakdown below MA200 support before a reversal confirms."
     },
     {
       "ticker": "META",
@@ -2978,19 +2978,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META's fundamentals remain compelling at 19.4x forward P/E with 28% revenue growth and strong margin profile, and the BULL regime supports continued momentum despite the extended RSI. The analyst target of $755 provides a defined upside catalyst anchored by solid earnings execution and ad revenue resilience.",
-      "price_target": 755.0,
-      "key_risk": "RSI at 87.2 with below-average volume signals a late-stage momentum surge vulnerable to violent mean reversion on any AI capex or ad revenue disappointment."
+      "reasoning": "META trades at a compelling 19.5x forward P/E against 28% revenue growth with AI monetization across Reels and WhatsApp still underpriced by the market, making the fundamental case for $750+ target credible. Entry here requires discipline given RSI at 87.7 and thin volume confirmation, but BULL regime full-Kelly rules permit the position with a hard stop at the 200-DMA.",
+      "price_target": 755.28,
+      "key_risk": "A deeply overbought RSI-87 starting point means any AI CapEx or CPM disappointment at the next earnings print could trigger a sharp 8-10% drawdown to the $623 200-DMA before fundamentals reassert."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is pulling back to a constructive entry within a structural bull trend, trading well above both key moving averages with RSI at 40.5 offering a mean-reversion setup ahead of anticipated AI/defense contract catalysts. Strong fundamentals \u2014 49% margins and accelerating earnings \u2014 support a growth premium despite stretched valuation.",
-      "price_target": 210.0,
-      "key_risk": "Federal budget cuts or DOGE-driven spending freezes could rapidly erode government revenue visibility and compress the multiple sharply from current levels."
+      "reasoning": "AMD trades in a clean bull structure with bullish MACD, RSI not yet overbought, and a compelling forward P/E of 35x backed by 50% revenue growth and strong analyst conviction toward $616. The MI300X AI accelerator adoption cycle remains the key re-rating catalyst with meaningful upside if hyperscaler wins accelerate.",
+      "price_target": 616.51,
+      "key_risk": "High leverage (D/E 6.36) and maturing momentum near 52-week highs create vulnerability to any AI capex slowdown or NVIDIA competitive data that could trigger a sharp multiple compression."
     }
   ],
   "regime": "BULL",
@@ -3006,5 +3006,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-17 17:50"
+  "last_run": "2026-09-17 20:06"
 }
