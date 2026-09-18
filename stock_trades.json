@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 345.92,
-      "last_pnl_pct": 5.29,
+      "last_price": 347.88,
+      "last_pnl_pct": 5.88,
       "days_held": 53,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 441.01,
-      "last_price": 429.6,
-      "last_pnl_pct": 13.83,
+      "last_price": 430.27,
+      "last_pnl_pct": 14.01,
       "days_held": 51,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 493.66,
-      "last_pnl_pct": -3.57,
+      "last_price": 495.67,
+      "last_pnl_pct": -3.18,
       "days_held": 39,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 253.24,
-      "last_pnl_pct": -2.33,
+      "last_price": 254.57,
+      "last_pnl_pct": -1.81,
       "days_held": 28,
       "status": "OPEN",
       "live": false
@@ -2962,19 +2962,19 @@
     },
     {
       "date": "2026-09-18",
-      "value": 1051.98
+      "value": 1053.12
     }
   ],
   "top_picks": [
     {
-      "ticker": "VFV.TO",
+      "ticker": "MSTR",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "VFV holds above both key moving averages with positive MACD in a confirmed bull regime, and the consolidation near 52-week highs at RSI 46.9 suggests healthy digestion rather than distribution before a potential breakout above $194.21. The S&P 500's structural uptrend and bull market regime justify medium-term accumulation at current levels with defined downside at the 50-day MA.",
+      "reasoning": "MSTR trades in a clean bullish structure with RSI at 63.1 leaving upside room, MACD confirming momentum, and a 49% analyst consensus target supported by Bitcoin's potential breakout above $100K as the primary re-rating catalyst. The leveraged BTC accumulation model amplifies upside in a bull regime, and the stock's bounce off $81.81 lows with trend confirmation above both key moving averages provides a compelling risk/reward entry.",
       "price_target": 220.0,
-      "key_risk": "Unhedged USD/CAD exposure means CAD appreciation could erase S&P 500 gains entirely, and the elevated index P/E of ~24.7x leaves limited cushion against any earnings disappointment or risk-off rotation."
+      "key_risk": "A Bitcoin price reversal or sustained crypto risk-off event would compress MSTR disproportionately given its 14.9x debt-to-equity leverage, potentially triggering a rapid 30-40% drawdown from current levels."
     },
     {
       "ticker": "META",
@@ -2982,9 +2982,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 19x forward P/E for 28% revenue growth with a clear path to AI-driven ARPU expansion, and the ~13% gap to analyst consensus provides fundamental support even after the recent surge. RSI at 80.3 warrants a partial position now with intent to add on any pullback toward the 65\u201370 RSI zone near MA50 support.",
+      "reasoning": "META trades at a compelling 19.2x forward P/E against 28% revenue growth and ~30% margins, offering genuine fundamental value despite elevated technicals. Bull regime supports entry with a defined stop at the 50-day MA, targeting analyst consensus of $755 over the medium term.",
       "price_target": 755.0,
-      "key_risk": "A post-earnings disappointment on AI monetization or soft Q3 guidance after a 23% monthly rip could trigger a sharp mean-reversion unwind from deeply overbought levels."
+      "key_risk": "RSI at 81 with flat volume signals momentum exhaustion, and any ad revenue deceleration or Reality Labs capex surprise at the next earnings print could trigger a 10-15% corrective flush from overbought levels."
     },
     {
       "ticker": "AMD",
@@ -2992,9 +2992,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD is in a confirmed bull trend with institutional-grade momentum re-accelerating into a second leg, supported by a defensible 35x forward P/E underpinned by AI accelerator and EPYC share gains. The 13% upside to analyst target is achievable within the medium-term window assuming MI300X ramp continues to track ahead of estimates.",
+      "reasoning": "AMD trades in a confirmed bull structure with strong AI/data center tailwinds and a compelling forward P/E of 35x supporting the valuation thesis through earnings inflection. Bull regime allows full Kelly deployment at score 7, with the analyst target at $616 offering meaningful upside before heavy resistance near the 52-week high.",
       "price_target": 616.51,
-      "key_risk": "RSI at 71.1 means the entry is extended, and any NVIDIA CUDA ecosystem news or AMD revenue guidance miss could trigger a sharp mean-reversion toward the MA50 near $495."
+      "key_risk": "Hyperscaler preference consolidation toward NVIDIA Blackwell architecture could compress AMD's forward multiple sharply and trigger a breakdown to MA50 support near $495."
     }
   ],
   "regime": "BULL",
@@ -3010,5 +3010,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-18 17:17"
+  "last_run": "2026-09-18 19:32"
 }
