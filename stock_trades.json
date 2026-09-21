@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 347.88,
-      "last_pnl_pct": 5.88,
-      "days_held": 53,
+      "last_price": 351.36,
+      "last_pnl_pct": 6.94,
+      "days_held": 56,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 441.01,
-      "last_price": 430.27,
-      "last_pnl_pct": 14.01,
-      "days_held": 51,
+      "trail_high": 443.29,
+      "last_price": 443.29,
+      "last_pnl_pct": 17.46,
+      "days_held": 54,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 495.67,
-      "last_pnl_pct": -3.18,
-      "days_held": 39,
+      "last_price": 498.91,
+      "last_pnl_pct": -2.55,
+      "days_held": 42,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 219.73,
-      "last_pnl_pct": -0.14,
-      "days_held": 31,
+      "last_price": 228.09,
+      "last_pnl_pct": 3.66,
+      "days_held": 34,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.57,
-      "last_pnl_pct": -1.81,
-      "days_held": 28,
+      "last_price": 258.58,
+      "last_pnl_pct": -0.27,
+      "days_held": 31,
       "status": "OPEN",
       "live": false
     }
@@ -2963,6 +2963,10 @@
     {
       "date": "2026-09-18",
       "value": 1053.12
+    },
+    {
+      "date": "2026-09-21",
+      "value": 1060.83
     }
   ],
   "top_picks": [
@@ -2972,29 +2976,29 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR trades in a clean bullish structure with RSI at 63.1 leaving upside room, MACD confirming momentum, and a 49% analyst consensus target supported by Bitcoin's potential breakout above $100K as the primary re-rating catalyst. The leveraged BTC accumulation model amplifies upside in a bull regime, and the stock's bounce off $81.81 lows with trend confirmation above both key moving averages provides a compelling risk/reward entry.",
+      "reasoning": "MSTR trades in a clean bullish structure with accelerating 1M/3M momentum, RSI at 65.5 with room to run, and a strong analyst consensus target of $228 implying ~38% upside as Bitcoin sentiment remains constructive. The leveraged BTC exposure via Saylor's ATM/convertible strategy provides asymmetric upside in a bull regime with BTC threatening a breakout above $100K.",
       "price_target": 220.0,
-      "key_risk": "A Bitcoin price reversal or sustained crypto risk-off event would compress MSTR disproportionately given its 14.9x debt-to-equity leverage, potentially triggering a rapid 30-40% drawdown from current levels."
+      "key_risk": "A BTC drawdown of 20%+ would compress MSTR's NAV premium violently given its 3.6 beta and 14.9x debt-to-equity leverage, making position sizing critical within the 20% crypto proxy portfolio cap."
     },
     {
-      "ticker": "META",
-      "score": 7,
+      "ticker": "RIOT",
+      "score": 8,
       "action": "BUY",
-      "strategy": "MEDIUM",
+      "strategy": "SWING",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 19.2x forward P/E against 28% revenue growth and ~30% margins, offering genuine fundamental value despite elevated technicals. Bull regime supports entry with a defined stop at the 50-day MA, targeting analyst consensus of $755 over the medium term.",
-      "price_target": 755.0,
-      "key_risk": "RSI at 81 with flat volume signals momentum exhaustion, and any ad revenue deceleration or Reality Labs capex surprise at the next earnings print could trigger a 10-15% corrective flush from overbought levels."
+      "reasoning": "RIOT is re-accelerating off a multi-month base with strong momentum (17% 1W), trading well above both key moving averages, and carrying 3.83x BTC beta into a bull regime where a BTC breakout above $100K would act as a powerful amplifying catalyst toward the 52-week high. Analyst consensus at $32.40 and technical resistance at $30.32 provide a clear near-term target with favorable risk/reward from current levels.",
+      "price_target": 30.32,
+      "key_risk": "A BTC reversal or consolidation below $95K would rapidly compress RIOT's leveraged beta exposure and could trigger a swift 20-30% drawdown given the stock's extreme sensitivity to crypto price action."
     },
     {
-      "ticker": "AMD",
-      "score": 7,
+      "ticker": "XQQ.TO",
+      "score": 8,
       "action": "BUY",
-      "strategy": "MEDIUM",
+      "strategy": "SWING",
       "conviction": "medium",
-      "reasoning": "AMD trades in a confirmed bull structure with strong AI/data center tailwinds and a compelling forward P/E of 35x supporting the valuation thesis through earnings inflection. Bull regime allows full Kelly deployment at score 7, with the analyst target at $616 offering meaningful upside before heavy resistance near the 52-week high.",
-      "price_target": 616.51,
-      "key_risk": "Hyperscaler preference consolidation toward NVIDIA Blackwell architecture could compress AMD's forward multiple sharply and trigger a breakdown to MA50 support near $495."
+      "reasoning": "XQQ.TO is re-accelerating from a multi-month consolidation base with RSI at 64.7, bullish MACD, and above-average volume confirming buyer conviction just beneath 52-week highs \u2014 a classic breakout setup in a BULL regime. As a leveraged NASDAQ vehicle, the clean bullish structure above both MA50 and MA200 amplifies the favorable risk/reward if the 52-week high at $75.03 gives way.",
+      "price_target": 80.5,
+      "key_risk": "Leveraged NASDAQ exposure means a 5-8% index pullback from macro or Fed repricing translates to a 10-16% drawdown in XQQ.TO, with the stop at $70.50 designed to exit before structural damage."
     }
   ],
   "regime": "BULL",
@@ -3010,5 +3014,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-18 19:32"
+  "last_run": "2026-09-21 18:59"
 }
