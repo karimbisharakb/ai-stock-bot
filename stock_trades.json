@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 347.36,
-      "last_pnl_pct": 5.73,
+      "last_price": 347.44,
+      "last_pnl_pct": 5.75,
       "days_held": 57,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 447.67,
-      "last_price": 447.67,
-      "last_pnl_pct": 18.62,
+      "trail_high": 452.08,
+      "last_price": 452.08,
+      "last_pnl_pct": 19.79,
       "days_held": 55,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 497.05,
-      "last_pnl_pct": -2.91,
+      "last_price": 497.98,
+      "last_pnl_pct": -2.73,
       "days_held": 43,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 228.95,
-      "last_pnl_pct": 4.05,
+      "last_price": 228.86,
+      "last_pnl_pct": 4.01,
       "days_held": 35,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.22,
-      "last_pnl_pct": -1.95,
+      "last_price": 255.1,
+      "last_pnl_pct": -1.61,
       "days_held": 32,
       "status": "OPEN",
       "live": false
@@ -2970,19 +2970,19 @@
     },
     {
       "date": "2026-09-22",
-      "value": 1059.57
+      "value": 1060.71
     }
   ],
   "top_picks": [
     {
-      "ticker": "MSTR",
+      "ticker": "COIN",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's leveraged Bitcoin exposure provides asymmetric upside in a bull regime with BTC trending toward all-time highs and analyst consensus at $228 offering ~35% upside. Positive MACD, strong trend structure above both key moving averages, and a strong-buy rating support continuation despite elevated RSI.",
+      "reasoning": "COIN is in clean bullish structure above both key moving averages with RSI at 60 and positive MACD indicating early-to-mid momentum phase with room to run toward $220\u2013$250 if BTC sustains upward pressure. The 16.97% weekly surge on elevated volume signals a momentum reawakening, and a breakout above the $203.60 analyst target opens a clear technical path higher with limited resistance until $280+.",
       "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ would trigger amplified losses given MSTR's 14.9x debt-to-equity and ongoing equity dilution risk, making this trade entirely dependent on sustained Bitcoin strength."
+      "key_risk": "COIN is entirely BTC-dependent \u2014 a crypto risk-off rotation or BTC rejection below key support would rapidly unwind the momentum trade and expose structurally weak fundamentals (negative margins, 71x forward P/E)."
     },
     {
       "ticker": "SHOP.TO",
@@ -2990,19 +2990,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SHOP is in a confirmed uptrend with institutional volume, healthy RSI headroom, and a consolidation phase that sets up continuation toward the analyst target; 33.7% revenue growth with expanding margins justifies the premium multiple in a bull regime. The MA50/MA200 stack provides a solid technical floor while MACD confirms the underlying bid remains intact.",
-      "price_target": 234.54,
-      "key_risk": "High beta of 2.616 makes SHOP acutely vulnerable to any hawkish Fed repricing or risk-off rotation that compresses tech multiples broadly."
+      "reasoning": "SHOP trades in a clean bullish structure above both key moving averages with RSI at 58.2 and positive MACD leaving meaningful upside before exhaustion, while 33.7% revenue growth and a $234 analyst target support the growth premium. Renewed accumulation at 1.33x volume ratio post-consolidation suggests the next leg higher is building, with the bull market regime supporting full Kelly sizing.",
+      "price_target": 220.0,
+      "key_risk": "High beta (2.6) and SMB-exposed GMV make SHOP acutely vulnerable to any macro deterioration or consumer spending slowdown that pressures merchant volumes."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "AAPL",
       "score": 7,
       "action": "BUY",
-      "strategy": "MEDIUM",
+      "strategy": "SWING",
       "conviction": "medium",
-      "reasoning": "PLTR's bullish macro structure with MA50/MA200 well below current price and 49% margins justify a medium-term position during this consolidation phase before the next leg toward all-time highs. Bull regime permits full Kelly sizing and the RSI reset to 53.7 offers a cleaner entry than chasing the prior 58% run.",
-      "price_target": 220.0,
-      "key_risk": "Any U.S. defense budget sequestration or AIP contract slowdown would collapse the 157x P/E multiple rapidly given the elevated D/E of 2.14."
+      "reasoning": "AAPL is in clean bullish structure above key moving averages with RSI at 65.8 and positive MACD, setting up a potential breakout above the 52-week high at $345.34 in a confirmed bull regime. The trade is a tactical breakout play targeting new highs, though upside is capped near-term given the stock already trades 3.5% above analyst consensus.",
+      "price_target": 352.0,
+      "key_risk": "A rejection at the $345.34 52-week high resistance on below-average volume could trigger a swift mean-reversion toward the $320 50-day MA, invalidating the setup."
     }
   ],
   "regime": "BULL",
@@ -3018,5 +3018,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-22 17:51"
+  "last_run": "2026-09-22 20:08"
 }
