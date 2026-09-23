@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 335.36,
-      "last_pnl_pct": 2.07,
+      "last_price": 334.88,
+      "last_pnl_pct": 1.93,
       "days_held": 58,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 452.08,
-      "last_price": 446.69,
-      "last_pnl_pct": 18.36,
+      "last_price": 446.79,
+      "last_pnl_pct": 18.39,
       "days_held": 56,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 499.44,
-      "last_pnl_pct": -2.44,
+      "last_price": 500.22,
+      "last_pnl_pct": -2.29,
       "days_held": 44,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 225.29,
-      "last_pnl_pct": 2.39,
+      "last_price": 225.1,
+      "last_pnl_pct": 2.3,
       "days_held": 36,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 248.86,
-      "last_pnl_pct": -4.02,
+      "last_price": 249.35,
+      "last_pnl_pct": -3.83,
       "days_held": 33,
       "status": "OPEN",
       "live": false
@@ -2974,7 +2974,7 @@
     },
     {
       "date": "2026-09-23",
-      "value": 1054.09
+      "value": 1054.17
     }
   ],
   "top_picks": [
@@ -2984,29 +2984,29 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's accelerating momentum structure (26%/37%/57% across 1W/1M/3M) combined with institutional volume confirmation and RSI still below overbought territory signals a young momentum leg with significant upside to analyst targets near $230. As a leveraged BTC proxy trading at a material discount to its 52-week high of $365, the risk/reward in a bull regime favors aggressive positioning within the 20% crypto proxy cap.",
+      "reasoning": "MSTR is re-accelerating with strong institutional volume confirmation, trading well above both moving averages with momentum suggesting BTC proxy revaluation toward analyst consensus near $230 as Bitcoin targets $100K+. Bull regime permits full Kelly sizing on this high-beta crypto vehicle with clear technical trend support.",
       "price_target": 220.0,
-      "key_risk": "Bitcoin price reversal would trigger outsized drawdown given MSTR's 3.6 Beta and 14.9x leverage, with potential for rapid 30-50% downside if crypto sentiment shifts."
+      "key_risk": "A BTC mean-reversion of 20%+ would compress MSTR disproportionately given its 3.6x beta and extreme 14.9 D/E leverage, potentially triggering forced selling or balance sheet stress."
     },
     {
-      "ticker": "PLTR",
-      "score": 7,
+      "ticker": "SHOP.TO",
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's confirmed uptrend, elite 49% margins, and 93% revenue growth justify continued positioning in a bull regime despite near-term momentum deceleration. The RSI at 58.5 leaves room to run toward prior highs before overbought conditions emerge.",
-      "price_target": 210.0,
-      "key_risk": "At 82x forward earnings near all-time highs with minimal analyst upside buffer, any guidance miss or macro rate shock could trigger a violent 20-30% de-rating."
+      "reasoning": "SHOP.TO is re-accelerating off a mid-trend base with price holding above both key moving averages, bullish MACD, and RSI at 54 leaving substantial upside room before overbought conditions. The 33.7% revenue growth justifies the premium multiple in a bull regime with analyst consensus pointing to $234 target.",
+      "price_target": 234.79,
+      "key_risk": "A macro-driven SMB spending slowdown would brutally reprice a 58x forward multiple stock with elevated D/E of 1.4x and thin 14.5% margins."
     },
     {
-      "ticker": "SNOW",
-      "score": 7,
+      "ticker": "TQQQ",
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW's exceptional 3M/6M momentum, strong analyst consensus at $425, and 26.9% upside in a confirmed bull regime justify a medium-term position with the stock well above key moving averages in a healthy consolidation phase. The 35% revenue growth and potential beat-and-raise catalyst provide the fundamental backstop for multiple expansion toward prior analyst targets.",
-      "price_target": 400.0,
-      "key_risk": "Extreme valuation at 111x forward earnings with negative margins means any revenue growth deceleration or guidance cut triggers a violent 20-30% compression with no valuation floor to catch the stock."
+      "reasoning": "TQQQ is in a confirmed bull trend with strong MA separation and RSI at 67 leaving headroom before overbought conditions, making the risk/reward favorable in a BULL regime. The 3x leveraged structure amplifies the Nasdaq-100's upside while the technical setup shows consolidation rather than exhaustion, supporting a continued grind higher.",
+      "price_target": 92.0,
+      "key_risk": "A Fed hawkish surprise or hot inflation print could trigger a violent Nasdaq-100 selloff that 3x leverage would amplify into a 30-40% drawdown from current levels."
     }
   ],
   "regime": "BULL",
@@ -3022,5 +3022,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-23 18:03"
+  "last_run": "2026-09-23 20:05"
 }
