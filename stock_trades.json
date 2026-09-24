@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 337.14,
-      "last_pnl_pct": 2.61,
+      "last_price": 339.01,
+      "last_pnl_pct": 3.18,
       "days_held": 59,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 452.08,
-      "last_price": 448.52,
-      "last_pnl_pct": 18.85,
+      "last_price": 451.05,
+      "last_pnl_pct": 19.52,
       "days_held": 57,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 513.53,
-      "last_price": 496.07,
-      "last_pnl_pct": -3.1,
+      "last_price": 497.93,
+      "last_pnl_pct": -2.74,
       "days_held": 45,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 223.92,
-      "last_pnl_pct": 1.76,
+      "last_price": 224.58,
+      "last_pnl_pct": 2.06,
       "days_held": 37,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 249.09,
-      "last_pnl_pct": -3.93,
+      "last_price": 249.38,
+      "last_pnl_pct": -3.81,
       "days_held": 34,
       "status": "OPEN",
       "live": false
@@ -2978,7 +2978,7 @@
     },
     {
       "date": "2026-09-24",
-      "value": 1054.05
+      "value": 1055.41
     }
   ],
   "top_picks": [
@@ -2988,9 +2988,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR offers a leveraged BTC proxy with re-accelerating momentum, trading well above both key moving averages with RSI in constructive territory and strong analyst consensus pointing to 43% upside; the bull market regime supports full Kelly sizing within the 20% crypto cap. Recent 3M return of 88% reflects genuine trend strength rather than a blow-off top, with technicals and macro crypto setup aligned.",
+      "reasoning": "MSTR is in a clean bullish trend with RSI at 59.9, positive MACD, and strong momentum confirmation trading well above both key moving averages, with a 42% analyst upside target anchored to a credible BTC-to-$100K thesis. As a leveraged Bitcoin proxy in a BULL regime, full Kelly sizing applies and the risk/reward favors a medium-term position targeting the $229 analyst consensus.",
       "price_target": 220.0,
-      "key_risk": "Leveraged balance sheet (D/E 14.94) amplifies any BTC drawdown or risk-off event, with potential for 30-50% rapid downside if Bitcoin fails to hold or breaks below key support levels."
+      "key_risk": "A BTC drawdown of 20%+ would trigger amplified downside through MSTR's 14.9x leveraged balance sheet, potentially invalidating the entire thesis rapidly."
+    },
+    {
+      "ticker": "COIN",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "COIN is in a textbook momentum continuation setup with RSI at 53, re-accelerating 1W momentum of +14.51%, and institutional volume confirming the move \u2014 the 200-DMA holding as support in a BULL regime gives a high-probability risk/reward entry. Beta of 3.39 against a constructive BTC backdrop mechanically targets prices well above the conservative $203 analyst consensus.",
+      "price_target": 220.0,
+      "key_risk": "A BTC reversal below $50K would expose COIN's negative operating leverage brutally, and the 51x D/E ratio amplifies downside in any risk-off or rate-shock scenario."
     },
     {
       "ticker": "RIOT",
@@ -2998,19 +3008,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RIOT is in a clean bullish structure with re-accelerating momentum, trading above both key MAs with RSI at 61.8 leaving room to run toward analyst consensus of $32.40; the mid-trend reset from a 3-month consolidation with above-average volume confirms continuation bias. Bull regime allows full Kelly sizing within the 20% crypto proxy portfolio cap.",
-      "price_target": 32.4,
-      "key_risk": "A BTC reversal of 15%+ would compress RIOT 40-60% given its 3.83 beta, making this trade entirely contingent on sustained Bitcoin price strength."
-    },
-    {
-      "ticker": "SHOP.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SHOP is re-accelerating off a short-term base with price above both key MAs, elevated volume confirming institutional buying, and a 17% gap to analyst consensus providing a credible re-rating catalyst. Bull market regime with RSI at 52.9 and positive MACD gives meaningful runway before overbought conditions.",
-      "price_target": 220.0,
-      "key_risk": "High beta of 2.62 makes SHOP acutely vulnerable to any hawkish Fed repricing or macro risk-off rotation that could rapidly compress the growth multiple."
+      "reasoning": "RIOT is in a textbook reloading phase with clean bullish structure above both key MAs, rebuilding momentum, and 38% upside to analyst target with RSI not yet overbought. Bitcoin's trajectory toward $110K\u2013$120K is the primary accelerant, and RIOT's 3.83 beta provides amplified upside exposure at a structurally sound entry.",
+      "price_target": 30.32,
+      "key_risk": "A Bitcoin rejection back to the $75K\u2013$80K range would trigger rapid RIOT deleveraging given its extreme 40x D/E and negative margins, making the stop-loss critical."
     }
   ],
   "regime": "BULL",
@@ -3026,5 +3026,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-24 18:03"
+  "last_run": "2026-09-24 20:22"
 }
