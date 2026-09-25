@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 341.15,
-      "last_pnl_pct": 3.84,
+      "last_price": 341.08,
+      "last_pnl_pct": 3.81,
       "days_held": 60,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 452.08,
-      "last_price": 450.98,
-      "last_pnl_pct": 19.5,
+      "last_price": 450.37,
+      "last_pnl_pct": 19.34,
       "days_held": 58,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 517.78,
-      "last_price": 517.78,
-      "last_pnl_pct": 1.14,
+      "last_price": 516.17,
+      "last_pnl_pct": 0.82,
       "days_held": 46,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 224.8,
-      "last_pnl_pct": 2.16,
+      "last_price": 225.07,
+      "last_pnl_pct": 2.29,
       "days_held": 38,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 250.03,
-      "last_pnl_pct": -3.56,
+      "last_price": 249.67,
+      "last_pnl_pct": -3.7,
       "days_held": 35,
       "status": "OPEN",
       "live": false
@@ -2982,7 +2982,7 @@
     },
     {
       "date": "2026-09-25",
-      "value": 1058.07
+      "value": 1057.78
     }
   ],
   "top_picks": [
@@ -2992,9 +2992,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR is a leveraged Bitcoin proxy in a confirmed bull regime, trading above key MAs with RSI at 59.5 leaving meaningful upside before overbought conditions, and analyst consensus targets 44.6% upside. Accelerating 3M momentum off a base suggests we are mid-move with BTC momentum supportive of continued appreciation toward the $229 target.",
+      "reasoning": "MSTR trades in a clean bullish structure above both key moving averages with RSI at 59.2 leaving ample room to run, while 3M momentum of 92.7% concentrated into a recent surge without peak-euphoria volume signals mid-cycle continuation toward the $229 analyst target. BTC proxy beta of 3.6x amplifies upside in a sustained bull regime, and the 20% crypto portfolio cap provides the non-negotiable risk guardrail for this leveraged treasury vehicle.",
       "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ would disproportionately crater MSTR given its extreme 14.9x D/E leverage stack, making position sizing discipline and the hard stop-loss critical."
+      "key_risk": "A 15%+ BTC correction triggers 50%+ MSTR drawdown given 3.6x beta and 14.9x leverage \u2014 position sizing to the 20% crypto cap is mandatory, not optional."
+    },
+    {
+      "ticker": "COIN",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "COIN trades in a clean bullish structure above both key moving averages with RSI at 55 leaving room to run, and a BULL market regime supports full Kelly sizing within the 20% crypto proxy cap. The 30.89% 3M run validates BTC-cycle momentum, and any BTC breakout above $70K is the near-term repricing catalyst toward the $203-220 range.",
+      "price_target": 220.0,
+      "key_risk": "COIN's 3.39 beta and 51x D/E leverage mean a BTC reversal could trigger a 2-3x amplified drawdown, and current weak volume (0.84x avg) signals consolidation risk without a fresh catalyst."
     },
     {
       "ticker": "SHOP.TO",
@@ -3002,19 +3012,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SHOP is trading above both key moving averages with strong 33.7% revenue growth and credible margin expansion supporting the 58x forward multiple, while analyst consensus at $235.69 provides a clear 17% upside target in a confirmed bull regime. The MACD confirmation and 50-DMA support at $192.69 offer a defined risk framework with favorable reward-to-risk asymmetry.",
-      "price_target": 235.0,
-      "key_risk": "High D/E of 1.4 makes SHOP vulnerable to any hawkish macro repricing or rate-driven multiple compression, which could rapidly unwind the bounce before the fundamental story plays out."
-    },
-    {
-      "ticker": "VFV.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "VFV is breaking out to all-time highs with a textbook bullish structure \u2014 price above both MA50 and MA200, RSI at 66.8 with room before overbought, and strong 6M momentum in a confirmed bull regime. Full Kelly applies here, and the unhedged S&P 500 exposure is the right vehicle for capturing continued US equity upside.",
+      "reasoning": "SHOP is in a healthy trend-continuation setup with price above both key moving averages, RSI recovering from reset rather than peaking, and 33.7% revenue growth supporting the analyst consensus target. Bull regime unlocks full Kelly sizing, and the recent 1M pullback followed by momentum recovery offers a cleaner entry than chasing the 3M/6M surge.",
       "price_target": 220.0,
-      "key_risk": "CAD strengthening driven by BOC/Fed policy divergence or risk-off USD weakness could erode CAD-denominated returns even if the underlying S&P 500 continues to advance."
+      "key_risk": "Beta of 2.6 makes SHOP acutely vulnerable to any hawkish rate surprise from the Fed or Bank of Canada, which could rapidly unwind the technical setup and compress the already-stretched 97x trailing multiple."
     }
   ],
   "regime": "BULL",
@@ -3030,5 +3030,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-25 18:09"
+  "last_run": "2026-09-25 20:20"
 }
