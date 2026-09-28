@@ -38,8 +38,8 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 452.86,
-      "last_price": 452.86,
+      "trail_high": 452.88,
+      "last_price": 452.88,
       "last_pnl_pct": 20.0,
       "days_held": 61,
       "status": "OPEN",
@@ -2986,7 +2986,7 @@
     },
     {
       "date": "2026-09-28",
-      "value": 1057.44
+      "value": 1057.45
     }
   ],
   "top_picks": [
@@ -2996,9 +2996,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META offers a rare combination of compelling valuation (20.5x forward P/E) and 28% revenue growth with strong institutional participation and clean bullish structure well above both key moving averages. The current -3.46% weekly consolidation with RSI at 67.8 represents a healthy pause before the next leg higher toward analyst targets.",
-      "price_target": 790.27,
-      "key_risk": "Momentum plateau near overbought RSI could deepen into a retracement to the $650\u2013$660 support zone if macro conditions deteriorate or ad revenue growth disappoints at the next earnings print."
+      "reasoning": "META trades at a compelling 20.5x forward P/E for 28% revenue growth with strong institutional sponsorship confirmed by elevated volume and a $90+ cushion above both key MAs. The recent -3.46% pullback is healthy consolidation within a clear bull trend, with analyst consensus at $790 providing a well-supported upside target.",
+      "price_target": 790.0,
+      "key_risk": "CapEx guidance creep on AI data center buildout without a commensurate revenue beat at the next earnings print could compress the forward multiple and trigger a sharp de-rating."
     },
     {
       "ticker": "MSTR",
@@ -3006,19 +3006,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR trades in a clean bullish structure above both key moving averages with RSI at 62.8 and MACD confirming trend, while the 46% analyst upside and strong BTC momentum support continuation toward $220+. The recent -6.74% weekly pullback on below-average volume represents healthy digestion within a dominant uptrend, offering an attractive re-entry for a levered Bitcoin proxy in a bull regime.",
+      "reasoning": "MSTR's 3.6x BTC beta combined with strong technical structure (trading above both MAs, RSI with room to run, bullish MACD) positions it well for a BTC breakout scenario toward the $229 analyst target. The -6.74% weekly pullback on low volume reads as healthy consolidation within a dominant 69.55% 3-month uptrend, offering an attractive re-entry point.",
       "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ would trigger a 40-60% MSTR compression given the 3.6 beta and 14.9x debt-to-equity leverage, making position sizing within the 20% crypto cap ceiling critical."
+      "key_risk": "A BTC drawdown of 15-20% would translate to a 30-50% MSTR collapse given 14.9x leverage and structural equity dilution risk."
     },
     {
-      "ticker": "RIOT",
+      "ticker": "COIN",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RIOT is in a healthy mid-cycle pullback within a confirmed bull trend, trading above both MA50 and MA200 with RSI neutral and MACD still constructive \u2014 the -10.59% weekly flush without elevated volume signals a low-conviction dip rather than trend breakdown. Bitcoin exposure at current levels offers asymmetric upside to the analyst consensus target of $32.29 (~49%) with BTC directional tailwinds as the primary catalyst.",
-      "price_target": 32.29,
-      "key_risk": "As a 3.83-beta pure-play Bitcoin miner with deeply negative margins and 40x D/E, any sustained BTC price reversal below key support levels would trigger violent downside well beyond the stop-loss."
+      "reasoning": "COIN is holding above its 200-DMA with constructive MACD and RSI leaving room to run, positioning it well for the next crypto-driven volume cycle. Bull regime permits full Kelly sizing, and the regulatory normalization narrative combined with BTC momentum provides a credible path to analyst targets and beyond.",
+      "price_target": 220.0,
+      "key_risk": "Thin volume conviction and negative revenue growth (-17.3% YoY) mean any BTC price reversal or risk-off macro event could rapidly unwind the 200-DMA support and trigger the stop."
     }
   ],
   "regime": "BULL",
@@ -3034,5 +3034,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-28 20:19"
+  "last_run": "2026-09-28 22:30"
 }
