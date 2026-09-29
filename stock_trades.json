@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 339.16,
-      "last_pnl_pct": 3.23,
-      "days_held": 63,
+      "last_price": 336.85,
+      "last_pnl_pct": 2.53,
+      "days_held": 64,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 452.88,
-      "last_price": 452.88,
-      "last_pnl_pct": 20.0,
-      "days_held": 61,
+      "trail_high": 458.9,
+      "last_price": 458.9,
+      "last_pnl_pct": 21.6,
+      "days_held": 62,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 517.78,
-      "last_price": 509.22,
-      "last_pnl_pct": -0.53,
-      "days_held": 49,
+      "last_price": 510.73,
+      "last_pnl_pct": -0.24,
+      "days_held": 50,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 228.86,
-      "last_pnl_pct": 4.01,
-      "days_held": 41,
+      "last_price": 227.92,
+      "last_pnl_pct": 3.58,
+      "days_held": 42,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 246.15,
-      "last_pnl_pct": -5.06,
-      "days_held": 38,
+      "last_price": 247.82,
+      "last_pnl_pct": -4.42,
+      "days_held": 39,
       "status": "OPEN",
       "live": false
     }
@@ -2987,6 +2987,10 @@
     {
       "date": "2026-09-28",
       "value": 1057.45
+    },
+    {
+      "date": "2026-09-29",
+      "value": 1058.37
     }
   ],
   "top_picks": [
@@ -2996,9 +3000,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 20.5x forward P/E for 28% revenue growth with strong institutional sponsorship confirmed by elevated volume and a $90+ cushion above both key MAs. The recent -3.46% pullback is healthy consolidation within a clear bull trend, with analyst consensus at $790 providing a well-supported upside target.",
-      "price_target": 790.0,
-      "key_risk": "CapEx guidance creep on AI data center buildout without a commensurate revenue beat at the next earnings print could compress the forward multiple and trigger a sharp de-rating."
+      "reasoning": "META trades at a compelling 20.9x forward P/E with 28% revenue growth, clean institutional accumulation confirmed by price well above MA50/MA200, and RSI at 65 leaving meaningful upside before overbought conditions; the flat 1W consolidation in a bull regime is a constructive setup for continuation toward the analyst target. AI-driven ad efficiency via Advantage+ remains the key margin expansion engine with further monetization upside from Reels and WhatsApp.",
+      "price_target": 793.91,
+      "key_risk": "Any guidance commentary signaling CPM softening or macro-driven ad budget pullbacks at the next earnings print could sharply reprice the forward multiple lower."
     },
     {
       "ticker": "MSTR",
@@ -3006,19 +3010,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's 3.6x BTC beta combined with strong technical structure (trading above both MAs, RSI with room to run, bullish MACD) positions it well for a BTC breakout scenario toward the $229 analyst target. The -6.74% weekly pullback on low volume reads as healthy consolidation within a dominant 69.55% 3-month uptrend, offering an attractive re-entry point.",
+      "reasoning": "MSTR sits in a healthy mid-trend consolidation above key MAs with RSI at 63.5 and bullish MACD, offering meaningful upside to the $230 analyst target if BTC sustains momentum toward $100K+. The leveraged BTC accumulation model provides asymmetric upside in a bull regime, and the 20% crypto proxy cap appropriately limits concentration risk.",
       "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 15-20% would translate to a 30-50% MSTR collapse given 14.9x leverage and structural equity dilution risk."
+      "key_risk": "A BTC drawdown of 20%+ would amplify into a 70%+ MSTR drawdown given the 3.6 beta and 14.9 D/E leverage ratio, creating extreme downside that could trigger forced selling."
     },
     {
-      "ticker": "COIN",
+      "ticker": "VFV.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "COIN is holding above its 200-DMA with constructive MACD and RSI leaving room to run, positioning it well for the next crypto-driven volume cycle. Bull regime permits full Kelly sizing, and the regulatory normalization narrative combined with BTC momentum provides a credible path to analyst targets and beyond.",
+      "reasoning": "VFV.TO is pressing a legitimate 52-week high breakout with MACD bullish confirmation and volume participation, supported by a bull market regime that justifies full Kelly positioning despite near-term RSI extension at 71.7. Structural momentum remains intact with MAs well below price, and a clean breakout above $194.80 opens room toward the $220 target over the medium term.",
       "price_target": 220.0,
-      "key_risk": "Thin volume conviction and negative revenue growth (-17.3% YoY) mean any BTC price reversal or risk-off macro event could rapidly unwind the 200-DMA support and trigger the stop."
+      "key_risk": "A Fed hawkish reprice or macro deterioration triggering S&P 500 P/E compression would hit VFV.TO with a double punch \u2014 index drawdown plus potential CAD-hedge slippage."
     }
   ],
   "regime": "BULL",
@@ -3034,5 +3038,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-28 22:30"
+  "last_run": "2026-09-29 18:55"
 }
