@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 345.74,
-      "last_pnl_pct": 5.23,
+      "last_price": 340.74,
+      "last_pnl_pct": 3.71,
       "days_held": 65,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
       "trail_high": 458.9,
-      "last_price": 457.84,
-      "last_pnl_pct": 21.32,
+      "last_price": 456.19,
+      "last_pnl_pct": 20.88,
       "days_held": 63,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 518.08,
-      "last_price": 518.08,
-      "last_pnl_pct": 1.2,
+      "last_price": 512.9,
+      "last_pnl_pct": 0.19,
       "days_held": 51,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 231.31,
-      "last_price": 230.78,
-      "last_pnl_pct": 4.88,
+      "last_price": 228.38,
+      "last_pnl_pct": 3.79,
       "days_held": 43,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 250.25,
-      "last_pnl_pct": -3.48,
+      "last_price": 249.15,
+      "last_pnl_pct": -3.9,
       "days_held": 40,
       "status": "OPEN",
       "live": false
@@ -2994,7 +2994,7 @@
     },
     {
       "date": "2026-09-30",
-      "value": 1062.57
+      "value": 1059.49
     }
   ],
   "top_picks": [
@@ -3004,19 +3004,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 21x forward P/E with 28% revenue growth and expanding margins, offering genuine value relative to its AI-monetization growth profile. Bullish technicals with RSI at 66.8 and positive MACD confirm trend continuation from a healthy consolidation above key moving averages.",
-      "price_target": 793.9,
-      "key_risk": "Short-term momentum deceleration evidenced by the -1.43% weekly pullback after a 28% monthly surge could accelerate into a failed retest of the $779 52-week high if AI ad revenue catalysts disappoint."
-    },
-    {
-      "ticker": "SOXL",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SOXL is in confirmed bullish structure with price well above both MAs, RSI at 65.5 with MACD support, and a BULL regime allowing full Kelly sizing on a score-8 setup. The 30%+ monthly recovery with still-intact trend structure offers asymmetric upside toward prior resistance levels before the 3M drawdown began.",
-      "price_target": 185.0,
-      "key_risk": "A single negative guidance event from NVDA, TSMC, or AMD could trigger a 40-60% drawdown through 3x leverage and daily compounding decay, invalidating the trade rapidly."
+      "reasoning": "META trades at a compelling 20.7x forward P/E against 28% revenue growth with clean bullish technicals \u2014 RSI not yet overbought and MACD confirming trend continuation after a low-volume consolidation. The analyst consensus target of $793.91 with strong buy conviction and AI monetization catalysts on the horizon support a medium-term continuation trade.",
+      "price_target": 793.91,
+      "key_risk": "AI monetization disappoints in the next earnings print or macro ad-spend deterioration compresses forward estimates, invalidating the growth premium."
     },
     {
       "ticker": "AMD",
@@ -3024,9 +3014,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's structural AI/datacenter share gains with a defensible 39x forward P/E against 50%+ revenue growth justify accumulation even at elevated RSI, as the bull regime supports riding momentum through any shallow consolidation. The MI300X ramp catalyst and hyperscaler adoption data remain the clearest near-term re-rating triggers toward and beyond the 52-week high.",
-      "price_target": 670.0,
-      "key_risk": "RSI at 74.5 with softening volume near the $639 resistance ceiling raises probability of a 10-15% pullback if datacenter GPU ramp data disappoints or broader AI sentiment cools."
+      "reasoning": "AMD's 50% revenue growth and MI300X datacenter GPU ramp provide fundamental tailwinds that justify holding through near-term overbought conditions in a confirmed bull regime. Forward P/E compression to 39x leaves room for re-rating if AI capex from hyperscalers holds steady into H2.",
+      "price_target": 680.0,
+      "key_risk": "Any signal of AI capex deceleration from major hyperscalers could trigger a violent de-rating from these elevated multiples, with mean-reversion risk toward MA50 at $510."
+    },
+    {
+      "ticker": "SNOW",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SNOW trades in a healthy consolidation above key moving averages with 25% upside to analyst target and a strong bull regime backdrop supporting the AI infrastructure thesis via Cortex platform adoption. The cooling momentum and elevated 112x forward P/E are manageable given 35% revenue growth and room for multiple expansion if AI workload metrics accelerate.",
+      "price_target": 415.0,
+      "key_risk": "Any earnings guidance miss or slowing consumption revenue trend could violently compress the premium multiple given deeply negative margins and high leverage."
     }
   ],
   "regime": "BULL",
@@ -3042,5 +3042,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-09-30 18:38"
+  "last_run": "2026-09-30 21:16"
 }
