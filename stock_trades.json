@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 335.36,
-      "last_pnl_pct": 2.07,
+      "last_price": 334.93,
+      "last_pnl_pct": 1.94,
       "days_held": 66,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "TSM at 17.5x forward P/E with 36% revenue growth and 43% analyst upside represents exceptional value for the world's most critical semiconductor infrastructure asset, with RSI at 23.4 signaling deeply oversold conditions within a structurally intact bull trend above the 200-DMA. The sharp corrective flush on sub-panic volume creates a compelling MEDIUM-term entry with the 200-DMA at $354 providing a clear invalidation level.",
       "key_risk": "U.S.-China geopolitical escalation or expanded semiconductor export controls targeting Taiwan-adjacent trade could reprice the stock sharply lower regardless of fundamentals.",
       "earnings_play": false,
-      "trail_high": 459.02,
-      "last_price": 459.02,
-      "last_pnl_pct": 21.63,
+      "trail_high": 459.2,
+      "last_price": 459.2,
+      "last_pnl_pct": 21.68,
       "days_held": 64,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 518.08,
-      "last_price": 515.84,
-      "last_pnl_pct": 0.76,
+      "last_price": 512.8,
+      "last_pnl_pct": 0.17,
       "days_held": 52,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 232.19,
-      "last_price": 232.19,
-      "last_pnl_pct": 5.52,
+      "last_price": 230.86,
+      "last_pnl_pct": 4.92,
       "days_held": 44,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 249.31,
-      "last_pnl_pct": -3.84,
+      "last_price": 248.23,
+      "last_pnl_pct": -4.26,
       "days_held": 41,
       "status": "OPEN",
       "live": false
@@ -2998,7 +2998,7 @@
     },
     {
       "date": "2026-10-01",
-      "value": 1060.59
+      "value": 1059.42
     }
   ],
   "top_picks": [
@@ -3008,29 +3008,29 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META trades at a compelling 20.9x forward P/E with 28% revenue growth and AI-driven ad monetization acting as a durable earnings catalyst, while RSI at 64.6 and bullish MACD confirm the trend remains intact. The 1W pullback to current levels represents a clean re-entry opportunity within a bull regime, with analyst consensus at $794 offering a defined near-term target.",
-      "price_target": 793.91,
-      "key_risk": "A macro-driven advertiser budget pullback or disappointing AI monetization guidance at the next earnings print could stall the move and trigger a retest of the $680-$700 support shelf."
+      "reasoning": "META trades at a compelling ~21x forward P/E on 28% revenue growth with strong margin profile and meaningful cushion above both key moving averages, making the current -6.64% pullback a favorable entry point. RSI at 64.4 leaves room for continuation, analyst consensus at $794 provides a clear fundamental anchor, and BULL regime conditions support full Kelly deployment.",
+      "price_target": 793.0,
+      "key_risk": "Momentum deceleration confirmed by below-average volume and near-term consolidation could extend the pullback toward the $672-680 support zone before any resumption of the uptrend."
     },
     {
-      "ticker": "SOXL",
+      "ticker": "MSTR",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Strong uptrend with price well above both MAs, bullish MACD, and RSI at 66 with room to run in a confirmed bull regime supports a medium-term position. The 3x leveraged semiconductor structure amplifies the ongoing AI/capex cycle tailwind, making the risk/reward favorable with disciplined stop placement.",
+      "reasoning": "MSTR trades well above both MAs with a 43% upside to analyst consensus, and the current consolidation phase with fading momentum represents a healthier entry than chasing the prior 59% run. Bull regime permits full Kelly sizing on this leveraged BTC proxy, which benefits directly from any sustained move above $100K BTC.",
       "price_target": 220.0,
-      "key_risk": "A single negative guidance revision from NVDA, TSMC, or ASML could trigger a 30-50% rapid drawdown given 3x leverage and the extended 1M rally of 46%."
+      "key_risk": "MSTR's 3.6 beta and 14.9x D/E ratio mean a BTC reversal or macro risk-off event could compress the stock 40-50% rapidly, overwhelming any technical support."
     },
     {
-      "ticker": "AMD",
-      "score": 7,
+      "ticker": "TQQQ",
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's MI300X GPU ramp positions it as the primary NVIDIA alternative in AI datacenter buildouts, with forward P/E compression to ~40x validating a credible earnings acceleration thesis. Despite near-term overbought technicals and buyer exhaustion signals near the $639 resistance, the BULL regime and strong structural trend support initiating a position with a disciplined stop below the $550\u2013$570 mean-reversion zone.",
-      "price_target": 720.0,
-      "key_risk": "A rejection at the $639 52-week high combined with any negative GPU demand signal or AI capex slowdown narrative could trigger a violent de-rating given AMD's 2.48 beta and crowded long positioning."
+      "reasoning": "TQQQ is in a confirmed bull trend with re-accelerating momentum, trading well above both major moving averages with RSI at 66.9 leaving room before overbought exhaustion. The 6M return of 82.89% with 1M outpacing 3M signals institutional momentum continuation rather than a tired rally.",
+      "price_target": 92.0,
+      "key_risk": "A hawkish Fed surprise or sticky inflation print could reprice Nasdaq-100 multiples sharply lower, amplified 3x through TQQQ's daily rebalancing mechanism."
     }
   ],
   "regime": "BULL",
@@ -3046,5 +3046,5 @@
     "underperforming": false
   },
   "pnl": 42.55,
-  "last_run": "2026-10-01 19:06"
+  "last_run": "2026-10-01 21:39"
 }
