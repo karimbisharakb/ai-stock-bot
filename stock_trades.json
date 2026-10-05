@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 340.35,
-      "last_pnl_pct": 3.59,
-      "days_held": 67,
+      "last_price": 343.83,
+      "last_pnl_pct": 4.65,
+      "days_held": 70,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "MSFT's elite fundamentals \u2014 40%+ margins, 17.7% revenue growth, and a reasonable 21.8x forward P/E \u2014 support the analyst consensus target of $563 with strong_buy backing, making a staged entry justified despite overbought conditions. RSI at 85.1 and below-average volume warrant a small initial position with room to add on any pullback toward $470\u2013$480.",
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
-      "trail_high": 518.08,
-      "last_price": 517.53,
-      "last_pnl_pct": 1.09,
-      "days_held": 53,
+      "trail_high": 525.18,
+      "last_price": 525.18,
+      "last_pnl_pct": 2.58,
+      "days_held": 56,
       "status": "OPEN",
       "live": false
     },
@@ -60,10 +60,10 @@
       "reasoning": "NVDA's forward P/E of 17.1x against 85% revenue growth and 63% margins represents a compelling fundamental mispricing relative to peers, with analyst consensus targeting $302 and the BULL regime supporting full Kelly deployment. Near-term overbought RSI at 77.8 warrants a scaled entry rather than full position, with Blackwell ramp execution as the key medium-term catalyst.",
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
-      "trail_high": 234.41,
-      "last_price": 233.95,
-      "last_pnl_pct": 6.32,
-      "days_held": 45,
+      "trail_high": 238.9,
+      "last_price": 238.9,
+      "last_pnl_pct": 8.57,
+      "days_held": 48,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 251.52,
-      "last_pnl_pct": -2.99,
-      "days_held": 42,
+      "last_price": 251.4,
+      "last_pnl_pct": -3.04,
+      "days_held": 45,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "META trades at a discounted 20.8x forward P/E on 28% revenue growth with dominant platform economics, offering a compelling risk/reward with 9% upside to analyst targets and strong fundamental support well above key MAs. Near-term consolidation and fading MACD are a digestion pause, not a structural break, making this a quality entry for patient medium-term holders.",
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
-      "trail_high": 728.59,
-      "last_price": 728.08,
-      "last_pnl_pct": -0.07,
-      "days_held": 0,
+      "trail_high": 741.9,
+      "last_price": 741.9,
+      "last_pnl_pct": 1.83,
+      "days_held": 3,
       "status": "OPEN",
       "live": false
     }
@@ -3079,18 +3079,22 @@
     {
       "date": "2026-10-02",
       "value": 1065.33
+    },
+    {
+      "date": "2026-10-05",
+      "value": 1069.53
     }
   ],
   "top_picks": [
     {
-      "ticker": "PLTR",
-      "score": 7,
+      "ticker": "MSTR",
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's elite 93% revenue growth and 49% margins justify a premium multiple in a bull regime, and positive MACD momentum supports continued trend participation despite overbought RSI at 75.1. Position sizing should be conservative given the 81x forward P/E compression risk and softening volume signature suggesting distribution near highs.",
-      "price_target": 210.0,
-      "key_risk": "A hawkish Fed repricing or hot inflation print could trigger rapid multiple compression on PLTR's 81x forward P/E, amplified by its 1.62 beta in any broad Nasdaq drawdown."
+      "reasoning": "In a confirmed BULL regime with MSTR trading well above both key moving averages and a $236.8 analyst target implying 44% upside, the leveraged BTC proxy thesis remains intact if Bitcoin continues its macro uptrend. RSI overbought and bearish MACD warrant a measured position within the 20% crypto proxy cap rather than full Kelly sizing.",
+      "price_target": 220.0,
+      "key_risk": "A 20-25% BTC drawdown could halve MSTR given its 3.57 beta and extreme 14.9 D/E leverage, making the downside far more violent than the upside is gradual."
     },
     {
       "ticker": "SNOW",
@@ -3098,19 +3102,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "BULL regime with strong analyst conviction, 24.7% upside to target, and trading well above both key MAs after a confirmed trend reversal from the $118 lows supports a medium-term long position. MACD weakness and consolidating volume suggest a measured entry rather than aggressive sizing, with the AI workload narrative (Cortex AI, Iceberg) providing a credible re-rating catalyst over the next 2-3 months.",
-      "price_target": 415.0,
-      "key_risk": "At 113x forward P/E with negative operating margins, any guidance miss or deceleration in product revenue growth triggers a violent multiple compression given zero margin for error priced into the stock."
+      "reasoning": "SNOW is holding a clean bullish structure above both key moving averages with 25% upside to analyst target, and the near-term consolidation with RSI at 63 provides a lower-risk entry within an intact trend. The 35% revenue growth and AI data cloud positioning justify the speculative premium in a bull regime, with room to $384 before hitting structural resistance.",
+      "price_target": 410.0,
+      "key_risk": "At 112x forward earnings with negative margins, any earnings miss or NRR deceleration below 130% could trigger a severe de-rating given the valuation sensitivity."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "COIN",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR's leveraged Bitcoin exposure and 3.6x beta position it for outsized upside if BTC continues toward $100K+, with strong trend support above both key MAs and a 43.7% gap to analyst consensus target. Bull regime allows full Kelly sizing, though fading MACD and slowing momentum warrant measured entry rather than aggressive chase.",
-      "price_target": 220.0,
-      "key_risk": "A BTC correction of 20%+ would amplify losses dramatically through MSTR's 14.9x debt load, potentially triggering forced liquidation and a violent drawdown well below key support levels."
+      "reasoning": "COIN trades above MA50 and MA200 in a BULL regime with a clear analyst target at $207.85, making a measured entry viable despite fading short-term momentum. The trade is a pure BTC beta play \u2014 if crypto sentiment holds or improves, COIN rerates toward the target with structural support at the MA50 below.",
+      "price_target": 207.85,
+      "key_risk": "A BTC rejection below $60K would expose COIN's leveraged operating model and collapse the thesis toward the $160\u2013$165 support zone."
     }
   ],
   "regime": "BULL",
@@ -3126,5 +3130,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-02 21:14"
+  "last_run": "2026-10-05 23:09"
 }
