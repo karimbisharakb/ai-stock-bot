@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 344.93,
-      "last_pnl_pct": 4.99,
+      "last_price": 344.59,
+      "last_pnl_pct": 4.88,
       "days_held": 71,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 530.66,
-      "last_price": 530.66,
-      "last_pnl_pct": 3.65,
+      "last_price": 529.3,
+      "last_pnl_pct": 3.39,
       "days_held": 57,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 240.4,
-      "last_pnl_pct": 9.25,
+      "last_price": 239.24,
+      "last_pnl_pct": 8.73,
       "days_held": 49,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 256.01,
-      "last_pnl_pct": -1.26,
+      "last_price": 256.29,
+      "last_pnl_pct": -1.15,
       "days_held": 46,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 742.48,
-      "last_price": 742.48,
-      "last_pnl_pct": 1.91,
+      "last_price": 738.88,
+      "last_pnl_pct": 1.41,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -3086,29 +3086,19 @@
     },
     {
       "date": "2026-10-06",
-      "value": 1072.31
+      "value": 1071.52
     }
   ],
   "top_picks": [
-    {
-      "ticker": "MSTR",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR remains a leveraged Bitcoin proxy with strong structural upside if BTC sustains above $100K, and the bull regime supports full Kelly sizing within the 20% crypto proxy cap. Near-term overbought RSI and bearish MACD suggest entering on any pullback toward the 50-day MA for better risk-adjusted entry.",
-      "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ would trigger amplified ~70% downside in MSTR given its 3.5x crypto beta and extreme 15x leverage on its balance sheet."
-    },
     {
       "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "Bull regime with strong structural uptrend, accelerating revenue growth, and expanding AI/government contract monetization support continued multiple expansion despite stretched near-term technicals. RSI overbought and fading volume are concerns, but full Kelly in BULL regime permits entry with disciplined stop below recent consolidation.",
+      "reasoning": "PLTR's structural bull trend with price well above both key moving averages and strong AI/defense growth fundamentals supports continued upside, while the BULL market regime warrants full Kelly deployment despite stretched valuation. RSI at 78.1 and thinning volume demand a wider stop and modest target acknowledging near-term consolidation risk.",
       "price_target": 210.0,
-      "key_risk": "Any guidance miss or federal contract slowdown could trigger a sharp valuation re-rating given the stock is priced for perfection with consensus target only 1.7% above current price."
+      "key_risk": "Multiple compression from AI/defense sentiment rotation or government contract guidance softening could trigger a 20\u201330% repricing before fundamentals justify re-entry."
     },
     {
       "ticker": "TSM",
@@ -3116,9 +3106,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's monopoly-class franchise in advanced node fabrication with 36% revenue growth and ~50% margins at a reasonable 22x forward P/E provides a credible fundamental case, and the impending 52-week high breakout at $487.47 opens clean air with no overhead resistance. RSI at 90.4 on below-average volume signals near-term exhaustion risk, so position sizing should be modest with room to add on a healthy pullback toward the 50-DMA.",
-      "price_target": 554.0,
-      "key_risk": "U.S.-China geopolitical escalation or surprise semiconductor export restrictions targeting TSMC's advanced node customers could rapidly unwind the AI/HPC demand re-rating thesis."
+      "reasoning": "Elite fundamentals with 36% revenue growth, ~50% margins, and 22x forward P/E provide solid valuation support amid AI-driven CoWoS demand from NVIDIA and Apple. Bull regime permits entry but RSI at 88 and proximity to 52-week highs demand reduced sizing and disciplined stop placement below the 50-DMA.",
+      "price_target": 555.0,
+      "key_risk": "Any Taiwan Strait escalation or U.S. export restriction expansion could trigger an immediate 15\u201325% repricing, making geopolitical tail risk the dominant threat to this position."
+    },
+    {
+      "ticker": "SNOW",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "SNOW is consolidating healthily above key moving averages with 26.5% analyst upside and strong 35% revenue growth supporting the bull case in a BULL market regime. Neutral RSI with bearish MACD signals a mid-trend digestion phase rather than trend reversal, offering a reasonable entry ahead of potential catalyst-driven continuation.",
+      "price_target": 420.0,
+      "key_risk": "Consumption-based revenue deceleration or RPO miss at next earnings could trigger a violent multiple compression given the stretched 112x forward P/E."
     }
   ],
   "regime": "BULL",
@@ -3134,5 +3134,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-06 19:07"
+  "last_run": "2026-10-06 21:32"
 }
