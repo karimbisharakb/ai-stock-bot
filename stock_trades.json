@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 346.24,
-      "last_pnl_pct": 5.38,
+      "last_price": 347.37,
+      "last_pnl_pct": 5.73,
       "days_held": 72,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 530.66,
-      "last_price": 530.32,
-      "last_pnl_pct": 3.59,
+      "last_price": 529.76,
+      "last_pnl_pct": 3.48,
       "days_held": 58,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 237.1,
-      "last_pnl_pct": 7.75,
+      "last_price": 237.47,
+      "last_pnl_pct": 7.92,
       "days_held": 50,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 259.39,
-      "last_pnl_pct": 0.05,
+      "last_price": 259.92,
+      "last_pnl_pct": 0.25,
       "days_held": 47,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 742.48,
-      "last_price": 723.08,
-      "last_pnl_pct": -0.76,
+      "last_price": 721.31,
+      "last_pnl_pct": -1.0,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -3090,19 +3090,29 @@
     },
     {
       "date": "2026-10-07",
-      "value": 1071.06
+      "value": 1071.42
     }
   ],
   "top_picks": [
     {
-      "ticker": "SOXL",
-      "score": 8,
+      "ticker": "AMD",
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "BULL regime with strong trend structure above both key moving averages and a 132% six-month momentum base supports continued upside in the AI/semiconductor capex cycle. RSI overbought at 74.1 warrants a wider stop to avoid shakeout on a leveraged instrument, but the macro tailwind justifies a medium-term position at current levels.",
+      "reasoning": "In a BULL regime with full Kelly sizing, AMD's AI/data center thesis via MI300X adoption justifies a position despite overbought RSI, as the forward P/E compression to 41x reflects a credible earnings ramp that institutional players are pricing in. Entry here accepts near-term choppiness near the 52-week high in exchange for exposure to the next catalyst wave from hyperscaler deployment data.",
+      "price_target": 720.0,
+      "key_risk": "A MI300X adoption disappointment or any macro risk-off event could trigger mean-reversion to the $550\u2013580 support cluster, representing a ~10-15% drawdown from current levels."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR's elite fundamentals \u2014 93% revenue growth and 49% margins \u2014 justify a continued premium multiple in a bull regime, with trend structure intact despite near-term overbought conditions. A pullback toward the $185 support zone would be the optimal entry, but full Kelly in a bull regime supports initiating a measured position at current levels.",
       "price_target": 220.0,
-      "key_risk": "A macro-driven semiconductor rotation or NVDA/AMD earnings miss could trigger a rapid 30-50% drawdown given SOXL's 3x daily leverage decay and overbought RSI condition."
+      "key_risk": "Analyst consensus of $195.57 provides virtually no institutional upside buffer, meaning any AI/defense multiple compression or macro risk-off event could trigger a rapid 15-20% drawdown given PLTR's 1.60 beta and crowded positioning."
     },
     {
       "ticker": "TSM",
@@ -3110,19 +3120,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's forward P/E of 21.5x against 36% revenue growth and ~50% margins represents genuine value for a secular AI/semiconductor compounder, with analyst consensus pointing to 17.6% upside. Despite overbought RSI at 75.2, the BULL regime justifies entry with a disciplined stop below the MA50 confluence zone near $435.",
+      "reasoning": "TSM's 50% operating margins, 36% revenue growth, and forward P/E of 21.5x make it structurally undervalued for the world's most critical semiconductor infrastructure asset, with a $555 analyst target offering meaningful upside in a bull regime. RSI at 75.4 and below-average volume suggest near-term consolidation risk, but the MEDIUM horizon absorbs that noise while the AI capex supercycle and strong fundamental moat drive the thesis.",
       "price_target": 555.0,
-      "key_risk": "Taiwan Strait geopolitical escalation or tightening U.S. export controls could compress TSM's valuation multiple sharply given its irreplaceable but geographically concentrated fab infrastructure."
-    },
-    {
-      "ticker": "SNOW",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SNOW trades above both key moving averages with a 27% analyst upside and strong_buy consensus, supported by 35% revenue growth and accelerating AI/data cloud adoption tailwinds. The current RSI pullback to 45.5 offers a cleaner entry point relative to the 6M run, with BULL regime permitting full Kelly sizing despite near-term momentum fatigue.",
-      "price_target": 390.0,
-      "key_risk": "At 111x forward P/E with negative margins, any deceleration in RPO growth or guidance miss at the next earnings print could trigger a violent de-rating of 20-30%."
+      "key_risk": "U.S.-China geopolitical escalation or Taiwan Strait tension could trigger sharp multiple compression given TSM's irreplaceable but geographically concentrated fab operations."
     }
   ],
   "regime": "BULL",
@@ -3138,5 +3138,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-07 19:34"
+  "last_run": "2026-10-07 21:50"
 }
