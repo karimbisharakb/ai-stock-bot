@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 344.4,
-      "last_pnl_pct": 4.82,
+      "last_price": 344.86,
+      "last_pnl_pct": 4.96,
       "days_held": 73,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 530.66,
-      "last_price": 521.66,
-      "last_pnl_pct": 1.9,
+      "last_price": 522.61,
+      "last_pnl_pct": 2.08,
       "days_held": 59,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 230.35,
-      "last_pnl_pct": 4.69,
+      "last_price": 230.48,
+      "last_pnl_pct": 4.74,
       "days_held": 51,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.79,
-      "last_pnl_pct": -1.73,
+      "last_price": 254.06,
+      "last_pnl_pct": -2.01,
       "days_held": 48,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 742.48,
-      "last_price": 718.46,
-      "last_pnl_pct": -1.39,
+      "last_price": 720.89,
+      "last_pnl_pct": -1.06,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -3094,39 +3094,39 @@
     },
     {
       "date": "2026-10-08",
-      "value": 1065.62
+      "value": 1065.8
     }
   ],
   "top_picks": [
+    {
+      "ticker": "TSM",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM trades in a clean bull structure with RSI at 62.6, positive MACD, and strong 50/200-DMA separation, while a forward P/E of 20.9x dramatically undervalues elite AI/HPC-driven earnings growth of 36% revenue with ~50% margins. Earnings within 7 days warrant half-size entry given high conviction, preserving upside to the $555 analyst target while managing event risk.",
+      "price_target": 555.0,
+      "key_risk": "Earnings guidance disappointment or cautious CoWoS/advanced packaging capacity commentary could trigger a sharp post-earnings selloff given the stock's proximity to all-time highs."
+    },
+    {
+      "ticker": "TD.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TD is deeply oversold at RSI 29 with capitulation-volume characteristics, trading at a reasonable 14.5x forward P/E with 11% analyst-consensus upside to $180 \u2014 the risk/reward favors initiating a medium-term position at current levels. The $158\u2013160 support shelf and 200-day MA at $149 provide a defined risk framework with meaningful recovery potential upon regulatory clarity.",
+      "price_target": 180.0,
+      "key_risk": "Unresolved U.S. AML regulatory overhang and potential asset cap extensions could delay re-rating and pressure shares toward the 200-day MA if the $158\u2013160 support shelf fails."
+    },
     {
       "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD is consolidating just below its 52-week high of $658.52 with strong technical structure, bullish MACD, and a credible AI GPU ramp narrative via MI300X that supports the forward P/E of 39x. Bull regime allows full Kelly entry, and the breakout continuation setup offers a favorable risk/reward with the next meaningful resistance at the prior ATH.",
-      "price_target": 658.0,
-      "key_risk": "Below-average volume (0.85x) and peaking short-term momentum suggest institutional re-engagement has not confirmed, and any softness in MI300X adoption or NVIDIA competitive pressure could rapidly compress the multiple given the thin 15.6% net margin and elevated D/E of 6.4x."
-    },
-    {
-      "ticker": "TSM",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "TSMC's elite fundamentals \u2014 36% revenue growth, ~50% margins, and a P/E collapsing to 21x forward \u2014 support the $555 analyst target with strong AI/CoWoS tailwinds intact. Earnings within 7 days warrants half-size entry per risk rules, with intent to add aggressively on any post-earnings dip to the $430 MA50 level.",
-      "price_target": 555.0,
-      "key_risk": "Earnings guidance miss or Arizona fab margin commentary could sharply reprice a stock already priced near perfection at $456."
-    },
-    {
-      "ticker": "SNOW",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "SNOW trades in a confirmed bull structure above both key MAs with a 24.8% analyst upside and strong-buy consensus, making the consolidation phase an attractive entry point before the next catalyst. The Cortex AI consumption narrative and 35% revenue growth justify the premium multiple in a bull regime with full Kelly sizing applicable.",
-      "price_target": 415.0,
-      "key_risk": "A revenue growth miss or weak forward guidance at the next earnings print could trigger a 20-30% multiple compression given the extreme 113x forward P/E and negative margin profile."
+      "reasoning": "AMD's forward P/E of 39.5x against 50% revenue growth is compelling in a BULL regime, with technical structure remaining intact above both key moving averages and RSI in the momentum sweet spot. The $658 breakout level is the near-term catalyst, with MI300X adoption signals capable of driving a re-rating toward $700+.",
+      "price_target": 700.0,
+      "key_risk": "Volume deceleration and momentum plateauing near the 52-week high increase the probability of a failed breakout if MI300X demand commentary disappoints or Nvidia supply normalization accelerates."
     }
   ],
   "regime": "BULL",
@@ -3142,5 +3142,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-08 19:29"
+  "last_run": "2026-10-08 21:49"
 }
