@@ -3112,9 +3112,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR is in a technically oversold condition (RSI 33.5) above both MA50 and MA200 within a confirmed bull regime, offering a high-risk/high-reward entry on a leveraged Bitcoin proxy with 55.8% analyst upside and 3.57x BTC beta. The pullback from parabolic highs creates a favorable risk/reward for aggressive growth positioning as long as BTC trajectory remains constructive above key support.",
+      "reasoning": "MSTR is pulling back sharply (-7.15% weekly) into RSI oversold territory while remaining structurally above both 50-DMA ($131) and 200-DMA ($136), making this a high-probability reversion dip within a bull trend backed by 56% analyst upside. As a leveraged Bitcoin proxy with a strong_buy rating and 55.8% upside to target, the BULL regime warrants a full Kelly entry with stops just below the MA cluster.",
       "price_target": 220.0,
-      "key_risk": "Extreme leverage (14.9x D/E) means a 20-30% BTC drawdown could trigger forced selling, covenant stress, and a disproportionate collapse in MSTR price well beyond the crypto proxy cap exposure."
+      "key_risk": "Bitcoin price deterioration below key support levels would collapse the thesis entirely given MSTR's 14.9x D/E leverage and complete dependence on BTC appreciation."
     },
     {
       "ticker": "AMD",
@@ -3122,19 +3122,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's near-term weakness (RSI 40, bearish MACD) is a digestion phase within a structurally bullish trend supported by 50% revenue growth and an accelerating MI300X GPU ramp that could drive meaningful data center guidance revisions. The BULL market regime permits entry at this score, with the $531 MA50 providing a strong structural floor well above the stop.",
+      "reasoning": "AMD's pullback to RSI 40 within a strong bull regime and well above both key moving averages presents a reasonable mean-reversion entry, supported by strong analyst consensus and a genuine AI/data center earnings inflection compressing forward P/E to 37.8x. The structural uptrend remains intact with $531 as the critical support floor, offering a defined risk/reward setup.",
       "price_target": 636.21,
-      "key_risk": "A miss or cautious tone on MI300X hyperscaler adoption in the next earnings cycle could trigger a sharp de-rating given the zero-margin-for-error valuation at 37.8x forward P/E."
+      "key_risk": "Disappointing MI300X hyperscaler adoption or Nvidia ecosystem dominance could trigger a sharp de-rating from AMD's still-elevated premium valuation."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "TSM",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's parabolic uptrend with elite margins and dominant AI/government moat supports trend continuation in a BULL regime, though RSI at 81.7 and trading above analyst consensus limits near-term upside meaningfully. Full Kelly applies in BULL regime at score 7, but position sizing should be conservative given deep overbought conditions and fat-tail defense-budget risk.",
-      "price_target": 220.0,
-      "key_risk": "A federal defense spending cut or continuing resolution headline could sharply reprice PLTR's government-contract-dependent premium multiple, triggering a swift mean-reversion toward the 50MA near $178."
+      "reasoning": "TSM's pullback to neutral RSI with strong MA50/MA200 support, 36% revenue growth, ~50% margins, and a cheap 20.3x forward P/E against a 30% analyst upside makes this a compelling medium-term entry. Size is halved given earnings within 7 days and medium conviction to manage binary event risk.",
+      "price_target": 578.22,
+      "key_risk": "Earnings guidance softness on AI capex delays or escalating U.S.-China export restrictions could extend the current -8.53% weekly drawdown significantly."
     }
   ],
   "regime": "BULL",
@@ -3150,5 +3150,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-12 21:56"
+  "last_run": "2026-10-12 23:32"
 }
