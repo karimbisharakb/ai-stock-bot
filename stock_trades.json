@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 348.97,
-      "last_pnl_pct": 6.22,
-      "days_held": 77,
+      "last_price": 349.99,
+      "last_pnl_pct": 6.53,
+      "days_held": 78,
       "status": "OPEN",
       "live": false
     },
@@ -38,10 +38,10 @@
       "reasoning": "MSFT's elite fundamentals \u2014 40%+ margins, 17.7% revenue growth, and a reasonable 21.8x forward P/E \u2014 support the analyst consensus target of $563 with strong_buy backing, making a staged entry justified despite overbought conditions. RSI at 85.1 and below-average volume warrant a small initial position with room to add on any pullback toward $470\u2013$480.",
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
-      "trail_high": 541.15,
-      "last_price": 541.15,
-      "last_pnl_pct": 5.7,
-      "days_held": 63,
+      "trail_high": 543.72,
+      "last_price": 543.72,
+      "last_pnl_pct": 6.21,
+      "days_held": 64,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 226.32,
-      "last_pnl_pct": 2.85,
-      "days_held": 55,
+      "last_price": 228.08,
+      "last_pnl_pct": 3.65,
+      "days_held": 56,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 259.53,
-      "last_pnl_pct": 0.1,
-      "days_held": 52,
+      "last_price": 258.55,
+      "last_pnl_pct": -0.28,
+      "days_held": 53,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "META trades at a discounted 20.8x forward P/E on 28% revenue growth with dominant platform economics, offering a compelling risk/reward with 9% upside to analyst targets and strong fundamental support well above key MAs. Near-term consolidation and fading MACD are a digestion pause, not a structural break, making this a quality entry for patient medium-term holders.",
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
-      "trail_high": 742.96,
-      "last_price": 742.96,
-      "last_pnl_pct": 1.97,
-      "days_held": 10,
+      "trail_high": 763.3,
+      "last_price": 763.3,
+      "last_pnl_pct": 4.76,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     }
@@ -3103,28 +3103,32 @@
     {
       "date": "2026-10-12",
       "value": 1070.17
+    },
+    {
+      "date": "2026-10-13",
+      "value": 1072.37
     }
   ],
   "top_picks": [
-    {
-      "ticker": "MSTR",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR is pulling back sharply (-7.15% weekly) into RSI oversold territory while remaining structurally above both 50-DMA ($131) and 200-DMA ($136), making this a high-probability reversion dip within a bull trend backed by 56% analyst upside. As a leveraged Bitcoin proxy with a strong_buy rating and 55.8% upside to target, the BULL regime warrants a full Kelly entry with stops just below the MA cluster.",
-      "price_target": 220.0,
-      "key_risk": "Bitcoin price deterioration below key support levels would collapse the thesis entirely given MSTR's 14.9x D/E leverage and complete dependence on BTC appreciation."
-    },
     {
       "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's pullback to RSI 40 within a strong bull regime and well above both key moving averages presents a reasonable mean-reversion entry, supported by strong analyst consensus and a genuine AI/data center earnings inflection compressing forward P/E to 37.8x. The structural uptrend remains intact with $531 as the critical support floor, offering a defined risk/reward setup.",
-      "price_target": 636.21,
-      "key_risk": "Disappointing MI300X hyperscaler adoption or Nvidia ecosystem dominance could trigger a sharp de-rating from AMD's still-elevated premium valuation."
+      "reasoning": "AMD's structural bull trend remains intact with price well above both key moving averages, and the current 8% pullback with RSI at 46.6 offers a mean-reversion entry ahead of potential MI300X catalyst newsflow. The 38x forward P/E is defensible if AI GPU ramp executes, and a strong_buy analyst consensus with $636 target provides near-term upside confirmation.",
+      "price_target": 650.0,
+      "key_risk": "Bearish MACD and fading momentum could extend the consolidation phase if MI300X adoption data disappoints or NVIDIA maintains dominant hyperscaler share, compressing the timeline to retest highs."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "BULL regime with full Kelly allows entry despite overbought RSI, as PLTR's elite AI/government moat and 93% revenue growth justify premium multiples in a momentum-driven tape. Analyst targets below current price and late-stage momentum signals cap conviction, but the structural growth story remains intact for a measured position.",
+      "price_target": 225.0,
+      "key_risk": "Mean-reversion to the $180 MA50 is the primary near-term threat, amplified by federal budget uncertainty and a beta of 1.6 with no Street upside cover remaining."
     },
     {
       "ticker": "TSM",
@@ -3132,9 +3136,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's pullback to neutral RSI with strong MA50/MA200 support, 36% revenue growth, ~50% margins, and a cheap 20.3x forward P/E against a 30% analyst upside makes this a compelling medium-term entry. Size is halved given earnings within 7 days and medium conviction to manage binary event risk.",
-      "price_target": 578.22,
-      "key_risk": "Earnings guidance softness on AI capex delays or escalating U.S.-China export restrictions could extend the current -8.53% weekly drawdown significantly."
+      "reasoning": "TSM's elite fundamentals \u2014 49% margins, 36% revenue growth, forward P/E ~20x \u2014 combined with a strong buy consensus and 30% analyst upside make this a compelling medium-term hold above the 50-DMA; the bull market regime supports entry despite short-term momentum deterioration. Position is halved given earnings within 7 days and medium conviction to manage binary event risk.",
+      "price_target": 578.0,
+      "key_risk": "Earnings guidance disappoints on AI/CoWoS demand or macro headwinds accelerate the -7.76% weekly drawdown through the critical $433 50-DMA support, triggering a deeper correction."
     }
   ],
   "regime": "BULL",
@@ -3150,5 +3154,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-12 23:32"
+  "last_run": "2026-10-13 20:03"
 }
