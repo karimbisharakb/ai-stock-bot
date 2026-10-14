@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 349.52,
-      "last_pnl_pct": 6.38,
-      "days_held": 78,
+      "last_price": 343.63,
+      "last_pnl_pct": 4.59,
+      "days_held": 79,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 543.45,
-      "last_pnl_pct": 6.15,
-      "days_held": 64,
+      "last_price": 534.64,
+      "last_pnl_pct": 4.43,
+      "days_held": 65,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 228.52,
-      "last_pnl_pct": 3.85,
-      "days_held": 56,
+      "last_price": 220.82,
+      "last_pnl_pct": 0.35,
+      "days_held": 57,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 258.58,
-      "last_pnl_pct": -0.27,
-      "days_held": 53,
+      "last_price": 253.49,
+      "last_pnl_pct": -2.23,
+      "days_held": 54,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 763.3,
-      "last_price": 762.5,
-      "last_pnl_pct": 4.65,
-      "days_held": 11,
+      "last_price": 735.66,
+      "last_pnl_pct": 0.97,
+      "days_held": 12,
       "status": "OPEN",
       "live": false
     }
@@ -3107,18 +3107,22 @@
     {
       "date": "2026-10-13",
       "value": 1072.36
+    },
+    {
+      "date": "2026-10-14",
+      "value": 1064.03
     }
   ],
   "top_picks": [
     {
-      "ticker": "MSTR",
+      "ticker": "AMD",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR is in a mean-reversion pullback within a structurally intact bull trend, with RSI near oversold at 37.4 and price holding well above the $132\u2013136 MA cluster support, offering an asymmetric entry at roughly half its 52-week high. The 56% analyst upside target and strong BTC correlation create a compelling risk/reward if Bitcoin reclaims momentum toward $100K.",
-      "price_target": 220.0,
-      "key_risk": "A sustained Bitcoin drawdown below $75K would collapse MSTR's NAV premium and likely breach critical MA support, invalidating the thesis and triggering leveraged forced selling given the 14.9x D/E structure."
+      "reasoning": "AMD is pulling back sharply within a structurally intact bull trend \u2014 price remains well above MA50/MA200 and RSI near 33 signals near-oversold conditions that historically resolve higher in bull regimes. Strong analyst consensus at $636 with 50% revenue growth and MI300X AI momentum justify accumulating into this weakness.",
+      "price_target": 636.0,
+      "key_risk": "Margin compression and elevated D/E ratio could disappoint if AI data center revenue growth fails to offset pricing pressure from NVIDIA competition, prolonging the drawdown beyond the 2-4 week cooling window."
     },
     {
       "ticker": "VFV.TO",
@@ -3126,19 +3130,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "VFV trades above both key moving averages with RSI at 63 and bullish MACD, pressing against the 52-week high at $197.83 \u2014 a confirmed breakout would open clean upside with strong bull regime tailwinds. AI-driven mega-cap earnings continue to support the S&P 500 multiple, and the unhedged CAD structure benefits Canadian holders in a stable or weakening CAD environment.",
+      "reasoning": "VFV trades above both key moving averages with RSI at 57.7 and bullish MACD, offering room to run toward new highs in a confirmed bull regime. A breakout above the $197.83 52-week high on volume would confirm momentum continuation toward the $220 target.",
       "price_target": 220.0,
-      "key_risk": "Unhedged USD exposure means CAD appreciation driven by BoC/Fed policy divergence could erode NAV returns independent of S&P 500 performance."
+      "key_risk": "Unhedged USD/CAD exposure means a strengthening Canadian dollar could erode NAV regardless of S&P 500 performance, representing the dominant risk to this position."
     },
     {
-      "ticker": "AMD",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD remains structurally intact well above both key moving averages with a strong fundamental growth narrative supported by 50%+ revenue growth and AI GPU tailwinds, making this pullback-within-uptrend an attractive medium-term entry. Bull regime permits full Kelly sizing and the strong_buy analyst consensus with $636 target provides a credible near-term catalyst anchor.",
-      "price_target": 636.21,
-      "key_risk": "Near-term momentum deterioration (bearish MACD, RSI at 47, -6.76% weekly) could extend the drawdown toward the 50-DMA before recovery, and any MI300X hyperscaler adoption disappointment would rapidly reprice the 38.5x forward multiple."
+      "reasoning": "PLTR's clean uptrend with RSI at 61.5, positive MACD, and strong MA separation supports continued momentum toward the $212.94 52-week high and beyond in a bull regime. Elite 93% revenue growth and 49% margins justify holding a position, though the parabolic 3M acceleration and 85x forward P/E demand disciplined sizing given limited near-term analyst upside.",
+      "price_target": 220.0,
+      "key_risk": "Any deceleration in U.S. commercial AIP deal flow at the next earnings report could trigger a 20-30% repricing given the zero-margin-for-error valuation at 85x forward earnings."
     }
   ],
   "regime": "BULL",
@@ -3154,5 +3158,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-13 21:49"
+  "last_run": "2026-10-14 18:14"
 }
