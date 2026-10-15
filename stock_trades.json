@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 343.65,
-      "last_pnl_pct": 4.6,
-      "days_held": 79,
+      "last_price": 346.43,
+      "last_pnl_pct": 5.44,
+      "days_held": 80,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 533.69,
-      "last_pnl_pct": 4.25,
-      "days_held": 65,
+      "last_price": 540.4,
+      "last_pnl_pct": 5.56,
+      "days_held": 66,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 221.3,
-      "last_pnl_pct": 0.57,
-      "days_held": 57,
+      "last_price": 217.93,
+      "last_pnl_pct": -0.96,
+      "days_held": 58,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.08,
-      "last_pnl_pct": -2.0,
-      "days_held": 54,
+      "last_price": 254.55,
+      "last_pnl_pct": -1.82,
+      "days_held": 55,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +105,9 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 763.3,
-      "last_price": 737.54,
-      "last_pnl_pct": 1.23,
-      "days_held": 12,
+      "last_price": 742.51,
+      "last_pnl_pct": 1.91,
+      "days_held": 13,
       "status": "OPEN",
       "live": false
     }
@@ -3111,38 +3111,42 @@
     {
       "date": "2026-10-14",
       "value": 1064.43
+    },
+    {
+      "date": "2026-10-15",
+      "value": 1064.93
     }
   ],
   "top_picks": [
-    {
-      "ticker": "PLTR",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "PLTR's confirmed uptrend with institutional accumulation, elite 93% revenue growth, and 49% margins justify continued positioning despite proximity to 52-week highs; BULL regime warrants full Kelly sizing with a breakout above $212.94 as the key catalyst for next leg higher. Stop below the 50-day MA preserves capital if momentum reverses near all-time highs.",
-      "price_target": 220.0,
-      "key_risk": "Any credible signal of U.S. federal AI/defense budget cuts or contract delays would trigger a violent derating given PLTR's government revenue dependency and 85x forward P/E valuation."
-    },
     {
       "ticker": "MSTR",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR is in a classic bull-market pullback with RSI approaching oversold at 30.9 while holding above both MA50 and MA200, offering a high-asymmetry entry point. Strong analyst consensus with a $237.8 target and 66% upside justifies accumulation into weakness, with Bitcoin as the dominant catalyst for mean reversion.",
+      "reasoning": "MSTR is pulling back to RSI 41 within a confirmed bull structure above both key moving averages, offering an attractive re-entry into a leveraged Bitcoin proxy with 59% analyst upside and a 3.57x BTC beta poised to amplify any crypto recovery. The consolidation on below-average volume signals digestion rather than distribution, making this a high-reward continuation setup in a BULL regime.",
       "price_target": 220.0,
-      "key_risk": "A sustained Bitcoin drawdown below key support levels would compress MSTR's NAV premium and invalidate the thesis, with 14.9x leverage amplifying downside significantly."
+      "key_risk": "A BTC drawdown of 20%+ would violently compress MSTR given its 14.9 D/E leverage ratio, potentially breaching the 200-DMA and triggering forced selling."
     },
     {
-      "ticker": "AAPL",
+      "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AAPL's bullish structure with price above both key moving averages, intact MACD, and strong margin profile supports continuation toward a 52-week high breakout into uncharted territory. Services revenue and Apple Intelligence monetization represent a near-term re-rating catalyst that consensus targets have yet to price in, making the street's below-market target a floor rather than a ceiling.",
-      "price_target": 375.0,
-      "key_risk": "Rejection at the $348 52-week high prints a technical double-top that could trigger sharp selling, amplified by the premium 35.8x forward multiple leaving little room for execution misses."
+      "reasoning": "RSI at 29.6 signals extreme oversold conditions within a structurally intact bull trend with price well above MA200 ($393), offering a high-quality mean-reversion entry with 14.8% upside to analyst consensus. Bull regime enables full Kelly sizing, and the forward P/E of 35x is justified by 50% revenue growth driven by MI300X GPU demand in hyperscaler cycles.",
+      "price_target": 636.21,
+      "key_risk": "Any guidance cut or cloud customer inventory pushback on Instinct MI300X could collapse the forward multiple re-rating thesis and trigger a swift drawdown toward MA200 near $393."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR's bullish technical structure with RSI not yet overbought and strong fundamental growth (93% revenue, 49% margins) supports a continued uptrend in a bull regime, with price target aligned to a breakout above the $212.94 52-week high. However, decelerating momentum and razor-thin analyst upside (3%) demand disciplined position sizing with a hard stop at MA50 support.",
+      "price_target": 220.0,
+      "key_risk": "Multiple compression from AI sentiment rotation or macro risk-off print could trigger a sharp de-rating from 172x P/E with no near-term earnings catalyst to arrest the decline."
     }
   ],
   "regime": "BULL",
@@ -3158,5 +3162,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-14 20:31"
+  "last_run": "2026-10-15 17:58"
 }
