@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 346.43,
-      "last_pnl_pct": 5.44,
+      "last_price": 344.91,
+      "last_pnl_pct": 4.98,
       "days_held": 80,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 540.4,
-      "last_pnl_pct": 5.56,
+      "last_price": 539.44,
+      "last_pnl_pct": 5.37,
       "days_held": 66,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 217.93,
-      "last_pnl_pct": -0.96,
+      "last_price": 217.23,
+      "last_pnl_pct": -1.28,
       "days_held": 58,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.55,
-      "last_pnl_pct": -1.82,
+      "last_price": 254.76,
+      "last_pnl_pct": -1.74,
       "days_held": 55,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
       "earnings_play": false,
       "trail_high": 763.3,
-      "last_price": 742.51,
-      "last_pnl_pct": 1.91,
+      "last_price": 736.72,
+      "last_pnl_pct": 1.12,
       "days_held": 13,
       "status": "OPEN",
       "live": false
@@ -3114,39 +3114,39 @@
     },
     {
       "date": "2026-10-15",
-      "value": 1064.93
+      "value": 1063.93
     }
   ],
   "top_picks": [
     {
-      "ticker": "MSTR",
+      "ticker": "AMD",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR is pulling back to RSI 41 within a confirmed bull structure above both key moving averages, offering an attractive re-entry into a leveraged Bitcoin proxy with 59% analyst upside and a 3.57x BTC beta poised to amplify any crypto recovery. The consolidation on below-average volume signals digestion rather than distribution, making this a high-reward continuation setup in a BULL regime.",
-      "price_target": 220.0,
-      "key_risk": "A BTC drawdown of 20%+ would violently compress MSTR given its 14.9 D/E leverage ratio, potentially breaching the 200-DMA and triggering forced selling."
-    },
-    {
-      "ticker": "AMD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 29.6 signals extreme oversold conditions within a structurally intact bull trend with price well above MA200 ($393), offering a high-quality mean-reversion entry with 14.8% upside to analyst consensus. Bull regime enables full Kelly sizing, and the forward P/E of 35x is justified by 50% revenue growth driven by MI300X GPU demand in hyperscaler cycles.",
+      "reasoning": "AMD is deeply oversold (RSI 30.9) within a structurally intact bull trend well above both key moving averages, setting up a high-probability mean-reversion bounce toward analyst targets; forward P/E of 35.7x is defensible against 50% revenue growth with AI/MI300X momentum. Bull regime allows full Kelly deployment at this score with a favorable risk/reward skew from current oversold levels.",
       "price_target": 636.21,
-      "key_risk": "Any guidance cut or cloud customer inventory pushback on Instinct MI300X could collapse the forward multiple re-rating thesis and trigger a swift drawdown toward MA200 near $393."
+      "key_risk": "Failure to hold the $536 50-DMA support on continued selling pressure could accelerate downside toward $480, invalidating the mean-reversion thesis if MI300X demand disappoints."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "SNOW",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's bullish technical structure with RSI not yet overbought and strong fundamental growth (93% revenue, 49% margins) supports a continued uptrend in a bull regime, with price target aligned to a breakout above the $212.94 52-week high. However, decelerating momentum and razor-thin analyst upside (3%) demand disciplined position sizing with a hard stop at MA50 support.",
-      "price_target": 220.0,
-      "key_risk": "Multiple compression from AI sentiment rotation or macro risk-off print could trigger a sharp de-rating from 172x P/E with no near-term earnings catalyst to arrest the decline."
+      "reasoning": "SNOW trades above both key moving averages with a strong analyst consensus target implying 27% upside, and the bull market regime permits full Kelly sizing on a score-7 setup. The current consolidation after a 133% 6-month run is digestible given the 35% revenue growth trajectory and strong institutional sponsorship.",
+      "price_target": 420.0,
+      "key_risk": "Any earnings deceleration in NRR or cloud spend guidance will brutally compress the 111x forward P/E multiple, potentially unwinding months of gains in days given the 1.35 beta."
+    },
+    {
+      "ticker": "ARM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "RSI at 25.9 is deeply oversold with price still above the 200-day MA at $222.86, creating an asymmetric mean-reversion setup in a bull regime with analyst consensus pointing to $290. The AI infrastructure royalty thesis remains structurally intact, and current price offers a reasonable entry relative to the 6-month base with a defined risk level just below the 200-day MA.",
+      "price_target": 285.0,
+      "key_risk": "Elevated 5.62x D/E combined with 271x trailing P/E leaves no margin of safety if the next earnings print shows any deceleration in licensing or royalty revenue growth, which could accelerate the breakdown toward the $180\u2013200 true support zone."
     }
   ],
   "regime": "BULL",
@@ -3162,5 +3162,5 @@
     "underperforming": false
   },
   "pnl": 59.61,
-  "last_run": "2026-10-15 17:58"
+  "last_run": "2026-10-15 20:16"
 }
