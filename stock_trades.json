@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 321.14,
-      "last_pnl_pct": -2.26,
+      "last_price": 320.76,
+      "last_pnl_pct": -2.37,
       "days_held": 87,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 522.88,
-      "last_pnl_pct": 2.13,
+      "last_price": 521.08,
+      "last_pnl_pct": 1.78,
       "days_held": 73,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 212.23,
-      "last_pnl_pct": -3.55,
+      "last_price": 212.21,
+      "last_pnl_pct": -3.56,
       "days_held": 65,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 250.01,
-      "last_pnl_pct": -3.57,
+      "last_price": 250.38,
+      "last_pnl_pct": -3.43,
       "days_held": 62,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "META is deeply oversold at RSI 29.6 with 29% upside to analyst targets, trading at a discounted 18.5x forward P/E despite 28% revenue growth and best-in-class AI monetization catalysts. The 200-DMA at $631.66 provides a strong structural support floor, making the risk/reward compelling for a medium-term recovery.",
       "key_risk": "Macro ad-spend deterioration or recessionary signals could pressure revenue guidance and invalidate the fundamental re-rating thesis before price recovers.",
       "earnings_play": false,
-      "trail_high": 644.39,
-      "last_price": 644.39,
-      "last_pnl_pct": 0.0,
+      "trail_high": 648.85,
+      "last_price": 648.85,
+      "last_pnl_pct": 0.69,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3210,7 +3210,7 @@
     },
     {
       "date": "2026-10-22",
-      "value": 1047.66
+      "value": 1048.19
     }
   ],
   "top_picks": [
@@ -3220,9 +3220,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM is deeply oversold (RSI 25.8) within a confirmed bull regime, trading at a rare discount to its 200-DMA floor with 42% upside to analyst consensus \u2014 this is a textbook mean-reversion entry into a high-quality AI infrastructure compounder. The 51% operating margin and 50%+ revenue growth at 17.6x forward P/E represent a structural mispricing that the market will correct as geopolitical noise fades.",
+      "reasoning": "TSM is deeply oversold at RSI 26.1 with a flush-style volume spike near the critical MA200 support at $395, creating a high-probability mean-reversion entry within a confirmed bull regime. With 42% upside to the $584 analyst target, 51% margins, and 50%+ revenue growth at a 17.6x forward P/E, the fundamental dislocation is exceptional and warrants aggressive positioning.",
       "price_target": 520.0,
-      "key_risk": "Taiwan Strait geopolitical escalation remains a binary tail risk that could overwhelm all fundamental and technical positives regardless of entry price."
+      "key_risk": "Escalating U.S.-Taiwan geopolitical tension or new export control restrictions could trigger a sharp de-rating regardless of fundamentals, given TSM's structural sensitivity to U.S.-China trade policy."
     },
     {
       "ticker": "AMD",
@@ -3230,9 +3230,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD is deeply oversold at RSI 23.8 within a broader bull uptrend, with a 25% analyst upside to $637 and explosive AI/data center fundamentals validating the growth thesis. The forward P/E compression to 32x alongside 50% revenue growth makes current prices an attractive medium-term entry despite near-term technical weakness.",
+      "reasoning": "RSI at 23.6 in a bull regime historically marks capitulation exhaustion, and the 25.5% upside to analyst consensus with a confirmed AI/data center growth narrative justifies a staged entry despite near-term momentum weakness. The violent mean reversion within a structurally intact uptrend (price still 27% above 200-day MA) offers an asymmetric risk/reward for an aggressive growth portfolio willing to absorb short-term volatility.",
       "price_target": 637.61,
-      "key_risk": "Selling pressure has not exhausted with no capitulation volume spike, and elevated D/E of 6.36 leaves AMD vulnerable to a deeper drawdown toward $460 if broader market conditions deteriorate or AI spend narratives shift."
+      "key_risk": "A disappointing MI300X GPU demand update or margin compression signal in the next earnings cycle could accelerate institutional distribution and invalidate the recovery thesis before the position recovers."
     },
     {
       "ticker": "PLTR",
@@ -3240,9 +3240,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's structural bull trend remains intact above both key moving averages with elite AI/government contract fundamentals supporting the thesis despite near-term MACD weakness and consolidation. The current cooling phase offers a reasonable re-entry window ahead of the next earnings catalyst with a well-defined risk level at MA50 support near $185.",
+      "reasoning": "PLTR remains structurally bullish above both key moving averages with elite AI/government contract moat and 93% revenue growth justifying premium valuation in a bull regime. Current MACD weakness and consolidation post-60% run present a controlled entry with the 50-DMA acting as firm support below.",
       "price_target": 220.0,
-      "key_risk": "At 83x forward P/E with zero valuation cushion, any guidance miss or AIP commercial traction disappointment could trigger a violent multiple compression of 20-30% rapidly."
+      "key_risk": "DOGE-driven federal budget cuts or contract cancellations could sharply reprice this government-revenue-concentrated name, and the 5% analyst upside target suggests limited near-term institutional re-rating catalyst."
     }
   ],
   "regime": "BULL",
@@ -3258,5 +3258,5 @@
     "underperforming": false
   },
   "pnl": 53.83,
-  "last_run": "2026-10-22 18:14"
+  "last_run": "2026-10-22 20:30"
 }
