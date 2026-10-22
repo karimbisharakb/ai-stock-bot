@@ -1,5 +1,5 @@
 {
-  "cash": 729.9300000000003,
+  "cash": 676.9700000000004,
   "positions": [
     {
       "time": "2026-07-27 16:00",
@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 330.95,
-      "last_pnl_pct": 0.73,
-      "days_held": 86,
+      "last_price": 321.14,
+      "last_pnl_pct": -2.26,
+      "days_held": 87,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 532.95,
-      "last_pnl_pct": 4.1,
-      "days_held": 72,
+      "last_price": 522.88,
+      "last_pnl_pct": 2.13,
+      "days_held": 73,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 221.97,
-      "last_pnl_pct": 0.88,
-      "days_held": 64,
+      "last_price": 212.23,
+      "last_pnl_pct": -3.55,
+      "days_held": 65,
       "status": "OPEN",
       "live": false
     },
@@ -83,31 +83,31 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 262.37,
-      "last_pnl_pct": 1.2,
-      "days_held": 61,
+      "last_price": 250.01,
+      "last_pnl_pct": -3.57,
+      "days_held": 62,
       "status": "OPEN",
       "live": false
     },
     {
-      "time": "2026-10-02 18:38",
+      "time": "2026-10-22 18:08",
       "ticker": "META",
       "action": "BUY",
       "strategy": "MEDIUM",
-      "shares": 0.0686,
-      "price": 728.59,
-      "cost": 49.98,
-      "target": 794.96,
-      "stop_loss": 680.0,
-      "score": 7,
+      "shares": 0.1508,
+      "price": 644.39,
+      "cost": 97.17,
+      "target": 833.13,
+      "stop_loss": 620.0,
+      "score": 8,
       "conviction": "medium",
-      "reasoning": "META trades at a discounted 20.8x forward P/E on 28% revenue growth with dominant platform economics, offering a compelling risk/reward with 9% upside to analyst targets and strong fundamental support well above key MAs. Near-term consolidation and fading MACD are a digestion pause, not a structural break, making this a quality entry for patient medium-term holders.",
-      "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
+      "reasoning": "META is deeply oversold at RSI 29.6 with 29% upside to analyst targets, trading at a discounted 18.5x forward P/E despite 28% revenue growth and best-in-class AI monetization catalysts. The 200-DMA at $631.66 provides a strong structural support floor, making the risk/reward compelling for a medium-term recovery.",
+      "key_risk": "Macro ad-spend deterioration or recessionary signals could pressure revenue guidance and invalidate the fundamental re-rating thesis before price recovers.",
       "earnings_play": false,
-      "trail_high": 763.3,
-      "last_price": 697.52,
-      "last_pnl_pct": -4.26,
-      "days_held": 19,
+      "trail_high": 644.39,
+      "last_price": 644.39,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1783,6 +1783,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-10-02 18:38",
+      "ticker": "META",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.0686,
+      "price": 728.59,
+      "cost": 49.98,
+      "target": 794.96,
+      "stop_loss": 680.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "META trades at a discounted 20.8x forward P/E on 28% revenue growth with dominant platform economics, offering a compelling risk/reward with 9% upside to analyst targets and strong fundamental support well above key MAs. Near-term consolidation and fading MACD are a digestion pause, not a structural break, making this a quality entry for patient medium-term holders.",
+      "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
+      "earnings_play": false,
+      "trail_high": 763.3,
+      "last_price": 644.39,
+      "last_pnl_pct": -11.56,
+      "days_held": 20,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 644.39,
+      "sell_time": "2026-10-22 18:07",
+      "pnl_dollar": -5.78,
+      "pnl_pct": -11.56,
+      "sell_reason": "Stop loss -11.6% (limit -8%)"
+    },
+    {
+      "time": "2026-10-22 18:08",
+      "ticker": "META",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.1508,
+      "price": 644.39,
+      "cost": 97.17,
+      "target": 833.13,
+      "stop_loss": 620.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "META is deeply oversold at RSI 29.6 with 29% upside to analyst targets, trading at a discounted 18.5x forward P/E despite 28% revenue growth and best-in-class AI monetization catalysts. The 200-DMA at $631.66 provides a strong structural support floor, making the risk/reward compelling for a medium-term recovery.",
+      "key_risk": "Macro ad-spend deterioration or recessionary signals could pressure revenue guidance and invalidate the fundamental re-rating thesis before price recovers.",
+      "earnings_play": false,
+      "trail_high": 644.39,
+      "last_price": 644.39,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2657,6 +2706,33 @@
       "pnl_dollar": 17.06,
       "pnl_pct": 24.88,
       "sell_reason": "AI thesis break: SELL \u2013 RSI at 85.6 signals severely overbought conditions after a 24.9% gain in 65 days, and with the original thesis fully realized (entry at oversold RSI 23.4, price well above the 200-DMA invalidation level), locking in profits here is prudent before momentum exhaustion reverses the move."
+    },
+    {
+      "time": "2026-10-02 18:38",
+      "ticker": "META",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.0686,
+      "price": 728.59,
+      "cost": 49.98,
+      "target": 794.96,
+      "stop_loss": 680.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "META trades at a discounted 20.8x forward P/E on 28% revenue growth with dominant platform economics, offering a compelling risk/reward with 9% upside to analyst targets and strong fundamental support well above key MAs. Near-term consolidation and fading MACD are a digestion pause, not a structural break, making this a quality entry for patient medium-term holders.",
+      "key_risk": "Failure to break through the $779.82 52-week high resistance could trigger distribution and extend the pullback toward the $680-700 support zone if AI monetization signals disappoint at the next earnings print.",
+      "earnings_play": false,
+      "trail_high": 763.3,
+      "last_price": 644.39,
+      "last_pnl_pct": -11.56,
+      "days_held": 20,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 644.39,
+      "sell_time": "2026-10-22 18:07",
+      "pnl_dollar": -5.78,
+      "pnl_pct": -11.56,
+      "sell_reason": "Stop loss -11.6% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -3131,52 +3207,56 @@
     {
       "date": "2026-10-21",
       "value": 1061.72
+    },
+    {
+      "date": "2026-10-22",
+      "value": 1047.66
     }
   ],
   "top_picks": [
+    {
+      "ticker": "TSM",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM is deeply oversold (RSI 25.8) within a confirmed bull regime, trading at a rare discount to its 200-DMA floor with 42% upside to analyst consensus \u2014 this is a textbook mean-reversion entry into a high-quality AI infrastructure compounder. The 51% operating margin and 50%+ revenue growth at 17.6x forward P/E represent a structural mispricing that the market will correct as geopolitical noise fades.",
+      "price_target": 520.0,
+      "key_risk": "Taiwan Strait geopolitical escalation remains a binary tail risk that could overwhelm all fundamental and technical positives regardless of entry price."
+    },
     {
       "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's RSI near 35 signals an oversold dip within a structurally intact bull trend, trading well above both MA50 and MA200 with a compelling AI catalyst in the MI300X ramp supporting the analyst's $637 target. Forward P/E of 35x is reasonable given 50% revenue growth, and the BULL regime permits entry at score 7 with full Kelly sizing.",
+      "reasoning": "AMD is deeply oversold at RSI 23.8 within a broader bull uptrend, with a 25% analyst upside to $637 and explosive AI/data center fundamentals validating the growth thesis. The forward P/E compression to 32x alongside 50% revenue growth makes current prices an attractive medium-term entry despite near-term technical weakness.",
       "price_target": 637.61,
-      "key_risk": "MI300X demand disappointment or supply constraints relative to Nvidia's H100/H200 could trigger a sharp reversal toward the $480 support level."
+      "key_risk": "Selling pressure has not exhausted with no capitulation volume spike, and elevated D/E of 6.36 leaves AMD vulnerable to a deeper drawdown toward $460 if broader market conditions deteriorate or AI spend narratives shift."
     },
     {
-      "ticker": "TSM",
+      "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM offers a rare combination of 51% operating margins, 51% revenue growth, and a forward P/E of ~18.5x \u2014 deeply undervalued relative to quality, with 35%+ upside to analyst consensus. The pullback toward oversold RSI levels in a bull regime creates a favorable risk/reward entry as the market discounts geopolitical noise rather than fundamental deterioration.",
-      "price_target": 520.0,
-      "key_risk": "U.S.-China export control escalation or Taiwan geopolitical tension could trigger sharp multiple compression regardless of underlying earnings strength."
-    },
-    {
-      "ticker": "CRWD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CRWD remains structurally intact above both key moving averages with a 105% six-month run confirming dominant trend strength, and RSI near 37 signals a potential mean-reversion entry as oversold conditions historically precede bounces in high-quality growth names. A BULL regime with solid enterprise cybersecurity fundamentals and 25.8% revenue growth supports a medium-term accumulation thesis despite near-term distribution pressure.",
+      "reasoning": "PLTR's structural bull trend remains intact above both key moving averages with elite AI/government contract fundamentals supporting the thesis despite near-term MACD weakness and consolidation. The current cooling phase offers a reasonable re-entry window ahead of the next earnings catalyst with a well-defined risk level at MA50 support near $185.",
       "price_target": 220.0,
-      "key_risk": "At 149x forward earnings, any deceleration in ARR growth or new logo acquisition in the next earnings print could trigger a violent repricing well below current support levels."
+      "key_risk": "At 83x forward P/E with zero valuation cushion, any guidance miss or AIP commercial traction disappointment could trigger a violent multiple compression of 20-30% rapidly."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 54.5,
-    "rolling_win_rate": 55.0,
-    "avg_return": 3.28,
-    "sharpe": 0.29,
+    "win_rate": 52.9,
+    "rolling_win_rate": 50.0,
+    "avg_return": 2.85,
+    "sharpe": 0.25,
     "max_drawdown": 4.52,
-    "total_trades": 33,
+    "total_trades": 34,
     "wins": 18,
-    "losses": 15,
+    "losses": 16,
     "underperforming": false
   },
-  "pnl": 59.61,
-  "last_run": "2026-10-21 20:33"
+  "pnl": 53.83,
+  "last_run": "2026-10-22 18:14"
 }
