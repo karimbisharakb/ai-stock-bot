@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 319.08,
-      "last_pnl_pct": -2.88,
+      "last_price": 317.28,
+      "last_pnl_pct": -3.43,
       "days_held": 88,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 524.24,
-      "last_pnl_pct": 2.4,
+      "last_price": 524.51,
+      "last_pnl_pct": 2.45,
       "days_held": 74,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 211.83,
-      "last_pnl_pct": -3.73,
+      "last_price": 210.96,
+      "last_pnl_pct": -4.13,
       "days_held": 66,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 248.79,
-      "last_pnl_pct": -4.04,
+      "last_price": 248.0,
+      "last_pnl_pct": -4.35,
       "days_held": 63,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Macro ad-spend deterioration or recessionary signals could pressure revenue guidance and invalidate the fundamental re-rating thesis before price recovers.",
       "earnings_play": false,
       "trail_high": 648.85,
-      "last_price": 645.93,
-      "last_pnl_pct": 0.24,
+      "last_price": 642.62,
+      "last_pnl_pct": -0.27,
       "days_held": 1,
       "status": "OPEN",
       "live": false
@@ -3214,29 +3214,19 @@
     },
     {
       "date": "2026-10-23",
-      "value": 1047.07
+      "value": 1045.66
     }
   ],
   "top_picks": [
-    {
-      "ticker": "TQQQ",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "TQQQ at RSI 23 just above its 200MA in a confirmed bull regime represents a high-probability mean-reversion setup, with the corrective pullback showing seller exhaustion signals that historically precede sharp bounces in leveraged Nasdaq exposure. The 3M/6M positive momentum backdrop confirms this is a pullback within an intact uptrend, making the current entry compelling for aggressive growth positioning.",
-      "price_target": 85.0,
-      "key_risk": "A macro volatility spike from a Fed surprise or geopolitical shock pushing QQQ down 10%+ would translate to a catastrophic ~30% TQQQ drawdown, potentially breaching the $46\u201350 zone and triggering the stop."
-    },
     {
       "ticker": "AMD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 26.7 represents deeply oversold conditions with 23.3% upside to analyst consensus and strong 50% revenue growth supporting the forward multiple compression to 32.8x. Bull market regime allows entry here with a stop at the $480-490 demand zone, betting on a mean-reversion rally back toward the 50-day MA and beyond.",
-      "price_target": 637.61,
-      "key_risk": "NVIDIA's continued AI accelerator dominance could stall AMD's MI300X adoption narrative, triggering guidance cuts and a flush toward $450."
+      "reasoning": "AMD's RSI at 26.6 signals deeply oversold conditions within a broader bull regime and intact long-term uptrend supported by the 200-day MA at $402, creating a high-probability mean-reversion setup toward analyst targets. Forward P/E of 32.8x is reasonable given 50% revenue growth and AI/data center GPU demand tailwinds, making this pullback a tactical entry rather than a structural breakdown.",
+      "price_target": 620.0,
+      "key_risk": "Failure to demonstrate MI300X GPU market share gains versus NVIDIA could collapse the forward multiple re-rating thesis and accelerate selling well below the 50-day MA."
     },
     {
       "ticker": "PLTR",
@@ -3244,9 +3234,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR's elite growth quality \u2014 93% revenue growth, ~50% margins, and proven AI monetization \u2014 justifies holding the premium in a bull regime with clean long-term structure above both key MAs. Near-term consolidation and bearish MACD suggest patient accumulation rather than aggressive sizing, targeting a retest and break above the $212.94 52-week high.",
+      "reasoning": "PLTR remains in a structural uptrend with strong AI/defense fundamentals and solid margin profile, currently consolidating above key moving averages in a bull flag pattern that favors continuation once volume returns. Bull market regime permits entry at this score despite bearish MACD, with the 50-DMA at $184.75 providing a natural stop zone.",
       "price_target": 220.0,
-      "key_risk": "Federal budget delays, DOGE-driven DoD spending cuts, or any government contract slippage would directly undermine the growth narrative and compress forward multiples sharply."
+      "key_risk": "U.S. government budget freezes or contract delays could violently reprice the AI/defense growth narrative that underpins valuations above $150."
+    },
+    {
+      "ticker": "TSM",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "TSM's RSI at 21.7 signals extreme oversold conditions in a BULL regime, with 40%+ analyst upside driven by best-in-class AI/CoWoS positioning and 50%+ revenue growth making fundamentals compelling for patient capital at 17.9x forward earnings. The 200-DMA at $396 provides a clear floor and stop zone, while any AI capex reaffirmation from hyperscalers would trigger violent mean-reversion from these depressed levels.",
+      "price_target": 520.0,
+      "key_risk": "Geopolitical escalation around Taiwan or a demand slowdown in AI infrastructure spending breaks the 200-DMA and invalidates the thesis entirely."
     }
   ],
   "regime": "BULL",
@@ -3262,5 +3262,5 @@
     "underperforming": false
   },
   "pnl": 53.83,
-  "last_run": "2026-10-23 18:04"
+  "last_run": "2026-10-23 20:18"
 }
