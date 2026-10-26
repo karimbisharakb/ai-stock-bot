@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 313.75,
-      "last_pnl_pct": -4.5,
+      "last_price": 314.19,
+      "last_pnl_pct": -4.37,
       "days_held": 91,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 531.39,
-      "last_pnl_pct": 3.8,
+      "last_price": 532.6,
+      "last_pnl_pct": 4.03,
       "days_held": 77,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 216.6,
-      "last_pnl_pct": -1.56,
+      "last_price": 216.0,
+      "last_pnl_pct": -1.84,
       "days_held": 69,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 248.48,
-      "last_pnl_pct": -4.16,
+      "last_price": 249.09,
+      "last_pnl_pct": -3.93,
       "days_held": 66,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "MACD remains bearish with active distribution, meaning this is a falling knife entry that could extend losses toward $495 support if hyperscalers signal capex pauses or MI300X adoption disappoints.",
       "earnings_play": false,
       "trail_high": 532.18,
-      "last_price": 532.18,
-      "last_pnl_pct": 0.0,
+      "last_price": 531.28,
+      "last_pnl_pct": -0.17,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3294,29 +3294,29 @@
     },
     {
       "date": "2026-10-26",
-      "value": 1045.96
+      "value": 1046.03
     }
   ],
   "top_picks": [
     {
-      "ticker": "VFV.TO",
+      "ticker": "META",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 33.1 signals deeply oversold conditions within a confirmed bull trend, with MA200 at $179 providing a strong structural floor and 3M/6M momentum confirming the underlying uptrend remains intact. A mean-reversion bounce toward prior highs is the high-probability outcome as selling pressure exhausts near current levels.",
-      "price_target": 220.0,
-      "key_risk": "A strengthening Canadian dollar or unexpected USD/CAD volatility could directly erode NAV returns, while a broader S&P 500 macro deterioration would eliminate the mean-reversion thesis entirely."
+      "reasoning": "META at RSI 23.3 with 17.9x forward P/E and 26% revenue growth represents a deeply oversold high-quality compounder being sold at a discount to intrinsic value. The 34% analyst consensus upside combined with a BULL market regime makes this a compelling scale-in opportunity despite the ongoing technical breakdown.",
+      "price_target": 845.0,
+      "key_risk": "Accelerating AI capex beyond guidance could trigger margin compression fears and extend the drawdown well below the 200-MA before any mean-reversion occurs."
     },
     {
       "ticker": "TSM",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's RSI at 28.4 represents a deeply oversold mean-reversion opportunity with 36.5% analyst upside, supported by exceptional 50%+ revenue growth and dominant 2nm/3nm positioning that justifies the forward P/E compression to 18.3x. The 200-DMA at $396.61 provides structural support while AI capex tailwinds from NVIDIA and Apple underpin long-term demand.",
-      "price_target": 520.0,
-      "key_risk": "U.S.-China geopolitical escalation over Taiwan remains an existential binary risk that could instantly override all fundamental positives and render technical support levels irrelevant."
+      "reasoning": "TSM is deeply oversold (RSI 26.3) within an intact long-term uptrend, trading at a rare discount to intrinsic value with 51% margins and 50%+ revenue growth at just 18.1x forward P/E. The $396\u2013$400 support floor provides a well-defined risk boundary while the $584 consensus target offers asymmetric upside in a BULL regime.",
+      "price_target": 584.39,
+      "key_risk": "U.S.-China geopolitical escalation around Taiwan Strait tensions or new export control shocks could violently reprice the geopolitical risk premium embedded in TSM, overwhelming all fundamental tailwinds."
     },
     {
       "ticker": "SNOW",
@@ -3324,9 +3324,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "In a BULL regime with strong analyst conviction and 27.9% upside to target, SNOW's structural position above both MAs and 35% revenue growth justifies a medium-term entry despite near-term momentum weakness. The 6-month +130% run and analyst target of $425 support a medium strategy hold through the next earnings catalyst.",
+      "reasoning": "SNOW trades above both key moving averages in a bull regime with 26.9% upside to analyst target and strong AI/data cloud tailwinds supporting premium multiple expansion. Consolidation near MA50 at neutral RSI offers a reasonable entry before the next earnings catalyst.",
       "price_target": 425.0,
-      "key_risk": "At 110x Fwd P/E with decelerating growth and negative margins, any earnings miss or guidance cut could trigger a violent de-rating back toward the $250\u2013$275 range."
+      "key_risk": "Any revenue growth deceleration below 30% or weak forward guidance could trigger a violent multiple compression given the 111x forward P/E and deeply negative margins."
     }
   ],
   "regime": "BULL",
@@ -3342,5 +3342,5 @@
     "underperforming": false
   },
   "pnl": 51.739999999999995,
-  "last_run": "2026-10-26 19:36"
+  "last_run": "2026-10-26 21:24"
 }
