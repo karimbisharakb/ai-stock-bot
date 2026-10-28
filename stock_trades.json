@@ -17,8 +17,8 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 322.11,
-      "last_pnl_pct": -1.96,
+      "last_price": 321.89,
+      "last_pnl_pct": -2.03,
       "days_held": 93,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 529.5,
-      "last_pnl_pct": 3.43,
+      "last_price": 531.01,
+      "last_pnl_pct": 3.72,
       "days_held": 79,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 216.2,
-      "last_pnl_pct": -1.75,
+      "last_price": 215.38,
+      "last_pnl_pct": -2.12,
       "days_held": 71,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 253.46,
-      "last_pnl_pct": -2.24,
+      "last_price": 254.6,
+      "last_pnl_pct": -1.8,
       "days_held": 68,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "AMD's RSI at 25.9 represents deep capitulation-level oversold conditions within a structurally intact intermediate uptrend supported by MA200 at $403, offering a compelling mean-reversion entry with 19.8% upside to analyst targets. Forward P/E of 33.8x against 50%+ revenue growth is genuinely mispriced for a company gaining data center share, and the bull market regime supports full Kelly deployment despite unconfirmed MACD reversal.",
       "key_risk": "MACD remains bearish with active distribution, meaning this is a falling knife entry that could extend losses toward $495 support if hyperscalers signal capex pauses or MI300X adoption disappoints.",
       "earnings_play": false,
-      "trail_high": 575.92,
-      "last_price": 575.92,
-      "last_pnl_pct": 8.22,
+      "trail_high": 578.44,
+      "last_price": 578.44,
+      "last_pnl_pct": 8.69,
       "days_held": 2,
       "status": "OPEN",
       "live": false
@@ -3302,7 +3302,7 @@
     },
     {
       "date": "2026-10-28",
-      "value": 1054.16
+      "value": 1054.62
     }
   ],
   "top_picks": [
@@ -3312,9 +3312,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades above both key moving averages with elite 50%+ revenue growth and 51% margins, while forward P/E compression to 18.8x prices in meaningful earnings acceleration driven by AI/advanced node demand. Current RSI at 41.3 and mild -4% 1M pullback represent a mid-trend consolidation offering an attractive entry toward the $584 analyst consensus target.",
-      "price_target": 584.39,
-      "key_risk": "U.S.-China geopolitical escalation or export control tightening could restrict TSMC's China revenue (~12% of sales) or threaten Taiwan operational continuity, triggering sharp multiple compression."
+      "reasoning": "TSM offers a compelling buy-the-dip entry within a confirmed bull trend, trading above MA50/MA200 with RSI near oversold levels and 33% upside to analyst consensus backed by 51% operating margins and 51% YoY revenue growth. The forward P/E of 18.8x significantly underprices the earnings expansion trajectory, making this an asymmetric risk/reward opportunity.",
+      "price_target": 584.0,
+      "key_risk": "U.S.-China geopolitical escalation over Taiwan Strait policy remains the primary tail risk and could rapidly overwhelm all fundamental positives."
+    },
+    {
+      "ticker": "VFV.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "VFV.TO is pulling back to near-MA50 support with RSI at 35.8, offering a mean-reversion entry within a structurally intact bull trend confirmed by price sitting well above the 200-DMA at $179.23. The 3M/6M return profile and soft-landing macro backdrop support accumulation on this dip ahead of a likely retest of the $197.83 52-week high and beyond.",
+      "price_target": 220.0,
+      "key_risk": "A hawkish Fed pivot or sticky CPI print could reprice S&P 500 multiples sharply lower, invalidating the mean-reversion thesis and breaching the MA50 stop."
     },
     {
       "ticker": "META",
@@ -3322,19 +3332,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META is a high-quality compounder trading at a genuine discount with RSI 23.3 signaling extreme oversold conditions and a 38% gap to analyst consensus, making this an attractive medium-term entry despite near-term technical weakness. At 17.4x forward P/E with 26% revenue growth and AI monetization as an upcoming catalyst, the risk/reward strongly favors accumulation near current levels.",
+      "reasoning": "META is fundamentally mispriced at 17.4x forward P/E with 26% revenue growth and 31% margins, with RSI at 23.2 signaling extreme oversold conditions historically preceding violent mean-reversion in high-quality compounders. The selloff appears macro/sentiment-driven rather than fundamental deterioration, and the $847 analyst consensus target provides a 38% upside anchor with a BULL regime supporting full Kelly deployment.",
       "price_target": 720.0,
-      "key_risk": "MACD remains deeply negative and price is below both key moving averages, meaning momentum could extend the breakdown toward $570 before any mean-reversion rally materializes."
-    },
-    {
-      "ticker": "CRWD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "CRWD is in confirmed bullish structure with healthy RSI consolidation near 52-week highs, suggesting coiling behavior before a potential breakout above $287 resistance. Bull regime enables entry at score 7 with strong technical underpinning despite analyst target sitting below current price.",
-      "price_target": 287.0,
-      "key_risk": "Analyst consensus target below current price combined with decelerating near-term momentum and extreme leverage (D/E ~16x) could trigger sharp mean-reversion if ARR growth disappoints at next earnings."
+      "key_risk": "Ad-spend deterioration signals from Google/Snap earnings could validate the selloff and push META through the $565 support level before any reversal materializes."
     }
   ],
   "regime": "BULL",
@@ -3350,5 +3350,5 @@
     "underperforming": false
   },
   "pnl": 51.739999999999995,
-  "last_run": "2026-10-28 19:06"
+  "last_run": "2026-10-28 21:37"
 }
