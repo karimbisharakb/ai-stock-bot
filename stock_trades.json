@@ -17,9 +17,9 @@
       "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
       "earnings_play": false,
       "trail_high": 377.0,
-      "last_price": 316.83,
-      "last_pnl_pct": -3.57,
-      "days_held": 92,
+      "last_price": 322.11,
+      "last_pnl_pct": -1.96,
+      "days_held": 93,
       "status": "OPEN",
       "live": false
     },
@@ -39,9 +39,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 531.33,
-      "last_pnl_pct": 3.79,
-      "days_held": 78,
+      "last_price": 529.5,
+      "last_pnl_pct": 3.43,
+      "days_held": 79,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +61,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 217.94,
-      "last_pnl_pct": -0.95,
-      "days_held": 70,
+      "last_price": 216.2,
+      "last_pnl_pct": -1.75,
+      "days_held": 71,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +83,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 253.1,
-      "last_pnl_pct": -2.38,
-      "days_held": 67,
+      "last_price": 253.46,
+      "last_pnl_pct": -2.24,
+      "days_held": 68,
       "status": "OPEN",
       "live": false
     },
@@ -104,10 +104,10 @@
       "reasoning": "AMD's RSI at 25.9 represents deep capitulation-level oversold conditions within a structurally intact intermediate uptrend supported by MA200 at $403, offering a compelling mean-reversion entry with 19.8% upside to analyst targets. Forward P/E of 33.8x against 50%+ revenue growth is genuinely mispriced for a company gaining data center share, and the bull market regime supports full Kelly deployment despite unconfirmed MACD reversal.",
       "key_risk": "MACD remains bearish with active distribution, meaning this is a falling knife entry that could extend losses toward $495 support if hyperscalers signal capex pauses or MI300X adoption disappoints.",
       "earnings_play": false,
-      "trail_high": 560.26,
-      "last_price": 560.26,
-      "last_pnl_pct": 5.28,
-      "days_held": 1,
+      "trail_high": 575.92,
+      "last_price": 575.92,
+      "last_pnl_pct": 8.22,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     }
@@ -3299,6 +3299,10 @@
     {
       "date": "2026-10-27",
       "value": 1051.88
+    },
+    {
+      "date": "2026-10-28",
+      "value": 1054.16
     }
   ],
   "top_picks": [
@@ -3308,9 +3312,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM offers a rare combination of extraordinary fundamentals \u2014 51% margins, 50.9% revenue growth, and an 18.7x forward P/E \u2014 with a ~34% discount to analyst consensus, making this oversold dip (RSI 35.8) within a structurally intact bull trend a compelling medium-term entry. Price holding above both MA50 ($433.75) and MA200 ($397.17) confirms the pullback is consolidation, not breakdown, with a high-probability RSI mean-reversion bounce as the near-term catalyst.",
+      "reasoning": "TSM trades above both key moving averages with elite 50%+ revenue growth and 51% margins, while forward P/E compression to 18.8x prices in meaningful earnings acceleration driven by AI/advanced node demand. Current RSI at 41.3 and mild -4% 1M pullback represent a mid-trend consolidation offering an attractive entry toward the $584 analyst consensus target.",
       "price_target": 584.39,
-      "key_risk": "Any negative AI accelerator demand signals or capex guidance cuts from hyperscalers during NVIDIA/AMD earnings could immediately compress TSM's forward P/E re-rating thesis and invalidate the bullish setup."
+      "key_risk": "U.S.-China geopolitical escalation or export control tightening could restrict TSMC's China revenue (~12% of sales) or threaten Taiwan operational continuity, triggering sharp multiple compression."
     },
     {
       "ticker": "META",
@@ -3318,19 +3322,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META is deeply oversold at RSI 24.1 with a 37% gap to analyst consensus and a forward P/E of 17.6x \u2014 a genuine value opportunity in a high-quality compounder during a bull regime. Initiating a partial position here with room to add on RSI stabilization, as fundamentals remain intact despite the tariff-driven macro headwind.",
+      "reasoning": "META is a high-quality compounder trading at a genuine discount with RSI 23.3 signaling extreme oversold conditions and a 38% gap to analyst consensus, making this an attractive medium-term entry despite near-term technical weakness. At 17.4x forward P/E with 26% revenue growth and AI monetization as an upcoming catalyst, the risk/reward strongly favors accumulation near current levels.",
       "price_target": 720.0,
-      "key_risk": "Tariff-driven digital ad spend contraction could force forward estimate cuts, collapsing the valuation floor before any technical reversal materializes."
+      "key_risk": "MACD remains deeply negative and price is below both key moving averages, meaning momentum could extend the breakdown toward $570 before any mean-reversion rally materializes."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "CRWD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW trades above both key moving averages with a 26% upside to the analyst consensus target, supported by 35% revenue growth and strong AI-driven consumption tailwinds in a bull market regime. Consolidation near $337 with neutral RSI offers a reasonable entry ahead of the next catalyst, though position sizing should be modest given fading momentum and rich valuation.",
-      "price_target": 426.5,
-      "key_risk": "Any deceleration in product revenue growth or net revenue retention below 130% at the next earnings print could trigger a sharp de-rating given the 111x forward earnings multiple."
+      "reasoning": "CRWD is in confirmed bullish structure with healthy RSI consolidation near 52-week highs, suggesting coiling behavior before a potential breakout above $287 resistance. Bull regime enables entry at score 7 with strong technical underpinning despite analyst target sitting below current price.",
+      "price_target": 287.0,
+      "key_risk": "Analyst consensus target below current price combined with decelerating near-term momentum and extreme leverage (D/E ~16x) could trigger sharp mean-reversion if ARR growth disappoints at next earnings."
     }
   ],
   "regime": "BULL",
@@ -3346,5 +3350,5 @@
     "underperforming": false
   },
   "pnl": 51.739999999999995,
-  "last_run": "2026-10-27 21:12"
+  "last_run": "2026-10-28 19:06"
 }
