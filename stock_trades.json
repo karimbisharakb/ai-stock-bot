@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 528.69,
-      "last_pnl_pct": 3.27,
+      "last_price": 530.14,
+      "last_pnl_pct": 3.55,
       "days_held": 80,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 212.82,
-      "last_pnl_pct": -3.28,
+      "last_price": 213.66,
+      "last_pnl_pct": -2.9,
       "days_held": 72,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 245.52,
-      "last_pnl_pct": -5.3,
+      "last_price": 243.79,
+      "last_pnl_pct": -5.97,
       "days_held": 69,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "MACD remains bearish with active distribution, meaning this is a falling knife entry that could extend losses toward $495 support if hyperscalers signal capex pauses or MI300X adoption disappoints.",
       "earnings_play": false,
       "trail_high": 578.44,
-      "last_price": 561.98,
-      "last_pnl_pct": 5.6,
+      "last_price": 566.42,
+      "last_pnl_pct": 6.43,
       "days_held": 3,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Bearish MACD and elevated distribution volume suggest the selloff may not be exhausted, with macro ad-spend weakness or expanded capex guidance at Q1 earnings potentially driving further downside toward $570 before stabilization.",
       "earnings_play": false,
       "trail_high": 628.47,
-      "last_price": 628.47,
-      "last_pnl_pct": 0.0,
+      "last_price": 624.52,
+      "last_pnl_pct": -0.63,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3382,7 +3382,7 @@
     },
     {
       "date": "2026-10-29",
-      "value": 1040.04
+      "value": 1040.16
     }
   ],
   "top_picks": [
@@ -3392,9 +3392,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM offers a rare combination of 51% margins, 50%+ revenue growth, and a Fwd P/E of 18.4x with 36% upside to analyst consensus, making this pullback toward oversold RSI levels a compelling medium-term entry. Low-conviction selling volume (0.74x average) and MA200 support at $398 provide a defined risk floor while AI infrastructure tailwinds from NVIDIA Blackwell ramp underpin the growth thesis.",
+      "reasoning": "TSM offers elite fundamental quality at a significant PEG discount \u2014 50%+ revenue growth against an 18.5x forward P/E \u2014 with the current pullback to near-oversold RSI (40.7) and proximity to MA200 support ($398) creating an attractive medium-term entry point. BULL regime permits full Kelly deployment, and the $584 analyst target reflects business value, not geopolitical noise currently being priced in.",
       "price_target": 584.39,
-      "key_risk": "Hyperscaler capex guidance cuts from MSFT, GOOGL, or META could rapidly compress N3/N2 utilization assumptions and crack TSM's growth multiple."
+      "key_risk": "Taiwan Strait escalation or aggressive U.S. chip export restrictions could trigger a sharp dislocation in TSM shares regardless of underlying business fundamentals."
     },
     {
       "ticker": "GOOG",
@@ -3402,19 +3402,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "GOOG at 14.7x earnings with 24% revenue growth and 55% margins represents extreme fundamental dislocation \u2014 RSI at 14.7 signals capitulation-level oversold conditions that historically precede violent mean-reversion in mega-cap quality names. The 44% gap to analyst consensus and BULL regime context support initiating a partial position here while managing downside risk tightly near the 52-week low.",
+      "reasoning": "GOOG at 14.7x P/E with 24% revenue growth and $40B+ FCF is a genuine fundamental dislocation trading near 52-week lows, offering a compelling risk/reward for patient capital in a bull regime. RSI at 14.9 signals extreme oversold conditions that historically precede sharp mean-reversion rallies, and the 43% analyst upside provides a wide margin of safety even after discounting antitrust headwinds.",
       "price_target": 340.0,
-      "key_risk": "If Google I/O fails to demonstrate Gemini is protecting search ad revenue, multiple compression accelerates and $271 support breaks, invalidating the mean-reversion thesis entirely."
+      "key_risk": "DOJ antitrust remedy ruling could structurally impair the Search business and invalidate the fundamental thesis, causing further multiple compression beyond technical support."
     },
     {
-      "ticker": "PLTR",
+      "ticker": "CRWD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is trading in an oversold RSI condition above both key moving averages in a confirmed bull regime, offering a pullback entry within an intact uptrend backed by 93% revenue growth and expanding AI/government contract momentum. Halving position size per earnings-within-7-days rule to manage binary event risk while maintaining exposure to a potential beat-and-raise catalyst.",
-      "price_target": 220.0,
-      "key_risk": "Earnings disappointment or guidance deceleration at 167x trailing P/E could trigger a violent de-rating, with the stock already 9% off highs and momentum fading."
+      "reasoning": "CRWD's RSI reset to 43 after a +36.83% 3-month surge sets up a constructive re-acceleration entry, with price well above key moving averages and MACD confirming buyer re-engagement off the pullback. The Rule-of-40 SaaS profile and 25%+ revenue growth justify premium multiples in a bull regime, with the 52-week high breakout as the near-term catalyst.",
+      "price_target": 310.0,
+      "key_risk": "Any deceleration in ARR growth or forward guidance cut post-earnings could trigger a violent de-rating given the 162x forward P/E with near-zero net margin buffer."
     }
   ],
   "regime": "BULL",
@@ -3430,5 +3430,5 @@
     "underperforming": false
   },
   "pnl": 41.669999999999995,
-  "last_run": "2026-10-29 19:14"
+  "last_run": "2026-10-29 21:37"
 }
