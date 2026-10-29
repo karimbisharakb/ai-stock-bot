@@ -1,28 +1,6 @@
 {
-  "cash": 708.4000000000004,
+  "cash": 716.4800000000005,
   "positions": [
-    {
-      "time": "2026-07-27 16:00",
-      "ticker": "GOOG",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.2117,
-      "price": 328.55,
-      "cost": 69.55,
-      "target": 400.0,
-      "stop_loss": 310.0,
-      "score": 7,
-      "conviction": "medium",
-      "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
-      "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
-      "earnings_play": false,
-      "trail_high": 377.0,
-      "last_price": 321.89,
-      "last_pnl_pct": -2.03,
-      "days_held": 93,
-      "status": "OPEN",
-      "live": false
-    },
     {
       "time": "2026-08-10 14:36",
       "ticker": "MSFT",
@@ -39,9 +17,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 531.01,
-      "last_pnl_pct": 3.72,
-      "days_held": 79,
+      "last_price": 528.69,
+      "last_pnl_pct": 3.27,
+      "days_held": 80,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +39,9 @@
       "key_risk": "RSI at 77.8 with below-average volume signals potential mean-reversion toward the $207 support zone, and any Blackwell delivery delays or hyperscaler capex pullback could trigger a sharp correction given the 2.2 beta.",
       "earnings_play": false,
       "trail_high": 240.4,
-      "last_price": 215.38,
-      "last_pnl_pct": -2.12,
-      "days_held": 71,
+      "last_price": 212.82,
+      "last_pnl_pct": -3.28,
+      "days_held": 72,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +61,9 @@
       "key_risk": "AWS Q2 growth disappointment below 20% YoY or tariff-driven retail GMV compression could trigger multiple contraction and force guidance cuts.",
       "earnings_play": false,
       "trail_high": 266.43,
-      "last_price": 254.6,
-      "last_pnl_pct": -1.8,
-      "days_held": 68,
+      "last_price": 245.52,
+      "last_pnl_pct": -5.3,
+      "days_held": 69,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "MACD remains bearish with active distribution, meaning this is a falling knife entry that could extend losses toward $495 support if hyperscalers signal capex pauses or MI300X adoption disappoints.",
       "earnings_play": false,
       "trail_high": 578.44,
-      "last_price": 578.44,
-      "last_pnl_pct": 8.69,
-      "days_held": 2,
+      "last_price": 561.98,
+      "last_pnl_pct": 5.6,
+      "days_held": 3,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-10-29 19:07",
+      "ticker": "META",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.0818,
+      "price": 628.47,
+      "cost": 51.41,
+      "target": 720.0,
+      "stop_loss": 585.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "META is trading at a compelling 17.7x forward P/E with 26% revenue growth just below its 200-MA at deeply oversold RSI 29.2, offering a high-quality entry point within a structural uptrend. AI-driven ad monetization via Advantage+ provides a credible near-term catalyst toward the $848 analyst consensus, justifying accumulation at current discount levels.",
+      "key_risk": "Bearish MACD and elevated distribution volume suggest the selloff may not be exhausted, with macro ad-spend weakness or expanded capex guidance at Q1 earnings potentially driving further downside toward $570 before stabilization.",
+      "earnings_play": false,
+      "trail_high": 628.47,
+      "last_price": 628.47,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -1881,6 +1881,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-07-27 16:00",
+      "ticker": "GOOG",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.2117,
+      "price": 328.55,
+      "cost": 69.55,
+      "target": 400.0,
+      "stop_loss": 310.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
+      "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
+      "earnings_play": false,
+      "trail_high": 377.0,
+      "last_price": 281.0,
+      "last_pnl_pct": -14.47,
+      "days_held": 94,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 281.0,
+      "sell_time": "2026-10-29 19:06",
+      "pnl_dollar": -10.07,
+      "pnl_pct": -14.47,
+      "sell_reason": "Stop loss -14.5% (limit -8%)"
+    },
+    {
+      "time": "2026-10-29 19:07",
+      "ticker": "META",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.0818,
+      "price": 628.47,
+      "cost": 51.41,
+      "target": 720.0,
+      "stop_loss": 585.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "META is trading at a compelling 17.7x forward P/E with 26% revenue growth just below its 200-MA at deeply oversold RSI 29.2, offering a high-quality entry point within a structural uptrend. AI-driven ad monetization via Advantage+ provides a credible near-term catalyst toward the $848 analyst consensus, justifying accumulation at current discount levels.",
+      "key_risk": "Bearish MACD and elevated distribution volume suggest the selloff may not be exhausted, with macro ad-spend weakness or expanded capex guidance at Q1 earnings potentially driving further downside toward $570 before stabilization.",
+      "earnings_play": false,
+      "trail_high": 628.47,
+      "last_price": 628.47,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -2809,6 +2858,33 @@
       "pnl_dollar": -2.09,
       "pnl_pct": -2.15,
       "sell_reason": "AI thesis break: SELL \u2013 RSI has deteriorated further to 23.3 (deeper oversold with no bounce), price has broken below the critical 200-DMA support floor of $631.66 that anchored the original thesis, and the worsening macro/ad-spend risk noted at entry appears to be materializing, invalidating the key structural support argument."
+    },
+    {
+      "time": "2026-07-27 16:00",
+      "ticker": "GOOG",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2117,
+      "price": 328.55,
+      "cost": 69.55,
+      "target": 400.0,
+      "stop_loss": 310.0,
+      "score": 7,
+      "conviction": "medium",
+      "reasoning": "GOOG trades at a historically cheap 16.5x P/E with 24% revenue growth and 55% margins, offering a 28% gap to analyst consensus in a bull market regime where RSI at 32.9 approaches oversold levels that historically precede mean-reversion bounces. The fundamental value case outweighs the near-term technical deterioration, making this a compelling medium-term entry with a defined risk level just below the 200-DMA.",
+      "key_risk": "A harsh DOJ antitrust remedy including structural breakup or forced Chrome/Android divestiture could violently reprice the multiple and invalidate the thesis before fundamentals reassert.",
+      "earnings_play": false,
+      "trail_high": 377.0,
+      "last_price": 281.0,
+      "last_pnl_pct": -14.47,
+      "days_held": 94,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 281.0,
+      "sell_time": "2026-10-29 19:06",
+      "pnl_dollar": -10.07,
+      "pnl_pct": -14.47,
+      "sell_reason": "Stop loss -14.5% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -3303,6 +3379,10 @@
     {
       "date": "2026-10-28",
       "value": 1054.62
+    },
+    {
+      "date": "2026-10-29",
+      "value": 1040.04
     }
   ],
   "top_picks": [
@@ -3312,43 +3392,43 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM offers a compelling buy-the-dip entry within a confirmed bull trend, trading above MA50/MA200 with RSI near oversold levels and 33% upside to analyst consensus backed by 51% operating margins and 51% YoY revenue growth. The forward P/E of 18.8x significantly underprices the earnings expansion trajectory, making this an asymmetric risk/reward opportunity.",
-      "price_target": 584.0,
-      "key_risk": "U.S.-China geopolitical escalation over Taiwan Strait policy remains the primary tail risk and could rapidly overwhelm all fundamental positives."
+      "reasoning": "TSM offers a rare combination of 51% margins, 50%+ revenue growth, and a Fwd P/E of 18.4x with 36% upside to analyst consensus, making this pullback toward oversold RSI levels a compelling medium-term entry. Low-conviction selling volume (0.74x average) and MA200 support at $398 provide a defined risk floor while AI infrastructure tailwinds from NVIDIA Blackwell ramp underpin the growth thesis.",
+      "price_target": 584.39,
+      "key_risk": "Hyperscaler capex guidance cuts from MSFT, GOOGL, or META could rapidly compress N3/N2 utilization assumptions and crack TSM's growth multiple."
     },
     {
-      "ticker": "VFV.TO",
-      "score": 8,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "VFV.TO is pulling back to near-MA50 support with RSI at 35.8, offering a mean-reversion entry within a structurally intact bull trend confirmed by price sitting well above the 200-DMA at $179.23. The 3M/6M return profile and soft-landing macro backdrop support accumulation on this dip ahead of a likely retest of the $197.83 52-week high and beyond.",
-      "price_target": 220.0,
-      "key_risk": "A hawkish Fed pivot or sticky CPI print could reprice S&P 500 multiples sharply lower, invalidating the mean-reversion thesis and breaching the MA50 stop."
-    },
-    {
-      "ticker": "META",
+      "ticker": "GOOG",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "META is fundamentally mispriced at 17.4x forward P/E with 26% revenue growth and 31% margins, with RSI at 23.2 signaling extreme oversold conditions historically preceding violent mean-reversion in high-quality compounders. The selloff appears macro/sentiment-driven rather than fundamental deterioration, and the $847 analyst consensus target provides a 38% upside anchor with a BULL regime supporting full Kelly deployment.",
-      "price_target": 720.0,
-      "key_risk": "Ad-spend deterioration signals from Google/Snap earnings could validate the selloff and push META through the $565 support level before any reversal materializes."
+      "reasoning": "GOOG at 14.7x earnings with 24% revenue growth and 55% margins represents extreme fundamental dislocation \u2014 RSI at 14.7 signals capitulation-level oversold conditions that historically precede violent mean-reversion in mega-cap quality names. The 44% gap to analyst consensus and BULL regime context support initiating a partial position here while managing downside risk tightly near the 52-week low.",
+      "price_target": 340.0,
+      "key_risk": "If Google I/O fails to demonstrate Gemini is protecting search ad revenue, multiple compression accelerates and $271 support breaks, invalidating the mean-reversion thesis entirely."
+    },
+    {
+      "ticker": "PLTR",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "PLTR is trading in an oversold RSI condition above both key moving averages in a confirmed bull regime, offering a pullback entry within an intact uptrend backed by 93% revenue growth and expanding AI/government contract momentum. Halving position size per earnings-within-7-days rule to manage binary event risk while maintaining exposure to a potential beat-and-raise catalyst.",
+      "price_target": 220.0,
+      "key_risk": "Earnings disappointment or guidance deceleration at 167x trailing P/E could trigger a violent de-rating, with the stock already 9% off highs and momentum fading."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 51.4,
-    "rolling_win_rate": 50.0,
-    "avg_return": 2.7,
-    "sharpe": 0.24,
+    "win_rate": 50.0,
+    "rolling_win_rate": 45.0,
+    "avg_return": 2.23,
+    "sharpe": 0.19,
     "max_drawdown": 4.52,
-    "total_trades": 35,
+    "total_trades": 36,
     "wins": 18,
-    "losses": 17,
+    "losses": 18,
     "underperforming": false
   },
-  "pnl": 51.739999999999995,
-  "last_run": "2026-10-28 21:37"
+  "pnl": 41.669999999999995,
+  "last_run": "2026-10-29 19:14"
 }
