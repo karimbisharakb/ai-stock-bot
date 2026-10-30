@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 519.46,
-      "last_pnl_pct": 1.47,
+      "last_price": 521.91,
+      "last_pnl_pct": 1.95,
       "days_held": 81,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "NVDA is deeply oversold at RSI 29.5 while trading at a forward P/E of 12.7x against 106% revenue growth \u2014 a fundamental mispricing that historically resolves higher as institutional buyers defend the MA200 at $204; the bull market regime supports deploying full Kelly on this mean-reversion setup. The 63% analyst upside to $328 provides asymmetric risk/reward even assuming conservative near-term recovery to the MA50.",
       "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
       "earnings_play": false,
-      "trail_high": 201.8,
-      "last_price": 201.8,
-      "last_pnl_pct": 0.0,
+      "trail_high": 204.64,
+      "last_price": 204.64,
+      "last_pnl_pct": 1.41,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -60,9 +60,9 @@
       "reasoning": "AMZN trades at a compelling discount to intrinsic value with 19x trailing P/E, 19.6% revenue growth, and a ~40% upside to analyst consensus \u2014 the oversold RSI at 32.4 in a bull market regime creates an asymmetric entry for patient capital. AWS re-acceleration remains the key catalyst that could trigger a violent short squeeze from deeply washed-out technicals.",
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
-      "trail_high": 237.9,
-      "last_price": 237.9,
-      "last_pnl_pct": 0.0,
+      "trail_high": 240.35,
+      "last_price": 240.35,
+      "last_pnl_pct": 1.03,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -82,9 +82,9 @@
       "reasoning": "RSI at 17.5 signals extreme oversold panic not seen outside capitulation events, creating a high-probability mean-reversion bounce for a fundamentally superior compounder trading at 17x forward earnings with 26% revenue growth and 38% analyst upside. BULL regime full Kelly sizing is warranted despite bearish technicals given the quality of the business and the magnitude of the dislocation.",
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
-      "trail_high": 613.84,
-      "last_price": 613.84,
-      "last_pnl_pct": 0.0,
+      "trail_high": 614.99,
+      "last_price": 614.99,
+      "last_pnl_pct": 0.19,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "GOOG at 14.4x trailing P/E with 24.7% revenue growth and 50% margins is anomalously cheap relative to intrinsic quality and the broader market, creating a compelling fundamental entry despite deteriorating technicals. RSI at 13 signals extreme capitulation near multi-year support, and in a confirmed bull market regime the risk/reward asymmetry favors initiating a position with disciplined downside protection.",
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
-      "trail_high": 276.14,
-      "last_price": 276.14,
-      "last_pnl_pct": 0.0,
+      "trail_high": 278.22,
+      "last_price": 278.22,
+      "last_pnl_pct": 0.75,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3690,7 +3690,7 @@
     },
     {
       "date": "2026-10-30",
-      "value": 1023.6
+      "value": 1025.72
     }
   ],
   "top_picks": [
@@ -3700,9 +3700,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 22.5 signals deeply oversold conditions within a structurally intact bull trend, creating a high-probability mean reversion setup toward the MA50 at $191 and beyond. In a confirmed bull regime, this corrective phase on a broad S&P 500 ETF represents a favorable risk/reward entry with limited downside relative to the recovery potential.",
+      "reasoning": "RSI at 24 signals extreme oversold conditions within a broader bull uptrend, with MA200 support at $179.43 providing a strong accumulation zone for this S&P 500 CAD-wrapper ETF. Bull market regime justifies full Kelly sizing on a pullback-within-uptrend setup backed by resilient US large-cap fundamentals and AI-driven earnings growth.",
       "price_target": 220.0,
-      "key_risk": "A hawkish Fed pivot or U.S. recession signal could invalidate the mean reversion thesis and extend the drawdown well below the $185 stop, with negative MACD confirming no momentum confirmation yet."
+      "key_risk": "Unhedged USD/CAD exposure means CAD appreciation driven by tariff resolution or Bank of Canada policy shifts could significantly erode returns even if the S&P 500 continues higher."
+    },
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AMD's 31.7x forward P/E at 50% revenue growth with a credible AI/data center catalyst via MI300X remains fundamentally compelling at oversold RSI levels in a bull market regime. Per earnings rule, conviction is medium so action is SKIP \u2014 however scoring as medium-conviction BUY at score 7 in BULL regime qualifies for entry at half size given the pre-earnings proximity.",
+      "price_target": 620.0,
+      "key_risk": "A guidance miss or softening AI accelerator demand commentary could accelerate breakdown toward $450\u2013$460 support given AMD's 2.45 beta and current distribution phase."
     },
     {
       "ticker": "TSM",
@@ -3710,19 +3720,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades at a stark fundamental discount \u2014 17x forward P/E against 50%+ revenue growth with world-class 51% operating margins \u2014 sitting just above its MA200 near a technical inflection point where RSI approaching oversold sets up a mean-reversion opportunity. In a BULL regime, the 45%+ analyst upside target justifies accumulation at current panic pricing despite deteriorating near-term momentum.",
+      "reasoning": "TSM is approaching MA200 support at $398-405 with RSI near oversold at 35.6, offering an attractive entry zone for a fundamentally exceptional business trading at 17.4x forward earnings with 44% analyst upside. World-class 51% margins, 50%+ revenue growth, and irreplaceable AI/advanced node positioning justify initiating a partial position here with a defined stop below MA200.",
       "price_target": 520.0,
-      "key_risk": "A U.S.-China geopolitical escalation or Taiwan cross-strait tension headline could trigger violent downside before fundamentals reassert, and a decisive close below the $399 MA200 support would invalidate the technical thesis entirely."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR is approaching oversold RSI levels with 86% upside to analyst consensus and a BULL regime supporting full Kelly sizing, making this a high-asymmetry entry point for a leveraged Bitcoin proxy. The 20% monthly drawdown creates a technically distressed entry with strong mean-reversion potential if BTC holds above key support levels.",
-      "price_target": 200.0,
-      "key_risk": "A BTC breakdown below $80K would compress both NAV and the premium simultaneously, potentially driving MSTR to $90-100 and invalidating the thesis entirely given the 14.9x leverage ratio."
+      "key_risk": "Taiwan Strait geopolitical escalation or U.S.-China trade deterioration could trigger immediate multiple compression regardless of fundamentals, invalidating the thesis."
     }
   ],
   "regime": "BULL",
@@ -3731,12 +3731,12 @@
     "rolling_win_rate": 40.0,
     "avg_return": 1.36,
     "sharpe": 0.12,
-    "max_drawdown": 4.55,
+    "max_drawdown": 4.52,
     "total_trades": 40,
     "wins": 18,
     "losses": 22,
     "underperforming": false
   },
   "pnl": 22.84,
-  "last_run": "2026-10-30 18:52"
+  "last_run": "2026-10-30 21:25"
 }
