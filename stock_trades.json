@@ -3699,34 +3699,34 @@
   ],
   "top_picks": [
     {
+      "ticker": "VFV.TO",
+      "score": 8,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "RSI at 24 is a classic mean-reversion buy signal within a structurally intact bull market, with MA200 at $179.52 providing a clear technical floor well below current price. The S&P 500 ETF's 6-month positive return confirms the intermediate uptrend is intact and this selloff represents exhaustion rather than trend reversal.",
+      "price_target": 210.0,
+      "key_risk": "Unhedged USD/CAD exposure means CAD strength could significantly erode returns even if the underlying S&P 500 rallies meaningfully."
+    },
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AMD is deeply oversold at RSI 29.3 with 38.5% upside to analyst targets and a defensible 29x forward P/E on 50% revenue growth, making the risk/reward compelling at current levels. Position is halved due to earnings binary risk within 7 days, with the MI300X beat-and-raise scenario offering a sharp snapback toward $540\u2013$560.",
+      "price_target": 560.0,
+      "key_risk": "An earnings miss or softening AI accelerator guidance could trigger a brutal re-rating toward the 200-DMA at $411, amplified by institutional distribution already underway."
+    },
+    {
       "ticker": "TSM",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM offers a rare combination of 46.6% upside to analyst target, world-class 51% margins, and dominant near-monopoly positioning in advanced nodes at a deeply discounted 17x forward P/E \u2014 the technical weakness near the 200-MA with RSI approaching oversold creates an asymmetric entry for a medium-term position. BULL regime permits full Kelly sizing, and the secular AI/advanced semiconductor demand tailwind dwarfs near-term geopolitical noise for patient capital.",
-      "price_target": 520.0,
-      "key_risk": "U.S.-Taiwan geopolitical escalation or expanded semiconductor export controls could accelerate the breakdown below $399 support toward the $267 52-week low regardless of fundamental strength."
-    },
-    {
-      "ticker": "MSTR",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "MSTR is trading near oversold territory with RSI at 37.3 and 79% upside to analyst targets, offering an asymmetric entry for leveraged Bitcoin exposure near a potential technical floor. BULL market regime supports full Kelly sizing, and any BTC recovery toward $100K would act as a powerful re-rating catalyst for this proxy.",
-      "price_target": 200.0,
-      "key_risk": "A Bitcoin drawdown to $70K\u2013$75K could trigger margin call fears on MSTR's heavily leveraged convertible debt structure, pushing the stock toward its 52-week low near $81."
-    },
-    {
-      "ticker": "COIN",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 25.2 with a 47.7% analyst upside and BULL regime justifies a contrarian entry near 52-week lows, as any BTC recovery above $70K would dramatically reprice COIN given its 3.35 beta. Position sizing must reflect crypto proxy cap constraints and the absence of technical reversal confirmation.",
-      "price_target": 185.0,
-      "key_risk": "Continued BTC breakdown breaches the $135.47 52-week low with no fundamental floor to arrest the decline, given negative margins and extreme leverage."
+      "reasoning": "TSM is approaching oversold territory (RSI 33.3) at a compelling valuation of 17x forward P/E with 51% margins and 51% revenue growth, while the $584 analyst target implies ~47% upside for the world's most critical semiconductor infrastructure. BULL market regime enables entry here as a geopolitical-risk-discounted contrarian medium-term setup with RSI nearing capitulation levels that historically precede sharp reversals.",
+      "price_target": 584.39,
+      "key_risk": "Taiwan Strait escalation or aggressive Beijing rhetoric could extend the breakdown well below the 200-MA, invalidating the thesis before fundamentals can reassert."
     }
   ],
   "regime": "BULL",
@@ -3742,5 +3742,5 @@
     "underperforming": false
   },
   "pnl": 22.84,
-  "last_run": "2026-11-02 22:32"
+  "last_run": "2026-11-02 23:53"
 }
