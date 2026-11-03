@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 543.72,
-      "last_price": 522.94,
-      "last_pnl_pct": 2.15,
+      "last_price": 520.99,
+      "last_pnl_pct": 1.77,
       "days_held": 85,
       "status": "OPEN",
       "live": false
@@ -38,9 +38,9 @@
       "reasoning": "NVDA is deeply oversold at RSI 29.5 while trading at a forward P/E of 12.7x against 106% revenue growth \u2014 a fundamental mispricing that historically resolves higher as institutional buyers defend the MA200 at $204; the bull market regime supports deploying full Kelly on this mean-reversion setup. The 63% analyst upside to $328 provides asymmetric risk/reward even assuming conservative near-term recovery to the MA50.",
       "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
       "earnings_play": false,
-      "trail_high": 206.65,
-      "last_price": 206.65,
-      "last_pnl_pct": 2.4,
+      "trail_high": 206.69,
+      "last_price": 206.69,
+      "last_pnl_pct": 2.42,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 251.51,
-      "last_price": 251.51,
-      "last_pnl_pct": 5.72,
+      "last_price": 250.69,
+      "last_pnl_pct": 5.38,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -82,9 +82,9 @@
       "reasoning": "RSI at 17.5 signals extreme oversold panic not seen outside capitulation events, creating a high-probability mean-reversion bounce for a fundamentally superior compounder trading at 17x forward earnings with 26% revenue growth and 38% analyst upside. BULL regime full Kelly sizing is warranted despite bearish technicals given the quality of the business and the magnitude of the dislocation.",
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
-      "trail_high": 619.0,
-      "last_price": 619.0,
-      "last_pnl_pct": 0.84,
+      "trail_high": 621.03,
+      "last_price": 621.03,
+      "last_pnl_pct": 1.17,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "GOOG at 14.4x trailing P/E with 24.7% revenue growth and 50% margins is anomalously cheap relative to intrinsic quality and the broader market, creating a compelling fundamental entry despite deteriorating technicals. RSI at 13 signals extreme capitulation near multi-year support, and in a confirmed bull market regime the risk/reward asymmetry favors initiating a position with disciplined downside protection.",
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
-      "trail_high": 278.22,
-      "last_price": 276.99,
-      "last_pnl_pct": 0.31,
+      "trail_high": 278.27,
+      "last_price": 278.27,
+      "last_pnl_pct": 0.77,
       "days_held": 4,
       "status": "OPEN",
       "live": false
@@ -3698,7 +3698,7 @@
     },
     {
       "date": "2026-11-03",
-      "value": 1028.67
+      "value": 1028.83
     }
   ],
   "top_picks": [
@@ -3708,9 +3708,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 30.4 in a bull regime with 93% revenue growth and a 23% analyst upside target makes this an attractive mean-reversion entry for a fundamentally exceptional AI/defense compounder. The stop is set near the 200-DMA demand zone to allow room for volatility while protecting against a structural breakdown.",
+      "reasoning": "RSI at 30.4 in a BULL regime with MA200 support at $153.60 and 23% upside to analyst targets creates a compelling mean-reversion entry for patient capital. Elite 49% margins and ~93% revenue growth justify the premium multiple if government AI/defense spending remains intact.",
       "price_target": 216.0,
-      "key_risk": "Federal budget cuts or DOGE-driven defense spending uncertainty could validate the technical breakdown and accelerate a move toward the $140\u2013150 demand zone."
+      "key_risk": "Federal spending cuts via DOGE or contract delays could trigger severe multiple compression given 71x forward P/E with no valuation cushion."
     },
     {
       "ticker": "TSM",
@@ -3718,19 +3718,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades near MA200 support with extraordinary fundamentals \u2014 50%+ revenue growth, 51% margins, and 17.3x forward P/E for the world's indispensable semiconductor foundry creates a compelling risk/reward at current levels. Scale-in entry near $400 with a stop just below MA200 offers asymmetric upside driven by AI accelerator demand and CoWoS capacity allocation.",
-      "price_target": 584.39,
-      "key_risk": "U.S.-Taiwan geopolitical escalation or expanded export controls could compress the multiple sharply regardless of fundamental strength, and bearish momentum signals suggest the knife may not have finished falling."
+      "reasoning": "TSM trades at a compelling 17x forward P/E with 51% gross margins and 51% revenue growth, sitting just above critical MA200 support at $399 with a $584 analyst target implying 44% upside \u2014 the fundamental quality justifies accumulation near these levels. The acute -16.67% one-month drawdown appears macro/geopolitical rather than fundamental, creating a valuation entry opportunity in a world-class compounder in a confirmed bull regime.",
+      "price_target": 510.0,
+      "key_risk": "A Taiwan Strait escalation or additional U.S. export controls targeting advanced node customers could breach the $399 MA200 support and trigger a retest of mid-$300s with no technical floor until then."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "CLSK",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 33.9 signals oversold conditions with 200-DMA ($239.97) providing strong structural support, and the 45.5% analyst upside with a strong_buy consensus suggests the selloff is overdone relative to long-term fundamentals. A BULL regime warrants entry here as a mean-reversion toward the 50-DMA ($330) with controlled downside via the stop.",
-      "price_target": 340.0,
-      "key_risk": "Consumption-based revenue deceleration below 30% at next earnings would violently compress the 97x forward multiple, rendering the current price expensive rather than a bargain."
+      "reasoning": "CLSK's high-beta (3.65) exposure to Bitcoin provides asymmetric upside in a bull regime with the stock compressing near its 52-week low of $7.06, creating a favorable risk/reward entry. A BTC rally toward $100K+ would act as a violent re-rating catalyst given proximity to multi-month support and a barely-positive MACD suggesting exhaustion of selling pressure.",
+      "price_target": 13.5,
+      "key_risk": "Deeply negative margins (-147%), extreme leverage (D/E 234x), and total revenue dependence on BTC price mean any crypto pullback could push CLSK through the $7.06 floor toward insolvency risk."
     }
   ],
   "regime": "BULL",
@@ -3746,5 +3746,5 @@
     "underperforming": false
   },
   "pnl": 22.84,
-  "last_run": "2026-11-03 20:21"
+  "last_run": "2026-11-03 22:17"
 }
