@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 558.53,
-      "last_price": 558.53,
-      "last_pnl_pct": 9.1,
+      "last_price": 555.8,
+      "last_pnl_pct": 8.57,
       "days_held": 86,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
       "earnings_play": false,
       "trail_high": 206.69,
-      "last_price": 202.06,
-      "last_pnl_pct": 0.13,
+      "last_price": 200.13,
+      "last_pnl_pct": -0.83,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 268.01,
-      "last_price": 268.01,
-      "last_pnl_pct": 12.66,
+      "last_price": 266.03,
+      "last_pnl_pct": 11.82,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
       "trail_high": 631.65,
-      "last_price": 631.65,
-      "last_pnl_pct": 2.9,
+      "last_price": 630.0,
+      "last_pnl_pct": 2.63,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
       "trail_high": 288.8,
-      "last_price": 288.8,
-      "last_pnl_pct": 4.58,
+      "last_price": 287.3,
+      "last_pnl_pct": 4.04,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -3702,19 +3702,19 @@
     },
     {
       "date": "2026-11-04",
-      "value": 1038.74
+      "value": 1037.03
     }
   ],
   "top_picks": [
     {
       "ticker": "PLTR",
-      "score": 8,
+      "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 29.4 in a bull regime with intact 200-DMA support (~$153) and 23% upside to analyst consensus presents a high-quality mean-reversion entry within a structurally sound AI/defense compounder. The sharp pullback (-12% weekly) appears driven by broad risk-off sentiment rather than fundamental deterioration, with 96% revenue growth and expanding margins supporting the thesis.",
-      "price_target": 220.0,
-      "key_risk": "Distribution volume (1.25x) and negative MACD suggest sellers remain in control short-term, and failure to hold the $160\u2013165 support cluster could accelerate losses toward 200-DMA before any recovery."
+      "reasoning": "RSI at 29 signals deep oversold conditions with 27% upside to analyst consensus target, and PLTR's dominant AI/government data platform with 96% revenue growth and 50%+ margins justifies a mean-reversion entry in a bull regime. The 200-DMA at $153 provides a structural floor, and full Kelly sizing applies in the current bull regime despite the near-term technical weakness.",
+      "price_target": 218.0,
+      "key_risk": "Federal budget sequestration or DOGE-driven defense spending cuts could accelerate contract slowdowns, collapsing the premium multiple well through the 200-DMA before stabilization."
     },
     {
       "ticker": "TSM",
@@ -3722,19 +3722,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM is trading at a compelling 16.9x forward P/E with 51% gross margins and AI/HPC structural tailwinds, while testing critical 200-MA support at $395\u2013400 with 48% upside to analyst consensus \u2014 the fundamental discount justifies accumulation despite weak near-term technicals. BULL regime permits entry at this score, and the acute -18% one-month selloff appears event-driven rather than a fundamental deterioration, creating a asymmetric medium-term opportunity.",
+      "reasoning": "TSM trades at a rare discount (16.9x forward PE) for the world's most critical semiconductor foundry with 50%+ revenue growth and 51% gross margins, offering 48% upside to analyst consensus as the market overprices geopolitical tail risk. The 200-MA confluence near $395-$400 provides a technical floor with RSI approaching oversold, creating an asymmetric entry in a bull regime.",
       "price_target": 520.0,
-      "key_risk": "A U.S.-China geopolitical escalation targeting Taiwan semiconductor supply chains could trigger a sharp gap-down through the $395 support level, invalidating the technical setup and compressing multiples regardless of fundamentals."
+      "key_risk": "Taiwan Strait escalation or new U.S.-China export restrictions could trigger further multiple compression regardless of TSM's operational strength, potentially breaking the $395-$400 support decisively."
     },
     {
-      "ticker": "CRWD",
+      "ticker": "MSTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "CRWD is holding its MA50 after an -8.31% pullback with structurally intact long-term trend (+44% above MA200), offering a disciplined entry point in a bull regime with 25.8% revenue growth in an expanding cybersecurity TAM. The cooling RSI at 50 and negative MACD suggest consolidation rather than breakdown, making this a reasonable risk/reward setup for patient medium-term holders.",
-      "price_target": 275.0,
-      "key_risk": "Failure to hold MA50 support opens a swift drop to $220\u2013$225, and any ARR deceleration or enterprise budget tightening at the next earnings report could trigger rapid multiple compression from already elevated forward P/E of ~152x."
+      "reasoning": "MSTR offers a leveraged BTC proxy with 64% analyst upside and a 3.6 beta to Bitcoin, making it an asymmetric vehicle if BTC breaks above $100K in the medium term. Current consolidation between the 50-DMA and 200-DMA creates a reasonable entry with defined downside near the 200-DMA.",
+      "price_target": 210.0,
+      "key_risk": "Continued BTC consolidation combined with accelerating ATM equity and convertible debt issuance could dilute NAV and compress the stock toward $110\u2013120 before any recovery."
     }
   ],
   "regime": "BULL",
@@ -3750,5 +3750,5 @@
     "underperforming": false
   },
   "pnl": 22.84,
-  "last_run": "2026-11-04 20:38"
+  "last_run": "2026-11-04 22:26"
 }
