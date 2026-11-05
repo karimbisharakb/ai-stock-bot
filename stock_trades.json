@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 558.53,
-      "last_price": 533.68,
-      "last_pnl_pct": 4.24,
+      "last_price": 535.93,
+      "last_pnl_pct": 4.68,
       "days_held": 87,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 268.01,
-      "last_price": 259.2,
-      "last_pnl_pct": 8.95,
+      "last_price": 260.21,
+      "last_pnl_pct": 9.38,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
       "trail_high": 631.65,
-      "last_price": 604.09,
-      "last_pnl_pct": -1.59,
+      "last_price": 605.08,
+      "last_pnl_pct": -1.43,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
       "trail_high": 288.8,
-      "last_price": 282.59,
-      "last_pnl_pct": 2.34,
+      "last_price": 281.74,
+      "last_pnl_pct": 2.03,
       "days_held": 6,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Escalating U.S. export controls on AI chips to China could trigger another leg down toward $164 support before any fundamental recovery materializes.",
       "earnings_play": false,
       "trail_high": 181.95,
-      "last_price": 181.95,
-      "last_pnl_pct": 0.0,
+      "last_price": 181.6,
+      "last_pnl_pct": -0.19,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3782,19 +3782,29 @@
     },
     {
       "date": "2026-11-05",
-      "value": 1025.47
+      "value": 1025.64
     }
   ],
   "top_picks": [
+    {
+      "ticker": "AMD",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "AMD's 60% analyst upside gap, elite 44.7% revenue growth, and RSI approaching oversold at 32.9 create a compelling asymmetric setup in a BULL regime where aggressive accumulation near multi-year support is warranted. The technical breakdown is severe but sentiment extremes and fundamental quality justify a scaled entry with discipline, targeting mean-reversion toward the $500+ range before full trend restoration.",
+      "price_target": 520.0,
+      "key_risk": "Continued institutional distribution with no reversal confirmation could accelerate the breakdown toward the $340 structural support zone, invalidating the entry thesis if AMD fails to defend that level."
+    },
     {
       "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is testing critical MA200 support at $153.56 with RSI at 27.8 \u2014 deeply oversold for a high-quality AI/government data compounder with 96% revenue growth and 50% margins that analyst consensus prices at $218. In a BULL regime, the 41% upside to target justifies a measured entry here with a stop below the mid-$130s structural level.",
+      "reasoning": "RSI at 28.1 with price touching MA200 support represents a high-probability mean-reversion entry for a fundamentally elite AI/defense compounder with 40%+ analyst upside; BULL regime justifies full Kelly sizing despite the bearish MACD given the violent flush appears driven by macro positioning rather than fundamental deterioration. Stop below MA200 at $143 preserves capital if institutional distribution continues toward the $130-135 range.",
       "price_target": 218.0,
-      "key_risk": "Federal budget cuts or DOGE-related contract cancellations could accelerate the breakdown below MA200, triggering a retest of $130s and multiple compression given the 62x forward P/E."
+      "key_risk": "DOGE-driven federal budget freezes or DoD contract repricing could accelerate the breakdown through MA200 support, invalidating the thesis and triggering a move to $130."
     },
     {
       "ticker": "TSM",
@@ -3802,19 +3812,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM's 24% monthly drawdown has created a compelling valuation dislocation \u2014 15x forward P/E for a monopoly-grade foundry with 50%+ revenue growth and 51% gross margins is objectively cheap, with RSI at 32.5 signaling capitulation proximity. Bull market regime permits full Kelly sizing, and the $586 analyst consensus provides substantial fundamental backstop for patient capital willing to absorb near-term geopolitical noise.",
-      "price_target": 430.0,
-      "key_risk": "Taiwan Strait escalation rhetoric could accelerate forced institutional de-risking, breaking the $320 technical support and triggering another leg lower regardless of fundamental value."
-    },
-    {
-      "ticker": "RIOT",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RIOT offers high-beta BTC upside with an 87% analyst target and bullish market regime providing favorable tailwinds for a speculative position sized within the 20% crypto proxy cap. The short-term momentum pulse and positive MACD support entry here with a defined stop near the 52-week low support zone.",
-      "price_target": 22.0,
-      "key_risk": "BTC consolidation or pullback below $60K would likely send RIOT retesting the $11.50 52-week low, negating the entire thesis."
+      "reasoning": "TSM is deeply oversold at RSI 31.9 with 51% margins and 51% revenue growth trading at just 15.1x forward earnings \u2014 a significant fundamental mispricing with 66% upside to analyst consensus. BULL regime permits entry at this score, and the geopolitical discount creates an asymmetric setup for patient buyers as capitulatory selling historically precedes sharp reversions in high-quality semis.",
+      "price_target": 450.0,
+      "key_risk": "U.S.-China geopolitical escalation or cross-strait tension spike could override all fundamental support and drive price toward the $267 52-week low."
     }
   ],
   "regime": "BULL",
@@ -3830,5 +3830,5 @@
     "underperforming": false
   },
   "pnl": 17.92,
-  "last_run": "2026-11-05 20:54"
+  "last_run": "2026-11-05 22:36"
 }
