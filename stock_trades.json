@@ -1,5 +1,5 @@
 {
-  "cash": 746.3900000000004,
+  "cash": 731.5600000000005,
   "positions": [
     {
       "time": "2026-08-10 14:36",
@@ -17,31 +17,9 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 558.53,
-      "last_price": 555.8,
-      "last_pnl_pct": 8.57,
-      "days_held": 86,
-      "status": "OPEN",
-      "live": false
-    },
-    {
-      "time": "2026-10-30 18:44",
-      "ticker": "NVDA",
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "shares": 0.2478,
-      "price": 201.8,
-      "cost": 50.01,
-      "target": 220.0,
-      "stop_loss": 185.0,
-      "score": 8,
-      "conviction": "medium",
-      "reasoning": "NVDA is deeply oversold at RSI 29.5 while trading at a forward P/E of 12.7x against 106% revenue growth \u2014 a fundamental mispricing that historically resolves higher as institutional buyers defend the MA200 at $204; the bull market regime supports deploying full Kelly on this mean-reversion setup. The 63% analyst upside to $328 provides asymmetric risk/reward even assuming conservative near-term recovery to the MA50.",
-      "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
-      "earnings_play": false,
-      "trail_high": 206.69,
-      "last_price": 200.13,
-      "last_pnl_pct": -0.83,
-      "days_held": 5,
+      "last_price": 533.68,
+      "last_pnl_pct": 4.24,
+      "days_held": 87,
       "status": "OPEN",
       "live": false
     },
@@ -61,9 +39,9 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 268.01,
-      "last_price": 266.03,
-      "last_pnl_pct": 11.82,
-      "days_held": 5,
+      "last_price": 259.2,
+      "last_pnl_pct": 8.95,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -83,9 +61,9 @@
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
       "trail_high": 631.65,
-      "last_price": 630.0,
-      "last_pnl_pct": 2.63,
-      "days_held": 5,
+      "last_price": 604.09,
+      "last_pnl_pct": -1.59,
+      "days_held": 6,
       "status": "OPEN",
       "live": false
     },
@@ -105,9 +83,31 @@
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
       "trail_high": 288.8,
-      "last_price": 287.3,
-      "last_pnl_pct": 4.04,
-      "days_held": 5,
+      "last_price": 282.59,
+      "last_pnl_pct": 2.34,
+      "days_held": 6,
+      "status": "OPEN",
+      "live": false
+    },
+    {
+      "time": "2026-11-05 20:46",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3293,
+      "price": 181.95,
+      "cost": 59.92,
+      "target": 220.0,
+      "stop_loss": 162.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA's RSI at 27.8 signals deep oversold conditions against an elite fundamental backdrop of 106% revenue growth and 11.4x forward P/E, creating a compelling mean-reversion setup toward the 200-MA at $204 and beyond in a bull market regime. The 79.8% upside to analyst consensus justifies accumulation here despite near-term technical weakness, with the 52-week low at $164 providing a rational hard stop.",
+      "key_risk": "Escalating U.S. export controls on AI chips to China could trigger another leg down toward $164 support before any fundamental recovery materializes.",
+      "earnings_play": false,
+      "trail_high": 181.95,
+      "last_price": 181.95,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
       "status": "OPEN",
       "live": false
     }
@@ -2126,6 +2126,55 @@
       "days_held": 0,
       "status": "OPEN",
       "live": false
+    },
+    {
+      "time": "2026-10-30 18:44",
+      "ticker": "NVDA",
+      "action": "SELL",
+      "strategy": "MEDIUM",
+      "shares": 0.2478,
+      "price": 201.8,
+      "cost": 50.01,
+      "target": 220.0,
+      "stop_loss": 185.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA is deeply oversold at RSI 29.5 while trading at a forward P/E of 12.7x against 106% revenue growth \u2014 a fundamental mispricing that historically resolves higher as institutional buyers defend the MA200 at $204; the bull market regime supports deploying full Kelly on this mean-reversion setup. The 63% analyst upside to $328 provides asymmetric risk/reward even assuming conservative near-term recovery to the MA50.",
+      "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
+      "earnings_play": false,
+      "trail_high": 206.69,
+      "last_price": 181.95,
+      "last_pnl_pct": -9.84,
+      "days_held": 6,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 181.95,
+      "sell_time": "2026-11-05 20:46",
+      "pnl_dollar": -4.92,
+      "pnl_pct": -9.84,
+      "sell_reason": "Stop loss -9.8% (limit -8%)"
+    },
+    {
+      "time": "2026-11-05 20:46",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.3293,
+      "price": 181.95,
+      "cost": 59.92,
+      "target": 220.0,
+      "stop_loss": 162.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA's RSI at 27.8 signals deep oversold conditions against an elite fundamental backdrop of 106% revenue growth and 11.4x forward P/E, creating a compelling mean-reversion setup toward the 200-MA at $204 and beyond in a bull market regime. The 79.8% upside to analyst consensus justifies accumulation here despite near-term technical weakness, with the 52-week low at $164 providing a rational hard stop.",
+      "key_risk": "Escalating U.S. export controls on AI chips to China could trigger another leg down toward $164 support before any fundamental recovery materializes.",
+      "earnings_play": false,
+      "trail_high": 181.95,
+      "last_price": 181.95,
+      "last_pnl_pct": 0.0,
+      "days_held": 0,
+      "status": "OPEN",
+      "live": false
     }
   ],
   "closed": [
@@ -3189,6 +3238,33 @@
       "pnl_dollar": -1.2,
       "pnl_pct": -2.33,
       "sell_reason": "AI thesis break: SELL \u2013 RSI has collapsed further to 17.5 with MACD still bearish and a -15.44% 1-month return, signaling the selloff is accelerating beyond the key risk scenario identified at entry, warranting a cut to avoid deeper losses toward the $570 downside target."
+    },
+    {
+      "time": "2026-10-30 18:44",
+      "ticker": "NVDA",
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "shares": 0.2478,
+      "price": 201.8,
+      "cost": 50.01,
+      "target": 220.0,
+      "stop_loss": 185.0,
+      "score": 8,
+      "conviction": "medium",
+      "reasoning": "NVDA is deeply oversold at RSI 29.5 while trading at a forward P/E of 12.7x against 106% revenue growth \u2014 a fundamental mispricing that historically resolves higher as institutional buyers defend the MA200 at $204; the bull market regime supports deploying full Kelly on this mean-reversion setup. The 63% analyst upside to $328 provides asymmetric risk/reward even assuming conservative near-term recovery to the MA50.",
+      "key_risk": "U.S. export control escalation on AI chips to China could structurally impair the forward revenue narrative and drive price below the $164 technical breakdown level, invalidating the value thesis.",
+      "earnings_play": false,
+      "trail_high": 206.69,
+      "last_price": 181.95,
+      "last_pnl_pct": -9.84,
+      "days_held": 6,
+      "status": "CLOSED",
+      "live": false,
+      "sell_price": 181.95,
+      "sell_time": "2026-11-05 20:46",
+      "pnl_dollar": -4.92,
+      "pnl_pct": -9.84,
+      "sell_reason": "Stop loss -9.8% (limit -8%)"
     }
   ],
   "portfolio_history": [
@@ -3703,6 +3779,10 @@
     {
       "date": "2026-11-04",
       "value": 1037.03
+    },
+    {
+      "date": "2026-11-05",
+      "value": 1025.47
     }
   ],
   "top_picks": [
@@ -3712,9 +3792,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 29 signals deep oversold conditions with 27% upside to analyst consensus target, and PLTR's dominant AI/government data platform with 96% revenue growth and 50%+ margins justifies a mean-reversion entry in a bull regime. The 200-DMA at $153 provides a structural floor, and full Kelly sizing applies in the current bull regime despite the near-term technical weakness.",
+      "reasoning": "PLTR is testing critical MA200 support at $153.56 with RSI at 27.8 \u2014 deeply oversold for a high-quality AI/government data compounder with 96% revenue growth and 50% margins that analyst consensus prices at $218. In a BULL regime, the 41% upside to target justifies a measured entry here with a stop below the mid-$130s structural level.",
       "price_target": 218.0,
-      "key_risk": "Federal budget sequestration or DOGE-driven defense spending cuts could accelerate contract slowdowns, collapsing the premium multiple well through the 200-DMA before stabilization."
+      "key_risk": "Federal budget cuts or DOGE-related contract cancellations could accelerate the breakdown below MA200, triggering a retest of $130s and multiple compression given the 62x forward P/E."
     },
     {
       "ticker": "TSM",
@@ -3722,33 +3802,33 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades at a rare discount (16.9x forward PE) for the world's most critical semiconductor foundry with 50%+ revenue growth and 51% gross margins, offering 48% upside to analyst consensus as the market overprices geopolitical tail risk. The 200-MA confluence near $395-$400 provides a technical floor with RSI approaching oversold, creating an asymmetric entry in a bull regime.",
-      "price_target": 520.0,
-      "key_risk": "Taiwan Strait escalation or new U.S.-China export restrictions could trigger further multiple compression regardless of TSM's operational strength, potentially breaking the $395-$400 support decisively."
+      "reasoning": "TSM's 24% monthly drawdown has created a compelling valuation dislocation \u2014 15x forward P/E for a monopoly-grade foundry with 50%+ revenue growth and 51% gross margins is objectively cheap, with RSI at 32.5 signaling capitulation proximity. Bull market regime permits full Kelly sizing, and the $586 analyst consensus provides substantial fundamental backstop for patient capital willing to absorb near-term geopolitical noise.",
+      "price_target": 430.0,
+      "key_risk": "Taiwan Strait escalation rhetoric could accelerate forced institutional de-risking, breaking the $320 technical support and triggering another leg lower regardless of fundamental value."
     },
     {
-      "ticker": "MSTR",
+      "ticker": "RIOT",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "MSTR offers a leveraged BTC proxy with 64% analyst upside and a 3.6 beta to Bitcoin, making it an asymmetric vehicle if BTC breaks above $100K in the medium term. Current consolidation between the 50-DMA and 200-DMA creates a reasonable entry with defined downside near the 200-DMA.",
-      "price_target": 210.0,
-      "key_risk": "Continued BTC consolidation combined with accelerating ATM equity and convertible debt issuance could dilute NAV and compress the stock toward $110\u2013120 before any recovery."
+      "reasoning": "RIOT offers high-beta BTC upside with an 87% analyst target and bullish market regime providing favorable tailwinds for a speculative position sized within the 20% crypto proxy cap. The short-term momentum pulse and positive MACD support entry here with a defined stop near the 52-week low support zone.",
+      "price_target": 22.0,
+      "key_risk": "BTC consolidation or pullback below $60K would likely send RIOT retesting the $11.50 52-week low, negating the entire thesis."
     }
   ],
   "regime": "BULL",
   "metrics": {
-    "win_rate": 45.0,
+    "win_rate": 43.9,
     "rolling_win_rate": 40.0,
-    "avg_return": 1.36,
-    "sharpe": 0.12,
+    "avg_return": 1.09,
+    "sharpe": 0.09,
     "max_drawdown": 4.52,
-    "total_trades": 40,
+    "total_trades": 41,
     "wins": 18,
-    "losses": 22,
+    "losses": 23,
     "underperforming": false
   },
-  "pnl": 22.84,
-  "last_run": "2026-11-04 22:26"
+  "pnl": 17.92,
+  "last_run": "2026-11-05 20:54"
 }
