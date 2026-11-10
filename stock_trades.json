@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 558.53,
-      "last_price": 533.29,
-      "last_pnl_pct": 4.17,
+      "last_price": 533.16,
+      "last_pnl_pct": 4.14,
       "days_held": 92,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 271.76,
-      "last_price": 271.76,
-      "last_pnl_pct": 14.23,
+      "last_price": 270.87,
+      "last_pnl_pct": 13.86,
       "days_held": 11,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
       "trail_high": 644.66,
-      "last_price": 644.66,
-      "last_pnl_pct": 5.02,
+      "last_price": 641.39,
+      "last_pnl_pct": 4.49,
       "days_held": 11,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
       "trail_high": 288.8,
-      "last_price": 285.24,
-      "last_pnl_pct": 3.3,
+      "last_price": 284.92,
+      "last_pnl_pct": 3.18,
       "days_held": 11,
       "status": "OPEN",
       "live": false
@@ -105,8 +105,8 @@
       "key_risk": "Escalating U.S. export controls on AI chips to China could trigger another leg down toward $164 support before any fundamental recovery materializes.",
       "earnings_play": false,
       "trail_high": 188.08,
-      "last_price": 168.47,
-      "last_pnl_pct": -7.41,
+      "last_price": 168.89,
+      "last_pnl_pct": -7.18,
       "days_held": 5,
       "status": "OPEN",
       "live": false
@@ -3794,7 +3794,7 @@
     },
     {
       "date": "2026-11-10",
-      "value": 1027.77
+      "value": 1027.35
     }
   ],
   "top_picks": [
@@ -3804,9 +3804,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's 29x forward P/E against 44.7% revenue growth offers compelling risk/reward in a bull regime, with 27.5% analyst upside and a structurally intact long-term trend above the 200-DMA at $418. The near-term pullback below the 50-DMA creates a favorable entry for patient medium-term holders awaiting data center GPU catalyst confirmation.",
-      "price_target": 620.0,
-      "key_risk": "Failure to reclaim the 50-DMA at $548 could extend the corrective phase and validate distribution, with bearish MACD and unexhausted selling pressure potentially driving further downside toward $480 support."
+      "reasoning": "AMD's 27.6% upside to analyst consensus is underpinned by a credible AI accelerator catalyst in the MI300X ramp, with strong 44.7% revenue growth validating the forward P/E compression thesis. Bull regime permits entry at score 7, and the $500 tactical support level provides a defined risk floor for a medium-term position.",
+      "price_target": 657.49,
+      "key_risk": "A breakdown below $500 or negative MI300X demand commentary from hyperscalers could accelerate distribution toward the $420\u2013440 support zone, invalidating the thesis."
     },
     {
       "ticker": "PLTR",
@@ -3814,19 +3814,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 24.7 signals deep oversold exhaustion within a confirmed bull regime, with the 200-DMA at $153 providing strong structural support and 33% upside to analyst consensus target underwriting a favorable risk/reward entry. The -20% drawdown is a correction within a larger uptrend driven by durable AI/AIP enterprise growth fundamentals, making this a high-quality accumulation opportunity despite unresolved near-term momentum headwinds.",
+      "reasoning": "RSI at 25.3 represents deeply oversold conditions in a bull regime with 31.7% analyst upside, making this a high-quality AI/defense compounder available at a meaningful discount during a momentum unwind rather than a fundamental breakdown. The 96% revenue growth, 50%+ margins, and AIP commercial acceleration thesis remain intact, justifying accumulation ahead of the next catalyst window.",
       "price_target": 220.0,
-      "key_risk": "MACD remains deeply negative with no capitulatory volume spike, meaning a final flush toward the $153-155 structural support zone is probable before momentum reverses, requiring tolerance for further short-term drawdown."
+      "key_risk": "Any deceleration in commercial AIP contract wins or U.S. government TCV at 66x forward earnings could trigger a violent multiple compression well below current levels."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "TSM",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "SNOW is in a healthy pullback within a longer uptrend, with RSI near oversold levels and 45% upside to analyst consensus supporting a medium-term re-entry; the AI/data cloud narrative and strong revenue growth justify accumulation ahead of a potential base formation near the $260-270 support zone. Bull market regime permits full Kelly sizing on this score-7 setup.",
-      "price_target": 380.0,
-      "key_risk": "Earnings deceleration in net revenue retention or RPO growth could trigger a violent re-rating toward $240-250, invalidating the thesis."
+      "reasoning": "TSM offers a rare opportunity to accumulate best-in-class semiconductor infrastructure at a cyclically distressed price \u2014 51% margins, 50%+ revenue growth, and a 48% discount to analyst consensus make the fundamental case compelling despite near-term technical weakness. In a BULL regime, initiating a small tranche here with scale-in on confirmed reclaim of $400 balances the exceptional quality with the unresolved technical breakdown.",
+      "price_target": 490.0,
+      "key_risk": "Taiwan Strait geopolitical escalation or new U.S. export control restrictions could compress the multiple further regardless of earnings quality, invalidating the fundamental thesis on a multi-month horizon."
     }
   ],
   "regime": "BULL",
@@ -3842,5 +3842,5 @@
     "underperforming": false
   },
   "pnl": 17.92,
-  "last_run": "2026-11-10 20:40"
+  "last_run": "2026-11-10 22:14"
 }
