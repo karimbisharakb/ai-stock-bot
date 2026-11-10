@@ -19,7 +19,7 @@
       "trail_high": 558.53,
       "last_price": 545.18,
       "last_pnl_pct": 6.49,
-      "days_held": 91,
+      "days_held": 92,
       "status": "OPEN",
       "live": false
     },
@@ -41,7 +41,7 @@
       "trail_high": 268.01,
       "last_price": 266.93,
       "last_pnl_pct": 12.2,
-      "days_held": 10,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -63,7 +63,7 @@
       "trail_high": 641.37,
       "last_price": 641.37,
       "last_pnl_pct": 4.48,
-      "days_held": 10,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -85,7 +85,7 @@
       "trail_high": 288.8,
       "last_price": 286.01,
       "last_pnl_pct": 3.57,
-      "days_held": 10,
+      "days_held": 11,
       "status": "OPEN",
       "live": false
     },
@@ -107,7 +107,7 @@
       "trail_high": 188.08,
       "last_price": 178.67,
       "last_pnl_pct": -1.8,
-      "days_held": 4,
+      "days_held": 5,
       "status": "OPEN",
       "live": false
     }
@@ -3791,18 +3791,22 @@
     {
       "date": "2026-11-09",
       "value": 1031.21
+    },
+    {
+      "date": "2026-11-10",
+      "value": 1031.21
     }
   ],
   "top_picks": [
     {
-      "ticker": "RY.TO",
+      "ticker": "CNQ.TO",
       "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RY.TO is in a classic bull-market reset pattern with price above both key moving averages, RSI at 62.2 with room to run, and re-accelerating momentum after a mid-cycle pullback. Quality franchise with compressing forward P/E at 16.1x and analyst consensus target of $301.23 provides a well-supported medium-term risk/reward setup.",
-      "price_target": 301.23,
-      "key_risk": "A hawkish Bank of Canada pivot or stickier-than-expected Canadian inflation could compress bank multiples and stall the re-acceleration thesis before the analyst target is reached."
+      "reasoning": "CNQ is deeply oversold at RSI 25.1 with capitulatory volume within a confirmed broader uptrend, trading at 10x earnings with a 12% gap to analyst consensus \u2014 a classic high-quality dip in a bull regime. The $63\u201365 support shelf backed by the 200-day MA provides a well-defined risk boundary for an asymmetric entry in the $64\u201368 range.",
+      "price_target": 75.95,
+      "key_risk": "WTI crude failing to recover above $75 would eliminate the fundamental catalyst and could pressure CNQ toward the lower support shelf, invalidating the thesis."
     },
     {
       "ticker": "AMD",
@@ -3810,9 +3814,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "AMD's forward P/E of 28.8x against 44.7% revenue growth presents a compelling PEG for a dominant AI/data center compounder, with the analyst consensus target of $658 implying 29.5% upside from current levels. The pullback below MA50 with high-volume activity near $508 offers a disciplined entry with defined risk to the $460-470 support cluster.",
+      "reasoning": "AMD's 44.7% revenue growth and 29.5% upside to analyst target justify a medium-term position in a BULL regime, with the 28.8x forward P/E defensible if MI300X datacenter momentum accelerates. Entry here between the 50-DMA and 200-DMA offers an asymmetric risk/reward with a stop anchored near the $450-$460 demand zone.",
       "price_target": 620.0,
-      "key_risk": "MI300X demand deceleration or loss of data center design wins to NVIDIA could invalidate the growth thesis and trigger another leg down toward $400."
+      "key_risk": "Hyperscaler budget reallocation back to NVIDIA or internal silicon could reprice AMD aggressively toward $400, invalidating the AI accelerator thesis."
     },
     {
       "ticker": "PLTR",
@@ -3820,9 +3824,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "PLTR is pulling back sharply to near-oversold RSI levels with MA200 at $153 providing strong institutional support in a bull regime, while analyst consensus targets ~31% upside driven by elite AI/government contract fundamentals. The 20% drawdown from highs creates a medium-term entry opportunity for a high-quality compounder with 96% revenue growth and durable margin expansion.",
+      "reasoning": "PLTR is approaching oversold territory near its 200-DMA with RSI at 34.5, offering a technically attractive entry point for a fundamentally elite AI/government platform with 96% revenue growth and 50% margins. The 31% analyst upside and bull market regime justify initiating a position at current levels, with the recent -19% drawdown creating a compelling risk/reward asymmetry for patient medium-term holders.",
       "price_target": 220.0,
-      "key_risk": "A guidance miss or U.S. commercial revenue deceleration at the next earnings report could trigger a violent multiple compression given the still-elevated 67x forward P/E with no valuation cushion."
+      "key_risk": "DOGE-driven U.S. federal budget cuts could materially impair government contract revenue, triggering a violent de-rating of PLTR's premium 67x forward P/E multiple with limited fundamental support below the 200-DMA at $153."
     }
   ],
   "regime": "BULL",
@@ -3838,5 +3842,5 @@
     "underperforming": false
   },
   "pnl": 17.92,
-  "last_run": "2026-11-09 23:13"
+  "last_run": "2026-11-10 00:38"
 }
