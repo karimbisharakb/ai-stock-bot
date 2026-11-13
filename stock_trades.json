@@ -17,8 +17,8 @@
       "key_risk": "An Azure revenue miss or cautious guidance at the next earnings print could trigger a violent mean-reversion toward the $460s from deeply overbought levels.",
       "earnings_play": false,
       "trail_high": 558.53,
-      "last_price": 524.21,
-      "last_pnl_pct": 2.39,
+      "last_price": 523.88,
+      "last_pnl_pct": 2.33,
       "days_held": 95,
       "status": "OPEN",
       "live": false
@@ -39,8 +39,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 271.76,
-      "last_price": 265.91,
-      "last_pnl_pct": 11.77,
+      "last_price": 266.66,
+      "last_pnl_pct": 12.09,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -61,8 +61,8 @@
       "key_risk": "Macro deterioration from escalating tariffs or AI capex scrutiny could extend the breakdown below the 200-MA toward $565 before any mean-reversion occurs.",
       "earnings_play": false,
       "trail_high": 644.66,
-      "last_price": 640.98,
-      "last_pnl_pct": 4.42,
+      "last_price": 641.69,
+      "last_pnl_pct": 4.54,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -83,8 +83,8 @@
       "key_risk": "Momentum remains in full waterfall mode with no confirmed reversal signal \u2014 price could continue declining another 5-10% before finding a technical floor, requiring conviction to hold through further drawdown.",
       "earnings_play": false,
       "trail_high": 295.35,
-      "last_price": 292.27,
-      "last_pnl_pct": 5.84,
+      "last_price": 292.52,
+      "last_pnl_pct": 5.93,
       "days_held": 14,
       "status": "OPEN",
       "live": false
@@ -104,9 +104,9 @@
       "reasoning": "AMD's forward P/E of 30x on 44.7% revenue growth is compelling in a bull regime, with strong analyst consensus at $657 implying 24% upside driven by AI accelerator ramp. The consolidation above the 200-DMA with bullish MACD provides a reasonable medium-term entry despite near-term overhead resistance at the 50-DMA.",
       "key_risk": "Failure to reclaim the $554 50-DMA could trigger a drift toward the $480-500 support zone, and any MI300X/MI350 ramp disappointment or hyperscaler spending deceleration would invalidate the thesis.",
       "earnings_play": false,
-      "trail_high": 530.45,
-      "last_price": 530.45,
-      "last_pnl_pct": 0.0,
+      "trail_high": 534.06,
+      "last_price": 534.06,
+      "last_pnl_pct": 0.68,
       "days_held": 0,
       "status": "OPEN",
       "live": false
@@ -3958,19 +3958,19 @@
     },
     {
       "date": "2026-11-13",
-      "value": 1021.58
+      "value": 1022.3
     }
   ],
   "top_picks": [
     {
       "ticker": "PLTR",
-      "score": 7,
+      "score": 8,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 27 signals deep oversold conditions with a 31.8% analyst upside target and 50%+ margins supporting a mean-reversion trade toward fair value in a bull regime. The -15.9% monthly drawdown has created a tactical entry with the 200-day MA at $153.73 providing a structural floor near the stop.",
+      "reasoning": "RSI at 26.8 signals deep oversold conditions within a larger intact uptrend, with 32% upside to analyst consensus and genuine earnings acceleration supporting the fundamental case. Bull regime permits full Kelly sizing on this correction-within-trend setup, where any government AI/defense contract catalyst could trigger rapid mean reversion.",
       "price_target": 220.0,
-      "key_risk": "Federal contract slowdowns or DOGE-driven DoD budget cuts could accelerate the drawdown toward $120-150, invalidating the government-revenue-anchored valuation thesis."
+      "key_risk": "Valuation at 118x trailing P/E leaves no margin of safety if tech multiple compression accelerates or a major federal contract is delayed, with MA200 at $153.72 as the last structural support before a deeper drawdown."
     },
     {
       "ticker": "TSM",
@@ -3978,19 +3978,19 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM is fundamentally mispriced at 17x forward P/E with 51% operating margins and an irreplaceable monopoly on leading-edge nodes, offering 47% upside to the $586 analyst target. Near-200-MA support with early MACD stabilization provides an asymmetric entry in a BULL regime where full Kelly sizing is justified.",
+      "reasoning": "TSM's elite fundamentals \u2014 51% gross margins, 50%+ revenue growth, and a 17x forward P/E \u2014 combined with strong analyst conviction at $586 target justify accumulation near multi-month lows despite near-term technical weakness. Bull market regime permits entry at score 7, with the 200-MA reclaim at $401.67 acting as a near-term confirmation catalyst.",
       "price_target": 520.0,
-      "key_risk": "U.S.-China geopolitical escalation over Taiwan could immediately compress multiples and override all fundamental tailwinds regardless of execution."
+      "key_risk": "U.S.-China geopolitical escalation or Taiwan Strait tensions could trigger a sharp repricing of TSM's risk premium, overwhelming the fundamental thesis regardless of earnings quality."
     },
     {
-      "ticker": "SNOW",
+      "ticker": "CRWD",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 32.5 approaching oversold with 47% upside to analyst consensus and 200-day MA at $243 providing structural support creates an asymmetric risk/reward entry in a bull regime. AI workload adoption via Iceberg and strong NRR history justify a medium-term position despite near-term technical weakness.",
-      "price_target": 360.0,
-      "key_risk": "Consumption revenue deceleration below 30% growth or conservative AI workload guidance would invalidate the bull thesis and trigger severe multiple compression from an already demanding 95x forward P/E."
+      "reasoning": "RSI at 29.3 signals deeply oversold conditions within a confirmed bull regime and intact long-term uptrend well above the 200-DMA, offering a mean-reversion entry with analyst consensus supporting ~10% upside. Volume confirmation is absent, so position sizing should be conservative pending institutional accumulation signals.",
+      "price_target": 249.68,
+      "key_risk": "The July 2024 Falcon outage reputational overhang could accelerate enterprise churn or renewal hesitancy, compressing multiples sharply given the stock's zero-margin-for-error valuation."
     }
   ],
   "regime": "BULL",
@@ -3999,12 +3999,12 @@
     "rolling_win_rate": 40.0,
     "avg_return": 0.62,
     "sharpe": 0.05,
-    "max_drawdown": 4.74,
+    "max_drawdown": 4.67,
     "total_trades": 43,
     "wins": 18,
     "losses": 25,
     "underperforming": false
   },
   "pnl": 7.800000000000002,
-  "last_run": "2026-11-13 20:43"
+  "last_run": "2026-11-13 22:27"
 }
