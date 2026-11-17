@@ -19,7 +19,7 @@
       "trail_high": 558.53,
       "last_price": 517.99,
       "last_pnl_pct": 1.18,
-      "days_held": 98,
+      "days_held": 99,
       "status": "OPEN",
       "live": false
     },
@@ -41,7 +41,7 @@
       "trail_high": 271.76,
       "last_price": 257.75,
       "last_pnl_pct": 8.34,
-      "days_held": 17,
+      "days_held": 18,
       "status": "OPEN",
       "live": false
     },
@@ -63,7 +63,7 @@
       "trail_high": 644.66,
       "last_price": 626.41,
       "last_pnl_pct": 2.05,
-      "days_held": 17,
+      "days_held": 18,
       "status": "OPEN",
       "live": false
     },
@@ -85,7 +85,7 @@
       "trail_high": 295.35,
       "last_price": 281.26,
       "last_pnl_pct": 1.85,
-      "days_held": 17,
+      "days_held": 18,
       "status": "OPEN",
       "live": false
     },
@@ -107,7 +107,7 @@
       "trail_high": 534.06,
       "last_price": 504.28,
       "last_pnl_pct": -4.93,
-      "days_held": 3,
+      "days_held": 4,
       "status": "OPEN",
       "live": false
     }
@@ -3963,18 +3963,32 @@
     {
       "date": "2026-11-16",
       "value": 1011.69
+    },
+    {
+      "date": "2026-11-17",
+      "value": 1011.69
     }
   ],
   "top_picks": [
+    {
+      "ticker": "NVDA",
+      "score": 7,
+      "action": "BUY",
+      "strategy": "MEDIUM",
+      "conviction": "medium",
+      "reasoning": "At forward P/E of ~10 on 106% revenue growth and 64% margins, NVDA is structurally mispriced at current levels despite brutal technical breakdown \u2014 the RSI-16 extreme compression sets up a violent mean-reversion once a catalyst confirms demand. Earnings within 7 days is binary, so position size is halved per protocol to manage gap-down risk through $148 support.",
+      "price_target": 210.0,
+      "key_risk": "Earnings guidance cut on export restrictions or hyperscaler CapEx pullback breaks $148.80 support and opens price discovery into the $120s, invalidating the fundamental thesis for multiple quarters."
+    },
     {
       "ticker": "PLTR",
       "score": 7,
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 24.1 represents extreme oversold exhaustion in a fundamentally elite AI infrastructure business still above its 200-DMA at $153.79, offering an asymmetric entry with 39% upside to analyst targets. Bull regime full Kelly sizing is warranted given the quality of the underlying business and deep discount from recent highs despite no fundamental deterioration.",
+      "reasoning": "RSI at 24.1 is deeply oversold near strong 200-day MA support at $153.79, creating an asymmetric mean-reversion setup with 39% upside to analyst consensus in a bull regime. Elite fundamentals \u2014 96% revenue growth, 50%+ margins \u2014 justify accumulating at current levels despite near-term technical weakness and sentiment headwinds.",
       "price_target": 220.0,
-      "key_risk": "A close below the 200-DMA at $153.79 invalidates the thesis and signals structural breakdown, while valuation at 63x forward P/E leaves no margin for any growth deceleration."
+      "key_risk": "U.S. federal budget uncertainty or DOGE-driven DoD contract scrutiny could break the 200-day MA support and trigger a flush to $130, invalidating the thesis."
     },
     {
       "ticker": "TSM",
@@ -3982,19 +3996,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades at a rare 16x forward P/E with 51% margins and 51% revenue growth, offering a 57% discount to analyst consensus that reflects macro fear rather than fundamental impairment. BULL regime permits entry at score 7+ and RSI near 34 suggests downside exhaustion, making this a compelling cautious accumulation opportunity ahead of potential AI capex tailwinds.",
-      "price_target": 490.0,
-      "key_risk": "Taiwan Strait geopolitical escalation or expanded U.S. export controls could reprice the stock violently lower regardless of fundamentals."
-    },
-    {
-      "ticker": "CRWD",
-      "score": 7,
-      "action": "BUY",
-      "strategy": "MEDIUM",
-      "conviction": "medium",
-      "reasoning": "RSI at 22.7 signals deeply oversold conditions with a 12% analyst upside target and strong 6-month momentum intact, making this a credible mean-reversion entry in a bull regime. The outage-driven discount creates a dislocation opportunity for a fundamentally sound cybersecurity compounder with 25.8% revenue growth.",
-      "price_target": 250.0,
-      "key_risk": "Further multiple compression if upcoming earnings reveal customer churn or ARR deceleration from the July 2024 outage fallout, which could accelerate the decline toward $195."
+      "reasoning": "TSM offers rare-tier fundamental quality at a compressed valuation \u2014 16x forward P/E on 51% margins with 51% revenue growth and 57% analyst upside \u2014 making the current technical weakness a medium-term accumulation opportunity. RSI approaching oversold at 34.3 with no confirmed capitulation flush suggests staged entry is warranted, with the $340\u2013$350 technical floor providing a defined risk zone.",
+      "price_target": 470.0,
+      "key_risk": "Taiwan Strait geopolitical escalation or expanded U.S. semiconductor export controls could trigger sharp multiple compression regardless of TSMC's irreplaceable manufacturing fundamentals."
     }
   ],
   "regime": "BULL",
@@ -4010,5 +4014,5 @@
     "underperforming": false
   },
   "pnl": 7.800000000000002,
-  "last_run": "2026-11-16 23:06"
+  "last_run": "2026-11-17 00:43"
 }
