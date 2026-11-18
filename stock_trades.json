@@ -3980,9 +3980,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "NVDA's forward P/E of 9.1x on 106% revenue growth with 63.7% margins represents a historically rare valuation dislocation for a franchise-quality AI infrastructure monopoly, with RSI at 15.8 signaling extreme capitulation exhaustion that in prior cycles has preceded sharp mean-reversion rallies. In a BULL regime with 68% analyst upside to $253 consensus, the risk/reward favors a measured entry with a wide stop below the panic low.",
-      "price_target": 220.0,
-      "key_risk": "U.S. export control escalation targeting AI chip shipments to China could trigger structural earnings revisions that permanently impair the forward P/E thesis and invalidate the current valuation floor."
+      "reasoning": "RSI at 15.8 signals extreme capitulation on a franchise trading at 9.1x forward earnings with 106% revenue growth \u2014 the fundamental disconnect is too severe to ignore in a bull regime. Position sizing should be staged given zero technical stabilization, targeting reversion toward fair value as export control fears normalize.",
+      "price_target": 210.0,
+      "key_risk": "Further U.S.-China export control escalation targeting H20 or next-gen datacenter SKUs would structurally impair forward earnings estimates and invalidate the bull thesis entirely."
     },
     {
       "ticker": "PLTR",
@@ -3990,9 +3990,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "RSI at 23.7 with price holding just above the 200-DMA at $153.83 offers a high-quality entry into an elite AI/government data compounder with 42% upside to analyst target; BULL regime permits full Kelly sizing on oversold setups with intact long-term structure. Elite fundamentals \u2014 96% revenue growth and 50%+ margins \u2014 justify a medium-term position despite near-term momentum headwinds.",
+      "reasoning": "PLTR is deeply oversold at RSI 23.7 while holding just above its 200-DMA at $153.83, creating an asymmetric mean-reversion setup in a bull regime with 42% upside to analyst targets. AI/defense revenue acceleration at 96% growth with 50%+ margins justifies the premium multiple and positions the stock for violent re-rating on any positive contract catalyst.",
       "price_target": 220.0,
-      "key_risk": "Federal budget cuts hitting government contract revenue or even modest growth deceleration could trigger another 15-20% leg down given the still-stretched 61x forward P/E valuation."
+      "key_risk": "A close below the 200-DMA (~$153.83) invalidates the technical setup entirely, and federal spending cuts or DOGE-related defense budget sequestration could structurally impair the near-term revenue thesis."
     },
     {
       "ticker": "TSM",
@@ -4000,9 +4000,9 @@
       "action": "BUY",
       "strategy": "MEDIUM",
       "conviction": "medium",
-      "reasoning": "TSM trades at a compelling 15.5x forward P/E with 51% gross margins and 50%+ revenue growth \u2014 the discount reflects geopolitical fear premium, not business deterioration, creating a high-asymmetry entry near oversold RSI (33.4) with 61% upside to analyst consensus. BULL market regime permits full Kelly sizing on this score, and the fundamental gap between price and intrinsic value is too wide to ignore despite near-term technical weakness.",
+      "reasoning": "TSM trades at a severe dislocation from fair value \u2014 15% below its 200-MA with a forward P/E of 15.5x for a 50%+ revenue grower with irreplaceable AI semiconductor infrastructure moat. Accumulating in tranches here captures asymmetric upside to analyst consensus of $586 while managing the geopolitical overhang with a defined stop below recent lows.",
       "price_target": 480.0,
-      "key_risk": "Any Taiwan Strait military escalation or hostile U.S.-China policy shift would rapidly reprice geopolitical risk premium downward, potentially driving TSM to new 52-week lows well below the stop loss."
+      "key_risk": "Taiwan Strait geopolitical escalation or hawkish U.S. semiconductor export controls could drive another 10-15% leg lower regardless of fundamentals before any recovery."
     }
   ],
   "regime": "BULL",
@@ -4018,5 +4018,5 @@
     "underperforming": false
   },
   "pnl": 7.800000000000002,
-  "last_run": "2026-11-18 21:38"
+  "last_run": "2026-11-18 23:21"
 }
