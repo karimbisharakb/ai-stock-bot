@@ -17,8 +17,8 @@
       "key_risk": "Continued downside momentum with no technical base confirmed \u2014 price below both MAs with distribution volume means this could fall further to $215 support before any meaningful reversal.",
       "earnings_play": false,
       "trail_high": 271.76,
-      "last_price": 255.39,
-      "last_pnl_pct": 7.35,
+      "last_price": 252.29,
+      "last_pnl_pct": 6.05,
       "days_held": 25,
       "status": "OPEN",
       "live": false
@@ -39,7 +39,7 @@
       "key_risk": "Azure growth disappoints below the ~29\u201331% market expectation, triggering a technical breakdown with limited near-term support.",
       "earnings_play": false,
       "trail_high": NaN,
-      "last_price": 492.5,
+      "last_price": 496.13,
       "last_pnl_pct": NaN,
       "days_held": 0,
       "status": "OPEN",
@@ -61,7 +61,7 @@
       "key_risk": "A macro-driven ad spending pullback from recession fears or tariff uncertainty hitting SMB advertisers could flush the stock toward the $520 52-week range low.",
       "earnings_play": false,
       "trail_high": NaN,
-      "last_price": 597.6,
+      "last_price": 589.82,
       "last_pnl_pct": NaN,
       "days_held": 0,
       "status": "OPEN",
@@ -4367,5 +4367,5 @@
     "underperforming": true
   },
   "pnl": NaN,
-  "last_run": "2026-11-24 03:15"
+  "last_run": "2026-11-24 23:19"
 }
