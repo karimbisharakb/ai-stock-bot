@@ -19,7 +19,7 @@
       "trail_high": 271.76,
       "last_price": 244.43,
       "last_pnl_pct": 2.74,
-      "days_held": 26,
+      "days_held": 27,
       "status": "OPEN",
       "live": false
     },
@@ -41,7 +41,7 @@
       "trail_high": NaN,
       "last_price": 489.93,
       "last_pnl_pct": NaN,
-      "days_held": 1,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     },
@@ -63,7 +63,7 @@
       "trail_high": NaN,
       "last_price": 609.89,
       "last_pnl_pct": NaN,
-      "days_held": 1,
+      "days_held": 2,
       "status": "OPEN",
       "live": false
     },
@@ -85,7 +85,7 @@
       "trail_high": NaN,
       "last_price": 270.98,
       "last_pnl_pct": NaN,
-      "days_held": 0,
+      "days_held": 1,
       "status": "OPEN",
       "live": false
     }
@@ -4475,6 +4475,10 @@
     {
       "date": "2026-11-25",
       "value": NaN
+    },
+    {
+      "date": "2026-11-26",
+      "value": NaN
     }
   ],
   "top_picks": [],
@@ -4491,5 +4495,5 @@
     "underperforming": true
   },
   "pnl": NaN,
-  "last_run": "2026-11-25 22:47"
+  "last_run": "2026-11-26 00:55"
 }
